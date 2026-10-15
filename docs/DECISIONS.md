@@ -94,4 +94,10 @@ Formato: decisión · alternativas · motivo. Las decisiones del motor (D-010+) 
 
 **D-047 · CSV:** columnas `measurement` y `load_mode` (`weight_kg` es por lado en `perSide`) y textos que empiezan con `=`, `+`, `-` o `@` se prefijan con `'` para que una planilla no los ejecute como fórmula.
 
+**D-048 · Compilación iOS en GitHub Actions.** Sin Mac, la app se compila en un runner macOS (`.github/workflows/build-ios.yml`, Xcode 26.6 / Swift 6.3.3 en el primer run verde): tests de paquetes, build sin firmar para iPhone empaquetado como `.ipa` (lo firma el usuario con Sideloadly) y tests de la app en un simulador elegido con `xcrun simctl`. Repo público ⇒ dispara en cada push a `main`.
+
+**D-049 · Un solo framework dinámico `GymKit`** (módulos `GymCore` + `GymStore`) enlazado por la app y su bundle de tests: una única copia de los tipos y del bundle de recursos. Dos productos dinámicos separados no compilan (GymCore quedaría enlazado dos veces). El framework se **embebe** en la app (`embed: true`) y el CI falla si alguna dependencia `@rpath` del ejecutable no está dentro del `.app` (el primer `.ipa` verde no lo tenía y no habría abierto en un iPhone).
+
+**D-050 · La app compila en modo Swift 6 con concurrencia estricta** (no hizo falta bajar a Swift 5). `BUNDLE_ID` se cambia solo en `project.yml` (marcador `com.example.gymprogress`).
+
 **D-023 · Pausa larga** ⇒ `reassess` con el último peso como referencia ("retomá con X o menos") y repeticiones objetivo = repMín. Días contados como días calendario en la zona horaria del usuario.

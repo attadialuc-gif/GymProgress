@@ -98,6 +98,16 @@ $ swift test
 $ swiftc -parse (26 archivos de la app)          sin errores
 ```
 
+## Compilación iOS en CI y .ipa · ✅
+
+- Repo: https://github.com/attadialuc-gif/GymProgress (público, historial sin datos personales).
+- Run verde: https://github.com/attadialuc-gif/GymProgress/actions/runs/38781147138 (Xcode 26.6, Swift 6.3.3).
+  - `packages`: 154 tests en 18 suites, en macOS.
+  - `build-ipa`: `BUILD SUCCEEDED`, `GymKit.framework` embebido (verificado con `otool -L`), `GymProgress.ipa` 1,7 MB.
+  - `app-tests`: 6 tests (7 casos) de la capa de app sobre SwiftData en simulador iPhone 17 Pro: caso 2.D-8 con recarga, recuperación, export/import, migración v1, flujo 2.E.
+- `.ipa` sin firmar en `dist/GymProgress.ipa` (no se versiona); instalación: `docs/INSTALAR_EN_IPHONE.md`.
+- Sin verificar: instalación y uso en un iPhone real; la UI no tiene tests automatizados de interfaz.
+
 ## Próximos pasos
 
 - En un Mac: `xcodegen generate`, compilar, corregir lo que marque el compilador, correr `GymProgressTests` y probar el flujo en simulador y en un iPhone.
