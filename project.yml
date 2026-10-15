@@ -1,7 +1,6 @@
-# XcodeGen spec. Generate the Xcode project on a Mac with: `xcodegen generate`
+# XcodeGen spec. Generate the Xcode project with: `xcodegen generate`
 name: GymProgress
 options:
-  bundleIdPrefix: com.gymprogress
   deploymentTarget:
     iOS: "17.0"
   developmentLanguage: es-AR
@@ -9,14 +8,18 @@ options:
 
 settings:
   base:
-    # Working name of the app: change it only here.
+    # ---- Change the app's identity only here --------------------------------------------
     APP_DISPLAY_NAME: GymProgress
-    SWIFT_VERSION: "6.0"
+    BUNDLE_ID: com.example.gymprogress
+    # -------------------------------------------------------------------------------------
     MARKETING_VERSION: "0.1.0"
     CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "6.0"
     SWIFT_STRICT_CONCURRENCY: complete
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
     SWIFT_EMIT_LOC_STRINGS: YES
+    DEVELOPMENT_TEAM: ""
 
 packages:
   GymCore:
@@ -28,6 +31,8 @@ targets:
     platform: iOS
     sources:
       - path: App
+        excludes:
+          - "Resources/Info.plist"
     dependencies:
       - package: GymCore
         product: GymCore
@@ -36,9 +41,17 @@ targets:
     info:
       path: App/Resources/Info.plist
       properties:
-        CFBundleDisplayName: $(APP_DISPLAY_NAME)
         CFBundleDevelopmentRegion: es-AR
+        CFBundleDisplayName: $(APP_DISPLAY_NAME)
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundlePackageType: APPL
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleLocalizations: [es-AR]
+        LSRequiresIPhoneOS: true
         UILaunchScreen:
           UIColorName: LaunchBackground
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
@@ -48,10 +61,12 @@ targets:
         ITSAppUsesNonExemptEncryption: false
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.gymprogress.app
+        PRODUCT_NAME: GymProgress
+        PRODUCT_BUNDLE_IDENTIFIER: $(BUNDLE_ID)
         TARGETED_DEVICE_FAMILY: "1"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_STYLE: Automatic
 
   GymProgressTests:
     type: bundle.unit-test
@@ -60,8 +75,13 @@ targets:
       - path: AppTests
     dependencies:
       - target: GymProgress
+      - package: GymCore
+        product: GymCore
+      - package: GymCore
+        product: GymStore
     settings:
       base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(BUNDLE_ID).tests
         GENERATE_INFOPLIST_FILE: YES
         BUNDLE_LOADER: $(TEST_HOST)
         TEST_HOST: $(BUILT_PRODUCTS_DIR)/GymProgress.app/GymProgress
@@ -71,7 +91,8 @@ schemes:
     build:
       targets:
         GymProgress: all
+        GymProgressTests: [test]
     test:
       targets:
         - GymProgressTests
-      gatherCoverageData: true
+      gatherCoverageData: false

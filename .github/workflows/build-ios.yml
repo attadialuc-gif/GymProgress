@@ -1,0 +1,128 @@
+name: build-ios
+
+# Public repository: macOS minutes are free, so pushes to main build automatically.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: build-ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # 1) Domain + application packages (the progression engine's tests live here).
+  packages:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: xcodebuild -version && swift --version
+      - name: swift test (GymCore + GymStore)
+        working-directory: GymCore
+        run: |
+          set -o pipefail
+          swift test 2>&1 | tee ../swift-test.log
+      - name: Summary
+        if: always()
+        run: grep -E "Test run with|✘|error:" swift-test.log | tail -20 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swift-test-log
+          path: swift-test.log
+
+  # 2) Unsigned device build → GymProgress.ipa (to be signed by the user with Sideloadly).
+  build-ipa:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: xcodebuild -version
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        run: xcodegen generate
+      - name: Build for iPhone (unsigned)
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project GymProgress.xcodeproj \
+            -scheme GymProgress \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            build 2>&1 | tee xcodebuild-build.log
+      - name: Compiler errors
+        if: failure()
+        run: grep -E "error:|warning: .*(concurrency|Sendable)" xcodebuild-build.log | sort -u | head -150 || true
+      - name: Package .ipa
+        run: |
+          APP=build/Build/Products/Release-iphoneos/GymProgress.app
+          test -d "$APP"
+          mkdir -p Payload dist
+          cp -R "$APP" Payload/
+          zip -qry dist/GymProgress.ipa Payload
+          ls -la dist
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "$APP/Info.plist"
+          ls "$APP/Frameworks" || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GymProgress-ipa
+          path: dist/GymProgress.ipa
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: xcodebuild-build-log
+          path: xcodebuild-build.log
+
+  # 3) App-layer tests (SwiftData repository, case 2.D-8, flow 2.E) on a simulator.
+  #    Separate job so the .ipa is available as soon as the device build finishes.
+  app-tests:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        run: xcodegen generate
+      - name: Pick an available iPhone simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          data = json.load(sys.stdin)["devices"]
+          runtimes = sorted((r for r in data if "iOS" in r), reverse=True)
+          for r in runtimes:
+              for d in data[r]:
+                  if d.get("isAvailable") and d["name"].startswith("iPhone"):
+                      print(d["udid"]); sys.exit(0)
+          sys.exit(1)')
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          xcrun simctl list devices available | grep "$UDID"
+      - name: Test on simulator
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project GymProgress.xcodeproj \
+            -scheme GymProgress \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -derivedDataPath build \
+            -resultBundlePath AppTests.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            test 2>&1 | tee xcodebuild-test.log
+      - name: Test summary
+        if: always()
+        run: grep -E "Test run with|✘|✔ Test|error:|Executed|TEST (SUCCEEDED|FAILED)" xcodebuild-test.log | tail -60 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: app-test-logs
+          path: |
+            xcodebuild-test.log
+            AppTests.xcresult

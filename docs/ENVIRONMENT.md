@@ -47,7 +47,7 @@ Target: x86_64-unknown-linux-gnu
 # dentro de WSL
 export PATH="$HOME/swift/swift-6.4.1-RELEASE-debian13/usr/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/swift/extra-libs"
-cd "<ruta del repo vista desde WSL>/GymCore"
+cd "<ruta del repo vista desde WSL>/GymCore"   # p. ej. /mnt/c/Users/<usuario>/…/GymProgress/GymCore
 swift test
 ```
 
@@ -60,6 +60,6 @@ swift test
 3. En la raíz del repo: `xcodegen generate` → genera `GymProgress.xcodeproj` a partir de `project.yml`.
 4. `xcodebuild -scheme GymProgress -destination 'platform=iOS Simulator,name=iPhone 16' test`
 
-## Qué falta para el camino completo
+## Compilación de la app en CI (sin Mac)
 
-- Un Mac con Xcode (no disponible en esta máquina). Sin eso no se puede: compilar SwiftUI/SwiftData, correr tests de persistencia SwiftData, tests de UI ni probar en simulador.
+La app iOS se compila en GitHub Actions (runner macOS) con `.github/workflows/build-ios.yml`: tests de los paquetes, build sin firmar para iPhone → `GymProgress.ipa`, y tests de la capa de app en un simulador elegido con `xcrun simctl`. El `.ipa` se firma en Windows con Sideloadly (ver `docs/INSTALAR_EN_IPHONE.md`).
