@@ -56,6 +56,23 @@ $ swift test
 $ swiftc -parse (23 archivos de la app)          sin errores
 ```
 
+## Etapa 5 — Calendario, rachas e Inicio · ✅ lógica / 📝 UI
+
+- ✅ `ConsistencyService`: plan semanal append-only con `validFrom` (`setWeeklyPlan`), vista mensual/semanal con hecho/planificado/omitido/descanso, resumen semanal con objetivo (sin empujar a entrenar de más), rachas modo A y B con su definición en texto. Tests en `Stage5And6Tests`.
+- 📝 UI: calendario mensual/semanal con leyenda accesible y editor de plan semanal; Inicio con próximo entrenamiento y sus recomendaciones, semana/objetivo, racha (con definición), volumen semanal vs anterior + gráfico de 8 semanas, récords recientes, última sesión.
+
+## Etapa 6 — Análisis · ✅ lógica / 📝 UI
+
+- ✅ `StatsService`: períodos (semana, 30 días, mes, 90 días, año, 12 meses, personalizado) con período anterior equivalente; totales y comparación (sesiones válidas, días, series efectivas, volumen externo) con filtro por rutina; serie por ejercicio (peso de trabajo, reps, 1RM estimado con tope, volumen, sesiones atípicas marcadas, contexto); volumen por músculo directo/indirecto y evolución semanal; récords recientes (solo los superados); objetivos con progreso y logro automático.
+- 📝 UI: Progreso con filtros de período y rutina, comparación, gráficos Swift Charts por ejercicio y métrica, series por músculo (directas e indirectas separadas), récords (real vs estimado) y objetivos; cada indicador con ayuda.
+
+```
+$ swift test
+✔ Test run with 103 tests in 11 suites passed   (GymCoreTests)
+✔ Test run with 40 tests in 6 suites passed     (GymStoreTests)
+$ swiftc -parse (26 archivos de la app)          sin errores
+```
+
 ## Próximos pasos
 
 - Etapa 4+: ver `docs/ARCHITECTURE.md` (solo después de que la etapa 3 esté verde).

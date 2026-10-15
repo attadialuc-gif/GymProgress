@@ -119,7 +119,7 @@ public struct HistoryService {
     /// Muscle work of completed sessions starting in `interval` (muscles from the log snapshot).
     public func muscleWork(in interval: DateInterval) -> [MuscleWork] {
         repository.sessions()
-            .filter { $0.status == .completed && interval.contains($0.startedAt) }
+            .filter { $0.status == .completed && interval.containsHalfOpen($0.startedAt) }
             .flatMap { session in
                 repository.exerciseLogs(sessionId: session.id).map { log in
                     MuscleWork(performance: performance(of: log, in: session), primary: log.snapshot.primaryMuscles, secondary: log.snapshot.secondaryMuscles)

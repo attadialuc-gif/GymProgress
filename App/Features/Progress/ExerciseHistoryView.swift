@@ -83,28 +83,3 @@ struct ExerciseHistoryView: View {
         return "\(prefix)\(fmt.load(load, measurement: measurement, loadMode: loadMode)) × \(amount)\(rir)"
     }
 }
-
-/// Progress tab (stage 3: exercises with history; charts arrive in stage 6).
-struct ProgressHomeView: View {
-    @Environment(AppModel.self) private var model
-
-    var body: some View {
-        let _ = model.revision
-        // Only exercises with at least one completed session (open/discarded sessions are not history).
-        let withHistory = model.repository.exercises().filter { !model.history.exerciseHistory(exerciseId: $0.id).isEmpty }
-        List {
-            Section {
-                NavigationLink { SessionHistoryView() } label: { Label("Entrenamientos realizados", systemImage: "calendar") }
-            }
-            Section("Por ejercicio") {
-                if withHistory.isEmpty {
-                    ContentUnavailableView("Sin historial", systemImage: "chart.line.uptrend.xyaxis", description: Text("Completá un entrenamiento para ver tu progreso."))
-                }
-                ForEach(withHistory) { exercise in
-                    NavigationLink(exercise.name) { ExerciseHistoryView(exerciseId: exercise.id) }
-                }
-            }
-        }
-        .navigationTitle("Progreso")
-    }
-}

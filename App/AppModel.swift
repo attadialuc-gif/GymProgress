@@ -15,6 +15,8 @@ final class AppModel {
     let catalog: ExerciseCatalogService
     let history: HistoryService
     let exporter: ExportService
+    let consistency: ConsistencyService
+    let stats: StatsService
     let restTimer: RestTimerService
 
     /// Incremented after each successful mutation; views read it to re-render.
@@ -32,6 +34,8 @@ final class AppModel {
         self.catalog = ExerciseCatalogService(repository: repository)
         self.history = HistoryService(repository: repository)
         self.exporter = ExportService(repository: repository)
+        self.consistency = ConsistencyService(repository: repository)
+        self.stats = StatsService(repository: repository)
         self.restTimer = RestTimerService()
     }
 
