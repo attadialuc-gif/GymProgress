@@ -11,6 +11,17 @@ public struct ExerciseHistoryEntry: Sendable, Hashable, Identifiable {
     public var performance: ExercisePerformance
 }
 
+/// One finished session for the history list.
+public struct SessionSummary: Sendable, Hashable, Identifiable {
+    public var id: UUID { session.id }
+    public var session: WorkoutSession
+    public var exerciseNames: [String]
+    public var effectiveSets: Int
+    /// External load volume (kg), per section 8.1 (per-side exercises counted as total).
+    public var volume: Double
+    public var duration: TimeInterval
+}
+
 /// Read-side mapping from records to GymCore inputs. No business rules here: it only translates.
 @MainActor
 public struct HistoryService {
@@ -65,6 +76,34 @@ public struct HistoryService {
             .sorted { a, b in
                 a.session.startedAt != b.session.startedAt ? a.session.startedAt > b.session.startedAt : a.log.id.uuidString < b.log.id.uuidString
             }
+    }
+
+    /// Completed sessions, newest first (history list). Discarded/open sessions are not history.
+    public func completedSessionSummaries(limit: Int? = nil) -> [SessionSummary] {
+        let completed = repository.sessions().filter { $0.status == .completed }.reversed()
+        let selected = limit.map { Array(completed.prefix($0)) } ?? Array(completed)
+        let bodyweight = repository.settings().bodyweightKg
+        return selected.map { session in
+            let logs = repository.exerciseLogs(sessionId: session.id).sorted {
+                ($0.executionOrder ?? Int.max, $0.plannedOrder) < ($1.executionOrder ?? Int.max, $1.plannedOrder)
+            }
+            let sets = repository.setLogs(exerciseLogIds: logs.map(\.id))
+            var effective = 0
+            var volume = 0.0
+            for log in logs {
+                let perf = performance(of: log, in: session, sets: sets[log.id] ?? [])
+                let v = Volume.of(perf, bodyweight: bodyweight)
+                effective += v.effectiveSets
+                volume += v.total
+            }
+            return SessionSummary(
+                session: session,
+                exerciseNames: logs.map(\.snapshot.name),
+                effectiveSets: effective,
+                volume: LoadMath.normalized(volume),
+                duration: session.elapsed(at: session.endedAt ?? session.startedAt)
+            )
+        }
     }
 
     /// Digest of every session (consistency metrics).

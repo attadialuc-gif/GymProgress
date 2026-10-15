@@ -195,7 +195,10 @@ private struct SessionExerciseRow: View {
         let done = sets.filter { $0.status == .completed }.count
         HStack {
             VStack(alignment: .leading, spacing: 2) {
-                Text(log.snapshot.name).font(.headline)
+                HStack {
+                    Text(log.snapshot.name).font(.headline)
+                    if let group = log.supersetGroup { Badge(text: "Superserie \(group)") }
+                }
                 if let label = [log.variantLabel, log.equipmentLabel].compactMap({ $0 }).first {
                     Text(label).font(.caption).foregroundStyle(.secondary)
                 }

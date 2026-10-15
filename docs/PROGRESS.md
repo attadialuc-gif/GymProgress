@@ -42,6 +42,20 @@ $ swiftc -parse App/**/*.swift AppTests/*.swift
 (sin errores)
 ```
 
+## Etapa 4 — Registro y rutinas completos · ✅ lógica / 📝 UI
+
+- ✅ Superseries en sesión: el log copia el grupo de la rutina; `WorkoutService.restAdvice` alterna ejercicios del grupo sin descanso y descansa al cerrar la ronda (test `Stage4Tests`).
+- ✅ Historial de entrenamientos (`HistoryService.completedSessionSummaries`: solo sesiones completadas, más nuevas primero, series efectivas, volumen externo, duración sin pausas).
+- ✅ Compatibilidad de esquema: logs guardados sin campos nuevos opcionales siguen decodificando.
+- 📝 UI: biblioteca (buscar, filtrar por músculo, archivados, crear propios), detalle de ejercicio (criterios de progresión predeterminados, archivar, eliminar sin historial con confirmación), lista y detalle de entrenamientos realizados (orden real, decisiones), insignia y botón "seguí con…" en superseries.
+
+```
+$ swift test
+✔ Test run with 103 tests in 11 suites passed   (GymCoreTests)
+✔ Test run with 31 tests in 4 suites passed     (GymStoreTests)
+$ swiftc -parse (23 archivos de la app)          sin errores
+```
+
 ## Próximos pasos
 
 - Etapa 4+: ver `docs/ARCHITECTURE.md` (solo después de que la etapa 3 esté verde).

@@ -11,6 +11,13 @@ public enum DecisionChoice: Sendable, Hashable {
     case ignore
 }
 
+public struct RestAdvice: Sendable, Hashable {
+    /// `nil` = no rest (continue the superset round).
+    public var restSeconds: Int?
+    /// Next exercise of the superset to go to, if any.
+    public var nextExerciseLogId: UUID?
+}
+
 /// Everything the exercise screen needs, with the recommendation card on top.
 public struct ExerciseLogState: Sendable, Hashable {
     public var log: ExerciseLog
@@ -65,7 +72,7 @@ public final class WorkoutService {
         for item in items {
             guard let exercise = repository.exercise(id: item.exerciseId), !exercise.isArchived else { continue }
             let config = item.progressionOverride ?? exercise.progression
-            try createLog(session: session, exercise: exercise, config: config, routineExerciseId: item.id, restSeconds: item.restSeconds ?? exercise.defaultRestSeconds, notes: item.notes, order: order)
+            try createLog(session: session, exercise: exercise, config: config, routineExerciseId: item.id, restSeconds: item.restSeconds ?? exercise.defaultRestSeconds, notes: item.notes, order: order, supersetGroup: item.supersetGroup)
             order += 1
         }
         return session
@@ -425,6 +432,28 @@ public final class WorkoutService {
         return set
     }
 
+    /// What to do after completing a set: inside a superset round, go straight to the next exercise
+    /// of the group (no rest); otherwise rest for the exercise's (or the global) rest time.
+    public func restAdvice(afterCompleting setId: UUID) -> RestAdvice {
+        guard let set = repository.setLog(id: setId), let log = repository.exerciseLog(id: set.exerciseLogId) else {
+            return RestAdvice(restSeconds: repository.settings().defaultRestSeconds, nextExerciseLogId: nil)
+        }
+        let rest = log.restSeconds ?? repository.settings().defaultRestSeconds
+        guard let group = log.supersetGroup else { return RestAdvice(restSeconds: rest, nextExerciseLogId: nil) }
+        let members = repository.exerciseLogs(sessionId: log.sessionId).filter { $0.supersetGroup == group }
+        guard let index = members.firstIndex(where: { $0.id == log.id }) else { return RestAdvice(restSeconds: rest, nextExerciseLogId: nil) }
+        // Next member (cyclically after this one) that still has pending working sets.
+        for offset in 1..<max(members.count, 1) {
+            let candidate = members[(index + offset) % members.count]
+            let pending = repository.setLogs(exerciseLogId: candidate.id).contains { $0.kind == .working && $0.status == .pending }
+            guard pending else { continue }
+            // Wrapping back to the start of the group ends the round: rest first.
+            let wraps = (index + offset) >= members.count
+            return RestAdvice(restSeconds: wraps ? rest : nil, nextExerciseLogId: candidate.id)
+        }
+        return RestAdvice(restSeconds: rest, nextExerciseLogId: nil)
+    }
+
     public func reopenSet(setId: UUID) throws {
         guard var set = repository.setLog(id: setId) else { throw GymStoreError.notFound("set") }
         _ = try requireOpenLog(set.exerciseLogId)
@@ -457,10 +486,10 @@ public final class WorkoutService {
     }
 
     @discardableResult
-    private func createLog(session: WorkoutSession, exercise: Exercise, config: ProgressionConfig, routineExerciseId: UUID?, restSeconds: Int?, notes: String, order: Int) throws -> ExerciseLog {
+    private func createLog(session: WorkoutSession, exercise: Exercise, config: ProgressionConfig, routineExerciseId: UUID?, restSeconds: Int?, notes: String, order: Int, supersetGroup: Int? = nil) throws -> ExerciseLog {
         let labels = history.lastUsedLabels(exerciseId: exercise.id)
         let sanitized = config.sanitized()
-        let log = ExerciseLog(
+        var log = ExerciseLog(
             sessionId: session.id,
             exerciseId: exercise.id,
             routineExerciseId: routineExerciseId,
@@ -472,6 +501,7 @@ public final class WorkoutService {
             restSeconds: restSeconds,
             notes: notes
         )
+        log.supersetGroup = supersetGroup
         try repository.upsertExerciseLog(log)
         for i in 0..<sanitized.targetSets {
             try repository.upsertSetLog(SetLog(exerciseLogId: log.id, index: i, kind: .working))

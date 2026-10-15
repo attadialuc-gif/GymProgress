@@ -93,11 +93,16 @@ struct ProgressHomeView: View {
         // Only exercises with at least one completed session (open/discarded sessions are not history).
         let withHistory = model.repository.exercises().filter { !model.history.exerciseHistory(exerciseId: $0.id).isEmpty }
         List {
-            if withHistory.isEmpty {
-                ContentUnavailableView("Sin historial", systemImage: "chart.line.uptrend.xyaxis", description: Text("Completá un entrenamiento para ver tu progreso."))
+            Section {
+                NavigationLink { SessionHistoryView() } label: { Label("Entrenamientos realizados", systemImage: "calendar") }
             }
-            ForEach(withHistory) { exercise in
-                NavigationLink(exercise.name) { ExerciseHistoryView(exerciseId: exercise.id) }
+            Section("Por ejercicio") {
+                if withHistory.isEmpty {
+                    ContentUnavailableView("Sin historial", systemImage: "chart.line.uptrend.xyaxis", description: Text("Completá un entrenamiento para ver tu progreso."))
+                }
+                ForEach(withHistory) { exercise in
+                    NavigationLink(exercise.name) { ExerciseHistoryView(exerciseId: exercise.id) }
+                }
             }
         }
         .navigationTitle("Progreso")

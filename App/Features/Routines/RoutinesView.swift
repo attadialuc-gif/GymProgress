@@ -71,6 +71,9 @@ struct RoutinesView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) { EditButton() }
             ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink { LibraryView() } label: { Label("Biblioteca", systemImage: "books.vertical") }
+            }
+            ToolbarItem(placement: .topBarTrailing) {
                 Menu {
                     Button { newName = ""; showNew = true } label: { Label("Rutina vacía", systemImage: "plus") }
                     Section("Plantillas editables") {

@@ -104,6 +104,9 @@ public struct ExerciseLog: Codable, Sendable, Hashable, Identifiable {
     public var sessionId: UUID
     public var exerciseId: UUID
     public var routineExerciseId: UUID?
+    /// Superset / biset group copied from the routine (exercises with the same group alternate;
+    /// rest starts after the last exercise of the round). Optional in stored data (schema v1).
+    public var supersetGroup: Int? = nil
     public var snapshot: ExerciseSnapshot
     /// Effective progression config at session start (routine override ?? exercise config).
     public var configSnapshot: ProgressionConfig

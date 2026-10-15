@@ -13,6 +13,7 @@ struct ExerciseLogView: View {
     @State private var showContext = false
     @State private var completedTick = 0
     @State private var notesDraft = ""
+    @State private var nextInSuperset: UUID?
     @FocusState private var notesFocused: Bool
 
     var body: some View {
@@ -66,12 +67,23 @@ struct ExerciseLogView: View {
                 SetTable(log: log, sets: state.sets, previous: state.recommendation.lastPerformance) { set in
                     if model.perform({ try model.workout.completeSet(setId: set.id, now: model.now()) }) != nil {
                         completedTick += 1
-                        let rest = log.restSeconds ?? model.settings.defaultRestSeconds
-                        model.restTimer.start(seconds: rest, now: model.now(), notify: model.settings.restNotifications)
+                        let advice = model.workout.restAdvice(afterCompleting: set.id)
+                        nextInSuperset = advice.nextExerciseLogId
+                        if let rest = advice.restSeconds {
+                            model.restTimer.start(seconds: rest, now: model.now(), notify: model.settings.restNotifications)
+                        }
                     }
                 }
 
                 RestTimerBanner()
+
+                if let nextId = nextInSuperset, let next = model.repository.exerciseLog(id: nextId) {
+                    NavigationLink(value: nextId) {
+                        Label("Superserie: seguí con \(next.snapshot.name)", systemImage: "arrow.right.circle.fill")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
 
                 HStack {
                     Button { model.perform { try model.workout.addSet(logId: logId) } } label: {
