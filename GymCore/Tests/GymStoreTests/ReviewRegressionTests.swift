@@ -32,6 +32,29 @@ struct ReviewRegressionTests {
         #expect(store.history.exerciseHistory(exerciseId: bench.id).count == 1)
     }
 
+    @Test("Re-review 1: an older backup does not resurrect exercises or sets removed locally from a session")
+    func importDoesNotResurrectRemovedChildren() throws {
+        let store = try TestStore()
+        let bench = try SFx.bench(in: store)
+        let routine = try SFx.routine(with: bench, in: store)
+        let curl = try store.catalog.createCustomExercise(name: "Curl", measurement: .weightReps, equipment: .dumbbell, loadMode: .perSide, primaryMuscles: [.biceps])
+        try store.routines.addExercise(routineId: routine.id, exerciseId: curl.id)
+        let session = try store.workout.startSession(routineId: routine.id, now: SFx.day(0))
+        let backup = try store.export.exportJSON(now: SFx.day(0, minutes: 1))
+
+        let logs = store.repo.exerciseLogs(sessionId: session.id)
+        try store.workout.removeExercise(logId: logs[1].id)
+        let benchSets = store.repo.setLogs(exerciseLogId: logs[0].id)
+        try store.workout.removeSet(setId: benchSets[2].id)
+        try store.workout.finish(sessionId: session.id, now: SFx.day(0, minutes: 30))
+        let before = store.repo.snapshot()
+
+        try store.export.importJSON(backup)
+        #expect(store.repo.snapshot() == before)
+        #expect(store.repo.exerciseLogs(sessionId: session.id).count == 1)
+        #expect(store.repo.setLogs(exerciseLogId: logs[0].id).count == 2)
+    }
+
     @Test("C1: a backup with another open workout is refused while one is open locally")
     func noSecondOpenSession() throws {
         let other = try TestStore()

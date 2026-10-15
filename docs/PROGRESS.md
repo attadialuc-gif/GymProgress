@@ -20,7 +20,10 @@ Fuente de verdad del estado del proyecto. Actualizar al cerrar cada etapa.
 - ✅ `GymStore`: records, protocolo `GymRepository`, `JSONGymRepository` (archivo, escritura atómica en cada cambio, índices), `WorkoutService` (recomendación congelada, decisiones aceptar/modificar/ignorar, completar en un toque, recuperación, cambios solo de la sesión), `RoutineService`, `ExerciseCatalogService` (catálogo de 98 ejercicios con UUID estables), plantillas, `ExportService` (JSON con `schemaVersion`, import validado sin duplicados, CSV).
 - 📝 SwiftData: `App/Persistence/SchemaV1.swift` (`VersionedSchema` + `GymMigrationPlan`) y `SwiftDataGymRepository` (mismo contrato). Tests en `AppTests/SwiftDataRepositoryTests.swift` (caso 8, recuperación, export/import, apertura con el plan de migración) — **no ejecutados**.
 
-## Etapa 3 — Flujo vertical crítico · ✅ lógica / 📝 UI (pendiente revisión)
+## Etapa 3 — Flujo vertical crítico · ✅ puerta de calidad aprobada (lógica) / 📝 UI
+
+- Revisión independiente de etapas 2–3: 1 crítico (import pisaba historial más nuevo), 5 mayores y 12 menores → **todos corregidos** con tests de regresión (`ReviewRegressionTests`). Re-revisión: **aprobada** ("Stage 3 passes the gate"); sus 4 observaciones no bloqueantes también se corrigieron (import no resucita lo borrado de una sesión local, guardado al pasar a segundo plano, carrera del temporizador, aviso de parseo).
+- Tests actuales: 103 (GymCore) + 28 (GymStore) en verde; 21 archivos de la app sin errores de sintaxis.
 
 - ✅ Test de integración del flujo 2.E (`EndToEndFlowTests.fullFlow`): crear rutina → elegir ejercicio del catálogo → objetivo (3 × 8–12, RIR 2, inicial 50 kg) → abrir ejercicio (tarjeta) → aceptar → registrar series → finalizar → historial → recomendación siguiente (52,5 kg × 8, confianza alta), **recargando el store desde disco entre cada paso**.
 - ✅ Caso 2.D-8 completo con persistencia (`PersistenceTests.case8_modifiedDecisionLifecycle`).
@@ -41,6 +44,5 @@ $ swiftc -parse App/**/*.swift AppTests/*.swift
 
 ## Próximos pasos
 
-- Revisión independiente de etapas 2 y 3 y correcciones.
 - Etapa 4+: ver `docs/ARCHITECTURE.md` (solo después de que la etapa 3 esté verde).
 - En un Mac: `xcodegen generate`, compilar, correr `GymProgressTests` y probar el flujo en simulador.

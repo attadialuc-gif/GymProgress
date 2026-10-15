@@ -92,8 +92,20 @@ public struct ExportService {
         }
         let summary = Self.diff(before: before, incoming: incoming)
         let isEmptyStore = before.sessions.isEmpty && before.routines.isEmpty
-        try repository.merge(incoming, includeSettings: isEmptyStore)
+        try repository.merge(Self.withoutChildrenOfLocalSessions(incoming, local: before), includeSettings: isEmptyStore)
         return summary
+    }
+
+    /// A session that already exists locally is the local truth as a whole: logs, sets and
+    /// decisions that the user removed from it locally are not brought back by an older file.
+    static func withoutChildrenOfLocalSessions(_ incoming: GymDatabase, local: GymDatabase) -> GymDatabase {
+        let localSessions = Set(local.sessions.map(\.id))
+        var filtered = incoming
+        filtered.exerciseLogs = incoming.exerciseLogs.filter { !localSessions.contains($0.sessionId) }
+        let importedLogs = Set(filtered.exerciseLogs.map(\.id))
+        filtered.setLogs = incoming.setLogs.filter { importedLogs.contains($0.exerciseLogId) }
+        filtered.decisions = incoming.decisions.filter { importedLogs.contains($0.exerciseLogId) }
+        return filtered
     }
 
     /// CSV of every set of completed sessions (one row per set). RFC 4180, comma separator, dot

@@ -12,7 +12,7 @@ final class RestTimerService {
     private(set) var endDate: Date?
     private(set) var totalSeconds: Int = 0
     private let notificationId = "rest-timer"
-    private static let storedEndKey = "restTimer.endDate"
+    private nonisolated static let storedEndKey = "restTimer.endDate"
 
     init() {
         // Restore a running timer after relaunch (UserDefaults is only used for this convenience).
@@ -69,8 +69,17 @@ final class RestTimerService {
             content: content,
             trigger: UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
         )
+        // The stored end date is the generation token: if the timer was stopped or restarted while
+        // this task was in flight, never add (or immediately withdraw) a stale notification.
+        func stillCurrent() -> Bool {
+            (UserDefaults.standard.object(forKey: storedEndKey) as? Date) == date
+        }
+        guard stillCurrent() else { return }
         center.removePendingNotificationRequests(withIdentifiers: [notificationId])
         try? await center.add(request)
+        if !stillCurrent() {
+            center.removePendingNotificationRequests(withIdentifiers: [notificationId])
+        }
     }
 }
 

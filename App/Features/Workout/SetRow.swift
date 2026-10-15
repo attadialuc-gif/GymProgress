@@ -6,6 +6,7 @@ import SwiftUI
 /// and always right before completing the set, so a tap on ✓ never loses what was typed.
 struct SetRow: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.scenePhase) private var scenePhase
     let log: ExerciseLog
     let entry: SetLog
     let label: String
@@ -17,6 +18,7 @@ struct SetRow: View {
     @State private var loadText = ""
     @State private var amountText = ""
     @State private var warning: String?
+    @State private var parseWarning: String?
     @State private var loaded = false
     @State private var confirmRemove = false
     @FocusState private var focused: Field?
@@ -97,6 +99,10 @@ struct SetRow: View {
             if old != nil { commitTexts() }
         }
         .onDisappear { commitTexts() }
+        // Leaving the app (call, lock, app switcher) saves what was typed, even mid-edit.
+        .onChange(of: scenePhase) { _, phase in
+            if phase != .active { commitTexts() }
+        }
     }
 
     /// RIR in one tap (0–10) or RPE (6–10). Optional; feeds the engine's effort check.
@@ -166,6 +172,7 @@ struct SetRow: View {
     /// display never rewrites a stored value).
     private func commitTexts() {
         var s = entry
+        parseWarning = nil
         if loadText != loadDisplay(storedLoad) {
             let fmt = model.loadFormatter
             let trimmed = loadText.trimmingCharacters(in: .whitespaces)
@@ -178,14 +185,14 @@ struct SetRow: View {
                     s.addedWeight = negative ? nil : (m > 0 ? m : nil)
                     s.assistance = negative ? m : nil
                 } else {
-                    warning = "Peso inválido: usá coma o punto decimal."
+                    parseWarning = "Peso inválido: usá coma o punto decimal."
                 }
             } else if trimmed.isEmpty {
                 s.weight = nil
             } else if let v = fmt.parse(trimmed) {
                 s.weight = v
             } else {
-                warning = "Peso inválido: usá coma o punto decimal."
+                parseWarning = "Peso inválido: usá coma o punto decimal."
             }
         }
         if amountText != (storedAmount.map(String.init) ?? "") {
@@ -194,7 +201,7 @@ struct SetRow: View {
             } else if let v = WeightParser.parseInt(amountText) {
                 if isDuration { s.seconds = v } else { s.reps = v }
             } else {
-                warning = "Ingresá un número entero."
+                parseWarning = "Ingresá un número entero."
             }
         }
         save(s)
@@ -208,12 +215,17 @@ struct SetRow: View {
     }
 
     private func save(_ s: SetLog) {
-        guard s != entry else { return }
+        guard s != entry else {
+            warning = parseWarning
+            return
+        }
         let issues = SetValidator.validate(weight: s.weight, reps: s.reps, seconds: s.seconds, rir: s.rir, rpe: s.rpe)
-        warning = issues.compactMap { issue -> String? in
+        let unusual = issues.compactMap { issue -> String? in
             if case let .warning(message) = issue { return message }
             return nil
         }.first
+        // A typing error is shown first; it is never hidden by another field's save.
+        warning = parseWarning ?? unusual
         model.perform { try model.workout.updateSet(s) }
     }
 }
