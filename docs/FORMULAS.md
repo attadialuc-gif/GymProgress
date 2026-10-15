@@ -51,3 +51,37 @@ Ver D-021. Serie de valores cronológica (máx. 6 últimas sesiones comparables)
 
 - Epley: `w × (1 + r/30)`; Brzycki: `w × 36 / (37 − r)` (r < 37). Con r = 1 ambas devuelven `w`.
 - Se excluyen series con más de `maxReps` (10 por defecto) y las marcadas por el usuario. Siempre rotulado "estimado".
+- Récords (`PersonalRecords`): reales = peso máximo, máximo de repeticiones por peso, mayor volumen por sesión; calculado = mejor 1RM estimado (`isEstimated = true`). Solo sesiones `completed` y series efectivas; en empate gana la primera vez que se logró. Siempre se recalculan desde las series (no se inventan ni se guardan como fuente de verdad).
+
+## Volumen (8.1 / 8.4)
+
+| Medición | Volumen de carga | Base |
+|---|---|---|
+| `weightReps`, `total` | Σ peso × reps | `external` |
+| `weightReps`, `perSide` | por lado = Σ peso × reps; total = 2 × por lado (las reps unilaterales se registran por lado) | `external` |
+| `bodyweightReps` con peso corporal conocido | Σ max(0, pc + adicional − asistencia) × reps | `bodyweightIncluded` |
+| `bodyweightReps` sin peso corporal | Σ adicional × reps (solo carga externa; se indica) | `externalOnlyBodyweightUnknown` |
+| `duration` | no aplica; se informa tiempo total | `notApplicable` |
+
+Solo series efectivas (calentamiento y pendientes excluidas). Peso usado, volumen externo, series realizadas y 1RM estimado son métricas distintas; más volumen no implica más fuerza ni hipertrofia.
+
+**Por grupo muscular** (`MuscleVolume`): series directas = series efectivas de ejercicios donde el músculo es principal. Series indirectas estimadas = series efectivas donde es secundario × factor (propio del ejercicio o global, 0,5 por defecto). Se informan **por separado**. Un músculo que figura como principal y secundario cuenta una vez, como directo. Frecuencia = días distintos con ≥ 1 serie directa. Los objetivos semanales de series los define el usuario; la app no impone un número.
+
+## Constancia (8.5)
+
+- **Sesión válida**: `completed` con ≥ N series efectivas (N = 3 por defecto, configurable).
+- **Calendario planificado**: `ScheduleEntry(weekday, routineId?, validFrom, validTo?)` append-only; para un día gana la entrada aplicable con `validFrom` más reciente; `routineId = nil` = descanso explícito.
+- **Modo A (plan semanal)**: semana cumplida si sesiones válidas ≥ días planificados esa semana (según el calendario vigente en esa fecha). Semanas sin plan y la semana en curso aún no cumplida son neutras. Racha = semanas cumplidas consecutivas.
+- **Modo B (días)**: cadena de días de entrenamiento donde la separación entre sesiones válidas consecutivas es ≤ K días (K = 2). La racha actual sigue viva mientras hoy esté a ≤ K días del último entrenamiento. Varias sesiones el mismo día = un día.
+- **Objetivo semanal**: progreso = min(1, hechas / objetivo); cumplido se muestra en positivo, sin empujar a entrenar de más.
+
+## Fechas (8.6)
+
+- Se guardan instantes (`Date`, UTC). "Día" y "semana" se calculan con el `Calendar` del usuario (`TrainingCalendar`: zona horaria + primer día de semana, lunes por defecto).
+- Una sesión pertenece al día en que **empezó** (aunque cruce la medianoche).
+- Sumar días usa `Calendar.date(byAdding: .day)` (días de 23/25 h en cambios de horario).
+- Tests: DST (America/New_York 2026-03-08 y 2026-11-01), cambio de zona, medianoche, inicio de semana lunes/domingo, fin de mes (febrero bisiesto) y de año.
+
+## Parseo de números
+
+`WeightParser.parse`: acepta coma o punto como separador decimal (`62,5`, `62.5`, `,5`, `100.`), un solo separador, sin signos ni miles ni exponentes; normaliza a 1 g. Validación (`SetValidator`): negativos = error; peso > 500 kg, reps > 100 o duración > 1 h = advertencia que no bloquea; RIR 0–10, RPE 1–10.
