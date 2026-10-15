@@ -34,8 +34,11 @@ targets:
         excludes:
           - "Resources/Info.plist"
     dependencies:
+      # Dynamic framework: must be embedded in the .app or the app can't launch on a device.
       - package: GymCore
         product: GymKit
+        embed: true
+        codeSign: true
     info:
       path: App/Resources/Info.plist
       properties:

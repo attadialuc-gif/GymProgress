@@ -61,6 +61,16 @@ jobs:
         if: failure()
         run: |
           grep -E "error:|warning: .*(concurrency|Sendable)" xcodebuild-build.log | sort -u | head -150 || true
+      - name: Verify every @rpath dependency is embedded
+        run: |
+          APP=build/Build/Products/Release-iphoneos/GymProgress.app
+          otool -L "$APP/GymProgress"
+          missing=0
+          for lib in $(otool -L "$APP/GymProgress" | awk '/@rpath\//{print $1}'); do
+            rel=${lib#@rpath/}
+            if [ -e "$APP/Frameworks/$rel" ]; then echo "embedded: $rel"; else echo "MISSING: $rel"; missing=1; fi
+          done
+          exit $missing
       - name: Package .ipa
         run: |
           APP=build/Build/Products/Release-iphoneos/GymProgress.app
