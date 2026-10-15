@@ -86,6 +86,18 @@ $ swift test
 $ swiftc -parse (26 archivos de la app)          sin errores
 ```
 
+## Revisión independiente de etapas 4–7 · ✅ corregida
+
+- 0 críticos, 7 mayores, 12 menores. Todos corregidos; los confirmados con tests de regresión (`Stage4To7ReviewTests`, 11 tests): plan con fecha pasada, plan futuro guardado antes, próximo entrenamiento, récords/gráficos por contexto, comparación a la fecha, récords recientes sin duplicados, calentamiento en superserie, resumen de importación, fecha de objetivo logrado, CSV, objetivos por músculo.
+- UI: peso corporal se guarda al salir del campo, objetivos de series por músculo, frecuencia por semana, filtro de rutina en músculos y ejercicios, etiquetas según medición, validación de criterios del ejercicio, objetivo de reps exige peso, superserie reemplaza pantalla, zona horaria actual.
+
+```
+$ swift test
+✔ Test run with 103 tests in 11 suites passed   (GymCoreTests)
+✔ Test run with 51 tests in 7 suites passed     (GymStoreTests)
+$ swiftc -parse (26 archivos de la app)          sin errores
+```
+
 ## Próximos pasos
 
 - En un Mac: `xcodegen generate`, compilar, corregir lo que marque el compilador, correr `GymProgressTests` y probar el flujo en simulador y en un iPhone.

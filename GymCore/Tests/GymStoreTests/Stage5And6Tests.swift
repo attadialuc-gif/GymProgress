@@ -123,7 +123,7 @@ struct StatsServiceTests {
         let (_, bench, stats) = try setUp()
         let points = stats.exerciseSeries(exerciseId: bench.id)
         #expect(points.map(\.workingLoad) == [60, 60, 62.5])
-        #expect(points.map(\.totalReps) == [30, 31, 27])
+        #expect(points.map(\.totalAmount) == [30, 31, 27])
         #expect(points[0].estimatedOneRepMax == 80)
         #expect(points[1].estimatedOneRepMax == 80) // 11 reps excluded by the cap, 10 reps → 80
         // 62.5 × (1 + 10/30) = 83.333…, stored at 1 g resolution.

@@ -90,9 +90,22 @@ public struct ExportService {
         if !incomingOpen.isEmpty && (!localOpen.isEmpty || incomingOpen.count > 1) {
             throw GymStoreError.invalidImport("Terminá o descartá el entrenamiento en curso antes de importar una copia que tiene otro entrenamiento abierto.")
         }
-        let summary = Self.diff(before: before, incoming: incoming)
+        let filtered = Self.withoutChildrenOfLocalSessions(incoming, local: before)
+        // The summary describes what really happens: children of local sessions are never
+        // inserted, so they count as unchanged (same as local) or as conflicts (local kept).
+        var summary = Self.diff(before: before, incoming: filtered)
+        var dropped = GymDatabase()
+        let keptLogs = Set(filtered.exerciseLogs.map(\.id))
+        let keptSets = Set(filtered.setLogs.map(\.id))
+        let keptDecisions = Set(filtered.decisions.map(\.exerciseLogId))
+        dropped.exerciseLogs = incoming.exerciseLogs.filter { !keptLogs.contains($0.id) }
+        dropped.setLogs = incoming.setLogs.filter { !keptSets.contains($0.id) }
+        dropped.decisions = incoming.decisions.filter { !keptDecisions.contains($0.exerciseLogId) }
+        let droppedDiff = Self.diff(before: before, incoming: dropped)
+        summary.unchanged += droppedDiff.unchanged
+        summary.conflicts += droppedDiff.conflicts + droppedDiff.inserted
         let isEmptyStore = before.sessions.isEmpty && before.routines.isEmpty
-        try repository.merge(Self.withoutChildrenOfLocalSessions(incoming, local: before), includeSettings: isEmptyStore)
+        try repository.merge(filtered, includeSettings: isEmptyStore)
         return summary
     }
 
@@ -111,7 +124,7 @@ public struct ExportService {
     /// CSV of every set of completed sessions (one row per set). RFC 4180, comma separator, dot
     /// decimals and ISO-8601 dates so any spreadsheet or script can read it unambiguously.
     public func exportSetsCSV() -> String {
-        var rows = ["session_id,session_start,routine,exercise,variant,equipment,set_index,set_kind,status,weight_kg,reps,seconds,added_kg,assistance_kg,rir,rpe,atypical"]
+        var rows = ["session_id,session_start,routine,exercise,measurement,load_mode,variant,equipment,set_index,set_kind,status,weight_kg,reps,seconds,added_kg,assistance_kg,rir,rpe,atypical"]
         let iso = ISO8601DateFormatter()
         for session in repository.sessions() where session.status == .completed {
             for log in repository.exerciseLogs(sessionId: session.id) {
@@ -119,10 +132,13 @@ public struct ExportService {
                     let fields: [String] = [
                         session.id.uuidString,
                         iso.string(from: session.startedAt),
-                        session.routineNameSnapshot ?? "",
-                        log.snapshot.name,
-                        log.variantLabel ?? "",
-                        log.equipmentLabel ?? "",
+                        Self.text(session.routineNameSnapshot ?? ""),
+                        Self.text(log.snapshot.name),
+                        log.snapshot.measurement.rawValue,
+                        // weight_kg is per side when load_mode is perSide.
+                        log.snapshot.loadMode.rawValue,
+                        Self.text(log.variantLabel ?? ""),
+                        Self.text(log.equipmentLabel ?? ""),
                         String(set.index),
                         set.kind.rawValue,
                         set.status.rawValue,
@@ -145,6 +161,13 @@ public struct ExportService {
     static func num(_ v: Double?) -> String {
         guard let v else { return "" }
         return v.formatted(.number.precision(.fractionLength(0...3)).grouping(.never).locale(Locale(identifier: "en_US_POSIX")))
+    }
+
+    /// User-typed text: a leading =, +, -, @ (or tab/CR) would be run as a formula by spreadsheets;
+    /// prefix an apostrophe so it stays plain text.
+    static func text(_ value: String) -> String {
+        guard let first = value.first, "=+-@\t\r".contains(first) else { return value }
+        return "'" + value
     }
 
     static func escape(_ field: String) -> String {

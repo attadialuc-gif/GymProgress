@@ -12,7 +12,9 @@ struct ExerciseHistoryView: View {
         let fmt = model.loadFormatter
         let entries = model.history.exerciseHistory(exerciseId: exerciseId)
         let next = model.workout.previewRecommendation(exerciseId: exerciseId, now: model.now())
-        let records = PersonalRecords.compute(entries.map(\.performance), oneRepMax: model.settings.oneRepMax)
+        // Records of the context currently in use (other machines/variants: Récords y objetivos).
+        let currentClass = model.stats.currentContextClass(exerciseId: exerciseId)
+        let records = model.stats.records(exerciseId: exerciseId, contextClass: currentClass)
 
         List {
             if let next {
@@ -33,7 +35,7 @@ struct ExerciseHistoryView: View {
             }
 
             if records.maxWeight != nil {
-                Section("Récords") {
+                Section(currentClass.map { $0.label == "estándar" ? "Récords" : "Récords · \($0.label)" } ?? "Récords") {
                     if let r = records.maxWeight {
                         LabeledContent("Peso máximo (real)", value: fmt.weight(r.value))
                     }

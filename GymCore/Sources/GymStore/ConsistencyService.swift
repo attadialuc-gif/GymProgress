@@ -61,7 +61,9 @@ public struct ConsistencyService {
     /// Replaces the weekly plan from `from` onwards (append-only: past days keep their plan).
     /// `assignments`: weekday (1 = Sunday … 7 = Saturday) → routine. Missing weekdays = rest.
     public func setWeeklyPlan(_ assignments: [Int: UUID], from: Date, now: Date) throws {
-        for entry in Schedule.weeklyPlanEntries(assignments: assignments, validFrom: from, createdAt: now, calendar: calendar) {
+        // Never earlier than today: a plan change can't rewrite planned/missed days in the past.
+        let start = max(calendar.day(of: from), calendar.day(of: now))
+        for entry in Schedule.weeklyPlanEntries(assignments: assignments, validFrom: start, createdAt: now, calendar: calendar) {
             try repository.insertScheduleEntry(entry)
         }
     }
@@ -73,6 +75,25 @@ public struct ConsistencyService {
 
     public func plannedRoutine(on day: Date) -> UUID? {
         Schedule.plannedRoutine(on: day, entries: repository.scheduleEntries(), calendar: calendar)
+    }
+
+    /// Next planned workout from today: skips today when today's planned routine was already
+    /// done (or today is a rest day). Looks up to two weeks ahead; `nil` without a plan.
+    public func nextPlannedWorkout(now: Date) -> (date: Date, routineId: UUID)? {
+        let entries = repository.scheduleEntries()
+        guard !entries.isEmpty else { return nil }
+        let today = calendar.day(of: now)
+        let doneToday = repository.sessions().contains {
+            $0.status == .completed && calendar.day(of: $0.startedAt) == today
+        }
+        for offset in 0..<14 {
+            let day = calendar.addDays(offset, to: today)
+            if offset == 0 && doneToday { continue }
+            if let routine = Schedule.plannedRoutine(on: day, entries: entries, calendar: calendar) {
+                return (day, routine)
+            }
+        }
+        return nil
     }
 
     // MARK: Calendar
@@ -142,7 +163,7 @@ public struct ConsistencyService {
             let weeks = Streaks.weeklyCompliance(sessions: digests, schedule: repository.scheduleEntries(), minSets: minSets, now: now, calendar: calendar)
             return StreakSummary(
                 result: Streaks.weeklyStreak(weeks),
-                definition: "Semanas seguidas cumpliendo el plan: entrenamientos válidos (≥ \(minSets) series efectivas) ≥ días planificados. Los descansos programados no cuentan como fallo y la semana en curso no corta la racha."
+                definition: "Semanas seguidas cumpliendo el plan: entrenamientos válidos (≥ \(minSets) series efectivas) ≥ días planificados. Los descansos programados no cuentan como fallo y la semana en curso no corta la racha." + (repository.scheduleEntries().isEmpty ? " Necesita un plan semanal: definilo en Calendario o cambiá el modo de racha en Perfil." : "")
             )
         case .dayGap:
             let days = Streaks.trainingDays(digests, minSets: minSets, calendar: calendar)

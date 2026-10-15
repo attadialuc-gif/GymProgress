@@ -71,6 +71,9 @@ struct ExerciseLogView: View {
                         nextInSuperset = advice.nextExerciseLogId
                         if let rest = advice.restSeconds {
                             model.restTimer.start(seconds: rest, now: model.now(), notify: model.settings.restNotifications)
+                        } else {
+                            // Mid-round of a superset: no rest; cancel a timer left from before.
+                            model.restTimer.stop()
                         }
                     }
                 }
@@ -78,7 +81,11 @@ struct ExerciseLogView: View {
                 RestTimerBanner()
 
                 if let nextId = nextInSuperset, let next = model.repository.exerciseLog(id: nextId) {
-                    NavigationLink(value: nextId) {
+                    Button {
+                        // Replace the current screen (A → B → A never piles up screens).
+                        if model.workoutPath.isEmpty { model.workoutPath = [nextId] } else { model.workoutPath[model.workoutPath.count - 1] = nextId }
+                        nextInSuperset = nil
+                    } label: {
                         Label("Superserie: seguí con \(next.snapshot.name)", systemImage: "arrow.right.circle.fill")
                             .frame(maxWidth: .infinity)
                     }

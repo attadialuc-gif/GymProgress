@@ -38,7 +38,7 @@ public struct ComparabilityContext: Codable, Sendable, Hashable {
     }
 
     /// Stable string used for deterministic ordering.
-    var sortKey: String {
+    public var sortKey: String {
         let n = normalized
         return "\(n.exerciseId.uuidString)|\(n.variantLabel ?? "")|\(n.equipmentLabel ?? "")|\(n.loadMode.rawValue)"
     }

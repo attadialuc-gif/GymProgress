@@ -78,4 +78,20 @@ Formato: decisión · alternativas · motivo. Las decisiones del motor (D-010+) 
 
 **D-034 · Ids del catálogo**: UUIDv5 derivado del `catalogId` estable (`scripts/gen_catalog.py`), fijo en el JSON. Seeding idempotente: actualiza nombre/músculos/equipamiento de ejercicios de catálogo, conserva la configuración de progresión editada y el archivado, nunca toca los personalizados.
 
+**D-040 · Plan semanal (revisada tras la revisión de etapas 4–7).** `validFrom` nunca es anterior a hoy (el servicio lo recorta y el selector de fecha no lo permite), así un cambio no reescribe días pasados. Entre entradas vigentes gana la **creada más recientemente** (desempate: `validFrom` más tardío): la última decisión del usuario manda desde su fecha, incluso sobre un plan guardado antes para una fecha posterior.
+
+**D-041 · Récords, gráficos y objetivos por contexto comparable.** Se calculan por clase de contexto (máquina/variante/modo de carga, más los vínculos del usuario); nunca se mezclan. Por defecto se usa la clase del contexto usado por última vez; Progreso y Récords muestran las demás por separado y rotuladas. Un primer registro en un contexto nuevo no es un "récord superado".
+
+**D-042 · Comparación de períodos a la fecha.** Para semana, mes y año en curso se compara el mismo número de días transcurridos con el período anterior ("a la fecha vs. los mismos días"); los períodos móviles se comparan completos.
+
+**D-043 · Récords recientes.** Solo cuentan si una sesión anterior ya tenía un registro de ese tipo en ese contexto; uno por (ejercicio, contexto, tipo, sesión), el mejor de la sesión.
+
+**D-044 · Objetivos de series semanales por músculo** opcionales en `UserSettings.muscleSetGoals` (solo si el usuario los define; la app no propone un número). Los objetivos por ejercicio se fechan el día del récord que los alcanzó.
+
+**D-045 · Superseries en la UI.** Un calentamiento no forma parte de la ronda (descanso normal). Pasar al siguiente ejercicio reemplaza la pantalla actual en lugar de apilarla; dentro de la ronda se detiene un temporizador previo.
+
+**D-046 · Próximo entrenamiento en Inicio:** con plan, el próximo día planificado (hoy salvo que ya se entrenó o sea descanso); sin plan, la rutina siguiente a la última hecha. Días y semanas siguen la zona horaria actual del dispositivo.
+
+**D-047 · CSV:** columnas `measurement` y `load_mode` (`weight_kg` es por lado en `perSide`) y textos que empiezan con `=`, `+`, `-` o `@` se prefijan con `'` para que una planilla no los ejecute como fórmula.
+
 **D-023 · Pausa larga** ⇒ `reassess` con el último peso como referencia ("retomá con X o menos") y repeticiones objetivo = repMín. Días contados como días calendario en la zona horaria del usuario.

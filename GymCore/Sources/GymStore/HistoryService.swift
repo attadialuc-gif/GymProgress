@@ -106,6 +106,15 @@ public struct HistoryService {
         }
     }
 
+    /// Exercises with at least one completed session (cheap: one pass over completed sessions).
+    public func exerciseIdsWithCompletedHistory() -> Set<UUID> {
+        var ids = Set<UUID>()
+        for session in repository.sessions() where session.status == .completed {
+            for log in repository.exerciseLogs(sessionId: session.id) { ids.insert(log.exerciseId) }
+        }
+        return ids
+    }
+
     /// Digest of every session (consistency metrics).
     public func sessionDigests() -> [SessionDigest] {
         repository.sessions().map { session in
@@ -117,9 +126,9 @@ public struct HistoryService {
     }
 
     /// Muscle work of completed sessions starting in `interval` (muscles from the log snapshot).
-    public func muscleWork(in interval: DateInterval) -> [MuscleWork] {
+    public func muscleWork(in interval: DateInterval, routineId: UUID? = nil) -> [MuscleWork] {
         repository.sessions()
-            .filter { $0.status == .completed && interval.containsHalfOpen($0.startedAt) }
+            .filter { $0.status == .completed && interval.containsHalfOpen($0.startedAt) && (routineId == nil || $0.routineId == routineId) }
             .flatMap { session in
                 repository.exerciseLogs(sessionId: session.id).map { log in
                     MuscleWork(performance: performance(of: log, in: session), primary: log.snapshot.primaryMuscles, secondary: log.snapshot.secondaryMuscles)

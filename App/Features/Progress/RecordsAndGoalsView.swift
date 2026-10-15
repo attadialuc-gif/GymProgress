@@ -11,8 +11,10 @@ struct RecordsAndGoalsView: View {
         let _ = model.revision
         let now = model.now()
         let fmt = model.loadFormatter
-        let goals = model.stats.goalProgress(now: now)
-        let exercises = model.repository.exercises().filter { !model.history.exerciseHistory(exerciseId: $0.id).isEmpty }
+        let stats = model.stats
+        let goals = stats.goalProgress(now: now)
+        let ids = model.history.exerciseIdsWithCompletedHistory()
+        let exercises = model.repository.exercises().filter { ids.contains($0.id) }
 
         List {
             Section {
@@ -41,9 +43,11 @@ struct RecordsAndGoalsView: View {
                 Text("Objetivos")
             }
 
+            // One section per exercise *and* comparable context: machines/variants never mix.
             ForEach(exercises) { exercise in
-                let records = model.stats.records(exerciseId: exercise.id)
-                Section(exercise.name) {
+                ForEach(stats.contextClasses(exerciseId: exercise.id)) { contextClass in
+                let records = stats.records(exerciseId: exercise.id, contextClass: contextClass)
+                Section(contextClass.label == "estándar" ? exercise.name : "\(exercise.name) · \(contextClass.label)") {
                     if let r = records.maxWeight {
                         LabeledContent("Peso máximo", value: "\(fmt.weight(r.value)) · \(r.date.formatted(date: .abbreviated, time: .omitted))")
                     }
@@ -64,6 +68,7 @@ struct RecordsAndGoalsView: View {
                             }
                         }
                     }
+                }
                 }
             }
         }
@@ -144,7 +149,8 @@ private struct NewGoalForm: View {
                     )
                     if model.perform({ try model.repository.upsertGoal(goal) }) != nil { dismiss() }
                 }
-                .disabled(exerciseId == nil || valueText.isEmpty)
+                // Reps-at-weight needs a valid weight, or the goal could never be reached.
+                .disabled(exerciseId == nil || valueText.isEmpty || (metric == .repsAtWeight && model.loadFormatter.parse(weightText) == nil))
             }
         }
     }

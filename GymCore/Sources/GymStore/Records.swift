@@ -304,6 +304,19 @@ public struct UserSettings: Codable, Sendable, Hashable {
     public var restNotifications: Bool
     /// Optional: enables body-weight volume. `nil` = unknown (never invented).
     public var bodyweightKg: Double?
+    /// Optional weekly direct-set goals per muscle (key = `MuscleGroup.rawValue`). Set by the user;
+    /// the app never proposes an "ideal" number. Optional in stored data (schema v1).
+    public var muscleSetGoals: [String: Int]? = nil
+
+    public func weeklySetGoal(for muscle: MuscleGroup) -> Int? {
+        muscleSetGoals?[muscle.rawValue]
+    }
+
+    public mutating func setWeeklySetGoal(_ goal: Int?, for muscle: MuscleGroup) {
+        var goals = muscleSetGoals ?? [:]
+        goals[muscle.rawValue] = goal.flatMap { $0 > 0 ? $0 : nil }
+        muscleSetGoals = goals.isEmpty ? nil : goals
+    }
 
     public init(weightUnit: WeightUnit = .kg, firstWeekday: Int = 2, defaultRestSeconds: Int = 120, theme: AppTheme = .dark, weeklyGoal: Int = 3, streakMode: StreakMode = .weeklyPlan, maxGapDays: Int = 2, indirectSetFactor: Double = 0.5, oneRepMax: OneRepMaxSettings = .default, minSetsForValidSession: Int = 3, keepScreenOn: Bool = true, restNotifications: Bool = true, bodyweightKg: Double? = nil) {
         self.weightUnit = weightUnit

@@ -32,7 +32,7 @@ struct RootView: View {
             NavigationStack { RoutinesView() }
                 .tabItem { Label("Rutinas", systemImage: "list.bullet.rectangle") }
                 .tag(AppTab.routines)
-            NavigationStack { WorkoutTabView() }
+            NavigationStack(path: $model.workoutPath) { WorkoutTabView() }
                 .tabItem { Label("Entrenar", systemImage: "figure.strengthtraining.traditional") }
                 .tag(AppTab.workout)
             NavigationStack { ProgressHomeView() }

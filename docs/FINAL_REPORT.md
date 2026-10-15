@@ -9,7 +9,7 @@ Comando (en `GymCore/`, Linux):
 ```
 $ swift test
 ✔ Test run with 103 tests in 11 suites passed      GymCoreTests
-✔ Test run with 40 tests in 6 suites passed        GymStoreTests
+✔ Test run with 51 tests in 7 suites passed        GymStoreTests
 2-year dataset: 5 recommendations + history + digests in 0.26 seconds
 ```
 
@@ -32,7 +32,7 @@ Además: determinismo (misma entrada, entrada permutada, reloj inyectado) y no c
 
 También verificado: persistencia y recuperación de sesión, decisiones aceptar/modificar/ignorar, historial inmutable, archivado vs borrado, export/import sin duplicados ni pisar datos, catálogo de 98 ejercicios, superseries, calendario con `validFrom`, rachas A/B, estadísticas por período y músculo, récords y objetivos, fechas (DST, zona, medianoche, inicio de semana, fin de mes/año), parseo con coma o punto, rendimiento con ~2 años de datos.
 
-**Revisiones independientes** (subagentes sin contexto): etapa 1 (3 mayores, corregidos) y etapas 2–3 (1 crítico, 5 mayores, 12 menores, corregidos); la re-revisión aprobó la puerta de calidad de la etapa 3.
+**Revisiones independientes** (subagentes sin contexto): etapa 1 (3 mayores, corregidos), etapas 2–3 (1 crítico, 5 mayores, 12 menores, corregidos; la re-revisión aprobó la puerta de calidad de la etapa 3) y etapas 4–7 (0 críticos, 7 mayores, 12 menores, corregidos con tests en `Stage4To7ReviewTests`; ver D-040…D-047).
 
 ## 2. Sin verificar o sin implementar
 
@@ -42,6 +42,7 @@ También verificado: persistencia y recuperación de sesión, decisiones aceptar
 - Datos de demostración `#if DEBUG`: no implementados (el generador de 2 años existe solo en los tests).
 - Accesibilidad: etiquetas VoiceOver, Dynamic Type y textos de ayuda incluidos, pero **no auditados en dispositivo**.
 - Ícono de la app: el catálogo de assets tiene el slot vacío.
+- Copias de seguridad: solo manuales (exportar/importar JSON); no hay copia automática programada.
 
 ## 3. Compilar, correr y testear
 

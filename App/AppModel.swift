@@ -15,9 +15,15 @@ final class AppModel {
     let catalog: ExerciseCatalogService
     let history: HistoryService
     let exporter: ExportService
-    let consistency: ConsistencyService
-    let stats: StatsService
     let restTimer: RestTimerService
+
+    /// Built on access so days and weeks always use the device's *current* time zone (8.6).
+    var consistency: ConsistencyService { ConsistencyService(repository: repository, timeZone: .current) }
+    var stats: StatsService { StatsService(repository: repository, timeZone: .current) }
+
+    /// Navigation path of the "Entrenar" tab (exercise screens). Superset hops replace the top
+    /// screen instead of stacking A → B → A → B…
+    var workoutPath: [UUID] = []
 
     /// Incremented after each successful mutation; views read it to re-render.
     private(set) var revision = 0
@@ -34,8 +40,6 @@ final class AppModel {
         self.catalog = ExerciseCatalogService(repository: repository)
         self.history = HistoryService(repository: repository)
         self.exporter = ExportService(repository: repository)
-        self.consistency = ConsistencyService(repository: repository)
-        self.stats = StatsService(repository: repository)
         self.restTimer = RestTimerService()
     }
 
@@ -59,7 +63,11 @@ final class AppModel {
     var loadFormatter: LoadFormatter { LoadFormatter(unit: settings.weightUnit) }
 
     /// The clock is read only here, at the UI edge; services and the engine receive it injected.
-    func now() -> Date { Date() }
+    /// The workout service follows the current time zone too (travel, DST).
+    func now() -> Date {
+        if workout.timeZone != .current { workout.timeZone = .current }
+        return Date()
+    }
 
     /// Runs a mutation, surfaces errors in Spanish, refreshes views.
     @discardableResult

@@ -190,7 +190,8 @@ struct WeeklyPlanEditor: View {
                 Text("\(assignments.count) días por semana.")
             }
             Section {
-                DatePicker("Vigente desde", selection: $from, displayedComponents: .date)
+                // Only today or later: the past keeps the plan it had.
+                DatePicker("Vigente desde", selection: $from, in: Calendar.current.startOfDay(for: model.now())..., displayedComponents: .date)
             } footer: {
                 Text("Los días anteriores conservan el plan que tenían: el historial de planificados y omitidos no cambia.")
             }

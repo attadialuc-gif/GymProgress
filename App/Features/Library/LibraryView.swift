@@ -191,9 +191,26 @@ struct ExerciseDetailView: View {
         if exercise.isCustom { updated.name = name }
         var c = config
         c.targetRIR = hasRIR ? rir : nil
-        if let inc = fmt.parse(incrementText), inc > 0 { c.increment = inc }
-        c.initialWeight = initialText.isEmpty ? nil : fmt.parse(initialText)
-        let weights = availableText.split(separator: ";").compactMap { fmt.parse(String($0)) }
+        // Never drop typed input silently: invalid values stop the save with an explanation.
+        guard let inc = fmt.parse(incrementText), inc > 0 else {
+            model.errorMessage = "Incremento inválido: usá coma o punto decimal (ej.: 2,5)."
+            return
+        }
+        c.increment = inc
+        if initialText.trimmingCharacters(in: .whitespaces).isEmpty {
+            c.initialWeight = nil
+        } else if let initial = fmt.parse(initialText) {
+            c.initialWeight = initial
+        } else {
+            model.errorMessage = "Peso inicial inválido: usá coma o punto decimal (ej.: 40 o 42,5)."
+            return
+        }
+        let parts = availableText.split(separator: ";").map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }
+        let weights = parts.compactMap { fmt.parse($0) }
+        guard weights.count == parts.count else {
+            model.errorMessage = "Pesos disponibles inválidos: separalos con punto y coma (ej.: 20; 22,5; 25)."
+            return
+        }
         c.availableWeights = weights.isEmpty ? nil : weights
         updated.progression = c
         updated.defaultIncrement = c.increment

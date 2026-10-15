@@ -11,6 +11,7 @@ struct ProfileView: View {
     @State private var showImporter = false
     @State private var importResult: String?
     @State private var bodyweightText = ""
+    @FocusState private var bodyweightFocused: Bool
 
     var body: some View {
         let _ = model.revision
@@ -62,7 +63,9 @@ struct ProfileView: View {
                     TextField("Opcional", text: $bodyweightText)
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.trailing)
-                        .onSubmit(saveBodyweight)
+                        .focused($bodyweightFocused)
+                        // The decimal pad has no Return key: save when the field loses focus.
+                        .onChange(of: bodyweightFocused) { _, focused in if !focused { saveBodyweight() } }
                 }
             } header: {
                 Text("Cálculos")
@@ -94,6 +97,12 @@ struct ProfileView: View {
             }
         }
         .navigationTitle("Perfil")
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Listo") { bodyweightFocused = false }
+            }
+        }
         .onAppear { bodyweightText = model.loadFormatter.editable(settings.bodyweightKg) }
         .fileImporter(isPresented: $showImporter, allowedContentTypes: [.json]) { result in
             importFile(result)
@@ -140,7 +149,16 @@ struct ProfileView: View {
 
     private func saveBodyweight() {
         var updated = model.settings
-        updated.bodyweightKg = bodyweightText.isEmpty ? nil : model.loadFormatter.parse(bodyweightText)
+        let trimmed = bodyweightText.trimmingCharacters(in: .whitespaces)
+        if trimmed.isEmpty {
+            updated.bodyweightKg = nil
+        } else if let value = model.loadFormatter.parse(trimmed), value > 0 {
+            updated.bodyweightKg = value
+        } else {
+            model.errorMessage = "Peso corporal inválido: usá coma o punto decimal (ej.: 78,5)."
+            return
+        }
+        guard updated != model.settings else { return }
         model.perform { try model.repository.saveSettings(updated) }
     }
 

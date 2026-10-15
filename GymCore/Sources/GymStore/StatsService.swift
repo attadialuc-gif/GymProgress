@@ -1,73 +1,6 @@
 import Foundation
 import GymCore
 
-/// Period filters of the Progress screen (section 9.4).
-public enum StatsPeriod: Hashable, Sendable {
-    case week
-    case last30Days
-    case calendarMonth
-    case last90Days
-    case calendarYear
-    case last12Months
-    case custom(DateInterval)
-
-    public var label: String {
-        switch self {
-        case .week: "Semana"
-        case .last30Days: "Últimos 30 días"
-        case .calendarMonth: "Mes"
-        case .last90Days: "Últimos 90 días"
-        case .calendarYear: "Año"
-        case .last12Months: "Últimos 12 meses"
-        case .custom: "Personalizado"
-        }
-    }
-
-    /// Half-open interval [start, end) in the user's calendar.
-    public func interval(now: Date, calendar: TrainingCalendar) -> DateInterval {
-        let cal = calendar.calendar
-        let tomorrow = calendar.addDays(1, to: calendar.day(of: now))
-        switch self {
-        case .week:
-            let start = calendar.weekStart(of: now)
-            return DateInterval(start: start, end: calendar.addDays(7, to: start))
-        case .last30Days:
-            return DateInterval(start: calendar.addDays(-30, to: tomorrow), end: tomorrow)
-        case .last90Days:
-            return DateInterval(start: calendar.addDays(-90, to: tomorrow), end: tomorrow)
-        case .calendarMonth:
-            let start = calendar.startOfMonth(now)
-            return DateInterval(start: start, end: cal.date(byAdding: .month, value: 1, to: start)!)
-        case .calendarYear:
-            let start = cal.date(from: cal.dateComponents([.year], from: now))!
-            return DateInterval(start: start, end: cal.date(byAdding: .year, value: 1, to: start)!)
-        case .last12Months:
-            return DateInterval(start: cal.date(byAdding: .month, value: -12, to: tomorrow)!, end: tomorrow)
-        case let .custom(interval):
-            return DateInterval(start: calendar.day(of: interval.start), end: calendar.addDays(1, to: calendar.day(of: interval.end)))
-        }
-    }
-
-    /// The equivalent previous period (previous week, previous month, same length before…).
-    public func previousInterval(now: Date, calendar: TrainingCalendar) -> DateInterval {
-        let current = interval(now: now, calendar: calendar)
-        let cal = calendar.calendar
-        switch self {
-        case .week:
-            return DateInterval(start: calendar.addDays(-7, to: current.start), end: current.start)
-        case .calendarMonth:
-            return DateInterval(start: cal.date(byAdding: .month, value: -1, to: current.start)!, end: current.start)
-        case .calendarYear:
-            return DateInterval(start: cal.date(byAdding: .year, value: -1, to: current.start)!, end: current.start)
-        case .last12Months:
-            return DateInterval(start: cal.date(byAdding: .month, value: -12, to: current.start)!, end: current.start)
-        case .last30Days, .last90Days, .custom:
-            let days = calendar.daysBetween(current.start, current.end)
-            return DateInterval(start: calendar.addDays(-days, to: current.start), end: current.start)
-        }
-    }
-}
-
 /// Aggregates for a period. Every number comes from recorded sets (never invented).
 public struct PeriodTotals: Sendable, Hashable {
     public var validSessions: Int
@@ -80,6 +13,19 @@ public struct PeriodTotals: Sendable, Hashable {
 public struct PeriodComparison: Sendable, Hashable {
     public var current: PeriodTotals
     public var previous: PeriodTotals
+    /// True when a running calendar period is compared day-for-day with the same elapsed span.
+    public var isToDate: Bool
+}
+
+/// A group of mutually comparable contexts of one exercise (same machine/variant/load mode, or
+/// linked by the user). Records and charts are computed per class (section 8.1).
+public struct ContextClass: Sendable, Hashable, Identifiable {
+    public var id: String { representative.sortKeyForUI }
+    public var representative: ComparabilityContext
+    public var contexts: Set<ComparabilityContext>
+    /// "estándar" or the machine/variant labels.
+    public var label: String
+    public var lastUsed: Date
 }
 
 /// One session of one exercise, as a chart point.
@@ -87,21 +33,28 @@ public struct ExercisePoint: Sendable, Hashable, Identifiable {
     public var id: UUID { exerciseLogId }
     public var exerciseLogId: UUID
     public var date: Date
+    public var measurement: MeasurementType
+    public var loadMode: LoadMode
+    /// Working load (external kg; body weight: net added load, negative = assistance).
     public var workingLoad: Double
-    public var totalReps: Int
-    public var bestSetReps: Int
+    /// Total reps, or total seconds for duration exercises.
+    public var totalAmount: Int
+    public var bestSetAmount: Int
     /// Estimated, capped by the user's rep limit; nil when no set qualifies.
     public var estimatedOneRepMax: Double?
     public var volume: Double
     public var effectiveSets: Int
     public var isAtypical: Bool
-    public var contextLabel: String?
 }
 
 public struct RecentRecord: Sendable, Hashable, Identifiable {
-    public var id: String { "\(exerciseId.uuidString)-\(record.kind.rawValue)-\(record.date.timeIntervalSince1970)" }
+    public var id: String {
+        "\(exerciseId.uuidString)|\(contextLabel)|\(record.kind.rawValue)|\(record.exerciseLogId.uuidString)|\(record.setIndex ?? -1)"
+    }
     public var exerciseId: UUID
     public var exerciseName: String
+    /// Context the record belongs to ("estándar", machine, variant).
+    public var contextLabel: String
     public var record: PersonalRecord
 }
 
@@ -112,6 +65,8 @@ public struct GoalProgress: Sendable, Hashable, Identifiable {
     public var current: Double?
     public var fraction: Double
     public var achieved: Bool
+    /// When the goal was first reached (date of the record that reached it).
+    public var achievedOn: Date?
 }
 
 /// Statistics for Progress, Home and Records (sections 8.3–8.4, 9.4, 9.6).
@@ -159,39 +114,80 @@ public struct StatsService {
         return PeriodTotals(validSessions: valid, effectiveSets: effective, volume: LoadMath.normalized(volume), trainingDays: days.count)
     }
 
+    /// Current vs. equivalent previous period. Running calendar periods are compared to date.
     public func comparison(_ period: StatsPeriod, now: Date, routineId: UUID? = nil) -> PeriodComparison {
-        PeriodComparison(
-            current: totals(in: period.interval(now: now, calendar: calendar), routineId: routineId),
-            previous: totals(in: period.previousInterval(now: now, calendar: calendar), routineId: routineId)
+        let intervals = period.comparableIntervals(now: now, calendar: calendar)
+        let full = period.interval(now: now, calendar: calendar)
+        return PeriodComparison(
+            current: totals(in: intervals.current, routineId: routineId),
+            previous: totals(in: intervals.previous, routineId: routineId),
+            isToDate: intervals.current != full
         )
+    }
+
+    // MARK: Comparability classes
+
+    /// Comparable context groups of an exercise (links respected), most recently used first.
+    public func contextClasses(exerciseId: UUID) -> [ContextClass] {
+        let resolver = ComparabilityResolver(links: repository.comparabilityLinks())
+        var classes: [ContextClass] = []
+        for entry in history.exerciseHistory(exerciseId: exerciseId) { // newest first
+            let context = entry.log.context.normalized
+            if let i = classes.firstIndex(where: { $0.contexts.contains(context) }) {
+                classes[i].lastUsed = max(classes[i].lastUsed, entry.session.startedAt)
+                continue
+            }
+            let members = resolver.equivalenceClass(of: entry.log.context)
+            let labels = [entry.log.equipmentLabel, entry.log.variantLabel].compactMap { $0 }
+            classes.append(ContextClass(
+                representative: entry.log.context,
+                contexts: members,
+                label: labels.isEmpty ? "estándar" : labels.joined(separator: " · "),
+                lastUsed: entry.session.startedAt
+            ))
+        }
+        return classes
+    }
+
+    /// The class of the context the user trains this exercise in now (last used).
+    public func currentContextClass(exerciseId: UUID) -> ContextClass? {
+        contextClasses(exerciseId: exerciseId).first
+    }
+
+    private func entries(exerciseId: UUID, in contextClass: ContextClass?) -> [ExerciseHistoryEntry] {
+        let all = history.exerciseHistory(exerciseId: exerciseId)
+        guard let contextClass else { return all }
+        return all.filter { contextClass.contexts.contains($0.log.context.normalized) }
     }
 
     // MARK: Exercise series
 
-    /// One point per completed session of the exercise inside `interval`, oldest first.
-    /// Atypical sessions are included but flagged (charts show them; trends exclude them).
-    public func exerciseSeries(exerciseId: UUID, in interval: DateInterval? = nil) -> [ExercisePoint] {
+    /// One point per completed session of the exercise in one comparability class (default: the
+    /// current one), inside `interval`, oldest first. Different machines/variants are never joined
+    /// into one line. Atypical sessions are included but flagged (trends exclude them).
+    public func exerciseSeries(exerciseId: UUID, in interval: DateInterval? = nil, contextClass: ContextClass? = nil, routineId: UUID? = nil) -> [ExercisePoint] {
         let settings = repository.settings()
-        return history.exerciseHistory(exerciseId: exerciseId)
-            .filter { interval?.containsHalfOpen($0.session.startedAt) ?? true }
+        let selected = contextClass ?? currentContextClass(exerciseId: exerciseId)
+        return entries(exerciseId: exerciseId, in: selected)
+            .filter { (interval?.containsHalfOpen($0.session.startedAt) ?? true) && (routineId == nil || $0.session.routineId == routineId) }
             .reversed()
             .compactMap { entry -> ExercisePoint? in
                 let perf = entry.performance
-                let progression = perf.progressionSets
-                guard !progression.isEmpty else { return nil }
+                guard !perf.progressionSets.isEmpty else { return nil }
                 let summary = HistoryAnalyzer.summary(of: perf)
                 let volume = Volume.of(perf, bodyweight: settings.bodyweightKg)
                 return ExercisePoint(
                     exerciseLogId: entry.log.id,
                     date: entry.session.startedAt,
+                    measurement: perf.measurement,
+                    loadMode: perf.context.loadMode,
                     workingLoad: summary.workingLoad,
-                    totalReps: summary.amounts.reduce(0, +),
-                    bestSetReps: summary.amounts.max() ?? 0,
+                    totalAmount: summary.amounts.reduce(0, +),
+                    bestSetAmount: summary.amounts.max() ?? 0,
                     estimatedOneRepMax: OneRepMax.best(in: perf, settings: settings.oneRepMax).map(LoadMath.normalized),
                     volume: volume.total,
                     effectiveSets: volume.effectiveSets,
-                    isAtypical: perf.isAtypical,
-                    contextLabel: [entry.log.equipmentLabel, entry.log.variantLabel].compactMap { $0 }.first
+                    isAtypical: perf.isAtypical
                 )
             }
     }
@@ -199,12 +195,13 @@ public struct StatsService {
     // MARK: Muscles
 
     /// Direct and indirect sets per muscle in the interval (reported separately).
-    public func muscleVolume(in interval: DateInterval) -> [MuscleSetVolume] {
+    public func muscleVolume(in interval: DateInterval, routineId: UUID? = nil) -> [MuscleSetVolume] {
         let settings = repository.settings()
-        return MuscleVolume.compute(history.muscleWork(in: interval), indirectFactor: settings.indirectSetFactor, calendar: calendar.calendar)
+        let work = history.muscleWork(in: interval, routineId: routineId)
+        return MuscleVolume.compute(work, indirectFactor: settings.indirectSetFactor, calendar: calendar.calendar)
     }
 
-    /// Weekly direct sets for one muscle over the last `weeks` weeks (oldest first).
+    /// Weekly direct and indirect sets for one muscle over the last `weeks` weeks (oldest first).
     public func weeklyDirectSets(muscle: MuscleGroup, weeks: Int, now: Date) -> [(weekStart: Date, directSets: Int, indirectSets: Double)] {
         let currentStart = calendar.weekStart(of: now)
         return (0..<max(1, weeks)).reversed().map { back in
@@ -217,58 +214,91 @@ public struct StatsService {
 
     // MARK: Records and goals
 
-    public func records(exerciseId: UUID) -> RecordSummary {
-        PersonalRecords.compute(
-            history.exerciseHistory(exerciseId: exerciseId).map(\.performance),
+    /// Records of one comparability class (default: the current one). Records of different
+    /// machines/variants are never mixed.
+    public func records(exerciseId: UUID, contextClass: ContextClass? = nil) -> RecordSummary {
+        let selected = contextClass ?? currentContextClass(exerciseId: exerciseId)
+        return PersonalRecords.compute(
+            entries(exerciseId: exerciseId, in: selected).map(\.performance),
             oneRepMax: repository.settings().oneRepMax,
             bodyweight: repository.settings().bodyweightKg
         )
     }
 
-    /// Records improved within the last `days` days, newest first (real and estimated, labeled).
+    /// Records *broken* within the last `days` days, newest first: a record counts only if a
+    /// previous record of the same kind and context existed; one entry per (exercise, context,
+    /// kind, session) with the best value of that session.
     public func recentRecords(days: Int, now: Date, limit: Int = 5) -> [RecentRecord] {
         let since = calendar.addDays(-days, to: calendar.day(of: now))
         var result: [RecentRecord] = []
         for exercise in repository.exercises() where repository.hasHistory(exerciseId: exercise.id) {
-            let summary = records(exerciseId: exercise.id)
-            // Only the first-ever value is not a "record broken"; skip records set in the first session.
-            let firstSession = summary.history.first?.sessionId
-            for record in summary.history where record.date >= since && record.date <= now && record.sessionId != firstSession {
-                result.append(RecentRecord(exerciseId: exercise.id, exerciseName: exercise.name, record: record))
+            for contextClass in contextClasses(exerciseId: exercise.id) {
+                let summary = records(exerciseId: exercise.id, contextClass: contextClass)
+                var bestPerSessionKind: [String: PersonalRecord] = [:]
+                // Session (log) where each kind was first recorded: values from that session are the
+                // starting point, not records broken.
+                var firstLogOfKind: [RecordKind: UUID] = [:]
+                for record in summary.history {
+                    let first = firstLogOfKind[record.kind] ?? record.exerciseLogId
+                    firstLogOfKind[record.kind] = first
+                    guard record.exerciseLogId != first, record.date >= since, record.date <= now else { continue }
+                    let key = "\(record.kind.rawValue)|\(record.exerciseLogId.uuidString)"
+                    if let existing = bestPerSessionKind[key], existing.value >= record.value { continue }
+                    bestPerSessionKind[key] = record
+                }
+                result += bestPerSessionKind.values.map {
+                    RecentRecord(exerciseId: exercise.id, exerciseName: exercise.name, contextLabel: contextClass.label, record: $0)
+                }
             }
         }
-        return Array(result.sorted { $0.record.date > $1.record.date }.prefix(limit))
+        return Array(result.sorted { a, b in
+            a.record.date != b.record.date ? a.record.date > b.record.date : a.id < b.id
+        }.prefix(limit))
     }
 
+    /// Progress of every goal, measured in the exercise's current comparability class.
     public func goalProgress(now: Date) -> [GoalProgress] {
         repository.goals().map { goal in
             let summary = records(exerciseId: goal.exerciseId)
             let current: Double?
+            var reachedOn: Date?
             switch goal.metric {
-            case .weight: current = summary.maxWeight?.value
-            case .estimatedOneRepMax: current = summary.bestEstimatedOneRepMax?.value
-            case .sessionVolume: current = summary.maxSessionVolume?.value
+            case .weight:
+                current = summary.maxWeight?.value
+                reachedOn = summary.history.first { $0.kind == .maxWeight && $0.value >= goal.value }?.date
+            case .estimatedOneRepMax:
+                current = summary.bestEstimatedOneRepMax?.value
+                reachedOn = summary.history.first { $0.kind == .bestEstimatedOneRepMax && $0.value >= goal.value }?.date
+            case .sessionVolume:
+                current = summary.maxSessionVolume?.value
+                reachedOn = summary.history.first { $0.kind == .maxSessionVolume && $0.value >= goal.value }?.date
             case .repsAtWeight:
-                current = goal.weight.flatMap { w in
-                    summary.maxRepsAtWeight.filter { ($0.weight ?? 0) >= w - LoadMath.resolution }.map(\.value).max()
-                }
+                let eligible = goal.weight.map { w in summary.maxRepsAtWeight.filter { ($0.weight ?? 0) >= w - LoadMath.resolution } } ?? []
+                current = eligible.map(\.value).max()
+                reachedOn = eligible.filter { $0.value >= goal.value }.map(\.date).min()
             }
+            let achieved = (current ?? 0) >= goal.value && goal.value > 0
             let fraction = current.map { goal.value > 0 ? min(1, $0 / goal.value) : 0 } ?? 0
-            return GoalProgress(goal: goal, current: current, fraction: fraction, achieved: (current ?? 0) >= goal.value)
+            return GoalProgress(goal: goal, current: current, fraction: fraction, achieved: achieved, achievedOn: achieved ? reachedOn : nil)
         }
     }
 
-    /// Marks reached goals as achieved (date = now). Returns the newly achieved ones.
+    /// Marks reached goals as achieved, dated when the record reached them. Returns the new ones.
     @discardableResult
     public func refreshGoals(now: Date) throws -> [Goal] {
         var achieved: [Goal] = []
         for progress in goalProgress(now: now) where progress.achieved && progress.goal.status == .active {
             var g = progress.goal
             g.status = .achieved
-            g.achievedAt = now
+            g.achievedAt = progress.achievedOn ?? now
             try repository.upsertGoal(g)
             achieved.append(g)
         }
         return achieved
     }
+}
+
+extension ComparabilityContext {
+    /// Stable identifier for UI lists.
+    public var sortKeyForUI: String { sortKey }
 }

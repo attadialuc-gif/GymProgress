@@ -168,6 +168,7 @@ struct WorkoutSessionView: View {
         .confirmationDialog("¿Finalizar el entrenamiento?", isPresented: $confirmFinish, titleVisibility: .visible) {
             Button("Finalizar") {
                 model.perform { try model.workout.finish(sessionId: sessionId, now: model.now()) }
+                model.workoutPath = []
                 model.restTimer.stop()
                 ScreenAwake.set(false)
             }
@@ -177,6 +178,7 @@ struct WorkoutSessionView: View {
         .confirmationDialog("¿Descartar el entrenamiento?", isPresented: $confirmDiscard, titleVisibility: .visible) {
             Button("Descartar", role: .destructive) {
                 model.perform { try model.workout.discard(sessionId: sessionId, now: model.now()) }
+                model.workoutPath = []
                 model.restTimer.stop()
                 ScreenAwake.set(false)
             }
@@ -191,6 +193,7 @@ private struct SessionExerciseRow: View {
     let log: ExerciseLog
 
     var body: some View {
+        let _ = model.revision // inputs don't change when sets do: subscribe explicitly
         let sets = model.repository.setLogs(exerciseLogId: log.id).filter { $0.kind != .warmup }
         let done = sets.filter { $0.status == .completed }.count
         HStack {

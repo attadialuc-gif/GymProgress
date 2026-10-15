@@ -26,8 +26,10 @@ public struct ScheduleEntry: Codable, Sendable, Hashable, Identifiable {
 
 public enum Schedule {
     /// Routine planned for `day`, or `nil` when it is a rest / unplanned day.
-    /// Among entries for that weekday valid on that day, the latest `validFrom` wins
-    /// (ties: later `createdAt`, then id).
+    /// Among the entries for that weekday already in force on that day, the most recently
+    /// *created* one wins (ties: later `validFrom`, then id). So the last decision the user made
+    /// rules every day from its `validFrom` on — even over a plan saved earlier for a later date —
+    /// while days before its `validFrom` keep what was planned then.
     public static func plannedRoutine(on day: Date, entries: [ScheduleEntry], calendar: TrainingCalendar) -> UUID? {
         let dayStart = calendar.day(of: day)
         let weekday = calendar.weekday(of: dayStart)
@@ -37,8 +39,8 @@ public enum Schedule {
                 && (entry.validTo.map { dayStart < calendar.day(of: $0) } ?? true)
         }
         let winner = candidates.max { a, b in
-            if a.validFrom != b.validFrom { return a.validFrom < b.validFrom }
             if a.createdAt != b.createdAt { return a.createdAt < b.createdAt }
+            if a.validFrom != b.validFrom { return a.validFrom < b.validFrom }
             return a.id.uuidString < b.id.uuidString
         }
         return winner?.routineId

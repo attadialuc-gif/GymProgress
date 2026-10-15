@@ -439,7 +439,8 @@ public final class WorkoutService {
             return RestAdvice(restSeconds: repository.settings().defaultRestSeconds, nextExerciseLogId: nil)
         }
         let rest = log.restSeconds ?? repository.settings().defaultRestSeconds
-        guard let group = log.supersetGroup else { return RestAdvice(restSeconds: rest, nextExerciseLogId: nil) }
+        // Warm-ups are not part of the superset round: plain rest, stay on this exercise.
+        guard set.kind == .working, let group = log.supersetGroup else { return RestAdvice(restSeconds: rest, nextExerciseLogId: nil) }
         let members = repository.exerciseLogs(sessionId: log.sessionId).filter { $0.supersetGroup == group }
         guard let index = members.firstIndex(where: { $0.id == log.id }) else { return RestAdvice(restSeconds: rest, nextExerciseLogId: nil) }
         // Next member (cyclically after this one) that still has pending working sets.

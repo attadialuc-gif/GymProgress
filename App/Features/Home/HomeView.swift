@@ -14,7 +14,8 @@ struct HomeView: View {
         let now = model.now()
         let fmt = model.loadFormatter
         let open = model.workout.openSession()
-        let routine = nextRoutine(now: now)
+        let next = nextRoutine(now: now)
+        let routine = next?.routine
         let previews = routine.map { model.workout.previewRecommendations(routineId: $0.id, now: now) } ?? []
         let week = model.consistency.weekSummary(now: now)
         let streak = model.consistency.streak(now: now)
@@ -33,7 +34,7 @@ struct HomeView: View {
                     }
                 }
 
-                nextWorkoutCard(routine: routine, previews: previews, canStart: open == nil)
+                nextWorkoutCard(routine: routine, plannedDay: next?.plannedDay, previews: previews, canStart: open == nil)
 
                 HStack(alignment: .top, spacing: 12) {
                     Card {
@@ -67,7 +68,7 @@ struct HomeView: View {
                         Spacer()
                         BigNumber(text: fmt.weight(comparison.current.volume), caption: "volumen externo")
                     }
-                    Text("Semana anterior: \(comparison.previous.effectiveSets) series · \(fmt.weight(comparison.previous.volume))")
+                    Text("\(comparison.isToDate ? "Mismos días de la semana anterior" : "Semana anterior"): \(comparison.previous.effectiveSets) series · \(fmt.weight(comparison.previous.volume))")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     WeeklySetsChart()
@@ -81,7 +82,8 @@ struct HomeView: View {
                                 Image(systemName: item.record.isEstimated ? "function" : "trophy.fill")
                                     .foregroundStyle(Theme.accent)
                                 VStack(alignment: .leading) {
-                                    Text(item.exerciseName).font(.subheadline.weight(.semibold))
+                                    Text(item.contextLabel == "estándar" ? item.exerciseName : "\(item.exerciseName) · \(item.contextLabel)")
+                                        .font(.subheadline.weight(.semibold))
                                     Text(recordText(item.record)).font(.caption).foregroundStyle(.secondary)
                                 }
                             }
@@ -116,10 +118,10 @@ struct HomeView: View {
     }
 
     @ViewBuilder
-    private func nextWorkoutCard(routine: RoutineTemplate?, previews: [(RoutineExercise, Exercise, Recommendation)], canStart: Bool) -> some View {
+    private func nextWorkoutCard(routine: RoutineTemplate?, plannedDay: Date?, previews: [(RoutineExercise, Exercise, Recommendation)], canStart: Bool) -> some View {
         if let routine {
             Card {
-                Text("Próximo entrenamiento").font(.caption).foregroundStyle(.secondary)
+                Text(nextTitle(plannedDay)).font(.caption).foregroundStyle(.secondary)
                 Text(routine.name).font(.title2.weight(.bold))
                 ForEach(previews, id: \.0.id) { entry in
                     let exercise = entry.1
@@ -153,17 +155,28 @@ struct HomeView: View {
         }
     }
 
-    /// Scheduled routine for today, else the routine after the last one trained, else the first.
-    private func nextRoutine(now: Date) -> RoutineTemplate? {
+    /// With a plan: the next planned workout (today unless already done or a rest day).
+    /// Without a plan: the routine after the last one trained, else the first.
+    private func nextRoutine(now: Date) -> (routine: RoutineTemplate, plannedDay: Date?)? {
         let routines = model.repository.routines().filter { !$0.isArchived }
-        if let planned = model.consistency.plannedRoutine(on: now), let routine = routines.first(where: { $0.id == planned }) {
-            return routine
+        if let planned = model.consistency.nextPlannedWorkout(now: now),
+           let routine = routines.first(where: { $0.id == planned.routineId }) {
+            return (routine, planned.date)
         }
         if let lastId = model.repository.sessions().last(where: { $0.status == .completed })?.routineId,
            let index = routines.firstIndex(where: { $0.id == lastId }) {
-            return routines[(index + 1) % routines.count]
+            return (routines[(index + 1) % routines.count], nil)
         }
-        return routines.first
+        return routines.first.map { ($0, nil) }
+    }
+
+    private func nextTitle(_ day: Date?) -> String {
+        guard let day else { return "Próximo entrenamiento" }
+        let cal = model.consistency.calendar
+        let today = cal.day(of: model.now())
+        if day == today { return "Hoy" }
+        if day == cal.addDays(1, to: today) { return "Mañana" }
+        return "Próximo: \(day.formatted(.dateTime.weekday(.wide).day().month(.abbreviated)))"
     }
 
     private func line(_ rec: Recommendation) -> String {
@@ -189,6 +202,7 @@ private struct WeeklySetsChart: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
+        let _ = model.revision // no inputs change when data does: subscribe explicitly
         let now = model.now()
         let cal = model.stats.calendar
         let start = cal.weekStart(of: now)
