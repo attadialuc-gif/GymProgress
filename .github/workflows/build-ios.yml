@@ -26,7 +26,8 @@ jobs:
           swift test 2>&1 | tee ../swift-test.log
       - name: Summary
         if: always()
-        run: grep -E "Test run with|✘|error:" swift-test.log | tail -20 || true
+        run: |
+          grep -E "Test run with|✘|error:" swift-test.log | tail -20 || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -58,7 +59,8 @@ jobs:
             build 2>&1 | tee xcodebuild-build.log
       - name: Compiler errors
         if: failure()
-        run: grep -E "error:|warning: .*(concurrency|Sendable)" xcodebuild-build.log | sort -u | head -150 || true
+        run: |
+          grep -E "error:|warning: .*(concurrency|Sendable)" xcodebuild-build.log | sort -u | head -150 || true
       - name: Package .ipa
         run: |
           APP=build/Build/Products/Release-iphoneos/GymProgress.app
@@ -118,7 +120,8 @@ jobs:
             test 2>&1 | tee xcodebuild-test.log
       - name: Test summary
         if: always()
-        run: grep -E "Test run with|✘|✔ Test|error:|Executed|TEST (SUCCEEDED|FAILED)" xcodebuild-test.log | tail -60 || true
+        run: |
+          grep -E "Test run with|✘|✔ Test|error:|Executed|TEST (SUCCEEDED|FAILED)" xcodebuild-test.log | tail -60 || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
