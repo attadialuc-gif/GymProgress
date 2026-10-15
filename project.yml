@@ -35,9 +35,7 @@ targets:
           - "Resources/Info.plist"
     dependencies:
       - package: GymCore
-        product: GymCore
-      - package: GymCore
-        product: GymStore
+        product: GymKit
     info:
       path: App/Resources/Info.plist
       properties:
@@ -76,9 +74,8 @@ targets:
     dependencies:
       - target: GymProgress
       - package: GymCore
-        product: GymCore
-      - package: GymCore
-        product: GymStore
+        product: GymKit
+        embed: false
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: $(BUNDLE_ID).tests

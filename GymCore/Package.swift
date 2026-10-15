@@ -12,11 +12,11 @@ let package = Package(
         .iOS(.v17),
         .macOS(.v14),
     ],
-    // Dynamic: the iOS app and its test bundle share ONE copy of each module (no duplicated
-    // types or resource bundles when tests link the packages too).
+    // One dynamic framework with both modules: the iOS app and its test bundle share a single
+    // copy (no duplicated types or resource bundles). Two dynamic products would each embed
+    // GymCore, which Xcode rejects.
     products: [
-        .library(name: "GymCore", type: .dynamic, targets: ["GymCore"]),
-        .library(name: "GymStore", type: .dynamic, targets: ["GymStore"]),
+        .library(name: "GymKit", type: .dynamic, targets: ["GymCore", "GymStore"]),
     ],
     targets: [
         .target(name: "GymCore"),
