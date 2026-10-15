@@ -26,6 +26,13 @@ public struct ExerciseLogState: Sendable, Hashable {
     /// change before any decision).
     public var recommendation: Recommendation
     public var decision: RecommendationDecision?
+
+    public init(log: ExerciseLog, sets: [SetLog], recommendation: Recommendation, decision: RecommendationDecision?) {
+        self.log = log
+        self.sets = sets
+        self.recommendation = recommendation
+        self.decision = decision
+    }
 }
 
 /// Session flow. Every call persists immediately through the repository (incremental save).
