@@ -108,6 +108,22 @@ $ swiftc -parse (26 archivos de la app)          sin errores
 - `.ipa` sin firmar en `dist/GymProgress.ipa` (no se versiona); instalación: `docs/INSTALAR_EN_IPHONE.md`.
 - Sin verificar: instalación y uso en un iPhone real; la UI no tiene tests automatizados de interfaz.
 
+## Port a Android y Windows (`crossplatform/`, rama `feat/crossplatform`)
+
+Flutter + Dart (D-100). La app de iOS no se toca; la fuente de verdad es el código Swift y sus tests, volcados a fixtures JSON (D-101).
+
+### Etapa A — Decisión, andamiaje, exportador de fixtures, CI · ✅
+
+- `GymCore/Sources/FixtureExporter` (target ejecutable nuevo, sin cambiar lógica Swift): genera `crossplatform/fixtures/` — 72 casos del motor (8 casos 2.D, determinismo, no comparabilidad, reglas), helpers, métricas, calendario/constancia, parseo/formato, 42 escenarios de store (807 operaciones) y un export de Swift.
+- Andamiaje: `crossplatform/gym_core` (Dart puro), `crossplatform/gym_store` (SQLite vía `sqlite3`, D-102), `crossplatform/app` (Flutter, plataformas android y windows).
+- CI `.github/workflows/test.yml`: `dart test` de los paquetes + `flutter test` de la app en cada push; job `fixtures` que regenera los fixtures con Swift en Linux y verifica que coincidan con los versionados.
+
+```
+$ swift run FixtureExporter export crossplatform/fixtures      (WSL, Swift 6.4.1)
+engine 72 · scenarios 42 / 807 ops · verify-import export_from_swift.json: OK (128 insertados, reimport 0)
+$ dart test   (gym_store, smoke SQLite)                         +1: All tests passed!
+```
+
 ## Próximos pasos
 
 - En un Mac: `xcodegen generate`, compilar, corregir lo que marque el compilador, correr `GymProgressTests` y probar el flujo en simulador y en un iPhone.

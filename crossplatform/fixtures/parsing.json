@@ -1,0 +1,582 @@
+{
+  "kg" : [
+    {
+      "text" : "62,5 kg",
+      "value" : 62.5
+    },
+    {
+      "text" : "60 kg",
+      "value" : 60
+    },
+    {
+      "text" : "0,25 kg",
+      "value" : 0.25
+    },
+    {
+      "text" : "1.234,5 kg",
+      "value" : 1234.5
+    },
+    {
+      "text" : "1.000 kg",
+      "value" : 1000
+    },
+    {
+      "text" : "62,56 kg",
+      "value" : 62.555
+    },
+    {
+      "text" : "62,55 kg",
+      "value" : 62.554
+    },
+    {
+      "text" : "0 kg",
+      "value" : 0.005
+    },
+    {
+      "text" : "-17,5 kg",
+      "value" : -17.5
+    },
+    {
+      "text" : "83,33 kg",
+      "value" : 83.333
+    },
+    {
+      "text" : "2,68 kg",
+      "value" : 2.675
+    }
+  ],
+  "list" : [
+    {
+      "text" : "12, 12, 12",
+      "values" : [
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "text" : "",
+      "values" : [
+
+      ]
+    },
+    {
+      "text" : "8",
+      "values" : [
+        8
+      ]
+    }
+  ],
+  "load" : [
+    {
+      "loadMode" : "total",
+      "locale" : "es_AR",
+      "measurement" : "weightReps",
+      "text" : "62,5 kg",
+      "value" : 62.5
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "en_US",
+      "measurement" : "weightReps",
+      "text" : "62.5 kg",
+      "value" : 62.5
+    },
+    {
+      "loadMode" : "perSide",
+      "locale" : "es_AR",
+      "measurement" : "weightReps",
+      "text" : "24 kg por lado",
+      "value" : 24
+    },
+    {
+      "loadMode" : "perSide",
+      "locale" : "en_US",
+      "measurement" : "weightReps",
+      "text" : "24 kg por lado",
+      "value" : 24
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "es_AR",
+      "measurement" : "bodyweightReps",
+      "text" : "peso corporal",
+      "value" : 0
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "en_US",
+      "measurement" : "bodyweightReps",
+      "text" : "peso corporal",
+      "value" : 0
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "es_AR",
+      "measurement" : "bodyweightReps",
+      "text" : "peso corporal +2,5 kg",
+      "value" : 2.5
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "en_US",
+      "measurement" : "bodyweightReps",
+      "text" : "peso corporal +2.5 kg",
+      "value" : 2.5
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "es_AR",
+      "measurement" : "bodyweightReps",
+      "text" : "peso corporal con 17,5 kg de asistencia",
+      "value" : -17.5
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "en_US",
+      "measurement" : "bodyweightReps",
+      "text" : "peso corporal con 17.5 kg de asistencia",
+      "value" : -17.5
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "es_AR",
+      "measurement" : "duration",
+      "text" : "sin carga",
+      "value" : 0
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "en_US",
+      "measurement" : "duration",
+      "text" : "sin carga",
+      "value" : 0
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "es_AR",
+      "measurement" : "duration",
+      "text" : "5 kg",
+      "value" : 5
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "en_US",
+      "measurement" : "duration",
+      "text" : "5 kg",
+      "value" : 5
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "es_AR",
+      "measurement" : "weightReps",
+      "text" : "1.000 kg",
+      "value" : 1000
+    },
+    {
+      "loadMode" : "total",
+      "locale" : "en_US",
+      "measurement" : "weightReps",
+      "text" : "1,000 kg",
+      "value" : 1000
+    }
+  ],
+  "number" : [
+    {
+      "locale" : "es_AR",
+      "text" : "62,5",
+      "value" : 62.5
+    },
+    {
+      "locale" : "en_US",
+      "text" : "62.5",
+      "value" : 62.5
+    },
+    {
+      "locale" : "es_AR",
+      "text" : "60",
+      "value" : 60
+    },
+    {
+      "locale" : "en_US",
+      "text" : "60",
+      "value" : 60
+    },
+    {
+      "locale" : "es_AR",
+      "text" : "0,25",
+      "value" : 0.25
+    },
+    {
+      "locale" : "en_US",
+      "text" : "0.25",
+      "value" : 0.25
+    },
+    {
+      "locale" : "es_AR",
+      "text" : "1.234,5",
+      "value" : 1234.5
+    },
+    {
+      "locale" : "en_US",
+      "text" : "1,234.5",
+      "value" : 1234.5
+    },
+    {
+      "locale" : "es_AR",
+      "text" : "1.000",
+      "value" : 1000
+    },
+    {
+      "locale" : "en_US",
+      "text" : "1,000",
+      "value" : 1000
+    },
+    {
+      "locale" : "es_AR",
+      "text" : "62,56",
+      "value" : 62.555
+    },
+    {
+      "locale" : "en_US",
+      "text" : "62.56",
+      "value" : 62.555
+    },
+    {
+      "locale" : "es_AR",
+      "text" : "62,55",
+      "value" : 62.554
+    },
+    {
+      "locale" : "en_US",
+      "text" : "62.55",
+      "value" : 62.554
+    },
+    {
+      "locale" : "es_AR",
+      "text" : "0",
+      "value" : 0.005
+    },
+    {
+      "locale" : "en_US",
+      "text" : "0",
+      "value" : 0.005
+    },
+    {
+      "locale" : "es_AR",
+      "text" : "-17,5",
+      "value" : -17.5
+    },
+    {
+      "locale" : "en_US",
+      "text" : "-17.5",
+      "value" : -17.5
+    },
+    {
+      "locale" : "es_AR",
+      "text" : "83,33",
+      "value" : 83.333
+    },
+    {
+      "locale" : "en_US",
+      "text" : "83.33",
+      "value" : 83.333
+    },
+    {
+      "locale" : "es_AR",
+      "text" : "2,68",
+      "value" : 2.675
+    },
+    {
+      "locale" : "en_US",
+      "text" : "2.68",
+      "value" : 2.675
+    }
+  ],
+  "parse" : [
+    {
+      "result" : 62.5,
+      "text" : "62,5"
+    },
+    {
+      "result" : 62.5,
+      "text" : "62.5"
+    },
+    {
+      "result" : 62.5,
+      "text" : " 62,50 "
+    },
+    {
+      "result" : 60,
+      "text" : "60"
+    },
+    {
+      "result" : 0.25,
+      "text" : "0,25"
+    },
+    {
+      "result" : 0.5,
+      "text" : ",5"
+    },
+    {
+      "result" : 100,
+      "text" : "100."
+    },
+    {
+      "result" : null,
+      "text" : ""
+    },
+    {
+      "result" : null,
+      "text" : "abc"
+    },
+    {
+      "result" : null,
+      "text" : "6,2,5"
+    },
+    {
+      "result" : null,
+      "text" : "1.000,5"
+    },
+    {
+      "result" : null,
+      "text" : "-5"
+    },
+    {
+      "result" : null,
+      "text" : "+5"
+    },
+    {
+      "result" : null,
+      "text" : "62 ,5"
+    },
+    {
+      "result" : null,
+      "text" : "."
+    },
+    {
+      "result" : null,
+      "text" : "1e3"
+    },
+    {
+      "result" : null,
+      "text" : "1.000"
+    },
+    {
+      "result" : null,
+      "text" : "62.500"
+    },
+    {
+      "result" : 1,
+      "text" : "1,000"
+    },
+    {
+      "result" : 0,
+      "text" : "0"
+    },
+    {
+      "result" : 7,
+      "text" : "007"
+    },
+    {
+      "result" : 62.556000000000004,
+      "text" : "62,5555"
+    },
+    {
+      "result" : 123456789012,
+      "text" : "123456789012"
+    },
+    {
+      "result" : 12345678901,
+      "text" : "12345678901"
+    },
+    {
+      "result" : null,
+      "text" : "１２"
+    },
+    {
+      "result" : null,
+      "text" : "62،5"
+    },
+    {
+      "result" : 40,
+      "text" : "\t40\n"
+    }
+  ],
+  "parseInt" : [
+    {
+      "result" : 12,
+      "text" : "12"
+    },
+    {
+      "result" : null,
+      "text" : "12,5"
+    },
+    {
+      "result" : null,
+      "text" : "-3"
+    },
+    {
+      "result" : null,
+      "text" : ""
+    },
+    {
+      "result" : 8,
+      "text" : " 8 "
+    },
+    {
+      "result" : 12,
+      "text" : "00012"
+    },
+    {
+      "result" : null,
+      "text" : "123456"
+    },
+    {
+      "result" : null,
+      "text" : "1e2"
+    },
+    {
+      "result" : null,
+      "text" : "٣"
+    }
+  ],
+  "validate" : [
+    {
+      "issues" : [
+        {
+          "kind" : "error",
+          "message" : "El peso no puede ser negativo."
+        }
+      ],
+      "reps" : 5,
+      "rir" : null,
+      "rpe" : null,
+      "seconds" : null,
+      "weight" : -1
+    },
+    {
+      "issues" : [
+        {
+          "kind" : "warning",
+          "message" : "El peso parece inusual (más de 500 kg)."
+        },
+        {
+          "kind" : "warning",
+          "message" : "Más de 100 repeticiones: revisá el valor."
+        }
+      ],
+      "reps" : 150,
+      "rir" : null,
+      "rpe" : null,
+      "seconds" : null,
+      "weight" : 600
+    },
+    {
+      "issues" : [
+
+      ],
+      "reps" : 10,
+      "rir" : 2,
+      "rpe" : 8,
+      "seconds" : null,
+      "weight" : 60
+    },
+    {
+      "issues" : [
+        {
+          "kind" : "error",
+          "message" : "El RIR va de 0 a 10."
+        }
+      ],
+      "reps" : 10,
+      "rir" : 11,
+      "rpe" : null,
+      "seconds" : null,
+      "weight" : 60
+    },
+    {
+      "issues" : [
+        {
+          "kind" : "error",
+          "message" : "La duración no puede ser negativa."
+        }
+      ],
+      "reps" : null,
+      "rir" : null,
+      "rpe" : null,
+      "seconds" : -1,
+      "weight" : null
+    },
+    {
+      "issues" : [
+        {
+          "kind" : "warning",
+          "message" : "Duración inusual: revisá el valor."
+        }
+      ],
+      "reps" : null,
+      "rir" : null,
+      "rpe" : null,
+      "seconds" : 4000,
+      "weight" : null
+    },
+    {
+      "issues" : [
+
+      ],
+      "reps" : 100,
+      "rir" : 0,
+      "rpe" : 1,
+      "seconds" : 3600,
+      "weight" : 500
+    },
+    {
+      "issues" : [
+        {
+          "kind" : "error",
+          "message" : "El peso no puede ser negativo."
+        }
+      ],
+      "reps" : null,
+      "rir" : null,
+      "rpe" : null,
+      "seconds" : null,
+      "weight" : "inf"
+    },
+    {
+      "issues" : [
+        {
+          "kind" : "error",
+          "message" : "El RPE va de 1 a 10."
+        }
+      ],
+      "reps" : null,
+      "rir" : null,
+      "rpe" : 0.5,
+      "seconds" : null,
+      "weight" : null
+    },
+    {
+      "issues" : [
+        {
+          "kind" : "error",
+          "message" : "Las repeticiones no pueden ser negativas."
+        },
+        {
+          "kind" : "error",
+          "message" : "El RIR va de 0 a 10."
+        },
+        {
+          "kind" : "error",
+          "message" : "El RPE va de 1 a 10."
+        }
+      ],
+      "reps" : -2,
+      "rir" : -1,
+      "rpe" : 11,
+      "seconds" : null,
+      "weight" : null
+    }
+  ]
+}

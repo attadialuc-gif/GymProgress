@@ -1,0 +1,16 @@
+name: gym_store
+description: GymProgress persistence (SQLite), repositories, application services and JSON/CSV exchange. Port of the Swift GymStore target.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  gym_core:
+    path: ../gym_core
+  sqlite3: ^3.7.1
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0

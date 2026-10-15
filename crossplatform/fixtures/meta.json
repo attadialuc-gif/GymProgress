@@ -1,0 +1,6 @@
+{
+  "dateEncoding" : "seconds since 1970 (UTC), Double",
+  "generator" : "GymCore\/Sources\/FixtureExporter (Swift)",
+  "note" : "Generated from the Swift implementation. Do not edit by hand; regenerate with `swift run FixtureExporter export`.",
+  "schemaVersion" : 1
+}

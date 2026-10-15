@@ -2,6 +2,23 @@
 
 Formato: decisión · alternativas · motivo. Las decisiones del motor (D-010+) explican cómo se resolvieron ambigüedades entre las secciones 2 y 8 (manda la sección 2).
 
+## Multiplataforma: Android y Windows (rama `feat/crossplatform`)
+
+**D-100 · Flutter + Dart para Android y Windows.** La app iOS no se toca; todo lo nuevo vive en `crossplatform/`.
+
+| Opción | Android | Windows | Reusa lógica Swift | Contras decisivos |
+|---|---|---|---|---|
+| **Flutter + Dart** (elegida) | Nativo AOT, maduro | Nativo (Win32/AOT), maduro | No (port + fixtures dorados) | Hay que portar GymCore/GymStore |
+| Compose Multiplatform (Kotlin) | Excelente | Desktop sobre JVM (JRE embebido, más pesado, look menos nativo) | No | Necesita JDK; port igual de grande |
+| TypeScript + Capacitor / Tauri | WebView | WebView2 | No | Es una página web en un contenedor: excluido por la consigna |
+| Swift en Android/Windows (SDK de Android de Swift, Swift para Windows) | Lógica sí; UI no (sin SwiftUI): JNI + UI nativa aparte | Lógica sí; UI WinUI vía interop inmaduro | Sí (solo la lógica) | Dos UIs nuevas + puentes FFI/JNI + toolchains pesados en CI; la UI hay que rehacerla igual |
+
+Motivo: un solo código de UI para ambas plataformas, binarios nativos, offline, núcleo en Dart puro testeable con `dart test` en WSL. El riesgo del port se controla con **fixtures dorados exportados desde el código Swift** (D-101).
+
+**D-101 · Fidelidad por fixtures.** Un ejecutable Swift (`GymCore/Sources/FixtureExporter`, sin cambiar lógica) serializa a JSON entrada y salida de los casos de GymCore/GymStore; el port Dart debe reproducirlos exactamente (con tolerancia numérica documentada). Una diferencia es un bug del port, salvo que se demuestre un bug en Swift (se corrige en ambos lados con test).
+
+**D-102 · Persistencia Dart: SQLite vía `package:sqlite3`** (FFI, sin generación de código) con migraciones por `PRAGMA user_version`, mismo esquema conceptual que SwiftData (columnas indexadas + payload JSON del registro). · Alternativa: drift (requiere `build_runner` y codegen; más dependencias). El formato de intercambio entre plataformas es el JSON de exportación con `schemaVersion` (mismo contrato que iOS).
+
 ## Entorno y estructura
 
 **D-001 · Ubicación del proyecto.** Subcarpeta `GymProgress/` dentro de la carpeta abierta (un proyecto de trading bot), con repo git propio. · Alternativa: carpeta hermana fuera del bot. · Elegido por el usuario.

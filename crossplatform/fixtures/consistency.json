@@ -1,0 +1,5406 @@
+{
+  "calendar" : [
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772506800
+        },
+        {
+          "days" : -1,
+          "result" : 1773025200
+        },
+        {
+          "days" : 1,
+          "result" : 1773198000
+        },
+        {
+          "days" : 2,
+          "result" : 1773284400
+        },
+        {
+          "days" : 30,
+          "result" : 1775703600
+        }
+      ],
+      "date" : 1773196200,
+      "day" : 1773111600,
+      "daysBetweenNext" : {
+        "other" : 1773200400,
+        "result" : 1
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1773025200,
+        1773111600,
+        1773198000,
+        1773284400,
+        1773370800,
+        1773457200,
+        1773543600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 3,
+      "weekStart" : 1773025200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772593200
+        },
+        {
+          "days" : -1,
+          "result" : 1773111600
+        },
+        {
+          "days" : 1,
+          "result" : 1773284400
+        },
+        {
+          "days" : 2,
+          "result" : 1773370800
+        },
+        {
+          "days" : 30,
+          "result" : 1775790000
+        }
+      ],
+      "date" : 1773200400,
+      "day" : 1773198000,
+      "daysBetweenNext" : {
+        "other" : 1772859600,
+        "result" : -4
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1773025200,
+        1773111600,
+        1773198000,
+        1773284400,
+        1773370800,
+        1773457200,
+        1773543600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 4,
+      "weekStart" : 1773025200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772247600
+        },
+        {
+          "days" : -1,
+          "result" : 1772766000
+        },
+        {
+          "days" : 1,
+          "result" : 1772938800
+        },
+        {
+          "days" : 2,
+          "result" : 1773025200
+        },
+        {
+          "days" : 30,
+          "result" : 1775444400
+        }
+      ],
+      "date" : 1772859600,
+      "day" : 1772852400,
+      "daysBetweenNext" : {
+        "other" : 1772946000,
+        "result" : 1
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772420400,
+        1772506800,
+        1772593200,
+        1772679600,
+        1772766000,
+        1772852400,
+        1772938800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 7,
+      "weekStart" : 1772420400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772334000
+        },
+        {
+          "days" : -1,
+          "result" : 1772852400
+        },
+        {
+          "days" : 1,
+          "result" : 1773025200
+        },
+        {
+          "days" : 2,
+          "result" : 1773111600
+        },
+        {
+          "days" : 30,
+          "result" : 1775530800
+        }
+      ],
+      "date" : 1772946000,
+      "day" : 1772938800,
+      "daysBetweenNext" : {
+        "other" : 1772967600,
+        "result" : 0
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772420400,
+        1772506800,
+        1772593200,
+        1772679600,
+        1772766000,
+        1772852400,
+        1772938800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 1,
+      "weekStart" : 1772420400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772334000
+        },
+        {
+          "days" : -1,
+          "result" : 1772852400
+        },
+        {
+          "days" : 1,
+          "result" : 1773025200
+        },
+        {
+          "days" : 2,
+          "result" : 1773111600
+        },
+        {
+          "days" : 30,
+          "result" : 1775530800
+        }
+      ],
+      "date" : 1772967600,
+      "day" : 1772938800,
+      "daysBetweenNext" : {
+        "other" : 1793505600,
+        "result" : 238
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772420400,
+        1772506800,
+        1772593200,
+        1772679600,
+        1772766000,
+        1772852400,
+        1772938800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 1,
+      "weekStart" : 1772420400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1792897200
+        },
+        {
+          "days" : -1,
+          "result" : 1793415600
+        },
+        {
+          "days" : 1,
+          "result" : 1793588400
+        },
+        {
+          "days" : 2,
+          "result" : 1793674800
+        },
+        {
+          "days" : 30,
+          "result" : 1796094000
+        }
+      ],
+      "date" : 1793505600,
+      "day" : 1793502000,
+      "daysBetweenNext" : {
+        "other" : 1779240600,
+        "result" : -166
+      },
+      "daysInMonthCount" : 30,
+      "daysOfWeek" : [
+        1792983600,
+        1793070000,
+        1793156400,
+        1793242800,
+        1793329200,
+        1793415600,
+        1793502000
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1793502000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 1,
+      "weekStart" : 1792983600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1778554800
+        },
+        {
+          "days" : -1,
+          "result" : 1779073200
+        },
+        {
+          "days" : 1,
+          "result" : 1779246000
+        },
+        {
+          "days" : 2,
+          "result" : 1779332400
+        },
+        {
+          "days" : 30,
+          "result" : 1781751600
+        }
+      ],
+      "date" : 1779240600,
+      "day" : 1779159600,
+      "daysBetweenNext" : {
+        "other" : 1791990000,
+        "result" : 148
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1779073200,
+        1779159600,
+        1779246000,
+        1779332400,
+        1779418800,
+        1779505200,
+        1779591600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1777604400,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 3,
+      "weekStart" : 1779073200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1791342000
+        },
+        {
+          "days" : -1,
+          "result" : 1791860400
+        },
+        {
+          "days" : 1,
+          "result" : 1792033200
+        },
+        {
+          "days" : 2,
+          "result" : 1792119600
+        },
+        {
+          "days" : 30,
+          "result" : 1794538800
+        }
+      ],
+      "date" : 1791990000,
+      "day" : 1791946800,
+      "daysBetweenNext" : {
+        "other" : 1792335600,
+        "result" : 4
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1791774000,
+        1791860400,
+        1791946800,
+        1792033200,
+        1792119600,
+        1792206000,
+        1792292400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790823600,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 4,
+      "weekStart" : 1791774000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1791687600
+        },
+        {
+          "days" : -1,
+          "result" : 1792206000
+        },
+        {
+          "days" : 1,
+          "result" : 1792378800
+        },
+        {
+          "days" : 2,
+          "result" : 1792465200
+        },
+        {
+          "days" : 30,
+          "result" : 1794884400
+        }
+      ],
+      "date" : 1792335600,
+      "day" : 1792292400,
+      "daysBetweenNext" : {
+        "other" : 1798815600,
+        "result" : 75
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1791774000,
+        1791860400,
+        1791946800,
+        1792033200,
+        1792119600,
+        1792206000,
+        1792292400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790823600,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 1,
+      "weekStart" : 1791774000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1798167600
+        },
+        {
+          "days" : -1,
+          "result" : 1798686000
+        },
+        {
+          "days" : 1,
+          "result" : 1798858800
+        },
+        {
+          "days" : 2,
+          "result" : 1798945200
+        },
+        {
+          "days" : 30,
+          "result" : 1801364400
+        }
+      ],
+      "date" : 1798815600,
+      "day" : 1798772400,
+      "daysBetweenNext" : {
+        "other" : 1770735600,
+        "result" : -325
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1798426800,
+        1798513200,
+        1798599600,
+        1798686000,
+        1798772400,
+        1798858800,
+        1798945200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1798772400,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 6,
+      "weekStart" : 1798426800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1770087600
+        },
+        {
+          "days" : -1,
+          "result" : 1770606000
+        },
+        {
+          "days" : 1,
+          "result" : 1770778800
+        },
+        {
+          "days" : 2,
+          "result" : 1770865200
+        },
+        {
+          "days" : 30,
+          "result" : 1773284400
+        }
+      ],
+      "date" : 1770735600,
+      "day" : 1770692400,
+      "daysBetweenNext" : {
+        "other" : 1833807600,
+        "result" : 730
+      },
+      "daysInMonthCount" : 28,
+      "daysOfWeek" : [
+        1770606000,
+        1770692400,
+        1770778800,
+        1770865200,
+        1770951600,
+        1771038000,
+        1771124400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1769914800,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 3,
+      "weekStart" : 1770606000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1833159600
+        },
+        {
+          "days" : -1,
+          "result" : 1833678000
+        },
+        {
+          "days" : 1,
+          "result" : 1833850800
+        },
+        {
+          "days" : 2,
+          "result" : 1833937200
+        },
+        {
+          "days" : 30,
+          "result" : 1836356400
+        }
+      ],
+      "date" : 1833807600,
+      "day" : 1833764400,
+      "daysBetweenNext" : {
+        "other" : 1798768800,
+        "result" : -406
+      },
+      "daysInMonthCount" : 29,
+      "daysOfWeek" : [
+        1833505200,
+        1833591600,
+        1833678000,
+        1833764400,
+        1833850800,
+        1833937200,
+        1834023600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1832986800,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 5,
+      "weekStart" : 1833505200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1798081200
+        },
+        {
+          "days" : -1,
+          "result" : 1798599600
+        },
+        {
+          "days" : 1,
+          "result" : 1798772400
+        },
+        {
+          "days" : 2,
+          "result" : 1798858800
+        },
+        {
+          "days" : 30,
+          "result" : 1801278000
+        }
+      ],
+      "date" : 1798768800,
+      "day" : 1798686000,
+      "daysBetweenNext" : {
+        "other" : 1774744200,
+        "result" : -278
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1798426800,
+        1798513200,
+        1798599600,
+        1798686000,
+        1798772400,
+        1798858800,
+        1798945200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1796094000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 5,
+      "weekStart" : 1798426800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1774062000
+        },
+        {
+          "days" : -1,
+          "result" : 1774580400
+        },
+        {
+          "days" : 1,
+          "result" : 1774753200
+        },
+        {
+          "days" : 2,
+          "result" : 1774839600
+        },
+        {
+          "days" : 30,
+          "result" : 1777258800
+        }
+      ],
+      "date" : 1774744200,
+      "day" : 1774666800,
+      "daysBetweenNext" : {
+        "other" : 1792888200,
+        "result" : 210
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1774234800,
+        1774321200,
+        1774407600,
+        1774494000,
+        1774580400,
+        1774666800,
+        1774753200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 7,
+      "weekStart" : 1774234800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1792206000
+        },
+        {
+          "days" : -1,
+          "result" : 1792724400
+        },
+        {
+          "days" : 1,
+          "result" : 1792897200
+        },
+        {
+          "days" : 2,
+          "result" : 1792983600
+        },
+        {
+          "days" : 30,
+          "result" : 1795402800
+        }
+      ],
+      "date" : 1792888200,
+      "day" : 1792810800,
+      "daysBetweenNext" : {
+        "other" : 1773196200,
+        "result" : -228
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1792378800,
+        1792465200,
+        1792551600,
+        1792638000,
+        1792724400,
+        1792810800,
+        1792897200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790823600,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 7,
+      "weekStart" : 1792378800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772506800
+        },
+        {
+          "days" : -1,
+          "result" : 1773025200
+        },
+        {
+          "days" : 1,
+          "result" : 1773198000
+        },
+        {
+          "days" : 2,
+          "result" : 1773284400
+        },
+        {
+          "days" : 30,
+          "result" : 1775703600
+        }
+      ],
+      "date" : 1773196200,
+      "day" : 1773111600,
+      "daysBetweenNext" : {
+        "other" : 1773200400,
+        "result" : 1
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772938800,
+        1773025200,
+        1773111600,
+        1773198000,
+        1773284400,
+        1773370800,
+        1773457200
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 3,
+      "weekStart" : 1772938800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772593200
+        },
+        {
+          "days" : -1,
+          "result" : 1773111600
+        },
+        {
+          "days" : 1,
+          "result" : 1773284400
+        },
+        {
+          "days" : 2,
+          "result" : 1773370800
+        },
+        {
+          "days" : 30,
+          "result" : 1775790000
+        }
+      ],
+      "date" : 1773200400,
+      "day" : 1773198000,
+      "daysBetweenNext" : {
+        "other" : 1772859600,
+        "result" : -4
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772938800,
+        1773025200,
+        1773111600,
+        1773198000,
+        1773284400,
+        1773370800,
+        1773457200
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 4,
+      "weekStart" : 1772938800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772247600
+        },
+        {
+          "days" : -1,
+          "result" : 1772766000
+        },
+        {
+          "days" : 1,
+          "result" : 1772938800
+        },
+        {
+          "days" : 2,
+          "result" : 1773025200
+        },
+        {
+          "days" : 30,
+          "result" : 1775444400
+        }
+      ],
+      "date" : 1772859600,
+      "day" : 1772852400,
+      "daysBetweenNext" : {
+        "other" : 1772946000,
+        "result" : 1
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772334000,
+        1772420400,
+        1772506800,
+        1772593200,
+        1772679600,
+        1772766000,
+        1772852400
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 7,
+      "weekStart" : 1772334000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772334000
+        },
+        {
+          "days" : -1,
+          "result" : 1772852400
+        },
+        {
+          "days" : 1,
+          "result" : 1773025200
+        },
+        {
+          "days" : 2,
+          "result" : 1773111600
+        },
+        {
+          "days" : 30,
+          "result" : 1775530800
+        }
+      ],
+      "date" : 1772946000,
+      "day" : 1772938800,
+      "daysBetweenNext" : {
+        "other" : 1772967600,
+        "result" : 0
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772938800,
+        1773025200,
+        1773111600,
+        1773198000,
+        1773284400,
+        1773370800,
+        1773457200
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 1,
+      "weekStart" : 1772938800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772334000
+        },
+        {
+          "days" : -1,
+          "result" : 1772852400
+        },
+        {
+          "days" : 1,
+          "result" : 1773025200
+        },
+        {
+          "days" : 2,
+          "result" : 1773111600
+        },
+        {
+          "days" : 30,
+          "result" : 1775530800
+        }
+      ],
+      "date" : 1772967600,
+      "day" : 1772938800,
+      "daysBetweenNext" : {
+        "other" : 1793505600,
+        "result" : 238
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772938800,
+        1773025200,
+        1773111600,
+        1773198000,
+        1773284400,
+        1773370800,
+        1773457200
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 1,
+      "weekStart" : 1772938800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1792897200
+        },
+        {
+          "days" : -1,
+          "result" : 1793415600
+        },
+        {
+          "days" : 1,
+          "result" : 1793588400
+        },
+        {
+          "days" : 2,
+          "result" : 1793674800
+        },
+        {
+          "days" : 30,
+          "result" : 1796094000
+        }
+      ],
+      "date" : 1793505600,
+      "day" : 1793502000,
+      "daysBetweenNext" : {
+        "other" : 1779240600,
+        "result" : -166
+      },
+      "daysInMonthCount" : 30,
+      "daysOfWeek" : [
+        1793502000,
+        1793588400,
+        1793674800,
+        1793761200,
+        1793847600,
+        1793934000,
+        1794020400
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1793502000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 1,
+      "weekStart" : 1793502000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1778554800
+        },
+        {
+          "days" : -1,
+          "result" : 1779073200
+        },
+        {
+          "days" : 1,
+          "result" : 1779246000
+        },
+        {
+          "days" : 2,
+          "result" : 1779332400
+        },
+        {
+          "days" : 30,
+          "result" : 1781751600
+        }
+      ],
+      "date" : 1779240600,
+      "day" : 1779159600,
+      "daysBetweenNext" : {
+        "other" : 1791990000,
+        "result" : 148
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1778986800,
+        1779073200,
+        1779159600,
+        1779246000,
+        1779332400,
+        1779418800,
+        1779505200
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1777604400,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 3,
+      "weekStart" : 1778986800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1791342000
+        },
+        {
+          "days" : -1,
+          "result" : 1791860400
+        },
+        {
+          "days" : 1,
+          "result" : 1792033200
+        },
+        {
+          "days" : 2,
+          "result" : 1792119600
+        },
+        {
+          "days" : 30,
+          "result" : 1794538800
+        }
+      ],
+      "date" : 1791990000,
+      "day" : 1791946800,
+      "daysBetweenNext" : {
+        "other" : 1792335600,
+        "result" : 4
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1791687600,
+        1791774000,
+        1791860400,
+        1791946800,
+        1792033200,
+        1792119600,
+        1792206000
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1790823600,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 4,
+      "weekStart" : 1791687600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1791687600
+        },
+        {
+          "days" : -1,
+          "result" : 1792206000
+        },
+        {
+          "days" : 1,
+          "result" : 1792378800
+        },
+        {
+          "days" : 2,
+          "result" : 1792465200
+        },
+        {
+          "days" : 30,
+          "result" : 1794884400
+        }
+      ],
+      "date" : 1792335600,
+      "day" : 1792292400,
+      "daysBetweenNext" : {
+        "other" : 1798815600,
+        "result" : 75
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1792292400,
+        1792378800,
+        1792465200,
+        1792551600,
+        1792638000,
+        1792724400,
+        1792810800
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1790823600,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 1,
+      "weekStart" : 1792292400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1798167600
+        },
+        {
+          "days" : -1,
+          "result" : 1798686000
+        },
+        {
+          "days" : 1,
+          "result" : 1798858800
+        },
+        {
+          "days" : 2,
+          "result" : 1798945200
+        },
+        {
+          "days" : 30,
+          "result" : 1801364400
+        }
+      ],
+      "date" : 1798815600,
+      "day" : 1798772400,
+      "daysBetweenNext" : {
+        "other" : 1770735600,
+        "result" : -325
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1798340400,
+        1798426800,
+        1798513200,
+        1798599600,
+        1798686000,
+        1798772400,
+        1798858800
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1798772400,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 6,
+      "weekStart" : 1798340400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1770087600
+        },
+        {
+          "days" : -1,
+          "result" : 1770606000
+        },
+        {
+          "days" : 1,
+          "result" : 1770778800
+        },
+        {
+          "days" : 2,
+          "result" : 1770865200
+        },
+        {
+          "days" : 30,
+          "result" : 1773284400
+        }
+      ],
+      "date" : 1770735600,
+      "day" : 1770692400,
+      "daysBetweenNext" : {
+        "other" : 1833807600,
+        "result" : 730
+      },
+      "daysInMonthCount" : 28,
+      "daysOfWeek" : [
+        1770519600,
+        1770606000,
+        1770692400,
+        1770778800,
+        1770865200,
+        1770951600,
+        1771038000
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1769914800,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 3,
+      "weekStart" : 1770519600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1833159600
+        },
+        {
+          "days" : -1,
+          "result" : 1833678000
+        },
+        {
+          "days" : 1,
+          "result" : 1833850800
+        },
+        {
+          "days" : 2,
+          "result" : 1833937200
+        },
+        {
+          "days" : 30,
+          "result" : 1836356400
+        }
+      ],
+      "date" : 1833807600,
+      "day" : 1833764400,
+      "daysBetweenNext" : {
+        "other" : 1798768800,
+        "result" : -406
+      },
+      "daysInMonthCount" : 29,
+      "daysOfWeek" : [
+        1833418800,
+        1833505200,
+        1833591600,
+        1833678000,
+        1833764400,
+        1833850800,
+        1833937200
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1832986800,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 5,
+      "weekStart" : 1833418800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1798081200
+        },
+        {
+          "days" : -1,
+          "result" : 1798599600
+        },
+        {
+          "days" : 1,
+          "result" : 1798772400
+        },
+        {
+          "days" : 2,
+          "result" : 1798858800
+        },
+        {
+          "days" : 30,
+          "result" : 1801278000
+        }
+      ],
+      "date" : 1798768800,
+      "day" : 1798686000,
+      "daysBetweenNext" : {
+        "other" : 1774744200,
+        "result" : -278
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1798340400,
+        1798426800,
+        1798513200,
+        1798599600,
+        1798686000,
+        1798772400,
+        1798858800
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1796094000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 5,
+      "weekStart" : 1798340400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1774062000
+        },
+        {
+          "days" : -1,
+          "result" : 1774580400
+        },
+        {
+          "days" : 1,
+          "result" : 1774753200
+        },
+        {
+          "days" : 2,
+          "result" : 1774839600
+        },
+        {
+          "days" : 30,
+          "result" : 1777258800
+        }
+      ],
+      "date" : 1774744200,
+      "day" : 1774666800,
+      "daysBetweenNext" : {
+        "other" : 1792888200,
+        "result" : 210
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1774148400,
+        1774234800,
+        1774321200,
+        1774407600,
+        1774494000,
+        1774580400,
+        1774666800
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1772334000,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 7,
+      "weekStart" : 1774148400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1792206000
+        },
+        {
+          "days" : -1,
+          "result" : 1792724400
+        },
+        {
+          "days" : 1,
+          "result" : 1792897200
+        },
+        {
+          "days" : 2,
+          "result" : 1792983600
+        },
+        {
+          "days" : 30,
+          "result" : 1795402800
+        }
+      ],
+      "date" : 1792888200,
+      "day" : 1792810800,
+      "daysBetweenNext" : {
+        "other" : 1773196200,
+        "result" : -228
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1792292400,
+        1792378800,
+        1792465200,
+        1792551600,
+        1792638000,
+        1792724400,
+        1792810800
+      ],
+      "firstWeekday" : 1,
+      "startOfMonth" : 1790823600,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weekday" : 7,
+      "weekStart" : 1792292400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772514000
+        },
+        {
+          "days" : -1,
+          "result" : 1773028800
+        },
+        {
+          "days" : 1,
+          "result" : 1773201600
+        },
+        {
+          "days" : 2,
+          "result" : 1773288000
+        },
+        {
+          "days" : 30,
+          "result" : 1775707200
+        }
+      ],
+      "date" : 1773196200,
+      "day" : 1773115200,
+      "daysBetweenNext" : {
+        "other" : 1773200400,
+        "result" : 0
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1773028800,
+        1773115200,
+        1773201600,
+        1773288000,
+        1773374400,
+        1773460800,
+        1773547200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772341200,
+      "timeZone" : "America\/New_York",
+      "weekday" : 3,
+      "weekStart" : 1773028800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772514000
+        },
+        {
+          "days" : -1,
+          "result" : 1773028800
+        },
+        {
+          "days" : 1,
+          "result" : 1773201600
+        },
+        {
+          "days" : 2,
+          "result" : 1773288000
+        },
+        {
+          "days" : 30,
+          "result" : 1775707200
+        }
+      ],
+      "date" : 1773200400,
+      "day" : 1773115200,
+      "daysBetweenNext" : {
+        "other" : 1772859600,
+        "result" : -3
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1773028800,
+        1773115200,
+        1773201600,
+        1773288000,
+        1773374400,
+        1773460800,
+        1773547200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772341200,
+      "timeZone" : "America\/New_York",
+      "weekday" : 3,
+      "weekStart" : 1773028800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772254800
+        },
+        {
+          "days" : -1,
+          "result" : 1772773200
+        },
+        {
+          "days" : 1,
+          "result" : 1772946000
+        },
+        {
+          "days" : 2,
+          "result" : 1773028800
+        },
+        {
+          "days" : 30,
+          "result" : 1775448000
+        }
+      ],
+      "date" : 1772859600,
+      "day" : 1772859600,
+      "daysBetweenNext" : {
+        "other" : 1772946000,
+        "result" : 1
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772427600,
+        1772514000,
+        1772600400,
+        1772686800,
+        1772773200,
+        1772859600,
+        1772946000
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772341200,
+      "timeZone" : "America\/New_York",
+      "weekday" : 7,
+      "weekStart" : 1772427600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772341200
+        },
+        {
+          "days" : -1,
+          "result" : 1772859600
+        },
+        {
+          "days" : 1,
+          "result" : 1773028800
+        },
+        {
+          "days" : 2,
+          "result" : 1773115200
+        },
+        {
+          "days" : 30,
+          "result" : 1775534400
+        }
+      ],
+      "date" : 1772946000,
+      "day" : 1772946000,
+      "daysBetweenNext" : {
+        "other" : 1772967600,
+        "result" : 0
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772427600,
+        1772514000,
+        1772600400,
+        1772686800,
+        1772773200,
+        1772859600,
+        1772946000
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772341200,
+      "timeZone" : "America\/New_York",
+      "weekday" : 1,
+      "weekStart" : 1772427600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772341200
+        },
+        {
+          "days" : -1,
+          "result" : 1772859600
+        },
+        {
+          "days" : 1,
+          "result" : 1773028800
+        },
+        {
+          "days" : 2,
+          "result" : 1773115200
+        },
+        {
+          "days" : 30,
+          "result" : 1775534400
+        }
+      ],
+      "date" : 1772967600,
+      "day" : 1772946000,
+      "daysBetweenNext" : {
+        "other" : 1793505600,
+        "result" : 238
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772427600,
+        1772514000,
+        1772600400,
+        1772686800,
+        1772773200,
+        1772859600,
+        1772946000
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772341200,
+      "timeZone" : "America\/New_York",
+      "weekday" : 1,
+      "weekStart" : 1772427600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1792900800
+        },
+        {
+          "days" : -1,
+          "result" : 1793419200
+        },
+        {
+          "days" : 1,
+          "result" : 1793595600
+        },
+        {
+          "days" : 2,
+          "result" : 1793682000
+        },
+        {
+          "days" : 30,
+          "result" : 1796101200
+        }
+      ],
+      "date" : 1793505600,
+      "day" : 1793505600,
+      "daysBetweenNext" : {
+        "other" : 1779240600,
+        "result" : -166
+      },
+      "daysInMonthCount" : 30,
+      "daysOfWeek" : [
+        1792987200,
+        1793073600,
+        1793160000,
+        1793246400,
+        1793332800,
+        1793419200,
+        1793505600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1793505600,
+      "timeZone" : "America\/New_York",
+      "weekday" : 1,
+      "weekStart" : 1792987200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1778558400
+        },
+        {
+          "days" : -1,
+          "result" : 1779076800
+        },
+        {
+          "days" : 1,
+          "result" : 1779249600
+        },
+        {
+          "days" : 2,
+          "result" : 1779336000
+        },
+        {
+          "days" : 30,
+          "result" : 1781755200
+        }
+      ],
+      "date" : 1779240600,
+      "day" : 1779163200,
+      "daysBetweenNext" : {
+        "other" : 1791990000,
+        "result" : 148
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1779076800,
+        1779163200,
+        1779249600,
+        1779336000,
+        1779422400,
+        1779508800,
+        1779595200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1777608000,
+      "timeZone" : "America\/New_York",
+      "weekday" : 3,
+      "weekStart" : 1779076800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1791345600
+        },
+        {
+          "days" : -1,
+          "result" : 1791864000
+        },
+        {
+          "days" : 1,
+          "result" : 1792036800
+        },
+        {
+          "days" : 2,
+          "result" : 1792123200
+        },
+        {
+          "days" : 30,
+          "result" : 1794546000
+        }
+      ],
+      "date" : 1791990000,
+      "day" : 1791950400,
+      "daysBetweenNext" : {
+        "other" : 1792335600,
+        "result" : 4
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1791777600,
+        1791864000,
+        1791950400,
+        1792036800,
+        1792123200,
+        1792209600,
+        1792296000
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790827200,
+      "timeZone" : "America\/New_York",
+      "weekday" : 4,
+      "weekStart" : 1791777600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1791691200
+        },
+        {
+          "days" : -1,
+          "result" : 1792209600
+        },
+        {
+          "days" : 1,
+          "result" : 1792382400
+        },
+        {
+          "days" : 2,
+          "result" : 1792468800
+        },
+        {
+          "days" : 30,
+          "result" : 1794891600
+        }
+      ],
+      "date" : 1792335600,
+      "day" : 1792296000,
+      "daysBetweenNext" : {
+        "other" : 1798815600,
+        "result" : 75
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1791777600,
+        1791864000,
+        1791950400,
+        1792036800,
+        1792123200,
+        1792209600,
+        1792296000
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790827200,
+      "timeZone" : "America\/New_York",
+      "weekday" : 1,
+      "weekStart" : 1791777600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1798174800
+        },
+        {
+          "days" : -1,
+          "result" : 1798693200
+        },
+        {
+          "days" : 1,
+          "result" : 1798866000
+        },
+        {
+          "days" : 2,
+          "result" : 1798952400
+        },
+        {
+          "days" : 30,
+          "result" : 1801371600
+        }
+      ],
+      "date" : 1798815600,
+      "day" : 1798779600,
+      "daysBetweenNext" : {
+        "other" : 1770735600,
+        "result" : -325
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1798434000,
+        1798520400,
+        1798606800,
+        1798693200,
+        1798779600,
+        1798866000,
+        1798952400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1798779600,
+      "timeZone" : "America\/New_York",
+      "weekday" : 6,
+      "weekStart" : 1798434000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1770094800
+        },
+        {
+          "days" : -1,
+          "result" : 1770613200
+        },
+        {
+          "days" : 1,
+          "result" : 1770786000
+        },
+        {
+          "days" : 2,
+          "result" : 1770872400
+        },
+        {
+          "days" : 30,
+          "result" : 1773288000
+        }
+      ],
+      "date" : 1770735600,
+      "day" : 1770699600,
+      "daysBetweenNext" : {
+        "other" : 1833807600,
+        "result" : 730
+      },
+      "daysInMonthCount" : 28,
+      "daysOfWeek" : [
+        1770613200,
+        1770699600,
+        1770786000,
+        1770872400,
+        1770958800,
+        1771045200,
+        1771131600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1769922000,
+      "timeZone" : "America\/New_York",
+      "weekday" : 3,
+      "weekStart" : 1770613200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1833166800
+        },
+        {
+          "days" : -1,
+          "result" : 1833685200
+        },
+        {
+          "days" : 1,
+          "result" : 1833858000
+        },
+        {
+          "days" : 2,
+          "result" : 1833944400
+        },
+        {
+          "days" : 30,
+          "result" : 1836363600
+        }
+      ],
+      "date" : 1833807600,
+      "day" : 1833771600,
+      "daysBetweenNext" : {
+        "other" : 1798768800,
+        "result" : -406
+      },
+      "daysInMonthCount" : 29,
+      "daysOfWeek" : [
+        1833512400,
+        1833598800,
+        1833685200,
+        1833771600,
+        1833858000,
+        1833944400,
+        1834030800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1832994000,
+      "timeZone" : "America\/New_York",
+      "weekday" : 5,
+      "weekStart" : 1833512400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1798088400
+        },
+        {
+          "days" : -1,
+          "result" : 1798606800
+        },
+        {
+          "days" : 1,
+          "result" : 1798779600
+        },
+        {
+          "days" : 2,
+          "result" : 1798866000
+        },
+        {
+          "days" : 30,
+          "result" : 1801285200
+        }
+      ],
+      "date" : 1798768800,
+      "day" : 1798693200,
+      "daysBetweenNext" : {
+        "other" : 1774744200,
+        "result" : -278
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1798434000,
+        1798520400,
+        1798606800,
+        1798693200,
+        1798779600,
+        1798866000,
+        1798952400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1796101200,
+      "timeZone" : "America\/New_York",
+      "weekday" : 5,
+      "weekStart" : 1798434000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1774065600
+        },
+        {
+          "days" : -1,
+          "result" : 1774584000
+        },
+        {
+          "days" : 1,
+          "result" : 1774756800
+        },
+        {
+          "days" : 2,
+          "result" : 1774843200
+        },
+        {
+          "days" : 30,
+          "result" : 1777262400
+        }
+      ],
+      "date" : 1774744200,
+      "day" : 1774670400,
+      "daysBetweenNext" : {
+        "other" : 1792888200,
+        "result" : 210
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1774238400,
+        1774324800,
+        1774411200,
+        1774497600,
+        1774584000,
+        1774670400,
+        1774756800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772341200,
+      "timeZone" : "America\/New_York",
+      "weekday" : 7,
+      "weekStart" : 1774238400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1792209600
+        },
+        {
+          "days" : -1,
+          "result" : 1792728000
+        },
+        {
+          "days" : 1,
+          "result" : 1792900800
+        },
+        {
+          "days" : 2,
+          "result" : 1792987200
+        },
+        {
+          "days" : 30,
+          "result" : 1795410000
+        }
+      ],
+      "date" : 1792888200,
+      "day" : 1792814400,
+      "daysBetweenNext" : {
+        "other" : 1773196200,
+        "result" : -228
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1792382400,
+        1792468800,
+        1792555200,
+        1792641600,
+        1792728000,
+        1792814400,
+        1792900800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790827200,
+      "timeZone" : "America\/New_York",
+      "weekday" : 7,
+      "weekStart" : 1792382400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772582400
+        },
+        {
+          "days" : -1,
+          "result" : 1773100800
+        },
+        {
+          "days" : 1,
+          "result" : 1773273600
+        },
+        {
+          "days" : 2,
+          "result" : 1773360000
+        },
+        {
+          "days" : 30,
+          "result" : 1775779200
+        }
+      ],
+      "date" : 1773196200,
+      "day" : 1773187200,
+      "daysBetweenNext" : {
+        "other" : 1773200400,
+        "result" : 0
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1773014400,
+        1773100800,
+        1773187200,
+        1773273600,
+        1773360000,
+        1773446400,
+        1773532800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772323200,
+      "timeZone" : "UTC",
+      "weekday" : 4,
+      "weekStart" : 1773014400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772582400
+        },
+        {
+          "days" : -1,
+          "result" : 1773100800
+        },
+        {
+          "days" : 1,
+          "result" : 1773273600
+        },
+        {
+          "days" : 2,
+          "result" : 1773360000
+        },
+        {
+          "days" : 30,
+          "result" : 1775779200
+        }
+      ],
+      "date" : 1773200400,
+      "day" : 1773187200,
+      "daysBetweenNext" : {
+        "other" : 1772859600,
+        "result" : -4
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1773014400,
+        1773100800,
+        1773187200,
+        1773273600,
+        1773360000,
+        1773446400,
+        1773532800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772323200,
+      "timeZone" : "UTC",
+      "weekday" : 4,
+      "weekStart" : 1773014400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772236800
+        },
+        {
+          "days" : -1,
+          "result" : 1772755200
+        },
+        {
+          "days" : 1,
+          "result" : 1772928000
+        },
+        {
+          "days" : 2,
+          "result" : 1773014400
+        },
+        {
+          "days" : 30,
+          "result" : 1775433600
+        }
+      ],
+      "date" : 1772859600,
+      "day" : 1772841600,
+      "daysBetweenNext" : {
+        "other" : 1772946000,
+        "result" : 1
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772409600,
+        1772496000,
+        1772582400,
+        1772668800,
+        1772755200,
+        1772841600,
+        1772928000
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772323200,
+      "timeZone" : "UTC",
+      "weekday" : 7,
+      "weekStart" : 1772409600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772323200
+        },
+        {
+          "days" : -1,
+          "result" : 1772841600
+        },
+        {
+          "days" : 1,
+          "result" : 1773014400
+        },
+        {
+          "days" : 2,
+          "result" : 1773100800
+        },
+        {
+          "days" : 30,
+          "result" : 1775520000
+        }
+      ],
+      "date" : 1772946000,
+      "day" : 1772928000,
+      "daysBetweenNext" : {
+        "other" : 1772967600,
+        "result" : 0
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772409600,
+        1772496000,
+        1772582400,
+        1772668800,
+        1772755200,
+        1772841600,
+        1772928000
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772323200,
+      "timeZone" : "UTC",
+      "weekday" : 1,
+      "weekStart" : 1772409600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772323200
+        },
+        {
+          "days" : -1,
+          "result" : 1772841600
+        },
+        {
+          "days" : 1,
+          "result" : 1773014400
+        },
+        {
+          "days" : 2,
+          "result" : 1773100800
+        },
+        {
+          "days" : 30,
+          "result" : 1775520000
+        }
+      ],
+      "date" : 1772967600,
+      "day" : 1772928000,
+      "daysBetweenNext" : {
+        "other" : 1793505600,
+        "result" : 238
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772409600,
+        1772496000,
+        1772582400,
+        1772668800,
+        1772755200,
+        1772841600,
+        1772928000
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772323200,
+      "timeZone" : "UTC",
+      "weekday" : 1,
+      "weekStart" : 1772409600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1792886400
+        },
+        {
+          "days" : -1,
+          "result" : 1793404800
+        },
+        {
+          "days" : 1,
+          "result" : 1793577600
+        },
+        {
+          "days" : 2,
+          "result" : 1793664000
+        },
+        {
+          "days" : 30,
+          "result" : 1796083200
+        }
+      ],
+      "date" : 1793505600,
+      "day" : 1793491200,
+      "daysBetweenNext" : {
+        "other" : 1779240600,
+        "result" : -165
+      },
+      "daysInMonthCount" : 30,
+      "daysOfWeek" : [
+        1792972800,
+        1793059200,
+        1793145600,
+        1793232000,
+        1793318400,
+        1793404800,
+        1793491200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1793491200,
+      "timeZone" : "UTC",
+      "weekday" : 1,
+      "weekStart" : 1792972800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1778630400
+        },
+        {
+          "days" : -1,
+          "result" : 1779148800
+        },
+        {
+          "days" : 1,
+          "result" : 1779321600
+        },
+        {
+          "days" : 2,
+          "result" : 1779408000
+        },
+        {
+          "days" : 30,
+          "result" : 1781827200
+        }
+      ],
+      "date" : 1779240600,
+      "day" : 1779235200,
+      "daysBetweenNext" : {
+        "other" : 1791990000,
+        "result" : 147
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1779062400,
+        1779148800,
+        1779235200,
+        1779321600,
+        1779408000,
+        1779494400,
+        1779580800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1777593600,
+      "timeZone" : "UTC",
+      "weekday" : 4,
+      "weekStart" : 1779062400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1791331200
+        },
+        {
+          "days" : -1,
+          "result" : 1791849600
+        },
+        {
+          "days" : 1,
+          "result" : 1792022400
+        },
+        {
+          "days" : 2,
+          "result" : 1792108800
+        },
+        {
+          "days" : 30,
+          "result" : 1794528000
+        }
+      ],
+      "date" : 1791990000,
+      "day" : 1791936000,
+      "daysBetweenNext" : {
+        "other" : 1792335600,
+        "result" : 4
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1791763200,
+        1791849600,
+        1791936000,
+        1792022400,
+        1792108800,
+        1792195200,
+        1792281600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790812800,
+      "timeZone" : "UTC",
+      "weekday" : 4,
+      "weekStart" : 1791763200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1791676800
+        },
+        {
+          "days" : -1,
+          "result" : 1792195200
+        },
+        {
+          "days" : 1,
+          "result" : 1792368000
+        },
+        {
+          "days" : 2,
+          "result" : 1792454400
+        },
+        {
+          "days" : 30,
+          "result" : 1794873600
+        }
+      ],
+      "date" : 1792335600,
+      "day" : 1792281600,
+      "daysBetweenNext" : {
+        "other" : 1798815600,
+        "result" : 75
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1791763200,
+        1791849600,
+        1791936000,
+        1792022400,
+        1792108800,
+        1792195200,
+        1792281600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790812800,
+      "timeZone" : "UTC",
+      "weekday" : 1,
+      "weekStart" : 1791763200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1798156800
+        },
+        {
+          "days" : -1,
+          "result" : 1798675200
+        },
+        {
+          "days" : 1,
+          "result" : 1798848000
+        },
+        {
+          "days" : 2,
+          "result" : 1798934400
+        },
+        {
+          "days" : 30,
+          "result" : 1801353600
+        }
+      ],
+      "date" : 1798815600,
+      "day" : 1798761600,
+      "daysBetweenNext" : {
+        "other" : 1770735600,
+        "result" : -325
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1798416000,
+        1798502400,
+        1798588800,
+        1798675200,
+        1798761600,
+        1798848000,
+        1798934400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1798761600,
+      "timeZone" : "UTC",
+      "weekday" : 6,
+      "weekStart" : 1798416000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1770076800
+        },
+        {
+          "days" : -1,
+          "result" : 1770595200
+        },
+        {
+          "days" : 1,
+          "result" : 1770768000
+        },
+        {
+          "days" : 2,
+          "result" : 1770854400
+        },
+        {
+          "days" : 30,
+          "result" : 1773273600
+        }
+      ],
+      "date" : 1770735600,
+      "day" : 1770681600,
+      "daysBetweenNext" : {
+        "other" : 1833807600,
+        "result" : 730
+      },
+      "daysInMonthCount" : 28,
+      "daysOfWeek" : [
+        1770595200,
+        1770681600,
+        1770768000,
+        1770854400,
+        1770940800,
+        1771027200,
+        1771113600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1769904000,
+      "timeZone" : "UTC",
+      "weekday" : 3,
+      "weekStart" : 1770595200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1833148800
+        },
+        {
+          "days" : -1,
+          "result" : 1833667200
+        },
+        {
+          "days" : 1,
+          "result" : 1833840000
+        },
+        {
+          "days" : 2,
+          "result" : 1833926400
+        },
+        {
+          "days" : 30,
+          "result" : 1836345600
+        }
+      ],
+      "date" : 1833807600,
+      "day" : 1833753600,
+      "daysBetweenNext" : {
+        "other" : 1798768800,
+        "result" : -405
+      },
+      "daysInMonthCount" : 29,
+      "daysOfWeek" : [
+        1833494400,
+        1833580800,
+        1833667200,
+        1833753600,
+        1833840000,
+        1833926400,
+        1834012800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1832976000,
+      "timeZone" : "UTC",
+      "weekday" : 5,
+      "weekStart" : 1833494400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1798156800
+        },
+        {
+          "days" : -1,
+          "result" : 1798675200
+        },
+        {
+          "days" : 1,
+          "result" : 1798848000
+        },
+        {
+          "days" : 2,
+          "result" : 1798934400
+        },
+        {
+          "days" : 30,
+          "result" : 1801353600
+        }
+      ],
+      "date" : 1798768800,
+      "day" : 1798761600,
+      "daysBetweenNext" : {
+        "other" : 1774744200,
+        "result" : -278
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1798416000,
+        1798502400,
+        1798588800,
+        1798675200,
+        1798761600,
+        1798848000,
+        1798934400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1798761600,
+      "timeZone" : "UTC",
+      "weekday" : 6,
+      "weekStart" : 1798416000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1774137600
+        },
+        {
+          "days" : -1,
+          "result" : 1774656000
+        },
+        {
+          "days" : 1,
+          "result" : 1774828800
+        },
+        {
+          "days" : 2,
+          "result" : 1774915200
+        },
+        {
+          "days" : 30,
+          "result" : 1777334400
+        }
+      ],
+      "date" : 1774744200,
+      "day" : 1774742400,
+      "daysBetweenNext" : {
+        "other" : 1792888200,
+        "result" : 210
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1774224000,
+        1774310400,
+        1774396800,
+        1774483200,
+        1774569600,
+        1774656000,
+        1774742400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772323200,
+      "timeZone" : "UTC",
+      "weekday" : 1,
+      "weekStart" : 1774224000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1792281600
+        },
+        {
+          "days" : -1,
+          "result" : 1792800000
+        },
+        {
+          "days" : 1,
+          "result" : 1792972800
+        },
+        {
+          "days" : 2,
+          "result" : 1793059200
+        },
+        {
+          "days" : 30,
+          "result" : 1795478400
+        }
+      ],
+      "date" : 1792888200,
+      "day" : 1792886400,
+      "daysBetweenNext" : {
+        "other" : 1773196200,
+        "result" : -228
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1792368000,
+        1792454400,
+        1792540800,
+        1792627200,
+        1792713600,
+        1792800000,
+        1792886400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790812800,
+      "timeZone" : "UTC",
+      "weekday" : 1,
+      "weekStart" : 1792368000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772578800
+        },
+        {
+          "days" : -1,
+          "result" : 1773097200
+        },
+        {
+          "days" : 1,
+          "result" : 1773270000
+        },
+        {
+          "days" : 2,
+          "result" : 1773356400
+        },
+        {
+          "days" : 30,
+          "result" : 1775772000
+        }
+      ],
+      "date" : 1773196200,
+      "day" : 1773183600,
+      "daysBetweenNext" : {
+        "other" : 1773200400,
+        "result" : 0
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1773010800,
+        1773097200,
+        1773183600,
+        1773270000,
+        1773356400,
+        1773442800,
+        1773529200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772319600,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 4,
+      "weekStart" : 1773010800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772578800
+        },
+        {
+          "days" : -1,
+          "result" : 1773097200
+        },
+        {
+          "days" : 1,
+          "result" : 1773270000
+        },
+        {
+          "days" : 2,
+          "result" : 1773356400
+        },
+        {
+          "days" : 30,
+          "result" : 1775772000
+        }
+      ],
+      "date" : 1773200400,
+      "day" : 1773183600,
+      "daysBetweenNext" : {
+        "other" : 1772859600,
+        "result" : -4
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1773010800,
+        1773097200,
+        1773183600,
+        1773270000,
+        1773356400,
+        1773442800,
+        1773529200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772319600,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 4,
+      "weekStart" : 1773010800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772233200
+        },
+        {
+          "days" : -1,
+          "result" : 1772751600
+        },
+        {
+          "days" : 1,
+          "result" : 1772924400
+        },
+        {
+          "days" : 2,
+          "result" : 1773010800
+        },
+        {
+          "days" : 30,
+          "result" : 1775426400
+        }
+      ],
+      "date" : 1772859600,
+      "day" : 1772838000,
+      "daysBetweenNext" : {
+        "other" : 1772946000,
+        "result" : 1
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772406000,
+        1772492400,
+        1772578800,
+        1772665200,
+        1772751600,
+        1772838000,
+        1772924400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772319600,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 7,
+      "weekStart" : 1772406000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772319600
+        },
+        {
+          "days" : -1,
+          "result" : 1772838000
+        },
+        {
+          "days" : 1,
+          "result" : 1773010800
+        },
+        {
+          "days" : 2,
+          "result" : 1773097200
+        },
+        {
+          "days" : 30,
+          "result" : 1775512800
+        }
+      ],
+      "date" : 1772946000,
+      "day" : 1772924400,
+      "daysBetweenNext" : {
+        "other" : 1772967600,
+        "result" : 0
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772406000,
+        1772492400,
+        1772578800,
+        1772665200,
+        1772751600,
+        1772838000,
+        1772924400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772319600,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 1,
+      "weekStart" : 1772406000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1772319600
+        },
+        {
+          "days" : -1,
+          "result" : 1772838000
+        },
+        {
+          "days" : 1,
+          "result" : 1773010800
+        },
+        {
+          "days" : 2,
+          "result" : 1773097200
+        },
+        {
+          "days" : 30,
+          "result" : 1775512800
+        }
+      ],
+      "date" : 1772967600,
+      "day" : 1772924400,
+      "daysBetweenNext" : {
+        "other" : 1793505600,
+        "result" : 238
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1772406000,
+        1772492400,
+        1772578800,
+        1772665200,
+        1772751600,
+        1772838000,
+        1772924400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772319600,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 1,
+      "weekStart" : 1772406000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1792879200
+        },
+        {
+          "days" : -1,
+          "result" : 1793401200
+        },
+        {
+          "days" : 1,
+          "result" : 1793574000
+        },
+        {
+          "days" : 2,
+          "result" : 1793660400
+        },
+        {
+          "days" : 30,
+          "result" : 1796079600
+        }
+      ],
+      "date" : 1793505600,
+      "day" : 1793487600,
+      "daysBetweenNext" : {
+        "other" : 1779240600,
+        "result" : -165
+      },
+      "daysInMonthCount" : 30,
+      "daysOfWeek" : [
+        1792969200,
+        1793055600,
+        1793142000,
+        1793228400,
+        1793314800,
+        1793401200,
+        1793487600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1793487600,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 1,
+      "weekStart" : 1792969200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1778623200
+        },
+        {
+          "days" : -1,
+          "result" : 1779141600
+        },
+        {
+          "days" : 1,
+          "result" : 1779314400
+        },
+        {
+          "days" : 2,
+          "result" : 1779400800
+        },
+        {
+          "days" : 30,
+          "result" : 1781820000
+        }
+      ],
+      "date" : 1779240600,
+      "day" : 1779228000,
+      "daysBetweenNext" : {
+        "other" : 1791990000,
+        "result" : 147
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1779055200,
+        1779141600,
+        1779228000,
+        1779314400,
+        1779400800,
+        1779487200,
+        1779573600
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1777586400,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 4,
+      "weekStart" : 1779055200
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1791324000
+        },
+        {
+          "days" : -1,
+          "result" : 1791842400
+        },
+        {
+          "days" : 1,
+          "result" : 1792015200
+        },
+        {
+          "days" : 2,
+          "result" : 1792101600
+        },
+        {
+          "days" : 30,
+          "result" : 1794524400
+        }
+      ],
+      "date" : 1791990000,
+      "day" : 1791928800,
+      "daysBetweenNext" : {
+        "other" : 1792335600,
+        "result" : 4
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1791756000,
+        1791842400,
+        1791928800,
+        1792015200,
+        1792101600,
+        1792188000,
+        1792274400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790805600,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 4,
+      "weekStart" : 1791756000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1791669600
+        },
+        {
+          "days" : -1,
+          "result" : 1792188000
+        },
+        {
+          "days" : 1,
+          "result" : 1792360800
+        },
+        {
+          "days" : 2,
+          "result" : 1792447200
+        },
+        {
+          "days" : 30,
+          "result" : 1794870000
+        }
+      ],
+      "date" : 1792335600,
+      "day" : 1792274400,
+      "daysBetweenNext" : {
+        "other" : 1798815600,
+        "result" : 75
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1791756000,
+        1791842400,
+        1791928800,
+        1792015200,
+        1792101600,
+        1792188000,
+        1792274400
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790805600,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 1,
+      "weekStart" : 1791756000
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1798153200
+        },
+        {
+          "days" : -1,
+          "result" : 1798671600
+        },
+        {
+          "days" : 1,
+          "result" : 1798844400
+        },
+        {
+          "days" : 2,
+          "result" : 1798930800
+        },
+        {
+          "days" : 30,
+          "result" : 1801350000
+        }
+      ],
+      "date" : 1798815600,
+      "day" : 1798758000,
+      "daysBetweenNext" : {
+        "other" : 1770735600,
+        "result" : -325
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1798412400,
+        1798498800,
+        1798585200,
+        1798671600,
+        1798758000,
+        1798844400,
+        1798930800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1798758000,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 6,
+      "weekStart" : 1798412400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1770073200
+        },
+        {
+          "days" : -1,
+          "result" : 1770591600
+        },
+        {
+          "days" : 1,
+          "result" : 1770764400
+        },
+        {
+          "days" : 2,
+          "result" : 1770850800
+        },
+        {
+          "days" : 30,
+          "result" : 1773270000
+        }
+      ],
+      "date" : 1770735600,
+      "day" : 1770678000,
+      "daysBetweenNext" : {
+        "other" : 1833807600,
+        "result" : 730
+      },
+      "daysInMonthCount" : 28,
+      "daysOfWeek" : [
+        1770591600,
+        1770678000,
+        1770764400,
+        1770850800,
+        1770937200,
+        1771023600,
+        1771110000
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1769900400,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 3,
+      "weekStart" : 1770591600
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1833145200
+        },
+        {
+          "days" : -1,
+          "result" : 1833663600
+        },
+        {
+          "days" : 1,
+          "result" : 1833836400
+        },
+        {
+          "days" : 2,
+          "result" : 1833922800
+        },
+        {
+          "days" : 30,
+          "result" : 1836342000
+        }
+      ],
+      "date" : 1833807600,
+      "day" : 1833750000,
+      "daysBetweenNext" : {
+        "other" : 1798768800,
+        "result" : -405
+      },
+      "daysInMonthCount" : 29,
+      "daysOfWeek" : [
+        1833490800,
+        1833577200,
+        1833663600,
+        1833750000,
+        1833836400,
+        1833922800,
+        1834009200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1832972400,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 5,
+      "weekStart" : 1833490800
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1798153200
+        },
+        {
+          "days" : -1,
+          "result" : 1798671600
+        },
+        {
+          "days" : 1,
+          "result" : 1798844400
+        },
+        {
+          "days" : 2,
+          "result" : 1798930800
+        },
+        {
+          "days" : 30,
+          "result" : 1801350000
+        }
+      ],
+      "date" : 1798768800,
+      "day" : 1798758000,
+      "daysBetweenNext" : {
+        "other" : 1774744200,
+        "result" : -278
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1798412400,
+        1798498800,
+        1798585200,
+        1798671600,
+        1798758000,
+        1798844400,
+        1798930800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1798758000,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 6,
+      "weekStart" : 1798412400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1774134000
+        },
+        {
+          "days" : -1,
+          "result" : 1774652400
+        },
+        {
+          "days" : 1,
+          "result" : 1774821600
+        },
+        {
+          "days" : 2,
+          "result" : 1774908000
+        },
+        {
+          "days" : 30,
+          "result" : 1777327200
+        }
+      ],
+      "date" : 1774744200,
+      "day" : 1774738800,
+      "daysBetweenNext" : {
+        "other" : 1792888200,
+        "result" : 210
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1774220400,
+        1774306800,
+        1774393200,
+        1774479600,
+        1774566000,
+        1774652400,
+        1774738800
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1772319600,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 1,
+      "weekStart" : 1774220400
+    },
+    {
+      "addDays" : [
+        {
+          "days" : -7,
+          "result" : 1792274400
+        },
+        {
+          "days" : -1,
+          "result" : 1792792800
+        },
+        {
+          "days" : 1,
+          "result" : 1792969200
+        },
+        {
+          "days" : 2,
+          "result" : 1793055600
+        },
+        {
+          "days" : 30,
+          "result" : 1795474800
+        }
+      ],
+      "date" : 1792888200,
+      "day" : 1792879200,
+      "daysBetweenNext" : {
+        "other" : 1773196200,
+        "result" : -228
+      },
+      "daysInMonthCount" : 31,
+      "daysOfWeek" : [
+        1792360800,
+        1792447200,
+        1792533600,
+        1792620000,
+        1792706400,
+        1792792800,
+        1792879200
+      ],
+      "firstWeekday" : 2,
+      "startOfMonth" : 1790805600,
+      "timeZone" : "Europe\/Madrid",
+      "weekday" : 1,
+      "weekStart" : 1792360800
+    }
+  ],
+  "compliance" : [
+    {
+      "firstWeekday" : 2,
+      "minSets" : 3,
+      "name" : "weekly mode",
+      "now" : 1793718000,
+      "schedule" : [
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000064",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 2
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000065",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 4
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000066",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 6
+        }
+      ],
+      "sessions" : [
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000001",
+          "start" : 1791234000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000002",
+          "start" : 1791406800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000003",
+          "start" : 1791579600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000004",
+          "start" : 1791838800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000005",
+          "start" : 1791925200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000006",
+          "start" : 1792242000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000007",
+          "start" : 1792443600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 1,
+          "id" : "00000000-0000-0000-0000-000000000008",
+          "start" : 1792616400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000009",
+          "start" : 1793048400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000A",
+          "start" : 1793221200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000B",
+          "start" : 1793394000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000C",
+          "start" : 1793653200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000D",
+          "start" : 1793660400,
+          "status" : "discarded"
+        }
+      ],
+      "streak" : {
+        "best" : 2,
+        "current" : 1,
+        "mode" : "weeklyPlan"
+      },
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weeks" : [
+        {
+          "planned" : 3,
+          "status" : "met",
+          "valid" : 3,
+          "weekStart" : 1791169200
+        },
+        {
+          "planned" : 3,
+          "status" : "met",
+          "valid" : 3,
+          "weekStart" : 1791774000
+        },
+        {
+          "planned" : 3,
+          "status" : "missed",
+          "valid" : 1,
+          "weekStart" : 1792378800
+        },
+        {
+          "planned" : 3,
+          "status" : "met",
+          "valid" : 3,
+          "weekStart" : 1792983600
+        },
+        {
+          "planned" : 3,
+          "status" : "inProgress",
+          "valid" : 1,
+          "weekStart" : 1793588400
+        }
+      ]
+    },
+    {
+      "firstWeekday" : 2,
+      "minSets" : 3,
+      "name" : "weekly mode after change",
+      "now" : 1793718000,
+      "schedule" : [
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000064",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 2
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000065",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 4
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000066",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 6
+        },
+        {
+          "createdAt" : 1792378800,
+          "id" : "00000000-0000-0000-0000-0000000000C8",
+          "validFrom" : 1792378800,
+          "weekday" : 4
+        },
+        {
+          "createdAt" : 1792378800,
+          "id" : "00000000-0000-0000-0000-0000000000C9",
+          "routineId" : "00000000-0000-0000-0000-00000000000B",
+          "validFrom" : 1792378800,
+          "weekday" : 3
+        }
+      ],
+      "sessions" : [
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000001",
+          "start" : 1791234000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000002",
+          "start" : 1791406800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000003",
+          "start" : 1791579600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000004",
+          "start" : 1791838800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000005",
+          "start" : 1791925200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000006",
+          "start" : 1792242000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000007",
+          "start" : 1792443600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 1,
+          "id" : "00000000-0000-0000-0000-000000000008",
+          "start" : 1792616400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000009",
+          "start" : 1793048400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000A",
+          "start" : 1793221200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000B",
+          "start" : 1793394000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000C",
+          "start" : 1793653200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000D",
+          "start" : 1793660400,
+          "status" : "discarded"
+        }
+      ],
+      "streak" : {
+        "best" : 2,
+        "current" : 1,
+        "mode" : "weeklyPlan"
+      },
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weeks" : [
+        {
+          "planned" : 3,
+          "status" : "met",
+          "valid" : 3,
+          "weekStart" : 1791169200
+        },
+        {
+          "planned" : 3,
+          "status" : "met",
+          "valid" : 3,
+          "weekStart" : 1791774000
+        },
+        {
+          "planned" : 3,
+          "status" : "missed",
+          "valid" : 1,
+          "weekStart" : 1792378800
+        },
+        {
+          "planned" : 3,
+          "status" : "met",
+          "valid" : 3,
+          "weekStart" : 1792983600
+        },
+        {
+          "planned" : 3,
+          "status" : "inProgress",
+          "valid" : 1,
+          "weekStart" : 1793588400
+        }
+      ]
+    },
+    {
+      "firstWeekday" : 2,
+      "minSets" : 3,
+      "name" : "no plan",
+      "now" : 1793718000,
+      "schedule" : [
+
+      ],
+      "sessions" : [
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000001",
+          "start" : 1791234000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000002",
+          "start" : 1791406800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000003",
+          "start" : 1791579600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000004",
+          "start" : 1791838800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000005",
+          "start" : 1791925200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000006",
+          "start" : 1792242000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000007",
+          "start" : 1792443600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 1,
+          "id" : "00000000-0000-0000-0000-000000000008",
+          "start" : 1792616400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000009",
+          "start" : 1793048400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000A",
+          "start" : 1793221200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000B",
+          "start" : 1793394000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000C",
+          "start" : 1793653200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000D",
+          "start" : 1793660400,
+          "status" : "discarded"
+        }
+      ],
+      "streak" : {
+        "best" : 0,
+        "current" : 0,
+        "mode" : "weeklyPlan"
+      },
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weeks" : [
+        {
+          "planned" : 0,
+          "status" : "noPlan",
+          "valid" : 3,
+          "weekStart" : 1791169200
+        },
+        {
+          "planned" : 0,
+          "status" : "noPlan",
+          "valid" : 3,
+          "weekStart" : 1791774000
+        },
+        {
+          "planned" : 0,
+          "status" : "noPlan",
+          "valid" : 1,
+          "weekStart" : 1792378800
+        },
+        {
+          "planned" : 0,
+          "status" : "noPlan",
+          "valid" : 3,
+          "weekStart" : 1792983600
+        },
+        {
+          "planned" : 0,
+          "status" : "noPlan",
+          "valid" : 1,
+          "weekStart" : 1793588400
+        }
+      ]
+    },
+    {
+      "firstWeekday" : 2,
+      "minSets" : 3,
+      "name" : "current week met",
+      "now" : 1793458800,
+      "schedule" : [
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000064",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 2
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000065",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 4
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000066",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 6
+        }
+      ],
+      "sessions" : [
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000001",
+          "start" : 1791234000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000002",
+          "start" : 1791406800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000003",
+          "start" : 1791579600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000004",
+          "start" : 1791838800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000005",
+          "start" : 1791925200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000006",
+          "start" : 1792242000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000007",
+          "start" : 1792443600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 1,
+          "id" : "00000000-0000-0000-0000-000000000008",
+          "start" : 1792616400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000009",
+          "start" : 1793048400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000A",
+          "start" : 1793221200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000B",
+          "start" : 1793394000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000C",
+          "start" : 1793653200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000D",
+          "start" : 1793660400,
+          "status" : "discarded"
+        }
+      ],
+      "streak" : {
+        "best" : 2,
+        "current" : 1,
+        "mode" : "weeklyPlan"
+      },
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "weeks" : [
+        {
+          "planned" : 3,
+          "status" : "met",
+          "valid" : 3,
+          "weekStart" : 1791169200
+        },
+        {
+          "planned" : 3,
+          "status" : "met",
+          "valid" : 3,
+          "weekStart" : 1791774000
+        },
+        {
+          "planned" : 3,
+          "status" : "missed",
+          "valid" : 1,
+          "weekStart" : 1792378800
+        },
+        {
+          "planned" : 3,
+          "status" : "met",
+          "valid" : 3,
+          "weekStart" : 1792983600
+        }
+      ]
+    }
+  ],
+  "dayGap" : [
+    {
+      "days" : [
+        1790823600,
+        1790996400,
+        1791169200,
+        1791514800,
+        1791601200
+      ],
+      "maxGapDays" : 2,
+      "now" : 1791817200,
+      "result" : {
+        "best" : 3,
+        "current" : 2,
+        "mode" : "dayGap"
+      },
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    },
+    {
+      "days" : [
+        1790823600,
+        1790996400,
+        1791169200,
+        1791514800,
+        1791601200
+      ],
+      "maxGapDays" : 2,
+      "now" : 1791903600,
+      "result" : {
+        "best" : 3,
+        "current" : 0,
+        "mode" : "dayGap"
+      },
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    },
+    {
+      "days" : [
+        1790823600,
+        1790996400,
+        1791169200,
+        1791514800,
+        1791601200
+      ],
+      "maxGapDays" : 1,
+      "now" : 1791644400,
+      "result" : {
+        "best" : 2,
+        "current" : 2,
+        "mode" : "dayGap"
+      },
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    },
+    {
+      "days" : [
+        1790823600,
+        1790996400,
+        1791169200,
+        1791514800,
+        1791601200
+      ],
+      "maxGapDays" : 4,
+      "now" : 1791990000,
+      "result" : {
+        "best" : 5,
+        "current" : 5,
+        "mode" : "dayGap"
+      },
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    }
+  ],
+  "schedule" : [
+    {
+      "currentAssignments" : {
+        "2" : "00000000-0000-0000-0000-00000000000A",
+        "4" : "00000000-0000-0000-0000-00000000000A",
+        "6" : "00000000-0000-0000-0000-00000000000A"
+      },
+      "entries" : [
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000064",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 2
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000065",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 4
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000066",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 6
+        }
+      ],
+      "firstWeekday" : 2,
+      "name" : "mon-wed-fri",
+      "planned" : [
+        {
+          "day" : 1790607600,
+          "routineId" : null
+        },
+        {
+          "day" : 1790694000,
+          "routineId" : null
+        },
+        {
+          "day" : 1790780400,
+          "routineId" : null
+        },
+        {
+          "day" : 1790866800,
+          "routineId" : null
+        },
+        {
+          "day" : 1790953200,
+          "routineId" : null
+        },
+        {
+          "day" : 1791039600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791126000,
+          "routineId" : null
+        },
+        {
+          "day" : 1791212400,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791298800,
+          "routineId" : null
+        },
+        {
+          "day" : 1791385200,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791471600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791558000,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791644400,
+          "routineId" : null
+        },
+        {
+          "day" : 1791730800,
+          "routineId" : null
+        },
+        {
+          "day" : 1791817200,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791903600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791990000,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792076400,
+          "routineId" : null
+        },
+        {
+          "day" : 1792162800,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792249200,
+          "routineId" : null
+        },
+        {
+          "day" : 1792335600,
+          "routineId" : null
+        },
+        {
+          "day" : 1792422000,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792508400,
+          "routineId" : null
+        },
+        {
+          "day" : 1792594800,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792681200,
+          "routineId" : null
+        },
+        {
+          "day" : 1792767600,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792854000,
+          "routineId" : null
+        },
+        {
+          "day" : 1792940400,
+          "routineId" : null
+        },
+        {
+          "day" : 1793026800,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1793113200,
+          "routineId" : null
+        },
+        {
+          "day" : 1793199600,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1793286000,
+          "routineId" : null
+        },
+        {
+          "day" : 1793372400,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1793458800,
+          "routineId" : null
+        },
+        {
+          "day" : 1793545200,
+          "routineId" : null
+        },
+        {
+          "day" : 1793631600,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1793718000,
+          "routineId" : null
+        },
+        {
+          "day" : 1793804400,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1793890800,
+          "routineId" : null
+        },
+        {
+          "day" : 1793977200,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1794063600,
+          "routineId" : null
+        },
+        {
+          "day" : 1794150000,
+          "routineId" : null
+        }
+      ],
+      "plannedDaysPerWeek" : [
+        {
+          "date" : 1790607600,
+          "days" : [
+
+          ]
+        },
+        {
+          "date" : 1791212400,
+          "days" : [
+            1791169200,
+            1791342000,
+            1791514800
+          ]
+        },
+        {
+          "date" : 1791817200,
+          "days" : [
+            1791774000,
+            1791946800,
+            1792119600
+          ]
+        },
+        {
+          "date" : 1792422000,
+          "days" : [
+            1792378800,
+            1792551600,
+            1792724400
+          ]
+        },
+        {
+          "date" : 1793026800,
+          "days" : [
+            1792983600,
+            1793156400,
+            1793329200
+          ]
+        },
+        {
+          "date" : 1793631600,
+          "days" : [
+            1793588400,
+            1793761200,
+            1793934000
+          ]
+        }
+      ],
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    },
+    {
+      "currentAssignments" : {
+        "2" : "00000000-0000-0000-0000-00000000000A",
+        "3" : "00000000-0000-0000-0000-00000000000B",
+        "6" : "00000000-0000-0000-0000-00000000000A"
+      },
+      "entries" : [
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000064",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 2
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000065",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 4
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000066",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 6
+        },
+        {
+          "createdAt" : 1792378800,
+          "id" : "00000000-0000-0000-0000-0000000000C8",
+          "validFrom" : 1792378800,
+          "weekday" : 4
+        },
+        {
+          "createdAt" : 1792378800,
+          "id" : "00000000-0000-0000-0000-0000000000C9",
+          "routineId" : "00000000-0000-0000-0000-00000000000B",
+          "validFrom" : 1792378800,
+          "weekday" : 3
+        }
+      ],
+      "firstWeekday" : 2,
+      "name" : "changed with rest entry",
+      "planned" : [
+        {
+          "day" : 1790607600,
+          "routineId" : null
+        },
+        {
+          "day" : 1790694000,
+          "routineId" : null
+        },
+        {
+          "day" : 1790780400,
+          "routineId" : null
+        },
+        {
+          "day" : 1790866800,
+          "routineId" : null
+        },
+        {
+          "day" : 1790953200,
+          "routineId" : null
+        },
+        {
+          "day" : 1791039600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791126000,
+          "routineId" : null
+        },
+        {
+          "day" : 1791212400,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791298800,
+          "routineId" : null
+        },
+        {
+          "day" : 1791385200,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791471600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791558000,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791644400,
+          "routineId" : null
+        },
+        {
+          "day" : 1791730800,
+          "routineId" : null
+        },
+        {
+          "day" : 1791817200,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791903600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791990000,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792076400,
+          "routineId" : null
+        },
+        {
+          "day" : 1792162800,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792249200,
+          "routineId" : null
+        },
+        {
+          "day" : 1792335600,
+          "routineId" : null
+        },
+        {
+          "day" : 1792422000,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792508400,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1792594800,
+          "routineId" : null
+        },
+        {
+          "day" : 1792681200,
+          "routineId" : null
+        },
+        {
+          "day" : 1792767600,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792854000,
+          "routineId" : null
+        },
+        {
+          "day" : 1792940400,
+          "routineId" : null
+        },
+        {
+          "day" : 1793026800,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1793113200,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1793199600,
+          "routineId" : null
+        },
+        {
+          "day" : 1793286000,
+          "routineId" : null
+        },
+        {
+          "day" : 1793372400,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1793458800,
+          "routineId" : null
+        },
+        {
+          "day" : 1793545200,
+          "routineId" : null
+        },
+        {
+          "day" : 1793631600,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1793718000,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1793804400,
+          "routineId" : null
+        },
+        {
+          "day" : 1793890800,
+          "routineId" : null
+        },
+        {
+          "day" : 1793977200,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1794063600,
+          "routineId" : null
+        },
+        {
+          "day" : 1794150000,
+          "routineId" : null
+        }
+      ],
+      "plannedDaysPerWeek" : [
+        {
+          "date" : 1790607600,
+          "days" : [
+
+          ]
+        },
+        {
+          "date" : 1791212400,
+          "days" : [
+            1791169200,
+            1791342000,
+            1791514800
+          ]
+        },
+        {
+          "date" : 1791817200,
+          "days" : [
+            1791774000,
+            1791946800,
+            1792119600
+          ]
+        },
+        {
+          "date" : 1792422000,
+          "days" : [
+            1792378800,
+            1792465200,
+            1792724400
+          ]
+        },
+        {
+          "date" : 1793026800,
+          "days" : [
+            1792983600,
+            1793070000,
+            1793329200
+          ]
+        },
+        {
+          "date" : 1793631600,
+          "days" : [
+            1793588400,
+            1793674800,
+            1793934000
+          ]
+        }
+      ],
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    },
+    {
+      "currentAssignments" : {
+        "2" : "00000000-0000-0000-0000-00000000000A",
+        "5" : "00000000-0000-0000-0000-00000000000B"
+      },
+      "entries" : [
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000064",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 2
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000065",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 4
+        },
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000066",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1791169200,
+          "weekday" : 6
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-00000000012D",
+          "validFrom" : 1792378800,
+          "weekday" : 1
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-00000000012E",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1792378800,
+          "weekday" : 2
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-00000000012F",
+          "validFrom" : 1792378800,
+          "weekday" : 3
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-000000000130",
+          "validFrom" : 1792378800,
+          "weekday" : 4
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-000000000131",
+          "routineId" : "00000000-0000-0000-0000-00000000000B",
+          "validFrom" : 1792378800,
+          "weekday" : 5
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-000000000132",
+          "validFrom" : 1792378800,
+          "weekday" : 6
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-000000000133",
+          "validFrom" : 1792378800,
+          "weekday" : 7
+        }
+      ],
+      "firstWeekday" : 2,
+      "name" : "weekly plan snapshot",
+      "planned" : [
+        {
+          "day" : 1790607600,
+          "routineId" : null
+        },
+        {
+          "day" : 1790694000,
+          "routineId" : null
+        },
+        {
+          "day" : 1790780400,
+          "routineId" : null
+        },
+        {
+          "day" : 1790866800,
+          "routineId" : null
+        },
+        {
+          "day" : 1790953200,
+          "routineId" : null
+        },
+        {
+          "day" : 1791039600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791126000,
+          "routineId" : null
+        },
+        {
+          "day" : 1791212400,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791298800,
+          "routineId" : null
+        },
+        {
+          "day" : 1791385200,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791471600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791558000,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791644400,
+          "routineId" : null
+        },
+        {
+          "day" : 1791730800,
+          "routineId" : null
+        },
+        {
+          "day" : 1791817200,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1791903600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791990000,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792076400,
+          "routineId" : null
+        },
+        {
+          "day" : 1792162800,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792249200,
+          "routineId" : null
+        },
+        {
+          "day" : 1792335600,
+          "routineId" : null
+        },
+        {
+          "day" : 1792422000,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1792508400,
+          "routineId" : null
+        },
+        {
+          "day" : 1792594800,
+          "routineId" : null
+        },
+        {
+          "day" : 1792681200,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1792767600,
+          "routineId" : null
+        },
+        {
+          "day" : 1792854000,
+          "routineId" : null
+        },
+        {
+          "day" : 1792940400,
+          "routineId" : null
+        },
+        {
+          "day" : 1793026800,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1793113200,
+          "routineId" : null
+        },
+        {
+          "day" : 1793199600,
+          "routineId" : null
+        },
+        {
+          "day" : 1793286000,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1793372400,
+          "routineId" : null
+        },
+        {
+          "day" : 1793458800,
+          "routineId" : null
+        },
+        {
+          "day" : 1793545200,
+          "routineId" : null
+        },
+        {
+          "day" : 1793631600,
+          "routineId" : "00000000-0000-0000-0000-00000000000A"
+        },
+        {
+          "day" : 1793718000,
+          "routineId" : null
+        },
+        {
+          "day" : 1793804400,
+          "routineId" : null
+        },
+        {
+          "day" : 1793890800,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1793977200,
+          "routineId" : null
+        },
+        {
+          "day" : 1794063600,
+          "routineId" : null
+        },
+        {
+          "day" : 1794150000,
+          "routineId" : null
+        }
+      ],
+      "plannedDaysPerWeek" : [
+        {
+          "date" : 1790607600,
+          "days" : [
+
+          ]
+        },
+        {
+          "date" : 1791212400,
+          "days" : [
+            1791169200,
+            1791342000,
+            1791514800
+          ]
+        },
+        {
+          "date" : 1791817200,
+          "days" : [
+            1791774000,
+            1791946800,
+            1792119600
+          ]
+        },
+        {
+          "date" : 1792422000,
+          "days" : [
+            1792378800,
+            1792638000
+          ]
+        },
+        {
+          "date" : 1793026800,
+          "days" : [
+            1792983600,
+            1793242800
+          ]
+        },
+        {
+          "date" : 1793631600,
+          "days" : [
+            1793588400,
+            1793847600
+          ]
+        }
+      ],
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    },
+    {
+      "currentAssignments" : {
+        "4" : "00000000-0000-0000-0000-00000000000B"
+      },
+      "entries" : [
+        {
+          "createdAt" : 1790866800,
+          "id" : "00000000-0000-0000-0000-000000000190",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1793588400,
+          "weekday" : 2
+        },
+        {
+          "createdAt" : 1790953200,
+          "id" : "00000000-0000-0000-0000-000000000191",
+          "validFrom" : 1791255600,
+          "weekday" : 2
+        },
+        {
+          "createdAt" : 1790953200,
+          "id" : "00000000-0000-0000-0000-000000000192",
+          "routineId" : "00000000-0000-0000-0000-00000000000B",
+          "validFrom" : 1791255600,
+          "weekday" : 4
+        }
+      ],
+      "firstWeekday" : 2,
+      "name" : "latest created wins",
+      "planned" : [
+        {
+          "day" : 1790607600,
+          "routineId" : null
+        },
+        {
+          "day" : 1790694000,
+          "routineId" : null
+        },
+        {
+          "day" : 1790780400,
+          "routineId" : null
+        },
+        {
+          "day" : 1790866800,
+          "routineId" : null
+        },
+        {
+          "day" : 1790953200,
+          "routineId" : null
+        },
+        {
+          "day" : 1791039600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791126000,
+          "routineId" : null
+        },
+        {
+          "day" : 1791212400,
+          "routineId" : null
+        },
+        {
+          "day" : 1791298800,
+          "routineId" : null
+        },
+        {
+          "day" : 1791385200,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1791471600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791558000,
+          "routineId" : null
+        },
+        {
+          "day" : 1791644400,
+          "routineId" : null
+        },
+        {
+          "day" : 1791730800,
+          "routineId" : null
+        },
+        {
+          "day" : 1791817200,
+          "routineId" : null
+        },
+        {
+          "day" : 1791903600,
+          "routineId" : null
+        },
+        {
+          "day" : 1791990000,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1792076400,
+          "routineId" : null
+        },
+        {
+          "day" : 1792162800,
+          "routineId" : null
+        },
+        {
+          "day" : 1792249200,
+          "routineId" : null
+        },
+        {
+          "day" : 1792335600,
+          "routineId" : null
+        },
+        {
+          "day" : 1792422000,
+          "routineId" : null
+        },
+        {
+          "day" : 1792508400,
+          "routineId" : null
+        },
+        {
+          "day" : 1792594800,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1792681200,
+          "routineId" : null
+        },
+        {
+          "day" : 1792767600,
+          "routineId" : null
+        },
+        {
+          "day" : 1792854000,
+          "routineId" : null
+        },
+        {
+          "day" : 1792940400,
+          "routineId" : null
+        },
+        {
+          "day" : 1793026800,
+          "routineId" : null
+        },
+        {
+          "day" : 1793113200,
+          "routineId" : null
+        },
+        {
+          "day" : 1793199600,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1793286000,
+          "routineId" : null
+        },
+        {
+          "day" : 1793372400,
+          "routineId" : null
+        },
+        {
+          "day" : 1793458800,
+          "routineId" : null
+        },
+        {
+          "day" : 1793545200,
+          "routineId" : null
+        },
+        {
+          "day" : 1793631600,
+          "routineId" : null
+        },
+        {
+          "day" : 1793718000,
+          "routineId" : null
+        },
+        {
+          "day" : 1793804400,
+          "routineId" : "00000000-0000-0000-0000-00000000000B"
+        },
+        {
+          "day" : 1793890800,
+          "routineId" : null
+        },
+        {
+          "day" : 1793977200,
+          "routineId" : null
+        },
+        {
+          "day" : 1794063600,
+          "routineId" : null
+        },
+        {
+          "day" : 1794150000,
+          "routineId" : null
+        }
+      ],
+      "plannedDaysPerWeek" : [
+        {
+          "date" : 1790607600,
+          "days" : [
+
+          ]
+        },
+        {
+          "date" : 1791212400,
+          "days" : [
+            1791342000
+          ]
+        },
+        {
+          "date" : 1791817200,
+          "days" : [
+            1791946800
+          ]
+        },
+        {
+          "date" : 1792422000,
+          "days" : [
+            1792551600
+          ]
+        },
+        {
+          "date" : 1793026800,
+          "days" : [
+            1793156400
+          ]
+        },
+        {
+          "date" : 1793631600,
+          "days" : [
+            1793761200
+          ]
+        }
+      ],
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    }
+  ],
+  "trainingDays" : [
+    {
+      "days" : [
+        1790823600,
+        1791169200,
+        1791342000,
+        1791514800,
+        1791774000,
+        1791860400,
+        1792206000,
+        1792378800,
+        1792983600,
+        1793156400,
+        1793329200,
+        1793588400
+      ],
+      "minSets" : 3,
+      "sessions" : [
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000001",
+          "start" : 1791234000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000002",
+          "start" : 1791406800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000003",
+          "start" : 1791579600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000004",
+          "start" : 1791838800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000005",
+          "start" : 1791925200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000006",
+          "start" : 1792242000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000007",
+          "start" : 1792443600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 1,
+          "id" : "00000000-0000-0000-0000-000000000008",
+          "start" : 1792616400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000009",
+          "start" : 1793048400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000A",
+          "start" : 1793221200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000B",
+          "start" : 1793394000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000C",
+          "start" : 1793653200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-00000000000D",
+          "start" : 1793660400,
+          "status" : "discarded"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000014",
+          "start" : 1790852400,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000015",
+          "start" : 1790892000,
+          "status" : "completed"
+        }
+      ],
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    }
+  ],
+  "validSession" : [
+    {
+      "effectiveSets" : 3,
+      "minSets" : 3,
+      "status" : "completed",
+      "valid" : true
+    },
+    {
+      "effectiveSets" : 2,
+      "minSets" : 3,
+      "status" : "completed",
+      "valid" : false
+    },
+    {
+      "effectiveSets" : 9,
+      "minSets" : 3,
+      "status" : "active",
+      "valid" : false
+    },
+    {
+      "effectiveSets" : 9,
+      "minSets" : 3,
+      "status" : "discarded",
+      "valid" : false
+    },
+    {
+      "effectiveSets" : 9,
+      "minSets" : 3,
+      "status" : "paused",
+      "valid" : false
+    },
+    {
+      "effectiveSets" : 1,
+      "minSets" : 0,
+      "status" : "completed",
+      "valid" : true
+    }
+  ],
+  "weeklyGoal" : [
+    {
+      "done" : 5,
+      "fraction" : 1,
+      "goal" : 3,
+      "goalUsed" : 3,
+      "minSets" : 3,
+      "now" : 1792191600,
+      "sessions" : [
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000000",
+          "start" : 1791838800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000001",
+          "start" : 1791925200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000002",
+          "start" : 1792011600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000003",
+          "start" : 1792098000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000004",
+          "start" : 1792184400,
+          "status" : "completed"
+        }
+      ],
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    },
+    {
+      "done" : 5,
+      "fraction" : 0.7142857142857143,
+      "goal" : 7,
+      "goalUsed" : 7,
+      "minSets" : 3,
+      "now" : 1792018800,
+      "sessions" : [
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000000",
+          "start" : 1791838800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000001",
+          "start" : 1791925200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000002",
+          "start" : 1792011600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000003",
+          "start" : 1792098000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000004",
+          "start" : 1792184400,
+          "status" : "completed"
+        }
+      ],
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    },
+    {
+      "done" : 0,
+      "fraction" : 0,
+      "goal" : 0,
+      "goalUsed" : 1,
+      "minSets" : 3,
+      "now" : 1792450800,
+      "sessions" : [
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000000",
+          "start" : 1791838800,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000001",
+          "start" : 1791925200,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000002",
+          "start" : 1792011600,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000003",
+          "start" : 1792098000,
+          "status" : "completed"
+        },
+        {
+          "effectiveSets" : 9,
+          "id" : "00000000-0000-0000-0000-000000000004",
+          "start" : 1792184400,
+          "status" : "completed"
+        }
+      ],
+      "timeZone" : "America\/Argentina\/Buenos_Aires"
+    }
+  ],
+  "weeklyPlanEntries" : [
+    {
+      "assignments" : {
+        "2" : "00000000-0000-0000-0000-00000000000A",
+        "5" : "00000000-0000-0000-0000-00000000000B"
+      },
+      "createdAt" : 1792411200,
+      "entries" : [
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-00000000012D",
+          "validFrom" : 1792378800,
+          "weekday" : 1
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-00000000012E",
+          "routineId" : "00000000-0000-0000-0000-00000000000A",
+          "validFrom" : 1792378800,
+          "weekday" : 2
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-00000000012F",
+          "validFrom" : 1792378800,
+          "weekday" : 3
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-000000000130",
+          "validFrom" : 1792378800,
+          "weekday" : 4
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-000000000131",
+          "routineId" : "00000000-0000-0000-0000-00000000000B",
+          "validFrom" : 1792378800,
+          "weekday" : 5
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-000000000132",
+          "validFrom" : 1792378800,
+          "weekday" : 6
+        },
+        {
+          "createdAt" : 1792411200,
+          "id" : "00000000-0000-0000-0000-000000000133",
+          "validFrom" : 1792378800,
+          "weekday" : 7
+        }
+      ],
+      "firstId" : 301,
+      "firstWeekday" : 2,
+      "timeZone" : "America\/Argentina\/Buenos_Aires",
+      "validFrom" : 1792411200
+    }
+  ]
+}

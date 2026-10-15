@@ -1,0 +1,1996 @@
+{
+  "muscleVolume" : [
+    {
+      "indirectFactor" : 0.5,
+      "result" : [
+        {
+          "directSets" : 3,
+          "frequencyDays" : 1,
+          "indirectSets" : 1,
+          "muscle" : "chest"
+        },
+        {
+          "directSets" : 0,
+          "frequencyDays" : 0,
+          "indirectSets" : 0.9,
+          "muscle" : "frontDelts"
+        },
+        {
+          "directSets" : 2,
+          "frequencyDays" : 1,
+          "indirectSets" : 1.5,
+          "muscle" : "triceps"
+        }
+      ],
+      "timeZone" : "UTC",
+      "work" : [
+        {
+          "performance" : {
+            "context" : {
+              "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+              "loadMode" : "total"
+            },
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+            "isAtypical" : false,
+            "measurement" : "weightReps",
+            "sessionId" : "00000000-0000-0000-0000-000000001001",
+            "sessionStart" : 1767636000,
+            "sessionStatus" : "completed",
+            "sets" : [
+              {
+                "excludedFromEstimates" : false,
+                "index" : 0,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 60
+              },
+              {
+                "excludedFromEstimates" : false,
+                "index" : 1,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 60
+              },
+              {
+                "excludedFromEstimates" : false,
+                "index" : 2,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 60
+              }
+            ]
+          },
+          "primary" : [
+            "chest"
+          ],
+          "secondary" : [
+            {
+              "muscle" : "triceps"
+            },
+            {
+              "factor" : 0.3,
+              "muscle" : "frontDelts"
+            }
+          ]
+        },
+        {
+          "performance" : {
+            "context" : {
+              "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+              "loadMode" : "total"
+            },
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+            "isAtypical" : false,
+            "measurement" : "weightReps",
+            "sessionId" : "00000000-0000-0000-0000-000000001002",
+            "sessionStart" : 1767808800,
+            "sessionStatus" : "completed",
+            "sets" : [
+              {
+                "excludedFromEstimates" : false,
+                "index" : 0,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 0
+              },
+              {
+                "excludedFromEstimates" : false,
+                "index" : 1,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 0
+              }
+            ]
+          },
+          "primary" : [
+            "triceps"
+          ],
+          "secondary" : [
+            {
+              "muscle" : "chest"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "indirectFactor" : 0.5,
+      "result" : [
+        {
+          "directSets" : 1,
+          "frequencyDays" : 1,
+          "indirectSets" : 0,
+          "muscle" : "chest"
+        }
+      ],
+      "timeZone" : "UTC",
+      "work" : [
+        {
+          "performance" : {
+            "context" : {
+              "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+              "loadMode" : "total"
+            },
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+            "isAtypical" : false,
+            "measurement" : "weightReps",
+            "sessionId" : "00000000-0000-0000-0000-000000001001",
+            "sessionStart" : 1767636000,
+            "sessionStatus" : "completed",
+            "sets" : [
+              {
+                "excludedFromEstimates" : false,
+                "index" : 0,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 60
+              },
+              {
+                "excludedFromEstimates" : false,
+                "index" : 1,
+                "kind" : "warmup",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 20
+              }
+            ]
+          },
+          "primary" : [
+            "chest"
+          ],
+          "secondary" : [
+            {
+              "muscle" : "chest"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "indirectFactor" : 0.25,
+      "result" : [
+        {
+          "directSets" : 3,
+          "frequencyDays" : 1,
+          "indirectSets" : 0.5,
+          "muscle" : "chest"
+        },
+        {
+          "directSets" : 0,
+          "frequencyDays" : 0,
+          "indirectSets" : 0.9,
+          "muscle" : "frontDelts"
+        },
+        {
+          "directSets" : 2,
+          "frequencyDays" : 1,
+          "indirectSets" : 0.75,
+          "muscle" : "triceps"
+        }
+      ],
+      "timeZone" : "UTC",
+      "work" : [
+        {
+          "performance" : {
+            "context" : {
+              "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+              "loadMode" : "total"
+            },
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+            "isAtypical" : false,
+            "measurement" : "weightReps",
+            "sessionId" : "00000000-0000-0000-0000-000000001001",
+            "sessionStart" : 1767636000,
+            "sessionStatus" : "completed",
+            "sets" : [
+              {
+                "excludedFromEstimates" : false,
+                "index" : 0,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 60
+              },
+              {
+                "excludedFromEstimates" : false,
+                "index" : 1,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 60
+              },
+              {
+                "excludedFromEstimates" : false,
+                "index" : 2,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 60
+              }
+            ]
+          },
+          "primary" : [
+            "chest"
+          ],
+          "secondary" : [
+            {
+              "muscle" : "triceps"
+            },
+            {
+              "factor" : 0.3,
+              "muscle" : "frontDelts"
+            }
+          ]
+        },
+        {
+          "performance" : {
+            "context" : {
+              "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+              "loadMode" : "total"
+            },
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+            "isAtypical" : false,
+            "measurement" : "weightReps",
+            "sessionId" : "00000000-0000-0000-0000-000000001002",
+            "sessionStart" : 1767808800,
+            "sessionStatus" : "completed",
+            "sets" : [
+              {
+                "excludedFromEstimates" : false,
+                "index" : 0,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 0
+              },
+              {
+                "excludedFromEstimates" : false,
+                "index" : 1,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 0
+              }
+            ]
+          },
+          "primary" : [
+            "triceps"
+          ],
+          "secondary" : [
+            {
+              "muscle" : "chest"
+            }
+          ]
+        },
+        {
+          "performance" : {
+            "context" : {
+              "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+              "loadMode" : "total"
+            },
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002003",
+            "isAtypical" : false,
+            "measurement" : "weightReps",
+            "sessionId" : "00000000-0000-0000-0000-000000001003",
+            "sessionStart" : 1767722400,
+            "sessionStatus" : "discarded",
+            "sets" : [
+              {
+                "excludedFromEstimates" : false,
+                "index" : 0,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 50
+              },
+              {
+                "excludedFromEstimates" : false,
+                "index" : 1,
+                "kind" : "working",
+                "reps" : 10,
+                "status" : "completed",
+                "weight" : 50
+              }
+            ]
+          },
+          "primary" : [
+            "quads"
+          ],
+          "secondary" : [
+
+          ]
+        }
+      ]
+    }
+  ],
+  "oneRepMaxBest" : [
+    {
+      "best" : 116.66666666666667,
+      "performance" : {
+        "context" : {
+          "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+          "loadMode" : "total"
+        },
+        "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+        "isAtypical" : false,
+        "measurement" : "weightReps",
+        "sessionId" : "00000000-0000-0000-0000-000000001001",
+        "sessionStart" : 1767636000,
+        "sessionStatus" : "completed",
+        "sets" : [
+          {
+            "excludedFromEstimates" : false,
+            "index" : 0,
+            "kind" : "working",
+            "reps" : 5,
+            "status" : "completed",
+            "weight" : 100
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 1,
+            "kind" : "working",
+            "reps" : 3,
+            "status" : "completed",
+            "weight" : 100
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 2,
+            "kind" : "warmup",
+            "reps" : 1,
+            "status" : "completed",
+            "weight" : 140
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 3,
+            "kind" : "working",
+            "reps" : 1,
+            "status" : "pending",
+            "weight" : 150
+          },
+          {
+            "excludedFromEstimates" : true,
+            "index" : 4,
+            "kind" : "working",
+            "reps" : 1,
+            "status" : "completed",
+            "weight" : 130
+          }
+        ]
+      },
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      }
+    }
+  ],
+  "oneRepMaxEstimate" : [
+    {
+      "estimate" : 100,
+      "reps" : 1,
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      },
+      "weight" : 100
+    },
+    {
+      "estimate" : 116.66666666666667,
+      "reps" : 5,
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      },
+      "weight" : 100
+    },
+    {
+      "estimate" : 80,
+      "reps" : 10,
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      },
+      "weight" : 60
+    },
+    {
+      "estimate" : 88,
+      "reps" : 3,
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      },
+      "weight" : 80
+    },
+    {
+      "estimate" : null,
+      "reps" : 11,
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      },
+      "weight" : 60
+    },
+    {
+      "estimate" : 84,
+      "reps" : 12,
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 12
+      },
+      "weight" : 60
+    },
+    {
+      "estimate" : null,
+      "reps" : 5,
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      },
+      "weight" : 0
+    },
+    {
+      "estimate" : null,
+      "reps" : 0,
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      },
+      "weight" : 60
+    },
+    {
+      "estimate" : 100,
+      "reps" : 1,
+      "settings" : {
+        "formula" : "brzycki",
+        "maxReps" : 10
+      },
+      "weight" : 100
+    },
+    {
+      "estimate" : 112.5,
+      "reps" : 5,
+      "settings" : {
+        "formula" : "brzycki",
+        "maxReps" : 10
+      },
+      "weight" : 100
+    },
+    {
+      "estimate" : 80,
+      "reps" : 10,
+      "settings" : {
+        "formula" : "brzycki",
+        "maxReps" : 10
+      },
+      "weight" : 60
+    },
+    {
+      "estimate" : 79.16666666666666,
+      "reps" : 8,
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      },
+      "weight" : 62.5
+    }
+  ],
+  "oneRepMaxRaw" : [
+    {
+      "formula" : "brzycki",
+      "raw" : null,
+      "reps" : 37,
+      "weight" : 60
+    },
+    {
+      "formula" : "brzycki",
+      "raw" : 2160,
+      "reps" : 36,
+      "weight" : 60
+    },
+    {
+      "formula" : "epley",
+      "raw" : 139.99999999999997,
+      "reps" : 40,
+      "weight" : 60
+    },
+    {
+      "formula" : "epley",
+      "raw" : null,
+      "reps" : 3,
+      "weight" : -5
+    }
+  ],
+  "records" : [
+    {
+      "performances" : [
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001001",
+          "sessionStart" : 1767636000,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001002",
+          "sessionStart" : 1767895200,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 62.5
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 62.5
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 7,
+              "status" : "completed",
+              "weight" : 62.5
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002003",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001003",
+          "sessionStart" : 1768154400,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 62.5
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 62.5
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 62.5
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002004",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001004",
+          "sessionStart" : 1768413600,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 12,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 11,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        }
+      ],
+      "result" : {
+        "bestEstimatedOneRepMax" : {
+          "date" : 1767636000,
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+          "isEstimated" : true,
+          "kind" : "bestEstimatedOneRepMax",
+          "reps" : 10,
+          "sessionId" : "00000000-0000-0000-0000-000000001001",
+          "setIndex" : 0,
+          "value" : 80,
+          "weight" : 60
+        },
+        "history" : [
+          {
+            "date" : 1767636000,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+            "isEstimated" : false,
+            "kind" : "maxWeight",
+            "reps" : 10,
+            "sessionId" : "00000000-0000-0000-0000-000000001001",
+            "setIndex" : 0,
+            "value" : 60,
+            "weight" : 60
+          },
+          {
+            "date" : 1767636000,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+            "isEstimated" : true,
+            "kind" : "bestEstimatedOneRepMax",
+            "reps" : 10,
+            "sessionId" : "00000000-0000-0000-0000-000000001001",
+            "setIndex" : 0,
+            "value" : 80,
+            "weight" : 60
+          },
+          {
+            "date" : 1767636000,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+            "isEstimated" : false,
+            "kind" : "maxSessionVolume",
+            "sessionId" : "00000000-0000-0000-0000-000000001001",
+            "value" : 1800
+          },
+          {
+            "date" : 1767895200,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+            "isEstimated" : false,
+            "kind" : "maxWeight",
+            "reps" : 8,
+            "sessionId" : "00000000-0000-0000-0000-000000001002",
+            "setIndex" : 0,
+            "value" : 62.5,
+            "weight" : 62.5
+          },
+          {
+            "date" : 1768413600,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002004",
+            "isEstimated" : false,
+            "kind" : "maxSessionVolume",
+            "sessionId" : "00000000-0000-0000-0000-000000001004",
+            "value" : 1980
+          }
+        ],
+        "maxRepsAtWeight" : [
+          {
+            "date" : 1768413600,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002004",
+            "isEstimated" : false,
+            "kind" : "maxRepsAtWeight",
+            "reps" : 12,
+            "sessionId" : "00000000-0000-0000-0000-000000001004",
+            "setIndex" : 0,
+            "value" : 12,
+            "weight" : 60
+          },
+          {
+            "date" : 1767895200,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+            "isEstimated" : false,
+            "kind" : "maxRepsAtWeight",
+            "reps" : 8,
+            "sessionId" : "00000000-0000-0000-0000-000000001002",
+            "setIndex" : 0,
+            "value" : 8,
+            "weight" : 62.5
+          }
+        ],
+        "maxSessionVolume" : {
+          "date" : 1768413600,
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002004",
+          "isEstimated" : false,
+          "kind" : "maxSessionVolume",
+          "sessionId" : "00000000-0000-0000-0000-000000001004",
+          "value" : 1980
+        },
+        "maxWeight" : {
+          "date" : 1767895200,
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+          "isEstimated" : false,
+          "kind" : "maxWeight",
+          "reps" : 8,
+          "sessionId" : "00000000-0000-0000-0000-000000001002",
+          "setIndex" : 0,
+          "value" : 62.5,
+          "weight" : 62.5
+        }
+      },
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      }
+    },
+    {
+      "performances" : [
+
+      ],
+      "result" : {
+        "history" : [
+
+        ],
+        "maxRepsAtWeight" : [
+
+        ]
+      },
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      }
+    },
+    {
+      "performances" : [
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001001",
+          "sessionStart" : 1767636000,
+          "sessionStatus" : "discarded",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 1,
+              "status" : "completed",
+              "weight" : 200
+            }
+          ]
+        }
+      ],
+      "result" : {
+        "history" : [
+
+        ],
+        "maxRepsAtWeight" : [
+
+        ]
+      },
+      "settings" : {
+        "formula" : "epley",
+        "maxReps" : 10
+      }
+    },
+    {
+      "performances" : [
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002004",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001004",
+          "sessionStart" : 1768413600,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 12,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 11,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002003",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001003",
+          "sessionStart" : 1768154400,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 62.5
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 62.5
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 62.5
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001002",
+          "sessionStart" : 1767895200,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 62.5
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 62.5
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 7,
+              "status" : "completed",
+              "weight" : 62.5
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001001",
+          "sessionStart" : 1767636000,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        }
+      ],
+      "result" : {
+        "bestEstimatedOneRepMax" : {
+          "date" : 1768413600,
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002004",
+          "isEstimated" : true,
+          "kind" : "bestEstimatedOneRepMax",
+          "reps" : 12,
+          "sessionId" : "00000000-0000-0000-0000-000000001004",
+          "setIndex" : 0,
+          "value" : 86.4,
+          "weight" : 60
+        },
+        "history" : [
+          {
+            "date" : 1767636000,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+            "isEstimated" : false,
+            "kind" : "maxWeight",
+            "reps" : 10,
+            "sessionId" : "00000000-0000-0000-0000-000000001001",
+            "setIndex" : 0,
+            "value" : 60,
+            "weight" : 60
+          },
+          {
+            "date" : 1767636000,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+            "isEstimated" : true,
+            "kind" : "bestEstimatedOneRepMax",
+            "reps" : 10,
+            "sessionId" : "00000000-0000-0000-0000-000000001001",
+            "setIndex" : 0,
+            "value" : 80,
+            "weight" : 60
+          },
+          {
+            "date" : 1767636000,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+            "isEstimated" : false,
+            "kind" : "maxSessionVolume",
+            "sessionId" : "00000000-0000-0000-0000-000000001001",
+            "value" : 1800
+          },
+          {
+            "date" : 1767895200,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+            "isEstimated" : false,
+            "kind" : "maxWeight",
+            "reps" : 8,
+            "sessionId" : "00000000-0000-0000-0000-000000001002",
+            "setIndex" : 0,
+            "value" : 62.5,
+            "weight" : 62.5
+          },
+          {
+            "date" : 1768413600,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002004",
+            "isEstimated" : true,
+            "kind" : "bestEstimatedOneRepMax",
+            "reps" : 12,
+            "sessionId" : "00000000-0000-0000-0000-000000001004",
+            "setIndex" : 0,
+            "value" : 86.4,
+            "weight" : 60
+          },
+          {
+            "date" : 1768413600,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002004",
+            "isEstimated" : false,
+            "kind" : "maxSessionVolume",
+            "sessionId" : "00000000-0000-0000-0000-000000001004",
+            "value" : 1980
+          }
+        ],
+        "maxRepsAtWeight" : [
+          {
+            "date" : 1768413600,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002004",
+            "isEstimated" : false,
+            "kind" : "maxRepsAtWeight",
+            "reps" : 12,
+            "sessionId" : "00000000-0000-0000-0000-000000001004",
+            "setIndex" : 0,
+            "value" : 12,
+            "weight" : 60
+          },
+          {
+            "date" : 1767895200,
+            "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+            "isEstimated" : false,
+            "kind" : "maxRepsAtWeight",
+            "reps" : 8,
+            "sessionId" : "00000000-0000-0000-0000-000000001002",
+            "setIndex" : 0,
+            "value" : 8,
+            "weight" : 62.5
+          }
+        ],
+        "maxSessionVolume" : {
+          "date" : 1768413600,
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002004",
+          "isEstimated" : false,
+          "kind" : "maxSessionVolume",
+          "sessionId" : "00000000-0000-0000-0000-000000001004",
+          "value" : 1980
+        },
+        "maxWeight" : {
+          "date" : 1767895200,
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+          "isEstimated" : false,
+          "kind" : "maxWeight",
+          "reps" : 8,
+          "sessionId" : "00000000-0000-0000-0000-000000001002",
+          "setIndex" : 0,
+          "value" : 62.5,
+          "weight" : 62.5
+        }
+      },
+      "settings" : {
+        "formula" : "brzycki",
+        "maxReps" : 12
+      }
+    }
+  ],
+  "trendPerformances" : [
+    {
+      "performances" : [
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001001",
+          "sessionStart" : 1767636000,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 11,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 11,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 11,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001002",
+          "sessionStart" : 1767808800,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 12,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 11,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 11,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002003",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001003",
+          "sessionStart" : 1767981600,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 12,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 12,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 12,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        }
+      ],
+      "result" : "progressing"
+    },
+    {
+      "performances" : [
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001001",
+          "sessionStart" : 1767636000,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 9,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 9,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001002",
+          "sessionStart" : 1767808800,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 9,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002003",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001003",
+          "sessionStart" : 1767981600,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 11,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 2,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        }
+      ],
+      "result" : "progressing"
+    },
+    {
+      "performances" : [
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001001",
+          "sessionStart" : 1767636000,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 55
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 10,
+              "status" : "completed",
+              "weight" : 55
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001002",
+          "sessionStart" : 1767808800,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002003",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001003",
+          "sessionStart" : 1767981600,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 6,
+              "status" : "completed",
+              "weight" : 62.5
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 6,
+              "status" : "completed",
+              "weight" : 62.5
+            }
+          ]
+        }
+      ],
+      "result" : "progressing"
+    },
+    {
+      "performances" : [
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001001",
+          "sessionStart" : 1767636000,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 12,
+              "status" : "completed",
+              "weight" : 55
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 12,
+              "status" : "completed",
+              "weight" : 55
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002002",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001002",
+          "sessionStart" : 1767808800,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 60
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 8,
+              "status" : "completed",
+              "weight" : 60
+            }
+          ]
+        },
+        {
+          "context" : {
+            "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+            "loadMode" : "total"
+          },
+          "exerciseLogId" : "00000000-0000-0000-0000-000000002003",
+          "isAtypical" : false,
+          "measurement" : "weightReps",
+          "sessionId" : "00000000-0000-0000-0000-000000001003",
+          "sessionStart" : 1767981600,
+          "sessionStatus" : "completed",
+          "sets" : [
+            {
+              "excludedFromEstimates" : false,
+              "index" : 0,
+              "kind" : "working",
+              "reps" : 6,
+              "status" : "completed",
+              "weight" : 62.5
+            },
+            {
+              "excludedFromEstimates" : false,
+              "index" : 1,
+              "kind" : "working",
+              "reps" : 6,
+              "status" : "completed",
+              "weight" : 62.5
+            }
+          ]
+        }
+      ],
+      "result" : "insufficientData"
+    }
+  ],
+  "trendValues" : [
+    {
+      "result" : "insufficientData",
+      "values" : [
+        100,
+        90
+      ]
+    },
+    {
+      "result" : "insufficientData",
+      "values" : [
+
+      ]
+    },
+    {
+      "result" : "progressing",
+      "values" : [
+        80,
+        82,
+        84,
+        86
+      ]
+    },
+    {
+      "result" : "possiblePlateau",
+      "values" : [
+        80,
+        80.5,
+        80,
+        80.2
+      ]
+    },
+    {
+      "result" : "stable",
+      "values" : [
+        80,
+        86,
+        79,
+        85,
+        80
+      ]
+    },
+    {
+      "result" : "declining",
+      "values" : [
+        86,
+        84,
+        82,
+        80
+      ]
+    },
+    {
+      "result" : "stable",
+      "values" : [
+        84,
+        79.17,
+        81.25
+      ]
+    },
+    {
+      "result" : "insufficientData",
+      "values" : [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "result" : "declining",
+      "values" : [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        40
+      ]
+    }
+  ],
+  "volume" : [
+    {
+      "bodyweight" : null,
+      "performance" : {
+        "context" : {
+          "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+          "loadMode" : "total"
+        },
+        "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+        "isAtypical" : false,
+        "measurement" : "weightReps",
+        "sessionId" : "00000000-0000-0000-0000-000000001001",
+        "sessionStart" : 1767636000,
+        "sessionStatus" : "completed",
+        "sets" : [
+          {
+            "excludedFromEstimates" : false,
+            "index" : 0,
+            "kind" : "working",
+            "reps" : 10,
+            "status" : "completed",
+            "weight" : 60
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 1,
+            "kind" : "working",
+            "reps" : 9,
+            "status" : "completed",
+            "weight" : 60
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 2,
+            "kind" : "working",
+            "reps" : 8,
+            "status" : "completed",
+            "weight" : 60
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 3,
+            "kind" : "warmup",
+            "reps" : 10,
+            "status" : "completed",
+            "weight" : 40
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 4,
+            "kind" : "working",
+            "reps" : 10,
+            "status" : "pending",
+            "weight" : 60
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 5,
+            "kind" : "dropSet",
+            "reps" : 6,
+            "status" : "completed",
+            "weight" : 40
+          }
+        ]
+      },
+      "result" : {
+        "basis" : "external",
+        "effectiveSets" : 4,
+        "reps" : 33,
+        "timeUnderLoadSeconds" : 0,
+        "total" : 1860
+      }
+    },
+    {
+      "bodyweight" : null,
+      "performance" : {
+        "context" : {
+          "exerciseId" : "00000000-0000-0000-0000-0000000000C1",
+          "loadMode" : "perSide"
+        },
+        "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+        "isAtypical" : false,
+        "measurement" : "weightReps",
+        "sessionId" : "00000000-0000-0000-0000-000000001001",
+        "sessionStart" : 1767636000,
+        "sessionStatus" : "completed",
+        "sets" : [
+          {
+            "excludedFromEstimates" : false,
+            "index" : 0,
+            "kind" : "working",
+            "reps" : 10,
+            "status" : "completed",
+            "weight" : 12.5
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 1,
+            "kind" : "working",
+            "reps" : 10,
+            "status" : "completed",
+            "weight" : 12.5
+          }
+        ]
+      },
+      "result" : {
+        "basis" : "external",
+        "effectiveSets" : 2,
+        "perSide" : 250,
+        "reps" : 20,
+        "timeUnderLoadSeconds" : 0,
+        "total" : 500
+      }
+    },
+    {
+      "bodyweight" : 80,
+      "performance" : {
+        "context" : {
+          "exerciseId" : "00000000-0000-0000-0000-00000000009B",
+          "loadMode" : "total"
+        },
+        "exerciseLogId" : "00000000-0000-0000-0000-000000000002",
+        "isAtypical" : false,
+        "measurement" : "bodyweightReps",
+        "sessionId" : "00000000-0000-0000-0000-000000000001",
+        "sessionStart" : 1767636000,
+        "sessionStatus" : "completed",
+        "sets" : [
+          {
+            "addedWeight" : 10,
+            "excludedFromEstimates" : false,
+            "index" : 0,
+            "kind" : "working",
+            "reps" : 10,
+            "status" : "completed"
+          },
+          {
+            "addedWeight" : 10,
+            "excludedFromEstimates" : false,
+            "index" : 1,
+            "kind" : "working",
+            "reps" : 8,
+            "status" : "completed"
+          }
+        ]
+      },
+      "result" : {
+        "basis" : "bodyweightIncluded",
+        "effectiveSets" : 2,
+        "reps" : 18,
+        "timeUnderLoadSeconds" : 0,
+        "total" : 1620
+      }
+    },
+    {
+      "bodyweight" : 80,
+      "performance" : {
+        "context" : {
+          "exerciseId" : "00000000-0000-0000-0000-00000000009B",
+          "loadMode" : "total"
+        },
+        "exerciseLogId" : "00000000-0000-0000-0000-000000000002",
+        "isAtypical" : false,
+        "measurement" : "bodyweightReps",
+        "sessionId" : "00000000-0000-0000-0000-000000000001",
+        "sessionStart" : 1767636000,
+        "sessionStatus" : "completed",
+        "sets" : [
+          {
+            "assistance" : 20,
+            "excludedFromEstimates" : false,
+            "index" : 0,
+            "kind" : "working",
+            "reps" : 10,
+            "status" : "completed"
+          },
+          {
+            "assistance" : 20,
+            "excludedFromEstimates" : false,
+            "index" : 1,
+            "kind" : "working",
+            "reps" : 8,
+            "status" : "completed"
+          }
+        ]
+      },
+      "result" : {
+        "basis" : "bodyweightIncluded",
+        "effectiveSets" : 2,
+        "reps" : 18,
+        "timeUnderLoadSeconds" : 0,
+        "total" : 1080
+      }
+    },
+    {
+      "bodyweight" : null,
+      "performance" : {
+        "context" : {
+          "exerciseId" : "00000000-0000-0000-0000-00000000009B",
+          "loadMode" : "total"
+        },
+        "exerciseLogId" : "00000000-0000-0000-0000-000000000002",
+        "isAtypical" : false,
+        "measurement" : "bodyweightReps",
+        "sessionId" : "00000000-0000-0000-0000-000000000001",
+        "sessionStart" : 1767636000,
+        "sessionStatus" : "completed",
+        "sets" : [
+          {
+            "addedWeight" : 10,
+            "excludedFromEstimates" : false,
+            "index" : 0,
+            "kind" : "working",
+            "reps" : 10,
+            "status" : "completed"
+          },
+          {
+            "addedWeight" : 10,
+            "excludedFromEstimates" : false,
+            "index" : 1,
+            "kind" : "working",
+            "reps" : 8,
+            "status" : "completed"
+          }
+        ]
+      },
+      "result" : {
+        "basis" : "externalOnlyBodyweightUnknown",
+        "effectiveSets" : 2,
+        "reps" : 18,
+        "timeUnderLoadSeconds" : 0,
+        "total" : 180
+      }
+    },
+    {
+      "bodyweight" : null,
+      "performance" : {
+        "context" : {
+          "exerciseId" : "00000000-0000-0000-0000-00000000009B",
+          "loadMode" : "total"
+        },
+        "exerciseLogId" : "00000000-0000-0000-0000-000000000002",
+        "isAtypical" : false,
+        "measurement" : "bodyweightReps",
+        "sessionId" : "00000000-0000-0000-0000-000000000001",
+        "sessionStart" : 1767636000,
+        "sessionStatus" : "completed",
+        "sets" : [
+          {
+            "excludedFromEstimates" : false,
+            "index" : 0,
+            "kind" : "working",
+            "reps" : 10,
+            "status" : "completed"
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 1,
+            "kind" : "working",
+            "reps" : 8,
+            "status" : "completed"
+          }
+        ]
+      },
+      "result" : {
+        "basis" : "externalOnlyBodyweightUnknown",
+        "effectiveSets" : 2,
+        "reps" : 18,
+        "timeUnderLoadSeconds" : 0,
+        "total" : 0
+      }
+    },
+    {
+      "bodyweight" : null,
+      "performance" : {
+        "context" : {
+          "exerciseId" : "00000000-0000-0000-0000-000000000091",
+          "loadMode" : "total"
+        },
+        "exerciseLogId" : "00000000-0000-0000-0000-000000000002",
+        "isAtypical" : false,
+        "measurement" : "duration",
+        "sessionId" : "00000000-0000-0000-0000-000000000001",
+        "sessionStart" : 1767636000,
+        "sessionStatus" : "completed",
+        "sets" : [
+          {
+            "excludedFromEstimates" : false,
+            "index" : 0,
+            "kind" : "working",
+            "seconds" : 45,
+            "status" : "completed"
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 1,
+            "kind" : "working",
+            "seconds" : 40,
+            "status" : "completed"
+          }
+        ]
+      },
+      "result" : {
+        "basis" : "notApplicable",
+        "effectiveSets" : 2,
+        "reps" : 0,
+        "timeUnderLoadSeconds" : 85,
+        "total" : 0
+      }
+    },
+    {
+      "bodyweight" : 80,
+      "performance" : {
+        "context" : {
+          "exerciseId" : "00000000-0000-0000-0000-00000000009B",
+          "loadMode" : "total"
+        },
+        "exerciseLogId" : "00000000-0000-0000-0000-000000000002",
+        "isAtypical" : false,
+        "measurement" : "bodyweightReps",
+        "sessionId" : "00000000-0000-0000-0000-000000000001",
+        "sessionStart" : 1767636000,
+        "sessionStatus" : "completed",
+        "sets" : [
+          {
+            "assistance" : 100,
+            "excludedFromEstimates" : false,
+            "index" : 0,
+            "kind" : "working",
+            "reps" : 10,
+            "status" : "completed"
+          },
+          {
+            "assistance" : 100,
+            "excludedFromEstimates" : false,
+            "index" : 1,
+            "kind" : "working",
+            "reps" : 8,
+            "status" : "completed"
+          }
+        ]
+      },
+      "result" : {
+        "basis" : "bodyweightIncluded",
+        "effectiveSets" : 2,
+        "reps" : 18,
+        "timeUnderLoadSeconds" : 0,
+        "total" : 0
+      }
+    }
+  ]
+}

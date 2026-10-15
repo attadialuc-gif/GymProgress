@@ -1,0 +1,17 @@
+# Dart / Flutter
+.dart_tool/
+.packages
+build/
+pubspec_overrides.yaml
+coverage/
+
+# Signing material never goes to the repo (CI receives it as GitHub secrets)
+*.jks
+*.keystore
+key.properties
+
+# Local outputs
+*.apk
+*.aab
+*.exe
+*.msix

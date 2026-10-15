@@ -21,6 +21,10 @@ let package = Package(
     targets: [
         .target(name: "GymCore"),
         .target(name: "GymStore", dependencies: ["GymCore"], resources: [.process("Resources")]),
+        // Cross-platform fidelity: serializes inputs/outputs of the existing cases as golden JSON
+        // fixtures (crossplatform/fixtures) and verifies imports of exports made by other ports.
+        // Not part of the app; it only calls the public API.
+        .executableTarget(name: "FixtureExporter", dependencies: ["GymCore", "GymStore"]),
         .testTarget(name: "GymCoreTests", dependencies: ["GymCore"]),
         .testTarget(name: "GymStoreTests", dependencies: ["GymStore", "GymCore"]),
     ]

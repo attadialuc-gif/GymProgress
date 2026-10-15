@@ -1,0 +1,245 @@
+{
+  "nextLoad" : [
+    {
+      "availableWeights" : null,
+      "current" : 60,
+      "increment" : 2.5,
+      "next" : 62.5
+    },
+    {
+      "availableWeights" : null,
+      "current" : 60,
+      "increment" : 5,
+      "next" : 65
+    },
+    {
+      "availableWeights" : [
+        60,
+        62,
+        64
+      ],
+      "current" : 60,
+      "increment" : 1,
+      "next" : 62
+    },
+    {
+      "availableWeights" : [
+        60,
+        62,
+        64
+      ],
+      "current" : 64,
+      "increment" : 1,
+      "next" : null
+    },
+    {
+      "availableWeights" : null,
+      "current" : 0.1,
+      "increment" : 0.2,
+      "next" : 0.3
+    },
+    {
+      "availableWeights" : null,
+      "current" : 61.234,
+      "increment" : 2.5,
+      "next" : 63.734
+    }
+  ],
+  "normalize" : [
+    {
+      "key" : 300,
+      "normalized" : 0.3,
+      "value" : 0.30000000000000004
+    },
+    {
+      "key" : 62500,
+      "normalized" : 62.5,
+      "value" : 62.4999999
+    },
+    {
+      "key" : 1000,
+      "normalized" : 1,
+      "value" : 1.0005
+    },
+    {
+      "key" : 0,
+      "normalized" : -0,
+      "value" : -0.0004
+    },
+    {
+      "key" : 1234568,
+      "normalized" : 1234.568,
+      "value" : 1234.5678
+    }
+  ],
+  "sanitize" : [
+    {
+      "config" : {
+        "availableWeights" : null,
+        "increment" : -1,
+        "initialWeight" : null,
+        "reassessAfterDays" : 21,
+        "repMax" : 8,
+        "repMin" : 12,
+        "requiredConsecutiveSessions" : 1,
+        "secondsIncrement" : 5,
+        "secondsMax" : 60,
+        "secondsMin" : 30,
+        "strategy" : "doubleProgression",
+        "targetRIR" : 15,
+        "targetSets" : 0
+      },
+      "sanitized" : {
+        "increment" : 2.5,
+        "reassessAfterDays" : 21,
+        "repMax" : 12,
+        "repMin" : 12,
+        "requiredConsecutiveSessions" : 1,
+        "secondsIncrement" : 5,
+        "secondsMax" : 60,
+        "secondsMin" : 30,
+        "strategy" : "doubleProgression",
+        "targetRIR" : 10,
+        "targetSets" : 1
+      }
+    },
+    {
+      "config" : {
+        "availableWeights" : [
+          60,
+          55,
+          60,
+          -1
+        ],
+        "increment" : "nan",
+        "initialWeight" : -5,
+        "reassessAfterDays" : 0,
+        "repMax" : 200,
+        "repMin" : 0,
+        "requiredConsecutiveSessions" : 0,
+        "secondsIncrement" : 0,
+        "secondsMax" : -5,
+        "secondsMin" : 0,
+        "strategy" : "doubleProgression",
+        "targetRIR" : -3,
+        "targetSets" : 25
+      },
+      "sanitized" : {
+        "availableWeights" : [
+          55,
+          60
+        ],
+        "increment" : 2.5,
+        "reassessAfterDays" : 1,
+        "repMax" : 100,
+        "repMin" : 1,
+        "requiredConsecutiveSessions" : 1,
+        "secondsIncrement" : 1,
+        "secondsMax" : 1,
+        "secondsMin" : 1,
+        "strategy" : "doubleProgression",
+        "targetRIR" : 0,
+        "targetSets" : 20
+      }
+    },
+    {
+      "config" : {
+        "availableWeights" : [
+
+        ],
+        "increment" : 2.5,
+        "initialWeight" : null,
+        "reassessAfterDays" : 21,
+        "repMax" : 12,
+        "repMin" : 8,
+        "requiredConsecutiveSessions" : 1,
+        "secondsIncrement" : 5,
+        "secondsMax" : 60,
+        "secondsMin" : 30,
+        "strategy" : "doubleProgression",
+        "targetRIR" : 2,
+        "targetSets" : 3
+      },
+      "sanitized" : {
+        "increment" : 2.5,
+        "reassessAfterDays" : 21,
+        "repMax" : 12,
+        "repMin" : 8,
+        "requiredConsecutiveSessions" : 1,
+        "secondsIncrement" : 5,
+        "secondsMax" : 60,
+        "secondsMin" : 30,
+        "strategy" : "doubleProgression",
+        "targetRIR" : 2,
+        "targetSets" : 3
+      }
+    },
+    {
+      "config" : {
+        "availableWeights" : null,
+        "increment" : 2.5,
+        "initialWeight" : null,
+        "reassessAfterDays" : 21,
+        "repMax" : 12,
+        "repMin" : 8,
+        "requiredConsecutiveSessions" : 1,
+        "secondsIncrement" : 5,
+        "secondsMax" : 60,
+        "secondsMin" : 30,
+        "strategy" : "doubleProgression",
+        "targetRIR" : 2,
+        "targetSets" : 3
+      },
+      "sanitized" : {
+        "increment" : 2.5,
+        "reassessAfterDays" : 21,
+        "repMax" : 12,
+        "repMin" : 8,
+        "requiredConsecutiveSessions" : 1,
+        "secondsIncrement" : 5,
+        "secondsMax" : 60,
+        "secondsMin" : 30,
+        "strategy" : "doubleProgression",
+        "targetRIR" : 2,
+        "targetSets" : 3
+      }
+    }
+  ],
+  "workingLoad" : [
+    {
+      "performance" : {
+        "context" : {
+          "exerciseId" : "00000000-0000-0000-0000-0000000000B1",
+          "loadMode" : "total"
+        },
+        "exerciseLogId" : "00000000-0000-0000-0000-000000002001",
+        "isAtypical" : false,
+        "measurement" : "weightReps",
+        "sessionId" : "00000000-0000-0000-0000-000000001001",
+        "sessionStart" : 1767636000,
+        "sessionStatus" : "completed",
+        "sets" : [
+          {
+            "excludedFromEstimates" : false,
+            "index" : 0,
+            "kind" : "working",
+            "reps" : 10,
+            "rir" : 2,
+            "status" : "completed",
+            "weight" : 60
+          },
+          {
+            "excludedFromEstimates" : false,
+            "index" : 1,
+            "kind" : "working",
+            "reps" : 8,
+            "rir" : 2,
+            "status" : "completed",
+            "weight" : 62.5
+          }
+        ]
+      },
+      "workingLoad" : 62.5
+    }
+  ]
+}

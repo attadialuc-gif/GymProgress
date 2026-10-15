@@ -1,0 +1,84 @@
+name: test
+
+# Dart/Flutter port (crossplatform/): unit tests against the Swift fixtures on every push.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  dart:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.7
+          cache: true
+      - name: Toolchain
+        run: flutter --version
+      - name: gym_core (engine, metrics, calendar vs. Swift fixtures)
+        working-directory: crossplatform/gym_core
+        run: |
+          set -o pipefail
+          dart pub get
+          dart analyze --fatal-infos
+          dart test -r expanded 2>&1 | tee ../../gym_core-test.log
+      - name: gym_store (persistence, services, store scenarios)
+        working-directory: crossplatform/gym_store
+        run: |
+          set -o pipefail
+          dart pub get
+          dart analyze --fatal-infos
+          dart test -r expanded 2>&1 | tee ../../gym_store-test.log
+      - name: app (widget tests)
+        working-directory: crossplatform/app
+        run: |
+          set -o pipefail
+          flutter pub get
+          flutter analyze
+          flutter test -r expanded 2>&1 | tee ../../app-test.log
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs
+          path: "*-test.log"
+          if-no-files-found: ignore
+
+  # The fixtures are generated from the Swift implementation; they must match what the Swift
+  # code produces today (export_from_swift.json uses random ids and is checked by import instead).
+  fixtures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Swift toolchain
+        run: swift --version
+      - name: Regenerate fixtures
+        working-directory: GymCore
+        run: swift run -c debug FixtureExporter export "$RUNNER_TEMP/fixtures"
+      - name: Compare with committed fixtures
+        run: |
+          python3 - "$RUNNER_TEMP/fixtures" crossplatform/fixtures <<'EOF'
+          import json, os, sys
+          fresh, committed = sys.argv[1], sys.argv[2]
+          names = sorted(set(os.listdir(fresh)) | set(os.listdir(committed)))
+          bad = [n for n in names if n != "export_from_swift.json"
+                 and (not os.path.exists(os.path.join(fresh, n)) or not os.path.exists(os.path.join(committed, n))
+                      or json.load(open(os.path.join(fresh, n))) != json.load(open(os.path.join(committed, n))))]
+          print("stale fixtures:", bad) if bad else print("Fixtures are up to date.")
+          sys.exit(1 if bad else 0)
+          EOF
+      - name: Swift export imports in Swift
+        working-directory: GymCore
+        run: swift run -c debug FixtureExporter verify-import "$RUNNER_TEMP/fixtures/export_from_swift.json"

@@ -31,6 +31,14 @@ docs/                            ENVIRONMENT, ARCHITECTURE, DECISIONS, FORMULAS,
 - Toda decisión no trivial → `docs/DECISIONS.md`. Al cerrar etapa → `docs/PROGRESS.md` + commit.
 - Nada es "terminado" sin ejecutarlo/testearlo. Nunca afirmar que compila o pasa sin correr el comando.
 
+## Port Android/Windows (`crossplatform/`, rama `feat/crossplatform`)
+- Flutter + Dart (D-100). `crossplatform/gym_core` (dominio y motor, Dart puro), `crossplatform/gym_store` (SQLite, repos, servicios, import/export), `crossplatform/app` (UI Flutter, sin lógica de negocio).
+- Fidelidad (D-101): `GymCore/Sources/FixtureExporter` corre la lógica Swift y escribe `crossplatform/fixtures/*.json`; los tests Dart deben coincidir con esos fixtures. Una diferencia es un bug del port salvo que se demuestre un bug en Swift (en ese caso se corrigen ambos, con test y entrada en DECISIONS).
+- Regenerar fixtures (WSL): `cd GymCore && swift run -c debug FixtureExporter export ../crossplatform/fixtures`.
+- Tests Dart (WSL, Flutter en `~/flutter/bin`): `cd crossplatform/gym_core && dart test`; ídem `gym_store`; app: `flutter test`.
+- CI: `test.yml` (cada push), `build-android.yml`, `build-windows.yml`. La app de iOS y `build-ios.yml` no se modifican.
+- Firma Android: keystore fuera del repo, solo como secretos de GitHub. Nunca versionar `*.jks`, `key.properties`, contraseñas ni rutas personales.
+
 ## Reglas permanentes (resumen de la sección 2 de la spec — prioridad máxima)
 1. Prioridades: integridad de datos > sistema de sobrecarga progresiva > velocidad de registro > resto.
 2. Al abrir un ejercicio en sesión, la **tarjeta de recomendación** va arriba de la tabla de series: última sesión comparable (peso y reps por serie), objetivo de hoy (series, rango, RIR), peso/reps recomendados, motivo (1–2 líneas), botones **Aceptar / Modificar / Ignorar**. La decisión se persiste siempre (`RecommendationDecision`) y nunca la pisa un recálculo.

@@ -1,0 +1,15 @@
+name: gym_core
+description: Pure Dart port of GymCore (progression engine, metrics, consistency, dates). No Flutter.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  # IANA time zone database in pure Dart (day/week computations in the user's time zone, DST).
+  timezone: ^0.10.0
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0
