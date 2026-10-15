@@ -117,6 +117,22 @@ struct StreakTests {
         #expect(Schedule.plannedDays(inWeekOf: date(2026, 9, 30, tz: ba), entries: entries, calendar: cal).isEmpty)
     }
 
+    @Test("Weekly plan snapshot: removing a weekday is explicit and leaves the past intact")
+    func weeklyPlanSnapshot() {
+        var counter = 300
+        let change = date(2026, 10, 19, 9, tz: ba)
+        // New plan: only Monday and Thursday.
+        let newPlan = Schedule.weeklyPlanEntries(assignments: [2: routineA, 5: routineB], validFrom: change, createdAt: change, calendar: cal) {
+            counter += 1
+            return Fx.uuid(counter)
+        }
+        #expect(newPlan.count == 7)
+        let entries = monWedFri + newPlan
+        #expect(Schedule.plannedDays(inWeekOf: date(2026, 10, 14, tz: ba), entries: entries, calendar: cal).count == 3)
+        let after = Schedule.plannedDays(inWeekOf: date(2026, 10, 21, tz: ba), entries: entries, calendar: cal)
+        #expect(after.map { cal.weekday(of: $0) } == [2, 5])
+    }
+
     @Test("Mode A: weeks meeting the plan; scheduled rest days are not failures; current week is neutral")
     func weeklyMode() {
         let sessions = [
@@ -186,7 +202,7 @@ struct ParsingTests {
         #expect(WeightParser.parse(text) == expected)
     }
 
-    @Test("Invalid input is rejected", arguments: ["", "abc", "6,2,5", "1.000,5", "-5", "+5", "62 ,5", ".", "1e3"])
+    @Test("Invalid or ambiguous input is rejected", arguments: ["", "abc", "6,2,5", "1.000,5", "-5", "+5", "62 ,5", ".", "1e3", "1.000", "62.500"])
     func rejected(text: String) {
         #expect(WeightParser.parse(text) == nil)
     }

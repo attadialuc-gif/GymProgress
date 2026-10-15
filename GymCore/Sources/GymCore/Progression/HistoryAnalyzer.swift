@@ -9,42 +9,60 @@ public enum HistoryAnalyzer {
     /// Several logs of the same exercise in one session are merged into one performance.
     public static func comparable(_ input: ProgressionInput) -> [ExercisePerformance] {
         let equivalent = ComparabilityResolver(links: input.links).equivalenceClass(of: input.context)
-        return eligible(input).filter { equivalent.contains($0.context.normalized) }
+        // Filter to the equivalence class first, then merge by session: two linked machines used in
+        // the same session are ONE comparable session, never two.
+        let inClass = eligible(input).filter { equivalent.contains($0.context.normalized) }
+        return merged(inClass, bySessionOnly: true)
+            .filter { !$0.progressionSets.isEmpty }
+            .sorted(by: newestFirst)
     }
 
     /// Most recent eligible performance of the same exercise in a context that is *not*
     /// equivalent. Shown only as a "no equivalente" reference.
     public static func nonEquivalentReference(_ input: ProgressionInput) -> ExercisePerformance? {
         let equivalent = ComparabilityResolver(links: input.links).equivalenceClass(of: input.context)
-        return eligible(input).first {
+        let others = eligible(input).filter {
             $0.context.exerciseId == input.context.exerciseId && !equivalent.contains($0.context.normalized)
         }
+        return merged(others, bySessionOnly: false)
+            .filter { !$0.progressionSets.isEmpty }
+            .sorted(by: newestFirst)
+            .first
     }
 
     private static func eligible(_ input: ProgressionInput) -> [ExercisePerformance] {
-        let filtered = input.history.filter { perf in
+        input.history.filter { perf in
             perf.sessionStatus == .completed
                 && !perf.isAtypical
                 && perf.sessionId != input.excludingSessionId
                 && perf.sessionStart <= input.now
                 && perf.measurement == input.measurement
         }
-        return merged(filtered)
-            .filter { !$0.progressionSets.isEmpty }
-            .sorted(by: newestFirst)
     }
 
-    /// Merges logs that share session and context; sets keep a deterministic order.
-    static func merged(_ performances: [ExercisePerformance]) -> [ExercisePerformance] {
-        struct Key: Hashable { let session: UUID; let context: ComparabilityContext }
-        let groups = Dictionary(grouping: performances) { Key(session: $0.sessionId, context: $0.context.normalized) }
+    /// Merges logs of the same session (and, unless `bySessionOnly`, the same context). Logs are
+    /// concatenated in execution order (first completed set), sets inside a log by index.
+    static func merged(_ performances: [ExercisePerformance], bySessionOnly: Bool) -> [ExercisePerformance] {
+        struct Key: Hashable { let session: UUID; let context: ComparabilityContext? }
+        let groups = Dictionary(grouping: performances) {
+            Key(session: $0.sessionId, context: bySessionOnly ? nil : $0.context.normalized)
+        }
         return groups.values.map { group -> ExercisePerformance in
-            let ordered = group.sorted { $0.exerciseLogId.uuidString < $1.exerciseLogId.uuidString }
+            let ordered = group.sorted { a, b in
+                let fa = firstCompletion(a), fb = firstCompletion(b)
+                if fa != fb { return fa < fb }
+                if a.context.sortKey != b.context.sortKey { return a.context.sortKey < b.context.sortKey }
+                return a.exerciseLogId.uuidString < b.exerciseLogId.uuidString
+            }
             var base = ordered[0]
             let sets = ordered.flatMap { perf in perf.sets.sorted(by: setOrder) }
             base.sets = sets.enumerated().map { i, s in var copy = s; copy.index = i; return copy }
             return base
         }
+    }
+
+    private static func firstCompletion(_ p: ExercisePerformance) -> Date {
+        p.sets.compactMap(\.completedAt).min() ?? .distantFuture
     }
 
     static func newestFirst(_ a: ExercisePerformance, _ b: ExercisePerformance) -> Bool {
@@ -59,8 +77,14 @@ public enum HistoryAnalyzer {
         let ac = a.completedAt ?? .distantFuture
         let bc = b.completedAt ?? .distantFuture
         if ac != bc { return ac < bc }
-        if a.weight != b.weight { return (a.weight ?? -1) < (b.weight ?? -1) }
-        return (a.reps ?? -1) < (b.reps ?? -1)
+        // Total order: identical-looking sets with different effort must not depend on input order.
+        let ka = (a.kind.rawValue, a.status.rawValue, a.weight ?? -1, a.reps ?? -1, a.seconds ?? -1)
+        let kb = (b.kind.rawValue, b.status.rawValue, b.weight ?? -1, b.reps ?? -1, b.seconds ?? -1)
+        if ka != kb { return ka < kb }
+        let ea = (a.rir ?? -1, a.rpe ?? -1, a.addedWeight ?? -1, a.assistance ?? -1)
+        let eb = (b.rir ?? -1, b.rpe ?? -1, b.addedWeight ?? -1, b.assistance ?? -1)
+        if ea != eb { return ea < eb }
+        return !a.excludedFromEstimates && b.excludedFromEstimates
     }
 
     /// Working load: the most frequent load among progression sets; ties → the heavier load.

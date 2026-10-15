@@ -27,8 +27,8 @@ Orden de evaluación (ver D-010):
    - racha de sesiones consecutivas al tope con el mismo peso < `requiredConsecutiveSessions` → `maintain` (`topOfRangeNeedsConfirmation`).
    - siguiente carga: con `availableWeights` → el menor disponible estrictamente mayor; si no → actual + `increment`. Sin carga mayor disponible → `maintain` con aviso.
    - `increaseWeight`, reps objetivo = repMín. Confianza `high` si todas las series tienen RIR (≥ objetivo si existe); si falta alguno → `conditional` con condiciones explícitas.
-5. **7b** algunas series < repMín en la última **y** en la anterior comparable al mismo peso → `reassess` (la reducción la decide el usuario).
-6. **7 Rendimiento inferior** (D-015) → `maintain`, objetivo = recuperar las reps de la sesión anterior.
+5. **7b** algunas series < repMín en la última **y** en la anterior comparable (cualquier carga, sin pausa larga entre ambas) → `reassess` (la reducción la decide el usuario).
+6. **7 Rendimiento inferior** (D-015): al mismo peso, menos reps totales que la anterior comparable → `maintain`, objetivo = recuperar las reps de esa sesión. Cambiar de carga nunca cuenta como caída.
 7. Series < repMín solo en la última → `maintain`, objetivo = llevar esas series a repMín.
 8. **6 Dentro del rango**: algún RIR registrado < objetivo → `maintain` (`repsHeldByEffort`); si no → `increaseReps`: +1 rep (o +`secondsIncrement` s) en cada serie bajo el máximo, acotado al máximo. Sin RIR → `conditional`.
 
@@ -38,7 +38,7 @@ Salida: `Recommendation` (acción, motivo, confianza, peso, reps/segundos por se
 
 ## Tendencia (regla 8)
 
-Ver D-021. Serie de valores cronológica (máx. 6 últimas sesiones comparables):
+Ver D-021. Métrica: reps totales a carga constante si las últimas ≥ 3 sesiones comparten peso; si no, mejor 1RM estimado (con tope). Serie de valores cronológica (máx. 6 últimas sesiones comparables):
 
 - `n < 3` → sin conclusión.
 - pendiente relativa = pendiente de mínimos cuadrados / media.

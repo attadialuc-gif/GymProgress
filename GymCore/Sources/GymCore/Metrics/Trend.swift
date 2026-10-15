@@ -62,28 +62,35 @@ public enum TrendAnalyzer {
     }
 
     /// Trend of an exercise from its comparable performances (chronological, oldest first).
-    /// Uses the best capped e1RM per session when at least `minSessions` sessions have one;
-    /// otherwise total reps (or seconds) over the trailing run of sessions at a constant load.
+    /// 1. If the trailing run of sessions at the same working load has at least `minSessions`
+    ///    sessions: total reps (or seconds) at that constant load. This sees rep progress that a
+    ///    capped 1RM cannot (e.g. 10→11 reps in an 8–12 range).
+    /// 2. Otherwise, the best capped e1RM per session, if every session has one.
+    /// 3. Otherwise no conclusion.
     public static func classify(
         performances: [ExercisePerformance],
         oneRepMax: OneRepMaxSettings = .default,
         thresholds: TrendThresholds = .default
     ) -> TrendClassification {
-        guard performances.count >= max(3, thresholds.minSessions) else { return .insufficientData }
+        let minSessions = max(3, thresholds.minSessions)
+        guard performances.count >= minSessions else { return .insufficientData }
+
+        let summaries = performances.map { HistoryAnalyzer.summary(of: $0) }
+        if let lastLoad = summaries.last?.workingLoad {
+            var run: [Double] = []
+            for summary in summaries.reversed() {
+                guard LoadMath.isEqual(summary.workingLoad, lastLoad) else { break }
+                run.append(Double(summary.amounts.reduce(0, +)))
+            }
+            if run.count >= minSessions {
+                return classify(run.reversed(), thresholds: thresholds)
+            }
+        }
 
         let e1rms = performances.compactMap { OneRepMax.best(in: $0, settings: oneRepMax) }
         if e1rms.count == performances.count {
             return classify(e1rms, thresholds: thresholds)
         }
-
-        // Constant-load fallback: trailing sessions sharing the same working load.
-        let summaries = performances.map { HistoryAnalyzer.summary(of: $0) }
-        guard let lastLoad = summaries.last?.workingLoad else { return .insufficientData }
-        var run: [Double] = []
-        for summary in summaries.reversed() {
-            guard LoadMath.isEqual(summary.workingLoad, lastLoad) else { break }
-            run.append(Double(summary.amounts.reduce(0, +)))
-        }
-        return classify(run.reversed(), thresholds: thresholds)
+        return .insufficientData
     }
 }

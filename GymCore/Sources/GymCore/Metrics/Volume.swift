@@ -90,7 +90,7 @@ public enum MuscleVolume {
         var indirect: [MuscleGroup: Double] = [:]
         var days: [MuscleGroup: Set<Date>] = [:]
 
-        for item in work {
+        for item in work where item.performance.sessionStatus == .completed {
             let count = item.performance.effectiveSets.count
             guard count > 0 else { continue }
             let day = calendar.startOfDay(for: item.performance.sessionStart)

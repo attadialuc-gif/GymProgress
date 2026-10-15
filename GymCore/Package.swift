@@ -18,7 +18,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "GymCore"),
-        .target(name: "GymStore", dependencies: ["GymCore"]),
+        .target(name: "GymStore", dependencies: ["GymCore"], resources: [.process("Resources")]),
         .testTarget(name: "GymCoreTests", dependencies: ["GymCore"]),
         .testTarget(name: "GymStoreTests", dependencies: ["GymStore", "GymCore"]),
     ]

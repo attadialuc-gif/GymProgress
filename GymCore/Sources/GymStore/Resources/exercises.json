@@ -1,0 +1,1988 @@
+{
+ "version": 1,
+ "exercises": [
+  {
+   "uuid": "B26479DA-308F-5C5A-8D12-FA7DA5F40DE0",
+   "catalogId": "barbell-bench-press",
+   "name": "Press de banca con barra",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    },
+    {
+     "muscle": "frontDelts"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 6,
+   "repMax": 10,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "5A33108A-555C-51BE-9E18-09270EA1D3A6",
+   "catalogId": "incline-barbell-bench-press",
+   "name": "Press inclinado con barra",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "frontDelts"
+    },
+    {
+     "muscle": "triceps"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 6,
+   "repMax": 10,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "9232F4B2-5E5F-525B-AEAC-8AC2C74A79D7",
+   "catalogId": "decline-barbell-bench-press",
+   "name": "Press declinado con barra",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 6,
+   "repMax": 10,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "BA69B253-37F1-5386-A6CC-32224E3AA27E",
+   "catalogId": "dumbbell-bench-press",
+   "name": "Press de banca con mancuernas",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    },
+    {
+     "muscle": "frontDelts"
+    }
+   ],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "8F654979-349A-526D-93B1-91E8ABC2F8DF",
+   "catalogId": "incline-dumbbell-press",
+   "name": "Press inclinado con mancuernas",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "frontDelts"
+    },
+    {
+     "muscle": "triceps"
+    }
+   ],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "8BD4A40F-7E0B-5A45-97A0-A72205202C3C",
+   "catalogId": "dumbbell-fly",
+   "name": "Aperturas con mancuernas",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "frontDelts",
+     "factor": 0.3
+    }
+   ],
+   "increment": 1,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "90790EC2-ABA4-5774-91B4-88F900D364E0",
+   "catalogId": "cable-crossover",
+   "name": "Cruce de poleas",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "total",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "frontDelts",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "B2BA6FDE-9D2E-5528-A82C-C112600411F0",
+   "catalogId": "machine-chest-press",
+   "name": "Press de pecho en máquina",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    },
+    {
+     "muscle": "frontDelts"
+    }
+   ],
+   "increment": 5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "A9393555-3984-5F80-BEB9-B4FBC42CE608",
+   "catalogId": "pec-deck",
+   "name": "Pec deck (contractor)",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [],
+   "increment": 5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "45407CC5-5348-5A39-8A1D-CE268089946C",
+   "catalogId": "smith-bench-press",
+   "name": "Press de banca en Smith",
+   "measurement": "weightReps",
+   "equipment": "smithMachine",
+   "loadMode": "total",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    },
+    {
+     "muscle": "frontDelts"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 6,
+   "repMax": 10,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "CDEF4D05-0900-5DD2-8F54-106DBDB7F197",
+   "catalogId": "push-up",
+   "name": "Flexiones de brazos",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    },
+    {
+     "muscle": "frontDelts"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 20,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "0D0DECC5-A587-51FA-9A2C-F9C7C8D00249",
+   "catalogId": "chest-dip",
+   "name": "Fondos en paralelas (pecho)",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    },
+    {
+     "muscle": "frontDelts"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 6,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "C2DEEC0A-E259-5BA3-BBEB-29ECBEC06FBB",
+   "catalogId": "pull-up",
+   "name": "Dominadas",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "lats"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    },
+    {
+     "muscle": "upperBack"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 5,
+   "repMax": 10,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "D174C290-4777-5929-8110-031338DF38A4",
+   "catalogId": "chin-up",
+   "name": "Dominadas supinas",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "lats"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 5,
+   "repMax": 10,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "9C0DF0D8-DE21-5E73-AA10-1A0884AFF6D7",
+   "catalogId": "assisted-pull-up",
+   "name": "Dominadas asistidas en máquina",
+   "measurement": "bodyweightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "lats"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    }
+   ],
+   "increment": 5,
+   "repMin": 6,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "37338C35-9CC0-54A4-A210-C967BEDFF719",
+   "catalogId": "lat-pulldown",
+   "name": "Jalón al pecho",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "total",
+   "primary": [
+    "lats"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    },
+    {
+     "muscle": "upperBack"
+    }
+   ],
+   "increment": 5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "69A5BF23-3D06-5957-84C3-BE5B88CB3496",
+   "catalogId": "close-grip-lat-pulldown",
+   "name": "Jalón agarre cerrado",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "total",
+   "primary": [
+    "lats"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    }
+   ],
+   "increment": 5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "42B5837A-B479-54C9-B3E1-3E1337A4634A",
+   "catalogId": "barbell-row",
+   "name": "Remo con barra",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "upperBack",
+    "lats"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    },
+    {
+     "muscle": "rearDelts"
+    },
+    {
+     "muscle": "lowerBack",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "340638CB-AE41-5032-AD80-1EEF479EC339",
+   "catalogId": "pendlay-row",
+   "name": "Remo Pendlay",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "upperBack",
+    "lats"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    },
+    {
+     "muscle": "lowerBack",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 6,
+   "repMax": 10,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "CA9EBFF9-1718-5F9F-A7EE-EA93A783C218",
+   "catalogId": "one-arm-dumbbell-row",
+   "name": "Remo con mancuerna a una mano",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "lats",
+    "upperBack"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    },
+    {
+     "muscle": "rearDelts"
+    }
+   ],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "98120DBF-DC05-57E6-9D5F-EFBABBE21C1E",
+   "catalogId": "seated-cable-row",
+   "name": "Remo sentado en polea",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "total",
+   "primary": [
+    "upperBack",
+    "lats"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    },
+    {
+     "muscle": "rearDelts"
+    }
+   ],
+   "increment": 5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "0CFF8FB7-F558-5A40-90A3-9CFA9585D94F",
+   "catalogId": "t-bar-row",
+   "name": "Remo en T",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "upperBack",
+    "lats"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "24594586-D91D-5BE5-AC57-8C70C9943BD4",
+   "catalogId": "chest-supported-row",
+   "name": "Remo con apoyo en pecho",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "upperBack"
+   ],
+   "secondary": [
+    {
+     "muscle": "lats"
+    },
+    {
+     "muscle": "rearDelts"
+    }
+   ],
+   "increment": 5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "625B3B14-85AE-574A-8EFA-7EE77246436F",
+   "catalogId": "machine-row",
+   "name": "Remo en máquina",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "upperBack",
+    "lats"
+   ],
+   "secondary": [
+    {
+     "muscle": "biceps"
+    }
+   ],
+   "increment": 5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "58BCCB64-7058-5475-AAFD-2E87B13397A4",
+   "catalogId": "straight-arm-pulldown",
+   "name": "Pullover en polea",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "total",
+   "primary": [
+    "lats"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "87B2B990-E025-52A1-A003-7C8467CD577B",
+   "catalogId": "deadlift",
+   "name": "Peso muerto convencional",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "hamstrings",
+    "glutes",
+    "lowerBack"
+   ],
+   "secondary": [
+    {
+     "muscle": "upperBack"
+    },
+    {
+     "muscle": "quads"
+    },
+    {
+     "muscle": "traps"
+    },
+    {
+     "muscle": "forearms"
+    }
+   ],
+   "increment": 5,
+   "repMin": 3,
+   "repMax": 6,
+   "restSeconds": 180
+  },
+  {
+   "uuid": "52830768-8A56-5275-9471-390FD8521F8C",
+   "catalogId": "sumo-deadlift",
+   "name": "Peso muerto sumo",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "glutes",
+    "quads",
+    "hamstrings"
+   ],
+   "secondary": [
+    {
+     "muscle": "adductors"
+    },
+    {
+     "muscle": "lowerBack"
+    }
+   ],
+   "increment": 5,
+   "repMin": 3,
+   "repMax": 6,
+   "restSeconds": 180
+  },
+  {
+   "uuid": "5DDEBEDF-9DD5-5295-AC55-EA6711F5B963",
+   "catalogId": "rack-pull",
+   "name": "Rack pull",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "lowerBack",
+    "upperBack"
+   ],
+   "secondary": [
+    {
+     "muscle": "traps"
+    },
+    {
+     "muscle": "glutes"
+    }
+   ],
+   "increment": 5,
+   "repMin": 4,
+   "repMax": 8,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "D1CB54CE-6CCB-581B-870A-7C6E2A3D73BA",
+   "catalogId": "back-extension",
+   "name": "Hiperextensiones",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "lowerBack"
+   ],
+   "secondary": [
+    {
+     "muscle": "glutes"
+    },
+    {
+     "muscle": "hamstrings"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "95CF71AF-3CC9-5776-9F7D-2A692A92A1DF",
+   "catalogId": "barbell-shrug",
+   "name": "Encogimientos con barra",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "traps"
+   ],
+   "secondary": [
+    {
+     "muscle": "forearms",
+     "factor": 0.3
+    }
+   ],
+   "increment": 5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "F2108301-4F74-5A05-8848-8AA6C8E00A4C",
+   "catalogId": "dumbbell-shrug",
+   "name": "Encogimientos con mancuernas",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "traps"
+   ],
+   "secondary": [
+    {
+     "muscle": "forearms",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "2FA63F07-817C-53B9-82A3-24B3913DC8E5",
+   "catalogId": "overhead-press",
+   "name": "Press militar con barra",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "frontDelts"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    },
+    {
+     "muscle": "sideDelts"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 5,
+   "repMax": 8,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "21893E99-6151-576F-BB9B-462C0D896479",
+   "catalogId": "dumbbell-shoulder-press",
+   "name": "Press de hombros con mancuernas",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "frontDelts"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    },
+    {
+     "muscle": "sideDelts"
+    }
+   ],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "9A413921-88E7-5E32-88E8-99F8A44EAA56",
+   "catalogId": "arnold-press",
+   "name": "Press Arnold",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "frontDelts"
+   ],
+   "secondary": [
+    {
+     "muscle": "sideDelts"
+    },
+    {
+     "muscle": "triceps"
+    }
+   ],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "8DD0D475-B90D-568E-9AB1-650F424294AF",
+   "catalogId": "machine-shoulder-press",
+   "name": "Press de hombros en máquina",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "frontDelts"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    }
+   ],
+   "increment": 5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "CA5F75BE-1CA7-5D63-B738-51A64CA46A92",
+   "catalogId": "dumbbell-lateral-raise",
+   "name": "Elevaciones laterales con mancuernas",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "sideDelts"
+   ],
+   "secondary": [],
+   "increment": 1,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "DF745FAB-DDA2-5D49-943E-CE6C5717498D",
+   "catalogId": "cable-lateral-raise",
+   "name": "Elevaciones laterales en polea",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "perSide",
+   "primary": [
+    "sideDelts"
+   ],
+   "secondary": [],
+   "increment": 1.25,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "A7C87D05-1AE5-54CE-92F4-38647DA8C3E8",
+   "catalogId": "machine-lateral-raise",
+   "name": "Elevaciones laterales en máquina",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "sideDelts"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "54670577-7319-5800-8633-9AAC72C701C7",
+   "catalogId": "dumbbell-front-raise",
+   "name": "Elevaciones frontales",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "frontDelts"
+   ],
+   "secondary": [],
+   "increment": 1,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "8F4382B6-A64C-5DCE-A465-DA1C2727EB19",
+   "catalogId": "rear-delt-fly",
+   "name": "Pájaros con mancuernas",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "rearDelts"
+   ],
+   "secondary": [
+    {
+     "muscle": "upperBack",
+     "factor": 0.3
+    }
+   ],
+   "increment": 1,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "DF294675-1C9F-5375-BCE8-63A937CE305F",
+   "catalogId": "reverse-pec-deck",
+   "name": "Pec deck inverso",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "rearDelts"
+   ],
+   "secondary": [
+    {
+     "muscle": "upperBack",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "DE9237E1-6626-5373-AA9D-260976FEDE09",
+   "catalogId": "face-pull",
+   "name": "Face pull",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "total",
+   "primary": [
+    "rearDelts"
+   ],
+   "secondary": [
+    {
+     "muscle": "upperBack"
+    },
+    {
+     "muscle": "traps",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "186F1C3C-ADE8-5328-8741-AB0E25C80FD0",
+   "catalogId": "upright-row",
+   "name": "Remo al mentón",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "sideDelts"
+   ],
+   "secondary": [
+    {
+     "muscle": "traps"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "46B5DE08-EAA8-53DE-BED9-BAA8856B97EB",
+   "catalogId": "barbell-curl",
+   "name": "Curl con barra",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "biceps"
+   ],
+   "secondary": [
+    {
+     "muscle": "forearms",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "221249FE-15FF-5D9C-880C-C638797FB184",
+   "catalogId": "ez-bar-curl",
+   "name": "Curl con barra Z",
+   "measurement": "weightReps",
+   "equipment": "ezBar",
+   "loadMode": "total",
+   "primary": [
+    "biceps"
+   ],
+   "secondary": [
+    {
+     "muscle": "forearms",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "1C0DA635-AAF2-5DC5-8DB7-5AF7D17486C8",
+   "catalogId": "dumbbell-curl",
+   "name": "Curl con mancuernas",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "biceps"
+   ],
+   "secondary": [
+    {
+     "muscle": "forearms",
+     "factor": 0.3
+    }
+   ],
+   "increment": 1,
+   "repMin": 8,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "B0B8F7E4-7DF8-52DF-AF1A-F57717A6B071",
+   "catalogId": "hammer-curl",
+   "name": "Curl martillo",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "biceps",
+    "forearms"
+   ],
+   "secondary": [],
+   "increment": 1,
+   "repMin": 8,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "684DD9DC-FE3F-5C38-9FAD-62E5BCAAE07A",
+   "catalogId": "incline-dumbbell-curl",
+   "name": "Curl inclinado con mancuernas",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "biceps"
+   ],
+   "secondary": [],
+   "increment": 1,
+   "repMin": 8,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "2BCE0148-0B77-594A-8EE7-6E47EFDE0319",
+   "catalogId": "preacher-curl",
+   "name": "Curl predicador",
+   "measurement": "weightReps",
+   "equipment": "ezBar",
+   "loadMode": "total",
+   "primary": [
+    "biceps"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "B602E81A-8F13-5A36-827F-0549095B5B05",
+   "catalogId": "cable-curl",
+   "name": "Curl en polea",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "total",
+   "primary": [
+    "biceps"
+   ],
+   "secondary": [
+    {
+     "muscle": "forearms",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "D925ABE2-7CFE-5DDB-AB83-B9D1DF3F38EA",
+   "catalogId": "concentration-curl",
+   "name": "Curl concentrado",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "biceps"
+   ],
+   "secondary": [],
+   "increment": 1,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "ECCA3A28-E03A-59DF-92BD-BD0367B5187B",
+   "catalogId": "cable-triceps-pushdown",
+   "name": "Extensión de tríceps en polea",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "total",
+   "primary": [
+    "triceps"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "B4F909DD-D8F8-5C49-B36A-03B0E1D03CC1",
+   "catalogId": "overhead-cable-triceps-extension",
+   "name": "Extensión de tríceps sobre la cabeza en polea",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "total",
+   "primary": [
+    "triceps"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "3B012936-16EF-5AE7-9663-AFF0CD6B40B1",
+   "catalogId": "skull-crusher",
+   "name": "Press francés",
+   "measurement": "weightReps",
+   "equipment": "ezBar",
+   "loadMode": "total",
+   "primary": [
+    "triceps"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "47B0B687-9E02-5A46-A531-B905F3CB0C97",
+   "catalogId": "dumbbell-overhead-triceps-extension",
+   "name": "Extensión de tríceps con mancuerna",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "total",
+   "primary": [
+    "triceps"
+   ],
+   "secondary": [],
+   "increment": 2,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "62FF295F-A2EE-5EF6-9862-4B8B3B6A8D81",
+   "catalogId": "close-grip-bench-press",
+   "name": "Press de banca agarre cerrado",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "triceps"
+   ],
+   "secondary": [
+    {
+     "muscle": "chest"
+    },
+    {
+     "muscle": "frontDelts"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 6,
+   "repMax": 10,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "A8403EC9-B5B0-5500-AB09-45D33E39F861",
+   "catalogId": "triceps-dip",
+   "name": "Fondos en paralelas (tríceps)",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "triceps"
+   ],
+   "secondary": [
+    {
+     "muscle": "chest"
+    },
+    {
+     "muscle": "frontDelts"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 6,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "19969CFC-563D-5B71-A6B7-5741F47A3495",
+   "catalogId": "bench-dip",
+   "name": "Fondos en banco",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "triceps"
+   ],
+   "secondary": [
+    {
+     "muscle": "chest",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 20,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "72676CDA-4219-5912-A064-06E8FDCBDCCD",
+   "catalogId": "wrist-curl",
+   "name": "Curl de muñeca",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "forearms"
+   ],
+   "secondary": [],
+   "increment": 1,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "80A600F5-FEB6-5E9D-8A4F-27FB2A73DA5C",
+   "catalogId": "farmers-walk",
+   "name": "Paseo del granjero",
+   "measurement": "duration",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "forearms",
+    "traps"
+   ],
+   "secondary": [
+    {
+     "muscle": "abs",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2,
+   "repMin": 30,
+   "repMax": 60,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "8C410A3E-F303-5B4E-9078-1BA56E521927",
+   "catalogId": "barbell-back-squat",
+   "name": "Sentadilla con barra",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "quads",
+    "glutes"
+   ],
+   "secondary": [
+    {
+     "muscle": "adductors"
+    },
+    {
+     "muscle": "lowerBack",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 5,
+   "repMax": 8,
+   "restSeconds": 180
+  },
+  {
+   "uuid": "5ED27B58-D64D-5B7B-9874-78E0A74A14DB",
+   "catalogId": "front-squat",
+   "name": "Sentadilla frontal",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "quads"
+   ],
+   "secondary": [
+    {
+     "muscle": "glutes"
+    },
+    {
+     "muscle": "upperBack",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 5,
+   "repMax": 8,
+   "restSeconds": 180
+  },
+  {
+   "uuid": "CD453FC3-2FAC-56DC-874A-C9C45D666EE4",
+   "catalogId": "goblet-squat",
+   "name": "Sentadilla goblet",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "total",
+   "primary": [
+    "quads",
+    "glutes"
+   ],
+   "secondary": [
+    {
+     "muscle": "adductors"
+    }
+   ],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "3340D762-9639-5D6D-BBBE-0E01E21BDBA4",
+   "catalogId": "smith-squat",
+   "name": "Sentadilla en Smith",
+   "measurement": "weightReps",
+   "equipment": "smithMachine",
+   "loadMode": "total",
+   "primary": [
+    "quads",
+    "glutes"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "6556AEC0-811D-548D-BC90-A823ADAFCB08",
+   "catalogId": "hack-squat",
+   "name": "Sentadilla hack",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "quads"
+   ],
+   "secondary": [
+    {
+     "muscle": "glutes"
+    }
+   ],
+   "increment": 5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "F59522FD-0555-504F-B4A6-AC0CABDC9CA8",
+   "catalogId": "leg-press",
+   "name": "Prensa de piernas",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "quads",
+    "glutes"
+   ],
+   "secondary": [
+    {
+     "muscle": "adductors"
+    }
+   ],
+   "increment": 5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "733FFC29-BC0F-5C92-9A6C-9A9A05408A09",
+   "catalogId": "bulgarian-split-squat",
+   "name": "Sentadilla búlgara",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "quads",
+    "glutes"
+   ],
+   "secondary": [
+    {
+     "muscle": "adductors"
+    }
+   ],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "7847B907-C4F5-5E02-A05B-4D5CB32B9D2A",
+   "catalogId": "walking-lunge",
+   "name": "Estocadas caminando",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "quads",
+    "glutes"
+   ],
+   "secondary": [
+    {
+     "muscle": "adductors"
+    }
+   ],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "450F0839-799A-5DE3-BE2A-556BB9BFCCF3",
+   "catalogId": "reverse-lunge",
+   "name": "Estocadas hacia atrás",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "quads",
+    "glutes"
+   ],
+   "secondary": [],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "15E06C97-C6B2-5895-B3C6-ACF36AC93231",
+   "catalogId": "step-up",
+   "name": "Subidas al cajón",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "quads",
+    "glutes"
+   ],
+   "secondary": [],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "D02D23F3-3487-51C7-AD90-52B470680058",
+   "catalogId": "leg-extension",
+   "name": "Extensión de cuádriceps",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "quads"
+   ],
+   "secondary": [],
+   "increment": 5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "88F27C12-42E8-5FE2-B8BE-478D29417D9E",
+   "catalogId": "romanian-deadlift",
+   "name": "Peso muerto rumano",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "hamstrings",
+    "glutes"
+   ],
+   "secondary": [
+    {
+     "muscle": "lowerBack"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "536E9AF4-4A09-5079-82A5-D2C9355BC9F5",
+   "catalogId": "dumbbell-romanian-deadlift",
+   "name": "Peso muerto rumano con mancuernas",
+   "measurement": "weightReps",
+   "equipment": "dumbbell",
+   "loadMode": "perSide",
+   "primary": [
+    "hamstrings",
+    "glutes"
+   ],
+   "secondary": [
+    {
+     "muscle": "lowerBack"
+    }
+   ],
+   "increment": 2,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "8FA267E0-82B2-5973-8709-D099BACA8BB8",
+   "catalogId": "stiff-leg-deadlift",
+   "name": "Peso muerto piernas rígidas",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "hamstrings"
+   ],
+   "secondary": [
+    {
+     "muscle": "glutes"
+    },
+    {
+     "muscle": "lowerBack"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 150
+  },
+  {
+   "uuid": "8760CC39-BA14-5525-BA98-83D52C7E62D3",
+   "catalogId": "lying-leg-curl",
+   "name": "Curl femoral acostado",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "hamstrings"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "9FBAB61A-50EC-58B8-9853-B5F4AADF92A5",
+   "catalogId": "seated-leg-curl",
+   "name": "Curl femoral sentado",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "hamstrings"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "DB300A12-87EA-5445-A0A3-54A0E74C663D",
+   "catalogId": "nordic-curl",
+   "name": "Curl nórdico",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "hamstrings"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 4,
+   "repMax": 10,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "EA4E6F51-DB3A-52ED-8F3F-995430961EBC",
+   "catalogId": "good-morning",
+   "name": "Buenos días",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "hamstrings",
+    "lowerBack"
+   ],
+   "secondary": [
+    {
+     "muscle": "glutes"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "C5E251ED-9043-5F6D-A12A-ED6A93858A41",
+   "catalogId": "hip-thrust",
+   "name": "Hip thrust con barra",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "glutes"
+   ],
+   "secondary": [
+    {
+     "muscle": "hamstrings"
+    }
+   ],
+   "increment": 5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 120
+  },
+  {
+   "uuid": "3A96AA6E-207B-5EA7-A7F7-BC8EB5E888D5",
+   "catalogId": "glute-bridge",
+   "name": "Puente de glúteos",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "glutes"
+   ],
+   "secondary": [
+    {
+     "muscle": "hamstrings",
+     "factor": 0.3
+    }
+   ],
+   "increment": 5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "14E854A8-0B4A-5C3A-89CB-2CA823C09846",
+   "catalogId": "cable-kickback",
+   "name": "Patada de glúteo en polea",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "perSide",
+   "primary": [
+    "glutes"
+   ],
+   "secondary": [],
+   "increment": 1.25,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "10C5246A-4706-5E4E-A2AD-0607D2757868",
+   "catalogId": "hip-abduction-machine",
+   "name": "Abducción de cadera en máquina",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "abductors"
+   ],
+   "secondary": [
+    {
+     "muscle": "glutes"
+    }
+   ],
+   "increment": 5,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "64F7A484-F39F-5942-A247-F035755E5C81",
+   "catalogId": "hip-adduction-machine",
+   "name": "Aducción de cadera en máquina",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "adductors"
+   ],
+   "secondary": [],
+   "increment": 5,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "547D7A20-E652-5E64-8E10-E23E5576AAC9",
+   "catalogId": "standing-calf-raise",
+   "name": "Elevación de talones de pie",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "calves"
+   ],
+   "secondary": [],
+   "increment": 5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "F7D9AF74-C519-52AC-9312-6D4745E59751",
+   "catalogId": "seated-calf-raise",
+   "name": "Elevación de talones sentado",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "calves"
+   ],
+   "secondary": [],
+   "increment": 5,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "530DBF50-DB12-5B4A-99ED-94F959D3BD97",
+   "catalogId": "leg-press-calf-raise",
+   "name": "Gemelos en prensa",
+   "measurement": "weightReps",
+   "equipment": "machine",
+   "loadMode": "total",
+   "primary": [
+    "calves"
+   ],
+   "secondary": [],
+   "increment": 5,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "F3D05FAD-3540-5922-B3B4-C52275AC874F",
+   "catalogId": "plank",
+   "name": "Plancha",
+   "measurement": "duration",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "abs"
+   ],
+   "secondary": [
+    {
+     "muscle": "obliques"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 30,
+   "repMax": 60,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "7FB7D3F4-3BE0-510E-903C-6BF52B9BA92E",
+   "catalogId": "side-plank",
+   "name": "Plancha lateral",
+   "measurement": "duration",
+   "equipment": "bodyweight",
+   "loadMode": "perSide",
+   "primary": [
+    "obliques"
+   ],
+   "secondary": [
+    {
+     "muscle": "abs"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 20,
+   "repMax": 45,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "C691B905-F279-551B-A5E7-B7904D262444",
+   "catalogId": "crunch",
+   "name": "Abdominales crunch",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "abs"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 12,
+   "repMax": 25,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "34CB6EC1-6090-55A1-8C33-2A6258F46722",
+   "catalogId": "cable-crunch",
+   "name": "Crunch en polea",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "total",
+   "primary": [
+    "abs"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "F462B133-2271-5295-874E-5681E8DF432B",
+   "catalogId": "hanging-leg-raise",
+   "name": "Elevación de piernas colgado",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "abs"
+   ],
+   "secondary": [
+    {
+     "muscle": "obliques"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "356C5F30-6A9F-5E3F-AB83-61EF18EDD913",
+   "catalogId": "ab-wheel-rollout",
+   "name": "Rueda abdominal",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "abs"
+   ],
+   "secondary": [
+    {
+     "muscle": "lats",
+     "factor": 0.3
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 15,
+   "restSeconds": 75
+  },
+  {
+   "uuid": "88BEBA49-EBAC-50A6-A31E-7BC4DC5BA2C8",
+   "catalogId": "russian-twist",
+   "name": "Giros rusos",
+   "measurement": "weightReps",
+   "equipment": "other",
+   "loadMode": "total",
+   "primary": [
+    "obliques"
+   ],
+   "secondary": [
+    {
+     "muscle": "abs"
+    }
+   ],
+   "increment": 2,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "91CB0C62-523C-5D03-9D24-E69A219917B7",
+   "catalogId": "pallof-press",
+   "name": "Press Pallof",
+   "measurement": "weightReps",
+   "equipment": "cable",
+   "loadMode": "perSide",
+   "primary": [
+    "obliques"
+   ],
+   "secondary": [
+    {
+     "muscle": "abs"
+    }
+   ],
+   "increment": 1.25,
+   "repMin": 10,
+   "repMax": 15,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "51434881-A461-5E1C-9206-DA1F081BB734",
+   "catalogId": "dead-bug",
+   "name": "Dead bug",
+   "measurement": "bodyweightReps",
+   "equipment": "bodyweight",
+   "loadMode": "total",
+   "primary": [
+    "abs"
+   ],
+   "secondary": [],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 15,
+   "restSeconds": 60
+  },
+  {
+   "uuid": "CE6DECFB-BAB0-521E-A9CC-EDA78186C671",
+   "catalogId": "kettlebell-swing",
+   "name": "Swing con kettlebell",
+   "measurement": "weightReps",
+   "equipment": "kettlebell",
+   "loadMode": "total",
+   "primary": [
+    "glutes",
+    "hamstrings"
+   ],
+   "secondary": [
+    {
+     "muscle": "lowerBack"
+    }
+   ],
+   "increment": 4,
+   "repMin": 12,
+   "repMax": 20,
+   "restSeconds": 90
+  },
+  {
+   "uuid": "76318202-A3CA-54E2-9D83-C0E8E4C34660",
+   "catalogId": "power-clean",
+   "name": "Cargada de potencia",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "total",
+   "primary": [
+    "glutes",
+    "quads",
+    "traps"
+   ],
+   "secondary": [
+    {
+     "muscle": "hamstrings"
+    },
+    {
+     "muscle": "upperBack"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 2,
+   "repMax": 5,
+   "restSeconds": 180
+  },
+  {
+   "uuid": "3CB6ED73-E56E-548E-9342-57714C316A83",
+   "catalogId": "landmine-press",
+   "name": "Press landmine",
+   "measurement": "weightReps",
+   "equipment": "barbell",
+   "loadMode": "perSide",
+   "primary": [
+    "frontDelts",
+    "chest"
+   ],
+   "secondary": [
+    {
+     "muscle": "triceps"
+    }
+   ],
+   "increment": 2.5,
+   "repMin": 8,
+   "repMax": 12,
+   "restSeconds": 90
+  }
+ ]
+}

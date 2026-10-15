@@ -155,16 +155,98 @@ struct ProgressionRulesTests {
         #expect(rec.targetReps == [10, 9, 9])
     }
 
-    @Test("Lower load and lower estimated 1RM → performance drop (estimate)")
-    func dropAtLowerLoad() {
+    @Test("A lower load is the user's choice, never a 'drop': progress from the new load")
+    func lowerLoadIsNotADrop() {
         let history = [
             Fx.perf(1, day: 0, weight: 60, reps: [10, 10, 10], rir: [2, 2, 2]),
             Fx.perf(2, day: 3, weight: 55, reps: [10, 9, 9], rir: [2, 2, 2]),
         ]
         let rec = ProgressionEngine.recommend(Fx.input(history: history))
-        #expect(rec.action == .maintain)
-        #expect(rec.reason == .performanceDropped)
+        #expect(rec.action == .increaseReps)
         #expect(rec.targetWeight == 55)
+        #expect(rec.targetReps == [11, 10, 10])
+    }
+
+    @Test("Review finding: returning lighter after a long break → add reps, no false drop")
+    func lighterAfterLongBreak() {
+        let history = [
+            Fx.perf(1, day: 0, weight: 60, reps: [12, 12, 12], rir: [2, 2, 2]),
+            Fx.perf(2, day: 30, weight: 55, reps: [10, 10, 10], rir: [2, 2, 2]),
+        ]
+        let rec = ProgressionEngine.recommend(Fx.input(history: history, now: Fx.day(33)))
+        #expect(rec.action == .increaseReps)
+        #expect(rec.targetWeight == 55)
+        #expect(rec.targetReps == [11, 11, 11])
+    }
+
+    @Test("Same-load drop is ignored when the previous session was before a long break")
+    func dropAcrossLongBreakIgnored() {
+        let history = [
+            Fx.perf(1, day: 0, weight: 60, reps: [12, 11, 10], rir: [2, 2, 2]),
+            Fx.perf(2, day: 30, weight: 60, reps: [10, 9, 8], rir: [2, 2, 2]),
+        ]
+        let rec = ProgressionEngine.recommend(Fx.input(history: history, now: Fx.day(32)))
+        #expect(rec.action == .increaseReps)
+        #expect(rec.targetReps == [11, 10, 9])
+    }
+
+    @Test("Review finding: below the minimum in 2 consecutive sessions at different loads → reassess")
+    func repeatedBelowMinAcrossLoads() {
+        let history = [
+            Fx.perf(1, day: 0, weight: 62.5, reps: [9, 8, 7], rir: [2, 2, 2]),
+            Fx.perf(2, day: 3, weight: 60, reps: [8, 7, 7], rir: [2, 2, 2]),
+        ]
+        let rec = ProgressionEngine.recommend(Fx.input(history: history))
+        #expect(rec.action == .reassess)
+        #expect(rec.reason == .repeatedBelowRepMin)
+        #expect(rec.targetWeight == 60)
+    }
+
+    @Test("Review finding: two linked machines in ONE session are one session, not two")
+    func linkedContextsSameSessionAreOneSession() {
+        let a = ComparabilityContext(exerciseId: Fx.benchId, equipmentLabel: "A", loadMode: .total)
+        let b = ComparabilityContext(exerciseId: Fx.benchId, equipmentLabel: "B", loadMode: .total)
+        let links = [ComparabilityLink(id: Fx.uuid(1), a: a, b: b, createdAt: Fx.day(0))]
+        func log(_ n: Int, _ ctx: ComparabilityContext, _ reps: [Int]) -> ExercisePerformance {
+            ExercisePerformance(sessionId: Fx.uuid(0x1001), exerciseLogId: Fx.uuid(0x2000 + n), sessionStart: Fx.day(0),
+                                context: ctx, sets: Fx.sets(weight: 60, reps: reps, rir: reps.map { _ in 2 }))
+        }
+
+        var config = Fx.config
+        config.requiredConsecutiveSessions = 2
+        let top = ProgressionEngine.recommend(Fx.input(history: [log(1, a, [12, 12, 12]), log(2, b, [12, 12, 12])], config: config, context: a, links: links))
+        #expect(top.reason == .topOfRangeNeedsConfirmation)
+        #expect(top.evidence.count == 1)
+
+        let low = ProgressionEngine.recommend(Fx.input(history: [log(1, a, [9, 8, 7]), log(2, b, [8, 7, 7])], context: a, links: links))
+        #expect(low.action != .reassess)
+    }
+
+    @Test("Review finding: sets that differ only in RIR order deterministically (permuted input)")
+    func setOrderIsTotal() {
+        let s1 = PerformedSet(index: 0, weight: 60, reps: 12, rir: 1)
+        let s2 = PerformedSet(index: 0, weight: 60, reps: 12, rir: 3)
+        let s3 = PerformedSet(index: 1, weight: 60, reps: 12, rir: 2)
+        func perf(_ sets: [PerformedSet]) -> ExercisePerformance {
+            ExercisePerformance(sessionId: Fx.uuid(0x1001), exerciseLogId: Fx.uuid(0x2001), sessionStart: Fx.day(0), context: Fx.benchContext, sets: sets)
+        }
+        var config = Fx.config
+        config.targetSets = 2
+        let r1 = ProgressionEngine.recommend(Fx.input(history: [perf([s1, s2, s3])], config: config))
+        let r2 = ProgressionEngine.recommend(Fx.input(history: [perf([s3, s2, s1])], config: config))
+        #expect(r1 == r2)
+    }
+
+    @Test("Review finding: reps rising inside the range is not a 'possible plateau'")
+    func risingRepsIsNotPlateau() {
+        let history = [
+            Fx.perf(1, day: 0, weight: 60, reps: [10, 9, 9], rir: [2, 2, 2]),
+            Fx.perf(2, day: 2, weight: 60, reps: [10, 10, 9], rir: [2, 2, 2]),
+            Fx.perf(3, day: 4, weight: 60, reps: [11, 10, 10], rir: [2, 2, 2]),
+        ]
+        let rec = ProgressionEngine.recommend(Fx.input(history: history))
+        #expect(rec.trend == .progressing)
+        #expect(!rec.notes.contains { $0.contains("estancamiento") })
     }
 
     @Test("No RIR target configured and RIR not recorded → still conditional")

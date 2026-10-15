@@ -76,7 +76,7 @@ public struct DoubleProgressionStrategy: ProgressionStrategy {
                 rec.reason = .initialTarget
                 rec.targetWeight = LoadMath.normalized(initial)
                 setAmounts(Array(repeating: bottom, count: sets))
-                rec.reasonText = text.initialTarget(initial)
+                rec.reasonText = text.initialTarget(initial, hasNonEquivalentReference: reference != nil)
             } else {
                 rec.reason = reference == nil ? .noComparableHistory : .noComparableHistoryInContext
                 rec.reasonText = reference == nil ? text.noHistory : text.noHistoryInContext
@@ -174,14 +174,15 @@ public struct DoubleProgressionStrategy: ProgressionStrategy {
             return rec
         }
 
-        // Below the top of the range.
-        let previous = comparable.dropFirst().first
+        // Below the top of the range. The previous comparable session only counts as "consecutive"
+        // when it is not separated from the last one by a long break.
+        let previous = comparable.dropFirst().first.flatMap { p in
+            Self.daysBetween(p.sessionStart, last.sessionStart, calendar: input.calendar) <= config.reassessAfterDays ? p : nil
+        }
         let belowMin = amounts.contains { $0 < bottom }
 
-        // Rule 7b — sets below the minimum in 2 consecutive comparable sessions at the same load.
+        // Rule 7b — sets below the minimum in 2 consecutive comparable sessions (any load).
         if belowMin, let previous,
-           let previousLoad = HistoryAnalyzer.workingLoad(of: previous),
-           LoadMath.isEqual(previousLoad, load),
            HistoryAnalyzer.evaluatedSets(of: previous, limit: sets).contains(where: { $0.amount(for: m) < bottom }) {
             rec.action = .reassess
             rec.reason = .repeatedBelowRepMin
@@ -190,20 +191,16 @@ public struct DoubleProgressionStrategy: ProgressionStrategy {
             return rec
         }
 
-        // Rule 7 — lower performance than the previous comparable session: keep the load, show history.
-        // Evaluated before rule 6 so that a drop is never answered with "add reps" (case 2.D-4).
-        if let previous, let drop = Self.performanceDrop(last: last, previous: previous, sets: sets, measurement: m, oneRepMax: input.oneRepMax) {
+        // Rule 7 — fewer reps than the previous comparable session at the same load: keep the load,
+        // show history. Evaluated before rule 6 so that a drop is never answered with "add reps"
+        // (case 2.D-4). A different load is never a "drop": going up costs reps, going down is a choice.
+        if let previous, let drop = Self.performanceDrop(last: last, previous: previous, sets: sets, measurement: m) {
             rec.action = .maintain
             rec.reason = .performanceDropped
             let previousAmounts = HistoryAnalyzer.evaluatedSets(of: previous, limit: sets)
                 .map { min(max($0.amount(for: m), bottom), top) }
             setAmounts(previousAmounts + Array(repeating: bottom, count: max(0, sets - previousAmounts.count)))
-            switch drop {
-            case let .sameLoad(lastTotal, previousTotal):
-                rec.reasonText = text.performanceDroppedSameLoad(lastTotal: lastTotal, previousTotal: previousTotal, weight: load)
-            case .estimate:
-                rec.reasonText = text.performanceDroppedEstimate(weight: load)
-            }
+            rec.reasonText = text.performanceDroppedSameLoad(lastTotal: drop.lastTotal, previousTotal: drop.previousTotal, weight: load)
             return rec
         }
 
@@ -276,37 +273,25 @@ public struct DoubleProgressionStrategy: ProgressionStrategy {
         return LoadMath.nextLoad(after: load, increment: config.increment, availableWeights: config.availableWeights)
     }
 
-    enum Drop {
-        case sameLoad(lastTotal: Int, previousTotal: Int)
-        case estimate
+    struct Drop {
+        let lastTotal: Int
+        let previousTotal: Int
     }
 
-    /// Lower performance than the previous comparable session:
-    /// - same load: fewer total reps over the sets both sessions share;
-    /// - lower load (weightReps only): lower best e1RM (uncapped formula, comparison only);
-    /// - higher load: never a drop (fewer reps after a load increase is expected).
-    static func performanceDrop(last: ExercisePerformance, previous: ExercisePerformance, sets: Int, measurement: MeasurementType, oneRepMax: OneRepMaxSettings) -> Drop? {
+    /// Lower performance than the previous comparable session = fewer total reps (or seconds) at the
+    /// same load, over the sets both sessions share. Different loads are never compared as a drop
+    /// (D-015): fewer reps after an increase is expected, and a lower load is the user's choice.
+    static func performanceDrop(last: ExercisePerformance, previous: ExercisePerformance, sets: Int, measurement: MeasurementType) -> Drop? {
         guard let lastLoad = HistoryAnalyzer.workingLoad(of: last),
-              let previousLoad = HistoryAnalyzer.workingLoad(of: previous) else { return nil }
+              let previousLoad = HistoryAnalyzer.workingLoad(of: previous),
+              LoadMath.isEqual(lastLoad, previousLoad) else { return nil }
         let lastSets = HistoryAnalyzer.evaluatedSets(of: last, limit: sets)
         let previousSets = HistoryAnalyzer.evaluatedSets(of: previous, limit: sets)
-
-        if LoadMath.isEqual(lastLoad, previousLoad) {
-            let k = min(lastSets.count, previousSets.count)
-            guard k > 0 else { return nil }
-            let lastTotal = lastSets.prefix(k).reduce(0) { $0 + $1.amount(for: measurement) }
-            let previousTotal = previousSets.prefix(k).reduce(0) { $0 + $1.amount(for: measurement) }
-            return lastTotal < previousTotal ? .sameLoad(lastTotal: lastTotal, previousTotal: previousTotal) : nil
-        }
-
-        guard measurement == .weightReps, LoadMath.key(lastLoad) < LoadMath.key(previousLoad) else { return nil }
-        func best(_ sets: [PerformedSet]) -> Double? {
-            sets.compactMap { s in
-                s.weight.flatMap { w in s.reps.flatMap { OneRepMax.raw(weight: w, reps: $0, formula: oneRepMax.formula) } }
-            }.max()
-        }
-        guard let lastBest = best(lastSets), let previousBest = best(previousSets) else { return nil }
-        return LoadMath.key(lastBest) < LoadMath.key(previousBest) ? .estimate : nil
+        let k = min(lastSets.count, previousSets.count)
+        guard k > 0 else { return nil }
+        let lastTotal = lastSets.prefix(k).reduce(0) { $0 + $1.amount(for: measurement) }
+        let previousTotal = previousSets.prefix(k).reduce(0) { $0 + $1.amount(for: measurement) }
+        return lastTotal < previousTotal ? Drop(lastTotal: lastTotal, previousTotal: previousTotal) : nil
     }
 
     private func appendTrendNotes(_ rec: inout Recommendation, text: RecommendationText) {

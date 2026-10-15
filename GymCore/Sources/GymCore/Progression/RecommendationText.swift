@@ -34,11 +34,14 @@ struct RecommendationText {
     }
 
     var noHistoryInContext: String {
-        "Todavía no hay datos suficientes en este contexto (otra máquina o variante). El historial anterior se muestra solo como referencia no equivalente."
+        "Todavía no hay datos suficientes en este contexto (otra máquina, variante o modo de carga). El historial anterior se muestra solo como referencia no equivalente."
     }
 
-    func initialTarget(_ weight: Double) -> String {
-        "Objetivo inicial configurado por vos: \(load(weight)) × \(rangeText). Todavía no hay sesiones anteriores para comparar."
+    func initialTarget(_ weight: Double, hasNonEquivalentReference: Bool) -> String {
+        let tail = hasNonEquivalentReference
+            ? "No hay sesiones comparables en este contexto; el historial de otro contexto es solo referencia."
+            : "Todavía no hay sesiones anteriores para comparar."
+        return "Objetivo inicial configurado por vos: \(load(weight)) × \(rangeText). \(tail)"
     }
 
     // MARK: Rules
@@ -58,7 +61,10 @@ struct RecommendationText {
     }
 
     func increaseConditional(next: Double) -> String {
-        "Podrías subir a \(load(next)) si las series se hicieron con buena técnica y cerca del esfuerzo objetivo."
+        if config.targetRIR == nil {
+            return "Podrías subir a \(load(next)) si las series se hicieron con buena técnica y un esfuerzo exigente pero controlado."
+        }
+        return "Podrías subir a \(load(next)) si las series se hicieron con buena técnica y cerca del esfuerzo objetivo."
     }
 
     var increaseConditions: [String] {
@@ -95,10 +101,6 @@ struct RecommendationText {
 
     func performanceDroppedSameLoad(lastTotal: Int, previousTotal: Int, weight: Double) -> String {
         "Rendimiento menor que la sesión anterior (\(lastTotal) vs. \(previousTotal) \(unit) con \(load(weight))). Mantené la carga y revisá descanso, sueño y técnica: una sola sesión no justifica cambiarla."
-    }
-
-    func performanceDroppedEstimate(weight: Double) -> String {
-        "Rendimiento estimado menor que la sesión anterior. Mantené \(load(weight)) y revisá descanso, sueño y técnica: una sola sesión no justifica cambiar la carga."
     }
 
     func belowMin(weight: Double) -> String {

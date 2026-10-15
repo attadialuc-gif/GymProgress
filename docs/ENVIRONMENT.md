@@ -32,7 +32,7 @@ Situación: **"Linux u otro sistema sin Xcode"**.
 ## Toolchain instalado (con autorización del usuario)
 
 - Swift **6.4.1** (`swift-6.4.1-RELEASE`, build oficial de swift.org para Debian 13), descomprimido en `~/swift/` dentro de WSL, sin privilegios de administrador.
-  - Firma GPG del tarball: ver "Verificación" abajo.
+  - Verificación: se volvió a descargar el tarball y `gpg --verify` dio *Good signature from "Swift 6.x Release Signing Key"* (huella `52BB 7E3D E28A 71BE 22EC 05FF EF80 A866 B47A 981F`); el árbol extraído es idéntico al instalado (`diff -rq`).
 - `libxml2.so.2` (paquete oficial de Debian 13 `libxml2_2.12.7+dfsg+really2.9.14-2.1+deb13u3`) extraído en `~/swift/extra-libs/` porque Kali trae solo `libxml2.so.16` y `swift-test` necesita la versión `.so.2`.
 
 ```

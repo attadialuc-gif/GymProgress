@@ -20,6 +20,12 @@ public enum WeightParser {
             }
         }
         guard separators <= 1, normalized != ".", let value = Double(normalized), value.isFinite else { return nil }
+        // "1.000" is one thousand in es-AR (dot = thousands separator): ambiguous, so it is rejected
+        // instead of being silently read as 1.0.
+        if let dot = trimmed.firstIndex(of: "."), dot != trimmed.startIndex,
+           trimmed[trimmed.index(after: dot)...].count == 3 {
+            return nil
+        }
         return LoadMath.normalized(value)
     }
 

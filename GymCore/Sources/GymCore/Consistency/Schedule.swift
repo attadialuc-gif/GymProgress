@@ -53,6 +53,15 @@ public enum Schedule {
         calendar.daysOfWeek(containing: date).filter { isPlanned($0, entries: entries, calendar: calendar) }
     }
 
+    /// Entries that set the whole week plan from `validFrom`: one entry per weekday (1…7), with
+    /// `nil` for rest days, so removing a day from the plan is explicit and the past is untouched.
+    public static func weeklyPlanEntries(assignments: [Int: UUID], validFrom: Date, createdAt: Date, calendar: TrainingCalendar, makeId: () -> UUID = UUID.init) -> [ScheduleEntry] {
+        let start = calendar.day(of: validFrom)
+        return (1...7).map { weekday in
+            ScheduleEntry(id: makeId(), weekday: weekday, routineId: assignments[weekday], validFrom: start, createdAt: createdAt)
+        }
+    }
+
     /// Current assignment per weekday (for editing): the entries that apply on `day` and after.
     public static func currentAssignments(asOf day: Date, entries: [ScheduleEntry], calendar: TrainingCalendar) -> [Int: UUID] {
         var result: [Int: UUID] = [:]

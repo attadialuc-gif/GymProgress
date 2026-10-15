@@ -222,7 +222,7 @@ struct ProgressionMandatoryCasesTests {
         #expect(rec.action == .maintain)
         #expect(rec.reason == .incompleteSets)
         #expect(rec.targetWeight == 60)
-        #expect(rec.targetReps.count == 3)
+        #expect(rec.targetReps == [12, 12, 8])
         // The pending set is not read as zero reps.
         #expect(rec.lastPerformance?.amounts == [12, 12])
     }
