@@ -23,12 +23,16 @@ public struct HistoryService {
     /// Every log of the exercise, in any context and any session status. The engine and the metrics
     /// decide what is comparable / valid.
     public func performances(exerciseId: UUID) -> [ExercisePerformance] {
-        repository.exerciseLogs(exerciseId: exerciseId).compactMap { log in
-            repository.session(id: log.sessionId).map { performance(of: log, in: $0) }
+        // Batched reads: one query for sessions and one for sets, whatever the history size.
+        let logs = repository.exerciseLogs(exerciseId: exerciseId)
+        let sessions = repository.sessions(ids: Array(Set(logs.map(\.sessionId))))
+        let sets = repository.setLogs(exerciseLogIds: logs.map(\.id))
+        return logs.compactMap { log in
+            sessions[log.sessionId].map { performance(of: log, in: $0, sets: sets[log.id] ?? []) }
         }
     }
 
-    public func performance(of log: ExerciseLog, in session: WorkoutSession) -> ExercisePerformance {
+    func performance(of log: ExerciseLog, in session: WorkoutSession, sets: [SetLog]) -> ExercisePerformance {
         ExercisePerformance(
             sessionId: session.id,
             exerciseLogId: log.id,
@@ -37,8 +41,12 @@ public struct HistoryService {
             isAtypical: session.isAtypical || log.isAtypical,
             context: log.context,
             measurement: log.snapshot.measurement,
-            sets: repository.setLogs(exerciseLogId: log.id).map(\.performed)
+            sets: sets.map(\.performed)
         )
+    }
+
+    public func performance(of log: ExerciseLog, in session: WorkoutSession) -> ExercisePerformance {
+        performance(of: log, in: session, sets: repository.setLogs(exerciseLogId: log.id))
     }
 
     /// Completed sessions of the exercise, newest first, with their sets and decisions.

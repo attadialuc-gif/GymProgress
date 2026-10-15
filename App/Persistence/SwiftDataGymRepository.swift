@@ -1,6 +1,7 @@
 import Foundation
 import GymCore
 import GymStore
+import OSLog
 import SwiftData
 
 /// `GymRepository` on SwiftData. Every mutation saves the context immediately (incremental save):
@@ -341,23 +342,26 @@ final class SwiftDataGymRepository: GymRepository {
         )
     }
 
-    /// All-or-nothing: upserts are staged in the context and saved once; on error the context is
-    /// rolled back.
-    func merge(_ database: GymDatabase) throws {
+    /// Inserts only records whose id does not exist (never overwrites: an old backup can never undo
+    /// newer history). All-or-nothing: staged in the context, saved once, rolled back on error.
+    func merge(_ database: GymDatabase, includeSettings: Bool) throws {
         batching = true
         defer { batching = false }
         do {
-            for e in database.exercises { try upsertExercise(e) }
-            for r in database.routines { try upsertRoutine(r) }
-            for r in database.routineExercises { try upsertRoutineExercise(r) }
-            for s in database.schedule where !scheduleEntries().contains(where: { $0.id == s.id }) { try insertScheduleEntry(s) }
-            for s in database.sessions { try upsertSession(s) }
-            for l in database.exerciseLogs { try upsertExerciseLog(l) }
-            for s in database.setLogs { try upsertSetLog(s) }
-            for d in database.decisions { try upsertDecision(d) }
-            for l in database.comparabilityLinks { try insertComparabilityLink(l) }
-            for g in database.goals { try upsertGoal(g) }
-            try saveSettings(database.settings)
+            for e in database.exercises where exerciseModel(e.id) == nil { try upsertExercise(e) }
+            for r in database.routines where routineModel(r.id) == nil { try upsertRoutine(r) }
+            for r in database.routineExercises where routineExerciseModel(r.id) == nil { try upsertRoutineExercise(r) }
+            let scheduleIds = Set(scheduleEntries().map(\.id))
+            for s in database.schedule where !scheduleIds.contains(s.id) { try insertScheduleEntry(s) }
+            for s in database.sessions where sessionModel(s.id) == nil { try upsertSession(s) }
+            for l in database.exerciseLogs where logModel(l.id) == nil { try upsertExerciseLog(l) }
+            for s in database.setLogs where setModel(s.id) == nil { try upsertSetLog(s) }
+            for d in database.decisions where decision(exerciseLogId: d.exerciseLogId) == nil { try upsertDecision(d) }
+            let linkIds = Set(comparabilityLinks().map(\.id))
+            for l in database.comparabilityLinks where !linkIds.contains(l.id) { try insertComparabilityLink(l) }
+            let goalIds = Set(goals().map(\.id))
+            for g in database.goals where !goalIds.contains(g.id) { try upsertGoal(g) }
+            if includeSettings { try saveSettings(database.settings) }
             batching = false
             try save()
         } catch {
@@ -366,9 +370,51 @@ final class SwiftDataGymRepository: GymRepository {
         }
     }
 
+    /// Every stored payload must decode and every fetch must succeed; otherwise an export would be
+    /// silently incomplete.
+    func validateIntegrity() throws {
+        readFailures = []
+        let counts = [
+            (fetch(ExerciseModel.self).count, exercises().count),
+            (fetch(SessionModel.self).count, sessions().count),
+            (fetch(ExerciseLogModel.self).count, fetch(ExerciseLogModel.self).compactMap { decode(ExerciseLog.self, $0.payload) }.count),
+            (fetch(SetLogModel.self).count, fetch(SetLogModel.self).compactMap { decode(SetLog.self, $0.payload) }.count),
+            (fetch(DecisionModel.self).count, fetch(DecisionModel.self).compactMap { decode(RecommendationDecision.self, $0.payload) }.count),
+        ]
+        if !readFailures.isEmpty || counts.contains(where: { $0.0 != $0.1 }) {
+            throw GymStoreError.storage("Hay registros que no se pudieron leer (\(readFailures.prefix(3).joined(separator: "; "))). No se exportó nada para no generar una copia incompleta.")
+        }
+    }
+
+    // MARK: - Batched reads
+
+    func setLogs(exerciseLogIds: [UUID]) -> [UUID: [SetLog]] {
+        let ids = exerciseLogIds
+        var result: [UUID: [SetLog]] = [:]
+        for model in fetch(SetLogModel.self, #Predicate { ids.contains($0.exerciseLogId) }) {
+            if let set = decode(SetLog.self, model.payload) { result[set.exerciseLogId, default: []].append(set) }
+        }
+        for key in result.keys {
+            result[key]?.sort { ($0.index, $0.id.uuidString) < ($1.index, $1.id.uuidString) }
+        }
+        return result
+    }
+
+    func sessions(ids: [UUID]) -> [UUID: WorkoutSession] {
+        let wanted = ids
+        var result: [UUID: WorkoutSession] = [:]
+        for model in fetch(SessionModel.self, #Predicate { wanted.contains($0.id) }) {
+            if let s = decode(WorkoutSession.self, model.payload) { result[s.id] = s }
+        }
+        return result
+    }
+
     // MARK: - Helpers
 
     private var batching = false
+    /// Read errors since the last integrity check (fetch failures or undecodable payloads).
+    private(set) var readFailures: [String] = []
+    private let logger = Logger(subsystem: "GymProgress", category: "persistence")
 
     private func save() throws {
         guard !batching else { return }
@@ -382,7 +428,13 @@ final class SwiftDataGymRepository: GymRepository {
 
     private func fetch<M: PersistentModel>(_ type: M.Type, _ predicate: Predicate<M>? = nil) -> [M] {
         let descriptor = FetchDescriptor<M>(predicate: predicate)
-        return (try? context.fetch(descriptor)) ?? []
+        do {
+            return try context.fetch(descriptor)
+        } catch {
+            logger.error("Fetch \(String(describing: M.self), privacy: .public) failed: \(String(describing: error), privacy: .public)")
+            readFailures.append("lectura de \(M.self)")
+            return []
+        }
     }
 
     private func encode<T: Encodable>(_ value: T) throws -> Data {
@@ -393,7 +445,8 @@ final class SwiftDataGymRepository: GymRepository {
         do {
             return try decoder.decode(type, from: data)
         } catch {
-            assertionFailure("Undecodable \(T.self) payload: \(error)")
+            logger.error("Undecodable \(String(describing: T.self), privacy: .public): \(String(describing: error), privacy: .public)")
+            readFailures.append("registro \(T.self) ilegible")
             return nil
         }
     }

@@ -12,6 +12,8 @@ struct ExerciseLogView: View {
     @State private var savingInitialTarget = false
     @State private var showContext = false
     @State private var completedTick = 0
+    @State private var notesDraft = ""
+    @FocusState private var notesFocused: Bool
 
     var body: some View {
         let _ = model.revision
@@ -53,7 +55,9 @@ struct ExerciseLogView: View {
                     onAccept: { model.perform { try model.workout.decide(logId: logId, choice: .accept, now: model.now()) } },
                     onModify: { savingInitialTarget = false; showModify = true },
                     onIgnore: { model.perform { try model.workout.decide(logId: logId, choice: .ignore, now: model.now()) } },
-                    onCopyPrevious: { model.perform { try model.workout.copyPreviousLoads(logId: logId, now: model.now()) } },
+                    onCopyPrevious: { nonEquivalent in
+                        model.perform { try model.workout.copyPreviousLoads(logId: logId, allowNonEquivalent: nonEquivalent, now: model.now()) }
+                    },
                     onSetInitialTarget: { savingInitialTarget = true; showModify = true }
                 )
 
@@ -83,11 +87,21 @@ struct ExerciseLogView: View {
                     get: { log.isAtypical },
                     set: { value in model.perform { try model.workout.setExerciseAtypical(logId: logId, value) } }
                 ))
-                TextField("Notas del ejercicio", text: Binding(
-                    get: { log.notes },
-                    set: { value in model.perform { try model.workout.setExerciseNotes(logId: logId, notes: value) } }
-                ), axis: .vertical)
-                .textFieldStyle(.roundedBorder)
+                TextField("Notas del ejercicio", text: $notesDraft, axis: .vertical)
+                    .textFieldStyle(.roundedBorder)
+                    .focused($notesFocused)
+                    .onAppear { notesDraft = log.notes }
+                    .onDisappear {
+                        if notesDraft != log.notes {
+                            model.perform { try model.workout.setExerciseNotes(logId: logId, notes: notesDraft) }
+                        }
+                    }
+                    // Saved when editing ends (not on every keystroke).
+                    .onChange(of: notesFocused) { _, focused in
+                        if !focused, notesDraft != log.notes {
+                            model.perform { try model.workout.setExerciseNotes(logId: logId, notes: notesDraft) }
+                        }
+                    }
             }
             .padding()
         }
@@ -98,14 +112,13 @@ struct ExerciseLogView: View {
                 ModifyRecommendationSheet(
                     recommendation: state.recommendation,
                     increment: log.configSnapshot.increment,
-                    formatter: fmt
+                    formatter: fmt,
+                    title: savingInitialTarget ? "Objetivo inicial" : "Modificar objetivo"
                 ) { weight, reps, seconds in
-                    model.perform {
-                        try model.workout.decide(logId: logId, choice: .modify(weight: weight, reps: reps, seconds: seconds), now: model.now())
-                        if savingInitialTarget, let weight, var exercise = model.repository.exercise(id: log.exerciseId) {
-                            exercise.progression.initialWeight = weight
-                            try model.catalog.updateExercise(exercise)
-                        }
+                    if savingInitialTarget {
+                        model.perform { try model.workout.setInitialTarget(logId: logId, weight: weight, reps: reps, seconds: seconds, now: model.now()) }
+                    } else {
+                        model.perform { try model.workout.decide(logId: logId, choice: .modify(weight: weight, reps: reps, seconds: seconds), now: model.now()) }
                     }
                 }
             }
@@ -142,6 +155,11 @@ private struct ContextEditor: View {
     @State private var equipment = ""
     @State private var variant = ""
 
+    private var currentLabel: String {
+        let parts = [log.equipmentLabel, log.variantLabel].compactMap { $0 }
+        return parts.isEmpty ? "estándar" : parts.joined(separator: " · ")
+    }
+
     var body: some View {
         Form {
             Section {
@@ -151,14 +169,14 @@ private struct ContextEditor: View {
                 Text("Con otro contexto la app no compara automáticamente con el historial anterior. Si son equivalentes, podés vincularlos.")
             }
             Section {
-                Button("Tratar como equivalente al contexto estándar") {
+                Button("Guardar y tratar como equivalente al anterior") {
                     model.perform {
-                        let updated = try model.workout.setContext(logId: log.id, variantLabel: variant, equipmentLabel: equipment, now: model.now())
-                        try model.workout.linkContexts(updated.context, ComparabilityContext(exerciseId: log.exerciseId, loadMode: log.snapshot.loadMode), now: model.now())
+                        try model.workout.switchContextTreatingAsEquivalent(logId: log.id, variantLabel: variant, equipmentLabel: equipment, now: model.now())
                     }
                     dismiss()
                 }
-                .disabled(equipment.isEmpty && variant.isEmpty)
+            } footer: {
+                Text("Vincula el contexto que estabas usando (\(currentLabel)) con el nuevo: desde ahora sus resultados se comparan entre sí.")
             }
         }
         .navigationTitle("Contexto")

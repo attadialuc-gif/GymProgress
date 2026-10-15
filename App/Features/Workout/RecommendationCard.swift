@@ -11,7 +11,8 @@ struct RecommendationCard: View {
     let onAccept: () -> Void
     let onModify: () -> Void
     let onIgnore: () -> Void
-    let onCopyPrevious: () -> Void
+    /// Parameter: copy from a non-equivalent context (explicit choice).
+    let onCopyPrevious: (Bool) -> Void
     let onSetInitialTarget: () -> Void
 
     var body: some View {
@@ -136,11 +137,18 @@ struct RecommendationCard: View {
             .controlSize(.large)
         }
         if decision?.kind == .ignored || recommendation.action == .needsInitialTarget {
-            Button(action: onCopyPrevious) {
-                Label("Copiar cargas anteriores", systemImage: "doc.on.doc")
+            if recommendation.lastPerformance != nil {
+                Button { onCopyPrevious(false) } label: {
+                    Label("Copiar cargas anteriores", systemImage: "doc.on.doc")
+                }
+                .font(.subheadline)
+            } else if recommendation.nonEquivalentReference != nil {
+                // Explicit and labeled: the loads come from another machine/variant.
+                Button { onCopyPrevious(true) } label: {
+                    Label("Copiar cargas de otro contexto (no equivalente)", systemImage: "doc.on.doc")
+                }
+                .font(.subheadline)
             }
-            .font(.subheadline)
-            .disabled(recommendation.lastPerformance == nil && recommendation.nonEquivalentReference == nil)
         }
     }
 }
@@ -151,72 +159,6 @@ extension DecisionKind {
         case .accepted: "Aceptada"
         case .modified: "Modificada"
         case .ignored: "Ignorada"
-        }
-    }
-}
-
-/// Quick editor for "Modificar": +/− with the exercise increment.
-struct ModifyRecommendationSheet: View {
-    @Environment(\.dismiss) private var dismiss
-    let recommendation: Recommendation
-    let increment: Double
-    let formatter: LoadFormatter
-    let onSave: (Double?, [Int], [Int]?) -> Void
-
-    @State private var weight: Double = 0
-    @State private var amounts: [Int] = []
-    @State private var loaded = false
-
-    private var isDuration: Bool { recommendation.measurement == .duration }
-
-    var body: some View {
-        Form {
-            Section("Peso objetivo") {
-                HStack {
-                    Button {
-                        let floor = recommendation.measurement == .bodyweightReps ? -500.0 : 0
-                        weight = max(floor, LoadMath.normalized(weight - increment))
-                    } label: { Image(systemName: "minus.circle.fill") }
-                        .accessibilityLabel("Restar \(formatter.weight(increment))")
-                    Spacer()
-                    Text(formatter.load(weight, measurement: recommendation.measurement, loadMode: recommendation.context.loadMode))
-                        .font(.title.weight(.bold).monospacedDigit())
-                    Spacer()
-                    Button { weight = LoadMath.normalized(weight + increment) } label: { Image(systemName: "plus.circle.fill") }
-                        .accessibilityLabel("Sumar \(formatter.weight(increment))")
-                }
-                .font(.title)
-                .buttonStyle(.borderless)
-            }
-            Section(isDuration ? "Segundos por serie" : "Repeticiones por serie") {
-                ForEach(amounts.indices, id: \.self) { i in
-                    Stepper("Serie \(i + 1): \(amounts[i])\(isDuration ? " s" : "")", value: $amounts[i], in: 0...(isDuration ? 3600 : 100), step: isDuration ? 5 : 1)
-                }
-                Button("Agregar serie") { amounts.append(amounts.last ?? recommendation.target.repMin) }
-                if amounts.count > 1 {
-                    Button("Quitar serie", role: .destructive) { amounts.removeLast() }
-                }
-            }
-        }
-        .navigationTitle("Modificar objetivo")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) { Button("Cancelar") { dismiss() } }
-            ToolbarItem(placement: .confirmationAction) {
-                Button("Usar") {
-                    if isDuration { onSave(weight, [], amounts) } else { onSave(weight, amounts, nil) }
-                    dismiss()
-                }
-            }
-        }
-        .onAppear {
-            guard !loaded else { return }
-            loaded = true
-            weight = recommendation.targetWeight ?? recommendation.lastPerformance?.workingLoad ?? 0
-            let base = isDuration ? (recommendation.targetSeconds ?? []) : recommendation.targetReps
-            amounts = base.isEmpty
-                ? Array(repeating: isDuration ? recommendation.target.secondsMin : recommendation.target.repMin, count: recommendation.target.sets)
-                : base
         }
     }
 }

@@ -20,6 +20,9 @@ final class AppModel {
     /// Incremented after each successful mutation; views read it to re-render.
     private(set) var revision = 0
     var errorMessage: String?
+    /// The persistent store could not be opened: the app shows a blocking screen and accepts no
+    /// workouts (anything logged would be lost on relaunch).
+    private(set) var storeError: String?
     var selectedTab: AppTab = .home
 
     init(repository: any GymRepository) {
@@ -40,10 +43,10 @@ final class AppModel {
             model.seedCatalogIfNeeded()
             return model
         } catch {
-            // Never silently replace the user's data: show the error on an empty in-memory store.
+            // Never pretend to work on a temporary store: block the UI and explain.
             let fallback = try! SwiftDataGymRepository.makeContainer(inMemory: true)
             let model = AppModel(repository: SwiftDataGymRepository(container: fallback))
-            model.errorMessage = "No se pudo abrir la base de datos: \(error.localizedDescription)"
+            model.storeError = "No se pudo abrir la base de datos de la app. Tus datos no se modificaron. Cerrá la app y volvé a abrirla; si el problema sigue, no registres entrenamientos hasta resolverlo.\n\nDetalle: \(error.localizedDescription)"
             return model
         }
     }
@@ -79,7 +82,7 @@ final class AppModel {
 
     static func message(for error: GymStoreError) -> String {
         switch error {
-        case .notFound: "No se encontró el elemento."
+        case let .notFound(what): what.contains(" ") ? what : "No se encontró el elemento."
         case .sessionAlreadyOpen: "Ya hay un entrenamiento en curso. Terminalo o descartalo antes de empezar otro."
         case .sessionNotOpen: "El entrenamiento ya no está en curso."
         case .hasHistory: "Tiene historial: no se puede borrar, pero podés archivarlo."

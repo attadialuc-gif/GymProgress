@@ -84,7 +84,7 @@ public final class JSONGymRepository: GymRepository {
         scheduleById.values.sorted { ($0.validFrom, $0.createdAt, $0.id.uuidString) < ($1.validFrom, $1.createdAt, $1.id.uuidString) }
     }
     public func insertScheduleEntry(_ entry: ScheduleEntry) throws {
-        guard scheduleById[entry.id] == nil else { throw GymStoreError.invalidValue("Schedule entries are append-only") }
+        guard scheduleById[entry.id] == nil else { throw GymStoreError.invalidValue("El calendario no se reescribe: se agregan entradas nuevas.") }
         try mutate { scheduleById[entry.id] = entry }
     }
 
@@ -187,13 +187,24 @@ public final class JSONGymRepository: GymRepository {
         )
     }
 
-    /// Upserts every record by id (never deletes). All-or-nothing: on a write failure the previous
-    /// state is restored.
-    public func merge(_ database: GymDatabase) throws {
+    /// Inserts only records whose id does not exist yet; existing records are never overwritten
+    /// (an older backup can never undo newer local history). All-or-nothing.
+    public func merge(_ database: GymDatabase, includeSettings: Bool) throws {
         let backup = snapshot()
+        var missing = database
+        missing.exercises = database.exercises.filter { exercisesById[$0.id] == nil }
+        missing.routines = database.routines.filter { routinesById[$0.id] == nil }
+        missing.routineExercises = database.routineExercises.filter { routineExercisesById[$0.id] == nil }
+        missing.schedule = database.schedule.filter { scheduleById[$0.id] == nil }
+        missing.sessions = database.sessions.filter { sessionsById[$0.id] == nil }
+        missing.exerciseLogs = database.exerciseLogs.filter { logsById[$0.id] == nil }
+        missing.setLogs = database.setLogs.filter { setsById[$0.id] == nil }
+        missing.decisions = database.decisions.filter { decisionsByLog[$0.exerciseLogId] == nil }
+        missing.comparabilityLinks = database.comparabilityLinks.filter { linksById[$0.id] == nil }
+        missing.goals = database.goals.filter { goalsById[$0.id] == nil }
         do {
             try batch {
-                try mutate { apply(database, settings: true) }
+                try mutate { apply(missing, settings: includeSettings) }
             }
         } catch {
             clear()
@@ -229,10 +240,25 @@ public final class JSONGymRepository: GymRepository {
         if settings { userSettings = db.settings }
     }
 
+    /// Applies a change and persists it. If the disk write fails, memory is restored to the last
+    /// state on disk so memory never claims something that was not saved.
     private func mutate(_ change: () -> Void) throws {
         change()
         dirty = true
-        if batchDepth == 0 { try persist() }
+        guard batchDepth == 0 else { return }
+        do {
+            try persist()
+        } catch {
+            restoreFromDisk()
+            throw error
+        }
+    }
+
+    private func restoreFromDisk() {
+        guard let fileURL, let data = try? Data(contentsOf: fileURL),
+              let db = try? GymJSON.decoder.decode(GymDatabase.self, from: data) else { return }
+        clear()
+        load(db)
     }
 
     private func persist() throws {

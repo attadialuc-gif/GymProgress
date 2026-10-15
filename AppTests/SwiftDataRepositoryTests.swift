@@ -115,6 +115,58 @@ struct SwiftDataRepositoryTests {
         #expect(target.repo.snapshot() == source.repo.snapshot())
     }
 
+    @Test("Accepted and ignored decisions persist on SwiftData and survive recomputation", arguments: [DecisionChoice.accept, DecisionChoice.ignore])
+    func decisionKinds(choice: DecisionChoice) throws {
+        let store = try DiskStore()
+        let (bench, routine) = try setUp(store)
+        try perform(store, routine: routine, on: 0, weight: 60, reps: [12, 12, 12])
+        let session = try store.workout.startSession(routineId: routine.id, now: day(3))
+        let logId = store.repo.exerciseLogs(sessionId: session.id)[0].id
+        let first = try store.workout.openExercise(logId: logId, now: day(3, 1))
+        let decision = try store.workout.decide(logId: logId, choice: choice, now: day(3, 2))
+        try store.reload()
+        _ = store.workout.previewRecommendation(exerciseId: bench.id, now: day(3, 3))
+        let again = try store.workout.openExercise(logId: logId, now: day(3, 4))
+        #expect(again.decision == decision)
+        #expect(again.recommendation == first.recommendation)
+        let weights = store.repo.setLogs(exerciseLogId: logId).map(\.weight)
+        #expect(weights == (choice == .accept ? [62.5, 62.5, 62.5] : [nil, nil, nil]))
+    }
+
+    @Test("Section 2.E flow on SwiftData, reopening the container between steps")
+    func endToEndFlow() throws {
+        let store = try DiskStore()
+        try ExerciseCatalogService(repository: store.repo).seed(try ExerciseCatalog.bundled())
+        try store.reload()
+        let routines = RoutineService(repository: store.repo)
+        let routine = try routines.createRoutine(name: "Torso A", now: day(0))
+        let bench = try #require(store.repo.exercises().first { $0.catalogId == "barbell-bench-press" })
+        try routines.addExercise(routineId: routine.id, exerciseId: bench.id,
+                                 override: ProgressionConfig(targetSets: 3, repMin: 8, repMax: 12, targetRIR: 2, initialWeight: 50, increment: 2.5))
+        try store.reload()
+
+        let s1 = try store.workout.startSession(routineId: routine.id, now: day(1))
+        let log1 = store.repo.exerciseLogs(sessionId: s1.id)[0]
+        #expect(try store.workout.openExercise(logId: log1.id, now: day(1, 1)).recommendation.targetWeight == 50)
+        try store.workout.decide(logId: log1.id, choice: .accept, now: day(1, 2))
+        try store.reload()
+        for set in store.repo.setLogs(exerciseLogId: log1.id) {
+            var s = set
+            s.reps = 12
+            s.rir = 2
+            try store.workout.updateSet(s)
+            try store.workout.completeSet(setId: s.id, now: day(1, 10))
+            try store.reload()
+        }
+        try store.workout.finish(sessionId: s1.id, now: day(1, 45))
+        try store.reload()
+
+        #expect(HistoryService(repository: store.repo).exerciseHistory(exerciseId: bench.id).count == 1)
+        let next = try #require(store.workout.previewRecommendation(exerciseId: bench.id, now: day(3)))
+        #expect(next.action == .increaseWeight)
+        #expect(next.targetWeight == 52.5)
+    }
+
     @Test("Migration plan opens a v1 store")
     func migrationPlan() throws {
         let store = try DiskStore()

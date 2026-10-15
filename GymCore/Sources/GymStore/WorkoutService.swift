@@ -136,7 +136,7 @@ public final class WorkoutService {
 
     /// Removes an exercise from this session only. Refused once a set was completed (data integrity).
     public func removeExercise(logId: UUID) throws {
-        guard repository.exerciseLog(id: logId) != nil else { throw GymStoreError.notFound("exerciseLog") }
+        _ = try requireOpenLog(logId)
         guard !repository.setLogs(exerciseLogId: logId).contains(where: { $0.status == .completed }) else {
             throw GymStoreError.hasCompletedSets
         }
@@ -170,7 +170,7 @@ public final class WorkoutService {
     /// recommendation are kept untouched (the user's choice is the source of truth).
     @discardableResult
     public func setContext(logId: UUID, variantLabel: String?, equipmentLabel: String?, now: Date) throws -> ExerciseLog {
-        var log = try requireLog(logId)
+        var log = try requireOpenLog(logId)
         log.variantLabel = Self.cleanLabel(variantLabel)
         log.equipmentLabel = Self.cleanLabel(equipmentLabel)
         if log.frozenRecommendation != nil, repository.decision(exerciseLogId: logId) == nil {
@@ -187,6 +187,22 @@ public final class WorkoutService {
         let link = ComparabilityLink(a: a, b: b, createdAt: now)
         try repository.insertComparabilityLink(link)
         return link
+    }
+
+    /// The user switches machine/variant *and* says it is equivalent to the one they were using:
+    /// the link (previous context ↔ new context) is created first, then the context changes, so
+    /// today's card (re-frozen if no decision yet) already compares against that history.
+    @discardableResult
+    public func switchContextTreatingAsEquivalent(logId: UUID, variantLabel: String?, equipmentLabel: String?, now: Date) throws -> ExerciseLog {
+        let log = try requireOpenLog(logId)
+        let previous = log.context
+        var next = previous
+        next.variantLabel = Self.cleanLabel(variantLabel)
+        next.equipmentLabel = Self.cleanLabel(equipmentLabel)
+        if next.normalized != previous.normalized {
+            try linkContexts(previous, next, now: now)
+        }
+        return try setContext(logId: logId, variantLabel: variantLabel, equipmentLabel: equipmentLabel, now: now)
     }
 
     // MARK: - Recommendation
@@ -207,7 +223,7 @@ public final class WorkoutService {
     /// the same decision (the originally shown recommendation stays as the audit snapshot).
     @discardableResult
     public func decide(logId: UUID, choice: DecisionChoice, now: Date) throws -> RecommendationDecision {
-        var log = try requireLog(logId)
+        var log = try requireOpenLog(logId)
         if log.frozenRecommendation == nil {
             log.frozenRecommendation = computeRecommendation(for: log, now: now)
             log.recommendationFrozenAt = now
@@ -228,9 +244,9 @@ public final class WorkoutService {
         case let .modify(w, r, s):
             kind = .modified
             if let w {
-                guard w.isFinite, w >= 0 || log.snapshot.measurement == .bodyweightReps else { throw GymStoreError.invalidValue("weight") }
+                guard w.isFinite, w >= 0 || log.snapshot.measurement == .bodyweightReps else { throw GymStoreError.invalidValue("El peso no puede ser negativo.") }
             }
-            guard r.allSatisfy({ $0 >= 0 }), (s ?? []).allSatisfy({ $0 >= 0 }) else { throw GymStoreError.invalidValue("reps") }
+            guard r.allSatisfy({ $0 >= 0 }), (s ?? []).allSatisfy({ $0 >= 0 }) else { throw GymStoreError.invalidValue("Las repeticiones no pueden ser negativas.") }
             weight = w.map(LoadMath.normalized)
             reps = r
             seconds = s
@@ -258,11 +274,16 @@ public final class WorkoutService {
     }
 
     /// Copies the loads (and reps as targets) of the last comparable session into the pending sets.
-    /// Falls back to the last session in another context only because the user asked explicitly.
-    public func copyPreviousLoads(logId: UUID, now: Date) throws {
+    /// The last session of a *non-equivalent* context is used only with `allowNonEquivalent`
+    /// (an explicit, labeled user choice).
+    public func copyPreviousLoads(logId: UUID, allowNonEquivalent: Bool = false, now: Date) throws {
+        _ = try requireOpenLog(logId)
         let state = try openExercise(logId: logId, now: now)
-        guard let previous = state.recommendation.lastPerformance ?? state.recommendation.nonEquivalentReference,
-              !previous.sets.isEmpty else { throw GymStoreError.notFound("previous performance") }
+        let source = state.recommendation.lastPerformance
+            ?? (allowNonEquivalent ? state.recommendation.nonEquivalentReference : nil)
+        guard let previous = source, !previous.sets.isEmpty else {
+            throw GymStoreError.notFound("No hay una sesión anterior para copiar.")
+        }
         let measurement = state.log.snapshot.measurement
         try ensureWorkingSets(count: previous.sets.count, log: state.log)
         for (i, set) in workingSets(of: state.log).enumerated() where set.status == .pending {
@@ -277,11 +298,40 @@ public final class WorkoutService {
     }
 
     /// Recommendation for the *next* session (Home / routine preview / after finishing). Not frozen.
+    /// Without an explicit config it uses the config the next session would get: the current
+    /// routine override of the routine exercise used last time, else the exercise's own config.
     public func previewRecommendation(exerciseId: UUID, config: ProgressionConfig? = nil, now: Date) -> Recommendation? {
         guard let exercise = repository.exercise(id: exerciseId) else { return nil }
         let labels = history.lastUsedLabels(exerciseId: exerciseId)
         let context = ComparabilityContext(exerciseId: exerciseId, variantLabel: labels.variant, equipmentLabel: labels.equipment, loadMode: exercise.loadMode)
-        return recommendation(context: context, measurement: exercise.measurement, config: config ?? exercise.progression, excludingSessionId: nil, now: now)
+        return recommendation(context: context, measurement: exercise.measurement, config: config ?? effectiveConfig(for: exercise), excludingSessionId: nil, now: now)
+    }
+
+    private func effectiveConfig(for exercise: Exercise) -> ProgressionConfig {
+        let latest = history.exerciseHistory(exerciseId: exercise.id).first
+        if let id = latest?.log.routineExerciseId, let item = repository.routineExercise(id: id), let override = item.progressionOverride {
+            return override
+        }
+        return exercise.progression
+    }
+
+    /// "Definir objetivo inicial": stored where the next session will read it (the routine override
+    /// when the exercise comes from a routine that overrides it, else the exercise config), and used
+    /// as today's target through a `modified` decision.
+    @discardableResult
+    public func setInitialTarget(logId: UUID, weight: Double?, reps: [Int], seconds: [Int]? = nil, now: Date) throws -> RecommendationDecision {
+        let log = try requireOpenLog(logId)
+        if let weight {
+            if let id = log.routineExerciseId, var item = repository.routineExercise(id: id), var override = item.progressionOverride {
+                override.initialWeight = LoadMath.normalized(weight)
+                item.progressionOverride = override
+                try repository.upsertRoutineExercise(item)
+            } else if var exercise = repository.exercise(id: log.exerciseId) {
+                exercise.progression.initialWeight = LoadMath.normalized(weight)
+                try repository.upsertExercise(exercise)
+            }
+        }
+        return try decide(logId: logId, choice: .modify(weight: weight, reps: reps, seconds: seconds), now: now)
     }
 
     /// Preview for every exercise of a routine (routine preview / Home).
@@ -298,7 +348,7 @@ public final class WorkoutService {
 
     @discardableResult
     public func addSet(logId: UUID, kind: SetKind = .working) throws -> SetLog {
-        _ = try requireLog(logId)
+        _ = try requireOpenLog(logId)
         let sets = repository.setLogs(exerciseLogId: logId)
         let last = sets.last { $0.kind == kind } ?? sets.last
         let set = SetLog(
@@ -319,14 +369,19 @@ public final class WorkoutService {
         try Self.validate(set)
         var updated = set
         updated.exerciseLogId = existing.exerciseLogId
+        // Status only changes through completeSet / reopenSet (a stale edit can't un-complete a set).
+        updated.status = existing.status
+        updated.completedAt = existing.completedAt
         updated.weight = set.weight.map(LoadMath.normalized)
         updated.addedWeight = set.addedWeight.map(LoadMath.normalized)
         updated.assistance = set.assistance.map(LoadMath.normalized)
         try repository.upsertSetLog(updated)
     }
 
+    /// Structural change: only while the session is open (finished history is never re-indexed).
     public func removeSet(setId: UUID) throws {
         guard let set = repository.setLog(id: setId) else { throw GymStoreError.notFound("set") }
+        _ = try requireOpenLog(set.exerciseLogId)
         try repository.deleteSetLog(id: setId)
         for (i, remaining) in repository.setLogs(exerciseLogId: set.exerciseLogId).enumerated() where remaining.index != i {
             var s = remaining
@@ -340,7 +395,7 @@ public final class WorkoutService {
     @discardableResult
     public func completeSet(setId: UUID, now: Date) throws -> SetLog {
         guard var set = repository.setLog(id: setId) else { throw GymStoreError.notFound("set") }
-        var log = try requireLog(set.exerciseLogId)
+        var log = try requireOpenLog(set.exerciseLogId)
         let measurement = log.snapshot.measurement
         switch measurement {
         case .weightReps:
@@ -372,6 +427,7 @@ public final class WorkoutService {
 
     public func reopenSet(setId: UUID) throws {
         guard var set = repository.setLog(id: setId) else { throw GymStoreError.notFound("set") }
+        _ = try requireOpenLog(set.exerciseLogId)
         set.status = .pending
         set.completedAt = nil
         try repository.upsertSetLog(set)
@@ -514,6 +570,14 @@ public final class WorkoutService {
         return log
     }
 
+    /// For changes that only make sense during the workout (decisions, completing/adding/removing
+    /// sets, context): refused once the session is finished or discarded.
+    private func requireOpenLog(_ id: UUID) throws -> ExerciseLog {
+        let log = try requireLog(id)
+        guard repository.session(id: log.sessionId)?.isOpen == true else { throw GymStoreError.sessionNotOpen }
+        return log
+    }
+
     static func cleanLabel(_ label: String?) -> String? {
         let trimmed = label?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         return trimmed.isEmpty ? nil : trimmed
@@ -524,7 +588,7 @@ public final class WorkoutService {
         if let error = issues.first(where: \.isError), case let .error(message) = error {
             throw GymStoreError.invalidValue(message)
         }
-        if let a = set.addedWeight, !(a.isFinite && a >= 0) { throw GymStoreError.invalidValue("addedWeight") }
-        if let a = set.assistance, !(a.isFinite && a >= 0) { throw GymStoreError.invalidValue("assistance") }
+        if let a = set.addedWeight, !(a.isFinite && a >= 0) { throw GymStoreError.invalidValue("El lastre no puede ser negativo.") }
+        if let a = set.assistance, !(a.isFinite && a >= 0) { throw GymStoreError.invalidValue("La asistencia no puede ser negativa.") }
     }
 }

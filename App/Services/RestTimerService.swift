@@ -35,7 +35,8 @@ final class RestTimerService {
         endDate = end
         UserDefaults.standard.set(end, forKey: Self.storedEndKey)
         guard notify else { return }
-        Task { await self.scheduleNotification(at: end) }
+        let id = notificationId
+        Task.detached { await Self.scheduleNotification(id: id, at: end) }
     }
 
     func add(seconds: Int, now: Date, notify: Bool) {
@@ -49,7 +50,9 @@ final class RestTimerService {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [notificationId])
     }
 
-    private func scheduleNotification(at date: Date) async {
+    /// Nonisolated: the notification center is used off the main actor only, so no non-Sendable
+    /// value crosses actor boundaries under Swift 6 strict concurrency.
+    private nonisolated static func scheduleNotification(id notificationId: String, at date: Date) async {
         let center = UNUserNotificationCenter.current()
         let settings = await center.notificationSettings()
         if settings.authorizationStatus == .notDetermined {

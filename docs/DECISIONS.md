@@ -64,7 +64,17 @@ Formato: decisión · alternativas · motivo. Las decisiones del motor (D-010+) 
 
 **D-032 · Completar en un toque.** Si faltan reps/segundos, `completeSet` usa el objetivo visible de la serie; el peso nunca se inventa (sin peso → error `missingValues`).
 
-**D-033 · Import = merge por id** (nunca borra, todo o nada, valida esquema y referencias antes). Reimportar el mismo archivo no duplica. CSV: RFC 4180 con coma, punto decimal e ISO-8601 para que sea legible por cualquier herramienta.
+**D-033 · Import = solo agrega lo nuevo (revisada tras la revisión de etapas 2–3).** Nunca sobrescribe ni borra registros locales: si el archivo trae una versión distinta de un registro existente, gana la local y se informa como conflicto (una copia vieja nunca deshace un entrenamiento más nuevo). Se rechaza el import si hay un entrenamiento abierto local y el archivo trae otro abierto. Los ajustes se importan solo en una app sin historial (restauración). Todo o nada; valida esquema, referencias (incluido el ejercicio de cada log), valores y decisiones duplicadas. Reimportar no duplica. CSV: RFC 4180 con coma, punto decimal e ISO-8601.
+
+**D-035 · Cambios estructurales solo con la sesión abierta.** Decidir, completar/reabrir/agregar/quitar series, cambiar contexto o quitar ejercicios exige sesión `active`/`paused`; el historial terminado no se reindexa. Editar valores de una serie se permite siempre (corregir un error de tipeo), pero `updateSet` nunca cambia el estado completada/pendiente.
+
+**D-036 · "Tratar como equivalente"** vincula el contexto que el usuario venía usando con el nuevo (no con el estándar) y después cambia el contexto, así la tarjeta de hoy (si todavía no hay decisión) ya compara con ese historial (`switchContextTreatingAsEquivalent`).
+
+**D-037 · Objetivo inicial** se guarda donde lo leerá la próxima sesión: en el override de la rutina si existe, si no en el ejercicio; y se usa hoy como decisión `modified`. La vista previa de "próxima sesión" usa la configuración de la rutina con la que se hizo el ejercicio la última vez.
+
+**D-038 · Copiar cargas** usa solo la última sesión comparable; copiar desde otro contexto requiere un botón explícito rotulado "no equivalente".
+
+**D-039 · Registro de series en la UI:** los campos se guardan al salir del campo, al confirmar y siempre antes de completar la serie (no en cada tecla); mostrar un valor nunca lo reescribe. Si la base de datos no abre, la app muestra una pantalla bloqueante en lugar de aceptar entrenamientos en un almacenamiento temporal. "Pantalla encendida" se maneja desde la raíz mientras haya sesión abierta.
 
 **D-034 · Ids del catálogo**: UUIDv5 derivado del `catalogId` estable (`scripts/gen_catalog.py`), fijo en el JSON. Seeding idempotente: actualiza nombre/músculos/equipamiento de ejercicios de catálogo, conserva la configuración de progresión editada y el archivado, nunca toca los personalizados.
 

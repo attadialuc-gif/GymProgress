@@ -2,8 +2,12 @@ import Foundation
 import GymCore
 
 public struct ImportSummary: Sendable, Hashable {
+    /// New records added.
     public var inserted: Int
-    public var updated: Int
+    /// Records in the file that differ from the local ones: the local version is kept (never
+    /// overwritten), and the count is reported to the user.
+    public var conflicts: Int
+    /// Records identical to the local ones.
     public var unchanged: Int
 }
 
@@ -19,6 +23,7 @@ public struct ExportService {
     }
 
     public func exportJSON(now: Date) throws -> Data {
+        try repository.validateIntegrity()
         var db = repository.snapshot()
         db.exportedAt = now
         return try GymJSON.encoder.encode(db)
@@ -44,6 +49,17 @@ public struct ExportService {
         if let bad = db.exerciseLogs.first(where: { !sessionIds.contains($0.sessionId) }) {
             throw GymStoreError.invalidImport("Registro de ejercicio sin sesión: \(bad.id)")
         }
+        if let bad = db.exerciseLogs.first(where: { !exerciseIds.contains($0.exerciseId) }) {
+            throw GymStoreError.invalidImport("Registro de un ejercicio inexistente: \(bad.id)")
+        }
+        let decisionLogs = db.decisions.map(\.exerciseLogId)
+        if Set(decisionLogs).count != decisionLogs.count {
+            throw GymStoreError.invalidImport("Hay más de una decisión para el mismo ejercicio de una sesión.")
+        }
+        for set in db.setLogs {
+            if let a = set.addedWeight, !(a.isFinite && a >= 0) { throw GymStoreError.invalidImport("Serie con lastre inválido: \(set.id)") }
+            if let a = set.assistance, !(a.isFinite && a >= 0) { throw GymStoreError.invalidImport("Serie con asistencia inválida: \(set.id)") }
+        }
         if let bad = db.setLogs.first(where: { !logIds.contains($0.exerciseLogId) }) {
             throw GymStoreError.invalidImport("Serie sin ejercicio: \(bad.id)")
         }
@@ -61,13 +77,22 @@ public struct ExportService {
         return db
     }
 
-    /// Validates, then merges by id (all-or-nothing). Open sessions in the file are imported as-is.
+    /// Validates, then inserts only what is new (all-or-nothing). Local records are never
+    /// overwritten: differing records are reported as conflicts and the local version is kept.
+    /// Refused while a local workout is open and the file has a different open workout (there must
+    /// never be two open sessions). Settings are imported only into a store without history.
     @discardableResult
     public func importJSON(_ data: Data) throws -> ImportSummary {
         let incoming = try validate(data)
         let before = repository.snapshot()
+        let localOpen = Set(before.sessions.filter(\.isOpen).map(\.id))
+        let incomingOpen = incoming.sessions.filter { $0.isOpen && !localOpen.contains($0.id) && !before.sessions.map(\.id).contains($0.id) }
+        if !incomingOpen.isEmpty && (!localOpen.isEmpty || incomingOpen.count > 1) {
+            throw GymStoreError.invalidImport("Terminá o descartá el entrenamiento en curso antes de importar una copia que tiene otro entrenamiento abierto.")
+        }
         let summary = Self.diff(before: before, incoming: incoming)
-        try repository.merge(incoming)
+        let isEmptyStore = before.sessions.isEmpty && before.routines.isEmpty
+        try repository.merge(incoming, includeSettings: isEmptyStore)
         return summary
     }
 
@@ -116,11 +141,11 @@ public struct ExportService {
     }
 
     static func diff(before: GymDatabase, incoming: GymDatabase) -> ImportSummary {
-        var inserted = 0, updated = 0, unchanged = 0
+        var inserted = 0, conflicts = 0, unchanged = 0
         func count<T: Identifiable & Equatable>(_ old: [T], _ new: [T]) where T.ID: Hashable {
             let existing = Dictionary(old.map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a })
             for item in new {
-                if let e = existing[item.id] { if e == item { unchanged += 1 } else { updated += 1 } } else { inserted += 1 }
+                if let e = existing[item.id] { if e == item { unchanged += 1 } else { conflicts += 1 } } else { inserted += 1 }
             }
         }
         count(before.exercises, incoming.exercises)
@@ -130,9 +155,13 @@ public struct ExportService {
         count(before.sessions, incoming.sessions)
         count(before.exerciseLogs, incoming.exerciseLogs)
         count(before.setLogs, incoming.setLogs)
-        count(before.decisions, incoming.decisions)
+        // Decisions are unique per exercise log: compare by log id.
+        let localDecisions = Dictionary(before.decisions.map { ($0.exerciseLogId, $0) }, uniquingKeysWith: { a, _ in a })
+        for d in incoming.decisions {
+            if let e = localDecisions[d.exerciseLogId] { if e == d { unchanged += 1 } else { conflicts += 1 } } else { inserted += 1 }
+        }
         count(before.comparabilityLinks, incoming.comparabilityLinks)
         count(before.goals, incoming.goals)
-        return ImportSummary(inserted: inserted, updated: updated, unchanged: unchanged)
+        return ImportSummary(inserted: inserted, conflicts: conflicts, unchanged: unchanged)
     }
 }

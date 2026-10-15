@@ -54,11 +54,30 @@ public protocol GymRepository: AnyObject {
 
     /// Full snapshot (export / backup).
     func snapshot() -> GymDatabase
-    /// Replace or merge from a snapshot (import / restore). Implementations must be all-or-nothing.
-    func merge(_ database: GymDatabase) throws
+    /// Inserts the records of `database` whose ids do not exist yet; never overwrites or deletes
+    /// existing records. All-or-nothing.
+    func merge(_ database: GymDatabase, includeSettings: Bool) throws
+    /// Throws if some stored record cannot be read (an export must never be silently incomplete).
+    func validateIntegrity() throws
+
+    // Batched reads (implementations may override for efficiency).
+    func setLogs(exerciseLogIds: [UUID]) -> [UUID: [SetLog]]
+    func sessions(ids: [UUID]) -> [UUID: WorkoutSession]
 }
 
 extension GymRepository {
+    public func validateIntegrity() throws {}
+
+    public func setLogs(exerciseLogIds: [UUID]) -> [UUID: [SetLog]] {
+        Dictionary(uniqueKeysWithValues: exerciseLogIds.map { ($0, setLogs(exerciseLogId: $0)) })
+    }
+
+    public func sessions(ids: [UUID]) -> [UUID: WorkoutSession] {
+        var result: [UUID: WorkoutSession] = [:]
+        for id in ids { if let s = session(id: id) { result[id] = s } }
+        return result
+    }
+
     /// All sets of a session, grouped by log.
     public func setLogs(sessionId: UUID) -> [UUID: [SetLog]] {
         Dictionary(uniqueKeysWithValues: exerciseLogs(sessionId: sessionId).map { ($0.id, setLogs(exerciseLogId: $0.id)) })

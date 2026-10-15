@@ -56,6 +56,7 @@ struct WorkoutSessionView: View {
     @State private var confirmDiscard = false
     @State private var showNotes = false
     @State private var notes = ""
+    @State private var pendingRemoval: UUID?
 
     var body: some View {
         let _ = model.revision
@@ -100,7 +101,7 @@ struct WorkoutSessionView: View {
                         SessionExerciseRow(log: log)
                     }
                     .swipeActions {
-                        Button { model.perform { try model.workout.removeExercise(logId: log.id) } } label: {
+                        Button { pendingRemoval = log.id } label: {
                             Label("Quitar de hoy", systemImage: "minus.circle")
                         }
                         .tint(.red)
@@ -143,8 +144,14 @@ struct WorkoutSessionView: View {
             ExerciseLogView(logId: logId)
         }
         .toolbar { EditButton() }
-        .onAppear { ScreenAwake.set(model.settings.keepScreenOn) }
-        .onDisappear { ScreenAwake.set(false) }
+        .confirmationDialog("¿Quitar este ejercicio del entrenamiento de hoy?", isPresented: Binding(get: { pendingRemoval != nil }, set: { if !$0 { pendingRemoval = nil } }), titleVisibility: .visible) {
+            Button("Quitar de hoy", role: .destructive) {
+                if let id = pendingRemoval { model.perform { try model.workout.removeExercise(logId: id) } }
+                pendingRemoval = nil
+            }
+        } message: {
+            Text("La rutina no cambia. Se pierde lo cargado en este ejercicio hoy (no tiene series completadas).")
+        }
         .sheet(isPresented: $showPicker) {
             NavigationStack {
                 ExercisePickerView { exercise in

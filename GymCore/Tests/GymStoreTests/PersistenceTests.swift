@@ -337,7 +337,7 @@ struct PersistenceTests {
 
         let target = try TestStore()
         let first = try target.export.importJSON(data)
-        #expect(first.updated == 0)
+        #expect(first.conflicts == 0)
         #expect(first.inserted > 0)
         var a = store.repo.snapshot(); a.exportedAt = nil
         var b = target.repo.snapshot(); b.exportedAt = nil
@@ -347,7 +347,7 @@ struct PersistenceTests {
 
         let second = try target.export.importJSON(data)
         #expect(second.inserted == 0)
-        #expect(second.updated == 0)
+        #expect(second.conflicts == 0)
         #expect(target.repo.snapshot().setLogs.count == a.setLogs.count)
 
         try target.reload()

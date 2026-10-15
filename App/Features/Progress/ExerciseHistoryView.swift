@@ -90,7 +90,8 @@ struct ProgressHomeView: View {
 
     var body: some View {
         let _ = model.revision
-        let withHistory = model.repository.exercises().filter { model.repository.hasHistory(exerciseId: $0.id) }
+        // Only exercises with at least one completed session (open/discarded sessions are not history).
+        let withHistory = model.repository.exercises().filter { !model.history.exerciseHistory(exerciseId: $0.id).isEmpty }
         List {
             if withHistory.isEmpty {
                 ContentUnavailableView("Sin historial", systemImage: "chart.line.uptrend.xyaxis", description: Text("Completá un entrenamiento para ver tu progreso."))

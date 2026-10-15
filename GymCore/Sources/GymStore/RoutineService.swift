@@ -13,7 +13,7 @@ public struct RoutineService {
     @discardableResult
     public func createRoutine(name: String, notes: String = "", now: Date) throws -> RoutineTemplate {
         let clean = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !clean.isEmpty else { throw GymStoreError.invalidValue("name") }
+        guard !clean.isEmpty else { throw GymStoreError.invalidValue("El nombre no puede estar vacío.") }
         let order = (repository.routines().map(\.sortOrder).max() ?? -1) + 1
         let routine = RoutineTemplate(name: clean, sortOrder: order, notes: notes, createdAt: now)
         try repository.upsertRoutine(routine)
@@ -22,7 +22,7 @@ public struct RoutineService {
 
     public func updateRoutine(_ routine: RoutineTemplate) throws {
         guard repository.routine(id: routine.id) != nil else { throw GymStoreError.notFound("routine") }
-        guard !routine.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { throw GymStoreError.invalidValue("name") }
+        guard !routine.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { throw GymStoreError.invalidValue("El nombre no puede estar vacío.") }
         try repository.upsertRoutine(routine)
     }
 
@@ -164,7 +164,7 @@ public struct ExerciseCatalogService {
         progression: ProgressionConfig? = nil
     ) throws -> Exercise {
         let clean = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !clean.isEmpty else { throw GymStoreError.invalidValue("name") }
+        guard !clean.isEmpty else { throw GymStoreError.invalidValue("El nombre no puede estar vacío.") }
         var config = progression ?? ProgressionConfig(increment: increment, availableWeights: availableWeights)
         config.increment = increment
         config.availableWeights = availableWeights
