@@ -2,25 +2,45 @@
 
 Fuente de verdad del estado del proyecto. Actualizar al cerrar cada etapa.
 
+**Leyenda:** ✅ verificado (ejecutado/testeado) · 📝 escrito, **no verificado** (requiere Mac con Xcode) · ⏳ pendiente.
+
 ## Etapa 0 — Entorno, docs y esqueleto · ✅
 
-- Entorno inspeccionado (`docs/ENVIRONMENT.md`): Windows 11 sin Xcode → camino "Linux sin Xcode". Swift 6.4.1 instalado en WSL.
-- Docs: `ARCHITECTURE.md`, `DECISIONS.md`, `FORMULAS.md` (borrador), `CLAUDE.md`.
-- Repo git inicializado. Paquete `GymCore/` compilando con `swift build`/`swift test` en Linux.
+- Entorno inspeccionado (`docs/ENVIRONMENT.md`): Windows 11 sin Xcode → camino "Linux sin Xcode". Swift 6.4.1 instalado en WSL (firma GPG verificada).
+- Docs: `SPEC.md` (copia de la especificación), `ARCHITECTURE.md`, `DECISIONS.md`, `FORMULAS.md`, `CLAUDE.md`, `project.yml` (XcodeGen).
+- Repo git inicializado.
 
-## Etapa 1 — Motor de progresión (TDD) · ✅ (pendiente revisión independiente)
+## Etapa 1 — Motor de progresión (TDD) · ✅ revisada
 
-Verificado con `swift test` (Swift 6.4.1, Linux/WSL):
+- Motor de doble progresión, comparabilidad, 1RM, volumen, músculos, récords, tendencias, calendario, rachas, fechas, parseo.
+- Revisión independiente (subagente sin contexto): 3 hallazgos mayores y varios menores, **todos corregidos** con tests de regresión (D-015, D-015b, D-021, D-024…D-028).
+
+## Etapa 2 — Persistencia · ✅ (GymStore) / 📝 (SwiftData)
+
+- ✅ `GymStore`: records, protocolo `GymRepository`, `JSONGymRepository` (archivo, escritura atómica en cada cambio, índices), `WorkoutService` (recomendación congelada, decisiones aceptar/modificar/ignorar, completar en un toque, recuperación, cambios solo de la sesión), `RoutineService`, `ExerciseCatalogService` (catálogo de 98 ejercicios con UUID estables), plantillas, `ExportService` (JSON con `schemaVersion`, import validado sin duplicados, CSV).
+- 📝 SwiftData: `App/Persistence/SchemaV1.swift` (`VersionedSchema` + `GymMigrationPlan`) y `SwiftDataGymRepository` (mismo contrato). Tests en `AppTests/SwiftDataRepositoryTests.swift` (caso 8, recuperación, export/import, apertura con el plan de migración) — **no ejecutados**.
+
+## Etapa 3 — Flujo vertical crítico · ✅ lógica / 📝 UI (pendiente revisión)
+
+- ✅ Test de integración del flujo 2.E (`EndToEndFlowTests.fullFlow`): crear rutina → elegir ejercicio del catálogo → objetivo (3 × 8–12, RIR 2, inicial 50 kg) → abrir ejercicio (tarjeta) → aceptar → registrar series → finalizar → historial → recomendación siguiente (52,5 kg × 8, confianza alta), **recargando el store desde disco entre cada paso**.
+- ✅ Caso 2.D-8 completo con persistencia (`PersistenceTests.case8_modifiedDecisionLifecycle`).
+- ✅ Rendimiento: 2 años sintéticos (416 sesiones × 6 ejercicios × 4 series): 5 recomendaciones + historial + resúmenes ≈ 0,15 s (debug).
+- 📝 UI SwiftUI mínima pero completa del flujo: 5 pestañas, rutinas (crear, plantillas, duplicar, archivar, reordenar, editor de criterios por ejercicio), biblioteca + ejercicios propios, sesión (tiempo sin pausas, pausar/finalizar/descartar con confirmación, agregar/quitar/reordenar solo hoy, atípica, notas), pantalla de ejercicio con **tarjeta de recomendación arriba** (última sesión, objetivo, recomendado, motivo, condiciones, Aceptar/Modificar/Ignorar, copiar cargas, objetivo inicial), tabla de series (coma/punto, RIR en un toque, completar en un toque con háptico y temporizador por timestamp + notificación local), cambio de máquina/variante y "tratar como equivalente", historial por ejercicio con recomendación siguiente, ajustes básicos y exportación. Sintaxis verificada con `swiftc -parse` (19 archivos, sin errores); **no compilada ni probada en simulador**.
+
+### Comandos y resultados
 
 ```
-$ swift test
-✔ Test run with 96 tests in 11 suites passed after 0.014 seconds.
+$ cd GymCore && swift test        # Swift 6.4.1, Linux (WSL)
+✔ Test run with 103 tests in 11 suites passed      (GymCoreTests)
+✔ Test run with 19 tests in 2 suites passed        (GymStoreTests)
+2-year dataset: 5 recommendations + history + digests in 0.147 seconds
+
+$ swiftc -parse App/**/*.swift AppTests/*.swift
+(sin errores)
 ```
 
-| Suite | Cubre |
-|---|---|
-| 2.D mandatory progression cases (19) | los 8 casos obligatorios, con variantes (sin RIR, RPE, pendientes, pesos disponibles) |
-| Determinism and comparability | misma entrada → misma salida; entrada permutada → misma salida; reloj inyectado; cambio de máquina/variante/loadMode; normalización de etiquetas; `ComparabilityLink` transitivo |
-| Progression rules | pausa larga y borde de 21 días, atípicas, sesiones no completadas, sesión actual, futuras, calentamiento/drop sets, sesiones consecutivas, series extra, cargas mezcladas, desempate de peso, < repMín, RIR por debajo dentro del rango, caída tras subir carga, caída a menor carga, RIR parcial, config invertida, logs fusionados, mancuernas por lado, peso corporal (reps, lastre, asistencia), duración, tendencia |
-| 1RM, Volume, Muscle volume, Personal records, Trend | fórmulas golden, tope de reps, volumen por lado/peso corporal/duración, directas vs indirectas, récords reales vs estimados, clasificación de tendencias |
-| Dates, Schedule and streaks, Parsing | DST, zona, medianoche, inicio de semana, fin de mes/año, `validFrom`, modos A y B, objetivo semanal, coma/punto, validaciones |
+## Próximos pasos
+
+- Revisión independiente de etapas 2 y 3 y correcciones.
+- Etapa 4+: ver `docs/ARCHITECTURE.md` (solo después de que la etapa 3 esté verde).
+- En un Mac: `xcodegen generate`, compilar, correr `GymProgressTests` y probar el flujo en simulador.
