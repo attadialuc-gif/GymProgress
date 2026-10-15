@@ -73,7 +73,20 @@ $ swift test
 $ swiftc -parse (26 archivos de la app)          sin errores
 ```
 
+## Etapa 7 — Cierre · ✅ lógica / 📝 UI
+
+- ✅ Export JSON completo con `schemaVersion` + chequeo de integridad, import validado que solo agrega (copias de seguridad/restauración), CSV de series.
+- 📝 Ajustes completos (unidades, inicio de semana, descanso, tema, pantalla, avisos, objetivo semanal, modo de racha y separación, mínimo de series, fórmula y tope de 1RM, factor de indirectas, peso corporal), importar con selector de archivos y resumen, compartir JSON/CSV.
+- Informe final: `docs/FINAL_REPORT.md`.
+
+```
+$ swift test
+✔ Test run with 103 tests in 11 suites passed   (GymCoreTests)
+✔ Test run with 40 tests in 6 suites passed     (GymStoreTests)
+$ swiftc -parse (26 archivos de la app)          sin errores
+```
+
 ## Próximos pasos
 
-- Etapa 4+: ver `docs/ARCHITECTURE.md` (solo después de que la etapa 3 esté verde).
-- En un Mac: `xcodegen generate`, compilar, correr `GymProgressTests` y probar el flujo en simulador.
+- En un Mac: `xcodegen generate`, compilar, corregir lo que marque el compilador, correr `GymProgressTests` y probar el flujo en simulador y en un iPhone.
+- Pendientes listados en `docs/FINAL_REPORT.md` §2 y §5.

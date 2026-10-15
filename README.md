@@ -6,7 +6,7 @@ App nativa de gimnasio para iPhone (iOS 17+) cuyo centro es un **asistente de so
 
 ## Estado
 
-Ver `docs/PROGRESS.md`. Resumen: el núcleo (motor de progresión, métricas, persistencia y flujo de punta a punta) está **implementado y verificado con tests en Linux**; la app SwiftUI/SwiftData está **escrita pero no compilada** porque el entorno de desarrollo no tenía Xcode.
+Ver `docs/PROGRESS.md` y `docs/FINAL_REPORT.md`. Resumen: el núcleo (motor de progresión, métricas, persistencia, calendario, estadísticas y flujo de punta a punta) está **implementado y verificado con 143 tests en Linux**; la app SwiftUI/SwiftData (etapas 0–7) está **escrita pero no compilada** porque el entorno de desarrollo no tenía Xcode.
 
 ## Estructura
 
