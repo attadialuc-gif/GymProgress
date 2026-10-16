@@ -135,6 +135,21 @@ $ dart analyze      No issues found!
 $ dart test         +113: All tests passed!   (WSL, Dart 3.13.5)
 ```
 
+### Etapa C — `gym_store` en Dart · ✅ revisada
+
+- SQLite (`package:sqlite3`, migraciones `PRAGMA user_version`, WAL + `synchronous=FULL`, cada mutación en transacción; cada llamada de servicio atómica). Servicios: entrenamiento (decisiones Aceptar/Modificar/Ignorar persistidas, nunca pisadas por un recálculo), rutinas y catálogo (98 ejercicios del JSON de iOS), historial, calendario/constancia, estadísticas y export/import JSON + CSV.
+- Los 42 escenarios de los tests de GymStore de Swift (807 operaciones: persistencia y recarga, recuperación de sesión, decisiones, archivado, import/export sin duplicados, calendario con `validFrom`, rachas, estadísticas, récords y objetivos) dan observaciones idénticas en Dart.
+- Intercambio cruzado (contrato JSON con `schemaVersion`): un export de Swift se importa en Dart sin pérdida (reimportar inserta 0) y el export de Dart se importa en Swift: `FixtureExporter verify-import` → `inserted=128 conflicts=0`, reimport `inserted=0`, `OK`.
+- Fixture determinista: un escenario de objetivos dependía de UUID aleatorios (orden de dos metas con la misma fecha); se separaron 1 minuto en el exportador (no es lógica de la app).
+- Rendimiento con ~2 años simulados (312 sesiones, 5.616 series; solo en tests): abrir un ejercicio ≈ 40–45 ms, reabrir la base ≈ 75–85 ms.
+- Revisión independiente: 1 mayor (filas ilegibles: ahora la base no abre, como Swift) y 8 menores (atomicidad por llamada, savepoints, errores de codificación, zona horaria obligatoria, ids sin mayúsculas, orden con ñ, `DateInterval`), más 3 detalles de la verificación; todo corregido con tests (D-105). Dos bugs de Swift quedan documentados sin tocar iOS.
+
+```
+$ dart test (gym_store)   +62: All tests passed!
+$ dart test (gym_core)    +113: All tests passed!
+$ swift run FixtureExporter verify-import export_from_dart.json   OK: no loss, no duplicates
+```
+
 ## Próximos pasos
 
 - En un Mac: `xcodegen generate`, compilar, corregir lo que marque el compilador, correr `GymProgressTests` y probar el flujo en simulador y en un iPhone.

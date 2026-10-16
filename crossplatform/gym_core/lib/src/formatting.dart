@@ -15,6 +15,9 @@ class GymLocale {
   static const esAR = GymLocale._('es_AR', ',', '.');
   static const enUS = GymLocale._('en_US', '.', ',');
 
+  /// `en_US_POSIX` without grouping (CSV export).
+  static const posix = GymLocale._('en_US_POSIX', '.', '');
+
   static GymLocale of(String identifier) => identifier.startsWith('en') ? enUS : esAR;
 }
 

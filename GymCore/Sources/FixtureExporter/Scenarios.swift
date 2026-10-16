@@ -392,7 +392,7 @@ enum Scenarios {
             ["op": "weeklyDirectSets", "muscle": "chest", "weeks": 2, "at": t(9)],
             ["op": "recentRecords", "days": 30, "at": t(9)],
             ["op": "addGoal", "alias": "g1", "exercise": "bench", "metric": "weight", "value": 62.5, "at": t(0)],
-            ["op": "addGoal", "alias": "g2", "exercise": "bench", "metric": "repsAtWeight", "value": 12, "weight": 60, "at": t(0)],
+            ["op": "addGoal", "alias": "g2", "exercise": "bench", "metric": "repsAtWeight", "value": 12, "weight": 60, "at": t(0, 1)], // distinct createdAt: deterministic order
             ["op": "goalProgress", "at": t(9)],
             ["op": "refreshGoals", "at": t(9)],
             ["op": "records", "exercise": "bench"],

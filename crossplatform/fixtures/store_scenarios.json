@@ -22012,21 +22012,6 @@
         "op" : "goalProgress",
         "result" : [
           {
-            "achieved" : false,
-            "achievedOn" : null,
-            "current" : 11,
-            "fraction" : 0.9166666666666666,
-            "goal" : {
-              "createdAt" : 1767646800,
-              "exerciseId" : "bench",
-              "id" : "g2",
-              "metric" : "repsAtWeight",
-              "status" : "active",
-              "value" : 12,
-              "weight" : 60
-            }
-          },
-          {
             "achieved" : true,
             "achievedOn" : 1768338000,
             "current" : 62.5,
@@ -22038,6 +22023,21 @@
               "metric" : "weight",
               "status" : "active",
               "value" : 62.5
+            }
+          },
+          {
+            "achieved" : false,
+            "achievedOn" : null,
+            "current" : 11,
+            "fraction" : 0.9166666666666666,
+            "goal" : {
+              "createdAt" : 1767646860,
+              "exerciseId" : "bench",
+              "id" : "g2",
+              "metric" : "repsAtWeight",
+              "status" : "active",
+              "value" : 12,
+              "weight" : 60
             }
           }
         ],
@@ -22534,7 +22534,7 @@
       },
       {
         "alias" : "g2",
-        "at" : 1767646800,
+        "at" : 1767646860,
         "exercise" : "bench",
         "metric" : "repsAtWeight",
         "op" : "addGoal",

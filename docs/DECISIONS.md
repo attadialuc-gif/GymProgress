@@ -27,6 +27,14 @@ Motivo: un solo código de UI para ambas plataformas, binarios nativos, offline,
 - Zonas horarias: identificadores IANA (los que entrega el sistema operativo); abreviaturas como "GMT-0300" no se aceptan.
 - `DateTime` locales y UTC se comparan por instante (`compareTo`), nunca con `==`.
 
+**D-105 · Store Dart: integridad ante fallas (revisión de la etapa C).**
+- Base con registros ilegibles → no se abre (igual que el store JSON de Swift): nunca se sobrescribe un registro dañado ni se exporta incompleto. La app muestra la pantalla de bloqueo.
+- Cada llamada de servicio con varias escrituras (empezar sesión, decidir, completar serie, importar, plan semanal, etc.) corre en `repository.transaction`: todo o nada. Dentro de un lote cada escritura usa `SAVEPOINT`.
+- Errores de codificación (NaN/∞) son `storage` y no escriben nada. Búsquedas por id sin distinguir mayúsculas (como `UUID` en Swift).
+- Orden de nombres es-AR: la ñ es una letra propia después de la n (como `localizedCompare` en un iPhone en español).
+- **Bugs de Swift detectados y no corregidos en iOS** (esta tarea prohíbe tocar la app iOS; quedan como mejora pendiente): (1) `setInitialTarget` guarda el peso inicial antes de validar; en Dart la transacción lo revierte; (2) el CSV no entrecomilla campos con `\r\n` (Swift compara `Character` y CRLF es un solo grafema); Dart sí lo hace. Ninguno afecta el motor ni los datos registrados normalmente (la UI no permite pesos negativos ni saltos de línea en nombres de rutina).
+- Igual que Swift, a propósito: abrir un ejercicio de una sesión terminada que nunca se abrió congela una recomendación (la UI solo abre ejercicios de la sesión en curso).
+
 ## Entorno y estructura
 
 **D-001 · Ubicación del proyecto.** Subcarpeta `GymProgress/` dentro de la carpeta abierta (un proyecto de trading bot), con repo git propio. · Alternativa: carpeta hermana fuera del bot. · Elegido por el usuario.
