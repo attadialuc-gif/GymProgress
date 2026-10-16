@@ -28,6 +28,21 @@ class LoadFormatter {
   }
 
   String editable(double? kg) => kg == null ? '' : GymFormat.number(value(kg), locale: locale);
+
+  /// Parses typed text, but returns the original kg value when the text is still exactly how
+  /// that value was shown: display rounding (lb) must never rewrite a stored kg value.
+  double? parseKeeping(String text, double? originalKg) {
+    if (originalKg != null && swiftTrim(text) == editable(originalKg)) return originalKg;
+    return parse(text);
+  }
+
+  /// Same for a list: each part that still shows one of the originals keeps that original.
+  double? parseKeepingAny(String text, List<double>? originals) {
+    for (final o in originals ?? const <double>[]) {
+      if (swiftTrim(text) == editable(o)) return o;
+    }
+    return parse(text);
+  }
 }
 
 const _months = ['ene.', 'feb.', 'mar.', 'abr.', 'may.', 'jun.', 'jul.', 'ago.', 'sept.', 'oct.', 'nov.', 'dic.'];

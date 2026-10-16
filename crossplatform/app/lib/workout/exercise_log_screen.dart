@@ -35,6 +35,7 @@ class _ExerciseLogScreenState extends State<ExerciseLogScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _model = AppScope.read(context);
+    _model.completeNextSet = _completeNext;
     if (_opened) return;
     _opened = true;
     // Opening freezes the recommendation (computed with history prior to this session).
@@ -53,8 +54,21 @@ class _ExerciseLogScreenState extends State<ExerciseLogScreen> {
     });
   }
 
+  /// Keyboard: complete the next pending working set (typed values are committed first).
+  Future<void> _completeNext() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    await Future<void>.delayed(Duration.zero);
+    if (!mounted) return;
+    final next = _model.repository
+        .setLogs(widget.logId)
+        .where((s) => s.kind == SetKind.working && s.status == SetStatus.pending)
+        .firstOrNull;
+    if (next != null) _complete(_model, next);
+  }
+
   @override
   void dispose() {
+    if (_model.completeNextSet == _completeNext) _model.completeNextSet = null;
     _saveNotes(notify: false);
     _notes.dispose();
     _notesFocus.dispose();
@@ -354,7 +368,7 @@ class _RestTimerBannerState extends State<RestTimerBanner> {
     super.initState();
     _tick = Timer.periodic(const Duration(seconds: 1), (_) {
       // Only while visible: current route of the selected tab.
-      if (!mounted || !(ModalRoute.of(context)?.isCurrent ?? true)) return;
+      if (!mounted || !(ModalRoute.of(context)?.isActive ?? true)) return;
       if (AppScope.read(context).selectedTab != AppTab.workout) return;
       setState(() {});
     });

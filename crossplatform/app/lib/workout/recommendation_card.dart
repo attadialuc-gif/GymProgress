@@ -252,7 +252,7 @@ class _ModifySheetState extends State<ModifySheet> {
     final r = widget.recommendation;
     // Start from the recommendation, else the last comparable load; never invent a number.
     final start = r.targetWeight ?? r.lastPerformance?.workingLoad;
-    if (start != null && !(_isDuration && LoadMath.key(start) == 0)) _weight.text = _display(start);
+    if (start != null && !(_isDuration && LoadMath.key(start) == 0)) _show(start);
     final base = _isDuration ? (r.targetSeconds ?? const <int>[]) : r.targetReps;
     _amounts = base.isEmpty
         ? List.filled(r.target.sets, _isDuration ? r.target.secondsMin : r.target.repMin)
@@ -265,6 +265,17 @@ class _ModifySheetState extends State<ModifySheet> {
     super.dispose();
   }
 
+  /// Last value written into the field by the app (prefill or ±): returned as is while the text
+  /// is unchanged, so lb display rounding never alters the kg value.
+  double? _shownKg;
+  String? _shownText;
+
+  void _show(double kg) {
+    _shownKg = kg;
+    _shownText = _display(kg);
+    _weight.text = _shownText!;
+  }
+
   String _display(double kg) =>
       _isBodyweight && kg < 0 ? '-${widget.formatter.editable(-kg)}' : widget.formatter.editable(kg);
 
@@ -272,6 +283,7 @@ class _ModifySheetState extends State<ModifySheet> {
   double? get _parsed {
     final t = swiftTrim(_weight.text);
     if (t.isEmpty) return null;
+    if (_shownKg != null && t == _shownText) return _shownKg;
     final negative = _isBodyweight && (t.startsWith('-') || t.startsWith('−'));
     final m = widget.formatter.parse(negative ? t.substring(1) : t);
     if (m == null) return null;
@@ -284,7 +296,7 @@ class _ModifySheetState extends State<ModifySheet> {
     final current = _parsed ?? 0;
     final floor = _isBodyweight ? -500.0 : 0.0;
     final next = LoadMath.normalized(current + delta);
-    setState(() => _weight.text = _display(next < floor ? floor : next));
+    setState(() => _show(next < floor ? floor : next));
   }
 
   @override

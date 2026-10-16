@@ -104,45 +104,62 @@ class _ShellState extends State<Shell> {
       ],
     );
     final wide = MediaQuery.sizeOf(context).width >= 720;
-    return PopScope(
-      // Android back: pops inside the current tab first (screens and sheets); exits only at the
-      // tab's root. Decided at the moment of the gesture (nested navigators don't rebuild Shell).
-      canPop: false,
-      onPopInvokedWithResult: (didPop, _) async {
-        if (didPop) return;
-        final nav = _navigators[model.selectedTab]!.currentState;
-        if (nav != null && await nav.maybePop()) return;
-        await SystemNavigator.pop();
+    return CallbackShortcuts(
+      bindings: {
+        for (var i = 0; i < _destinations.length; i++)
+          SingleActivator(LogicalKeyboardKey(LogicalKeyboardKey.digit1.keyId + i), control: true): () =>
+              _select(model, i),
+        const SingleActivator(LogicalKeyboardKey.escape): () =>
+            _navigators[model.selectedTab]!.currentState?.maybePop(),
+        const SingleActivator(LogicalKeyboardKey.enter, control: true): () => model.completeNextSet?.call(),
       },
-      child: wide
-          ? Scaffold(
-              body: Row(
-                children: [
-                  NavigationRail(
+      child: Focus(
+        autofocus: true,
+        child: PopScope(
+          // Android back: pops inside the current tab first (screens and sheets); exits only at the
+          // tab's root. Decided at the moment of the gesture (nested navigators don't rebuild Shell).
+          canPop: false,
+          onPopInvokedWithResult: (didPop, _) async {
+            if (didPop) return;
+            final nav = _navigators[model.selectedTab]!.currentState;
+            if (nav != null && await nav.maybePop()) return;
+            await SystemNavigator.pop();
+          },
+          child: wide
+              ? Scaffold(
+                  body: Row(
+                    children: [
+                      NavigationRail(
+                        selectedIndex: index,
+                        labelType: NavigationRailLabelType.all,
+                        onDestinationSelected: (i) => _select(model, i),
+                        destinations: [
+                          for (final (_, icon, selected, label) in _destinations)
+                            NavigationRailDestination(
+                              icon: Icon(icon),
+                              selectedIcon: Icon(selected),
+                              label: Text(label),
+                            ),
+                        ],
+                      ),
+                      const VerticalDivider(width: 1),
+                      Expanded(child: stack),
+                    ],
+                  ),
+                )
+              : Scaffold(
+                  body: stack,
+                  bottomNavigationBar: NavigationBar(
                     selectedIndex: index,
-                    labelType: NavigationRailLabelType.all,
                     onDestinationSelected: (i) => _select(model, i),
                     destinations: [
                       for (final (_, icon, selected, label) in _destinations)
-                        NavigationRailDestination(icon: Icon(icon), selectedIcon: Icon(selected), label: Text(label)),
+                        NavigationDestination(icon: Icon(icon), selectedIcon: Icon(selected), label: label),
                     ],
                   ),
-                  const VerticalDivider(width: 1),
-                  Expanded(child: stack),
-                ],
-              ),
-            )
-          : Scaffold(
-              body: stack,
-              bottomNavigationBar: NavigationBar(
-                selectedIndex: index,
-                onDestinationSelected: (i) => _select(model, i),
-                destinations: [
-                  for (final (_, icon, selected, label) in _destinations)
-                    NavigationDestination(icon: Icon(icon), selectedIcon: Icon(selected), label: label),
-                ],
-              ),
-            ),
+                ),
+        ),
+      ),
     );
   }
 }

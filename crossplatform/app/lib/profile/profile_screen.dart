@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final t = swiftTrim(_bodyweight.text);
     double? value;
     if (t.isNotEmpty) {
-      value = model.loadFormatter.parse(t);
+      value = model.loadFormatter.parseKeeping(t, model.settings.bodyweightKg);
       if (value == null || value <= 0) {
         model.errorMessage = 'Peso corporal inválido: usá coma o punto decimal (ej.: 78,5).';
         model.perform(() {});
@@ -220,6 +220,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             value: s.restNotifications,
             onChanged: (v) => _save((x) => x.restNotifications = v),
           ),
+          if (s.restNotifications && (model.platform?.supportsExactAlarmSetting ?? false))
+            ListTile(
+              leading: const Icon(Icons.alarm),
+              title: const Text('Permitir avisos puntuales'),
+              subtitle: const Text('Sin este permiso del sistema el aviso puede llegar unos segundos tarde.'),
+              onTap: () => model.platform?.requestExactAlarms(),
+            ),
           const SectionTitle('Constancia'),
           _stepper('Objetivo semanal: ${s.weeklyGoal} entrenamientos', s.weeklyGoal, 1, 14, (x, v) => x.weeklyGoal = v),
           ListTile(

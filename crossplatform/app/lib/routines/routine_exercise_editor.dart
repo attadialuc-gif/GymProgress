@@ -71,15 +71,15 @@ class _RoutineExerciseEditorState extends State<RoutineExerciseEditor> {
     if (swiftTrim(_initial.text).isEmpty) {
       updated.initialWeight = null;
     } else {
-      final initial = f.parse(_initial.text);
+      final initial = f.parseKeeping(_initial.text, _config.initialWeight);
       if (initial == null) return fail('Peso inicial inválido: usá coma o punto decimal (ej.: 40 o 42,5).');
       updated.initialWeight = initial;
     }
-    final inc = f.parse(_increment.text);
+    final inc = f.parseKeeping(_increment.text, _config.increment);
     if (inc == null || inc <= 0) return fail('Incremento inválido: usá coma o punto decimal (ej.: 2,5).');
     updated.increment = inc;
     final parts = _available.text.split(';').map(swiftTrim).where((p) => p.isNotEmpty).toList();
-    final weights = parts.map(f.parse).whereType<double>().toList();
+    final weights = parts.map((p) => f.parseKeepingAny(p, _config.availableWeights)).whereType<double>().toList();
     if (weights.length != parts.length) {
       return fail('Pesos disponibles inválidos: separalos con punto y coma (ej.: 20; 22,5; 25).');
     }

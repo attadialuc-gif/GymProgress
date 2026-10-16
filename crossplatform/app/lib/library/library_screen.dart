@@ -140,7 +140,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
     final f = model.loadFormatter;
     final c = _config.copy()..targetRIR = _hasRIR ? _rir : null;
     // Never drop typed input silently: invalid values stop the save with an explanation.
-    final inc = f.parse(_increment.text);
+    final inc = f.parseKeeping(_increment.text, _config.increment);
     if (inc == null || inc <= 0) {
       _error(model, 'Incremento inválido: usá coma o punto decimal (ej.: 2,5).');
       return;
@@ -149,7 +149,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
     if (swiftTrim(_initial.text).isEmpty) {
       c.initialWeight = null;
     } else {
-      final initial = f.parse(_initial.text);
+      final initial = f.parseKeeping(_initial.text, _config.initialWeight);
       if (initial == null) {
         _error(model, 'Peso inicial inválido: usá coma o punto decimal (ej.: 40 o 42,5).');
         return;
@@ -157,7 +157,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
       c.initialWeight = initial;
     }
     final parts = _available.text.split(';').map(swiftTrim).where((p) => p.isNotEmpty).toList();
-    final weights = parts.map(f.parse).whereType<double>().toList();
+    final weights = parts.map((p) => f.parseKeepingAny(p, _config.availableWeights)).whereType<double>().toList();
     if (weights.length != parts.length) {
       _error(model, 'Pesos disponibles inválidos: separalos con punto y coma (ej.: 20; 22,5; 25).');
       return;

@@ -8,6 +8,7 @@ import 'package:gym_store/gym_store.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'app_model.dart';
+import 'services/platform_services.dart';
 import 'shell.dart';
 import 'ui/theme.dart';
 
@@ -41,6 +42,8 @@ Future<AppModel> openAppModel() async {
     final repo = SqliteGymRepository.open('${dir.path}${Platform.pathSeparator}gymprogress.sqlite');
     final model = AppModel(repo, timeZone: zone);
     model.seedCatalog();
+    model.platform = PlatformServices(model, dataDir: dir.path);
+    await model.platform!.start();
     return model;
   } catch (e) {
     // Block the UI and explain; an in-memory store only backs the error screen.
@@ -78,6 +81,7 @@ class _GymProgressAppState extends State<GymProgressApp> with WidgetsBindingObse
   /// The device time zone may change while the app sleeps (travel, DST rules): re-read on resume.
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    widget.model.platform?.updateWakelock(appVisible: state == AppLifecycleState.resumed);
     if (state == AppLifecycleState.resumed) {
       deviceTimeZone().then((zone) {
         if (zone != widget.model.timeZone) {

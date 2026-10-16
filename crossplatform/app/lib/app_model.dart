@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:gym_store/gym_store.dart';
 
 import 'ui/format.dart';
+import 'services/platform_services.dart';
 import 'services/rest_timer.dart';
 
 enum AppTab { home, routines, workout, progress, profile }
@@ -24,6 +25,12 @@ class AppModel extends ChangeNotifier {
   int revision = 0;
   AppTab selectedTab = AppTab.home;
   final RestTimer restTimer = RestTimer();
+
+  /// Ctrl+Enter on the exercise screen: completes the next pending set (registered by it).
+  VoidCallback? completeNextSet;
+
+  /// Notifications, screen wake lock… (null in tests).
+  PlatformServices? platform;
 
   WorkoutService get workout => WorkoutService(repository, timeZone: timeZone);
   RoutineService get routines => RoutineService(repository);
