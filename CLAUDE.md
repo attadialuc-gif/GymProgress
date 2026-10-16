@@ -38,6 +38,9 @@ docs/                            ENVIRONMENT, ARCHITECTURE, DECISIONS, FORMULAS,
 - Tests Dart (WSL, Flutter en `~/flutter/bin`): `cd crossplatform/gym_core && dart test`; ídem `gym_store`; app: `flutter test`.
 - CI: `test.yml` (cada push), `build-android.yml`, `build-windows.yml`. La app de iOS y `build-ios.yml` no se modifican.
 - Firma Android: keystore fuera del repo, solo como secretos de GitHub. Nunca versionar `*.jks`, `key.properties`, contraseñas ni rutas personales.
+- Estado: etapas A–G completas (ver `docs/PROGRESS.md`). Tests: `gym_core` 113, `gym_store` 62, app 28 + integración 2.E en Windows y emulador Android (CI). Entregables en `dist/` (no versionado): `GymProgress.apk`, `GymProgress-Setup.exe`, `GymProgress-windows.zip`. Guías: `docs/INSTALAR_ANDROID.md`, `docs/INSTALAR_WINDOWS.md`; diferencias: `docs/PARIDAD.md`.
+- Escritura en Windows: Controlled Folder Access bloquea Write/Edit en Documents → escribir en el scratchpad y copiar desde WSL, o editar con python en WSL.
+- Revisión de privacidad antes de cada push (patrón en el script de commit): sin email personal, rutas de la PC, contraseñas literales ni claves.
 
 ## Reglas permanentes (resumen de la sección 2 de la spec — prioridad máxima)
 1. Prioridades: integridad de datos > sistema de sobrecarga progresiva > velocidad de registro > resto.

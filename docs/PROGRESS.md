@@ -166,7 +166,32 @@ $ swift run FixtureExporter verify-import export_from_dart.json   OK: no loss, n
 
 - Detalle en `docs/PARIDAD.md` y D-106: notificación de fin de descanso (Android programada exacta/inexacta, permiso en contexto; Windows sonido + aviso), pantalla encendida en sesión, atrás de Android, recuperación tras cierre del proceso (incluido el descanso en curso), ventana redimensionable con mínimo por DPI, atajos de teclado, datos en `%APPDATA%`, ícono y nombre de la app.
 
+### Etapa G — Empaquetado y CI · ✅
+
+- `test.yml` (cada push): `dart test` de `gym_core` y `gym_store`, `flutter test` de la app, fixtures regenerados con Swift y comparados, **integración 2.E en Windows real y en emulador Android** (API 34).
+- `build-android.yml`: APK release firmado con la clave del proyecto (secretos de GitHub; el build falla sin clave y verifica que el certificado sea `CN=GymProgress`, nunca el de debug).
+- `build-windows.yml`: build release, runtime de Visual C++ junto a la app, prueba de arranque de 15 s, instalador Inno Setup en español (por usuario, sin administrador) y zip portable.
+- Durante el ciclo se corrigieron: el plugin de notificaciones de Windows con Visual Studio 2026 (definición documentada por Microsoft), un falso verde del job del emulador (`tee` sin `pipefail`), y la robustez del test 2.E en un teléfono real (teclado en pantalla y listas perezosas).
+
+Runs verdes del commit `4ea21a1`:
+
+| Workflow | Resultado |
+|---|---|
+| test | https://github.com/attadialuc-gif/GymProgress/actions/runs/38942286546 — gym_core 113 ✓, gym_store 62 ✓, app 28 ✓, 2.E Windows ✓, 2.E emulador Android ✓, fixtures ✓ |
+| build-android | https://github.com/attadialuc-gif/GymProgress/actions/runs/38942286567 — `GymProgress.apk` 64,7 MB, firma `SHA-256 61:02:9A:…:06:73` |
+| build-windows | https://github.com/attadialuc-gif/GymProgress/actions/runs/38942286760 — `GymProgress-Setup.exe` 12,2 MB, `GymProgress-windows.zip` 14,7 MB |
+
+Entregables descargados con `gh run download` en `dist/` (no se versiona), con sumas SHA-256 verificadas. Guías: `docs/INSTALAR_ANDROID.md`, `docs/INSTALAR_WINDOWS.md`. No se publicó ningún Release.
+
+### Informe final del port
+
+- **Funciona y está verificado**: motor y datos idénticos a iOS (fixtures de Swift), flujo 2.E con UI y persistencia real en Linux (widget), Windows real y emulador Android; builds firmados/empaquetados en CI.
+- **No verificado**: instalación y uso en el teléfono y la PC del usuario; notificaciones y pantalla encendida en dispositivos concretos (dependen del fabricante y de los permisos).
+- **Diferencias de paridad**: `docs/PARIDAD.md` (exportar con "Guardar como" en vez de compartir, aviso de descanso en Windows solo con la app abierta, precisión de instantes al microsegundo, dos bugs de iOS que en Android/Windows no ocurren).
+
 ## Próximos pasos
+
+- Multiplataforma: decidir si se publica un Release con los archivos de `dist/` y si se integra `feat/crossplatform` a `main`.
 
 - En un Mac: `xcodegen generate`, compilar, corregir lo que marque el compilador, correr `GymProgressTests` y probar el flujo en simulador y en un iPhone.
 - Pendientes listados en `docs/FINAL_REPORT.md` §2 y §5.

@@ -46,5 +46,5 @@ La app de Android y Windows (`crossplatform/`, Flutter) es un port de la app de 
 
 ## No verificado
 
-- Instalación y uso en el teléfono y la PC del usuario (no hay acceso a esos dispositivos). Se verificó: build de Android y Windows en CI, tests unitarios/widget en Linux y el flujo 2.E de punta a punta en un Windows real del runner de CI.
+- Instalación y uso en el teléfono y la PC del usuario (no hay acceso a esos dispositivos). Se verificó: builds de Android y Windows en CI (APK firmado, instalador y zip con prueba de arranque), tests unitarios/widget en Linux y el flujo 2.E de punta a punta en un Windows real y en un emulador Android (API 34) del CI.
 - Comportamiento de las notificaciones y la pantalla encendida en dispositivos concretos (dependen del fabricante y de los permisos que el usuario otorgue).
