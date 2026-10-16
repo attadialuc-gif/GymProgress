@@ -124,6 +124,17 @@ engine 72 · scenarios 42 / 807 ops · verify-import export_from_swift.json: OK 
 $ dart test   (gym_store, smoke SQLite)                         +1: All tests passed!
 ```
 
+### Etapa B — `gym_core` en Dart · ✅ revisada
+
+- Port de modelos, motor de doble progresión, textos, historial comparable, tendencia, 1RM, volumen, músculos, récords, calendario (zona IANA con paquete `timezone`), agenda con `validFrom`, rachas y parseo/formato.
+- Verde contra los fixtures de Swift: los 8 casos 2.D, determinismo (5 órdenes de entrada + orden de series), no comparabilidad (máquina, variante, modo de carga, vínculos), reglas, métricas, 176 casos de calendario (incluye DST a medianoche: Santiago, Beirut, La Habana) y parseo/formato.
+- Revisión independiente (subagente) contra la sección 2 y el código Swift: 2 mayores (UUID en minúsculas, colisión de `sortKey` entre contextos distintos) y 6 menores (plegado Unicode, espacios, `DateTime` local vs UTC, signo de cero, precisión, locales). Todas corregidas con tests o registradas (D-103, D-104); verificación posterior del revisor: cerradas.
+
+```
+$ dart analyze      No issues found!
+$ dart test         +113: All tests passed!   (WSL, Dart 3.13.5)
+```
+
 ## Próximos pasos
 
 - En un Mac: `xcodegen generate`, compilar, corregir lo que marque el compilador, correr `GymProgressTests` y probar el flujo en simulador y en un iPhone.

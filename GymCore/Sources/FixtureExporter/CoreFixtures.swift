@@ -102,13 +102,19 @@ enum CoreFixtures {
 
     static func consistency() -> [String: Any] {
         let ba = FX.ba, ny = FX.ny
-        let cals: [(String, Int)] = [(ba, 2), (ba, 1), (ny, 2), ("UTC", 2), ("Europe/Madrid", 2)]
+        let cals: [(String, Int)] = [(ba, 2), (ba, 1), (ny, 2), ("UTC", 2), ("Europe/Madrid", 2),
+                                     ("America/Santiago", 2), ("Asia/Beirut", 1), ("America/Havana", 2)]
         let instants: [Date] = [
             FX.date(2026, 3, 10, 23, 30, tz: ba), FX.date(2026, 3, 11, 0, 40, tz: ba), FX.date(2026, 3, 7, 0, 0, tz: ny),
             FX.date(2026, 3, 8, 0, 0, tz: ny), FX.date(2026, 3, 8, 7, tz: ny), FX.date(2026, 11, 1, 0, 0, tz: ny),
             FX.date(2026, 5, 20, 1, 30, tz: "UTC"), FX.date(2026, 10, 14, tz: ba), FX.date(2026, 10, 18, tz: ba),
             FX.date(2027, 1, 1, tz: ba), FX.date(2026, 2, 10, tz: ba), FX.date(2028, 2, 10, tz: ba),
             FX.date(2026, 12, 31, 23, tz: ba), FX.date(2026, 3, 29, 1, 30, tz: "Europe/Madrid"), FX.date(2026, 10, 25, 2, 30, tz: "Europe/Madrid"),
+            // Midnight DST transitions (day starts at 01:00, or 23:00 repeated).
+            FX.date(2026, 9, 6, 0, 30, tz: "America/Santiago"), FX.date(2026, 4, 5, 0, 30, tz: "America/Santiago"),
+            FX.date(2026, 9, 5, 22, 0, tz: "America/Santiago"), FX.date(2026, 3, 29, 0, 30, tz: "Asia/Beirut"),
+            FX.date(2026, 10, 24, 23, 30, tz: "Asia/Beirut"), FX.date(2026, 3, 8, 0, 30, tz: "America/Havana"),
+            FX.date(2026, 10, 31, 23, 30, tz: "America/Havana"),
         ]
         var calendarCases: [[String: Any]] = []
         for (tz, fw) in cals {
@@ -214,13 +220,15 @@ enum CoreFixtures {
 
     static func parsing() -> [String: Any] {
         let weights = ["62,5", "62.5", " 62,50 ", "60", "0,25", ",5", "100.", "", "abc", "6,2,5", "1.000,5", "-5", "+5", "62 ,5", ".", "1e3",
-                       "1.000", "62.500", "1,000", "0", "007", "62,5555", "123456789012", "12345678901", "１２", "62،5", "\t40\n"]
+                       "1.000", "62.500", "1,000", "0", "007", "62,5555", "123456789012", "12345678901", "１２", "62،5", "\t40\n",
+                       "\u{FEFF}62,5", "62,5\u{85}", "\u{A0}62,5", "\u{2003}60\u{3000}", "62,5\u{200B}"]
         let ints = ["12", "12,5", "-3", "", " 8 ", "00012", "123456", "1e2", "٣"]
         let validations: [(Double?, Int?, Int?, Double?, Double?)] = [
             (-1, 5, nil, nil, nil), (600, 150, nil, nil, nil), (60, 10, nil, 2, 8), (60, 10, nil, 11, nil), (nil, nil, -1, nil, nil),
             (nil, nil, 4000, nil, nil), (500, 100, 3600, 0, 1), (.infinity, nil, nil, nil, nil), (nil, nil, nil, nil, 0.5), (nil, -2, nil, -1, 11),
         ]
-        let numbers: [Double] = [62.5, 60, 0.25, 1234.5, 1000, 62.555, 62.554, 0.005, -17.5, 83.333, 2.675]
+        let numbers: [Double] = [62.5, 60, 0.25, 1234.5, 1000, 62.555, 62.554, 0.005, -17.5, 83.333, 2.675,
+                                 -0.004, -0.0, -0.005, -0.006, 0.0049, 1234567.891, 999.995, 0.125, 0.135]
         let loads: [(Double, MeasurementType, LoadMode)] = [
             (62.5, .weightReps, .total), (24, .weightReps, .perSide), (0, .bodyweightReps, .total), (2.5, .bodyweightReps, .total),
             (-17.5, .bodyweightReps, .total), (0, .duration, .total), (5, .duration, .total), (1000, .weightReps, .total),
@@ -245,7 +253,34 @@ enum CoreFixtures {
                  "text": GymFormat.load(l.0, measurement: l.1, loadMode: l.2, locale: Locale(identifier: loc))]
             } },
             "list": [[12, 12, 12], [], [8]].map { ["values": $0, "text": GymFormat.list($0)] },
+            "labels": labels.map { l in
+                ["text": l, "normalized": nn(ComparabilityContext(exerciseId: FX.benchId, variantLabel: l, loadMode: .total).normalized.variantLabel)]
+            },
+            "fold": foldTable(),
         ]
+    }
+
+    static let labels: [String] = [
+        "  Polea  Gym A ", "Máquina", "MAQUINA", "e\u{301}", "inclinación", "inclinacio\u{301}n", "Straße", "Øster", "łódź",
+        "đ ħ ŧ ı", "ǎ ạ ỳ", "a\u{FEFF}b", "a\u{85}b", "a\u{A0}b", "\u{2003}x\u{3000}", "", "   ", "a|b", "b|", "Ñandú", "İstanbul",
+        "ﬁ", "Ⅻ", "ΣΑΣ", "Ελλάδα", "Москва", "x\u{200B}y", "TAB\tsep", "line\nbreak", "½", "²", "Ä̈",
+        "а\u{483}", "\u{5D0}\u{5B7}", "\u{628}\u{64E}", "Ａ", "ﬀ", "x\u{20D7}",
+    ]
+
+    /// Swift folding of every scalar of the Latin, Greek and Cyrillic blocks that changes (single
+    /// character, es_AR), so the Dart port reproduces it exactly.
+    static func foldTable() -> [[String: Any]] {
+        var rows: [[String: Any]] = []
+        let ranges: [ClosedRange<UInt32>] = [0x20...0x7E, 0xA0...0x24F, 0x250...0x2AF, 0x370...0x3FF, 0x400...0x52F, 0x1E00...0x1EFF, 0x2070...0x218F, 0xFB00...0xFB06]
+        for range in ranges {
+            for v in range {
+                guard let scalar = Unicode.Scalar(v) else { continue }
+                let c = String(Character(scalar))
+                let folded = c.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "es_AR"))
+                if folded != c { rows.append(["c": Int(v), "folded": folded]) }
+            }
+        }
+        return rows
     }
 }
 

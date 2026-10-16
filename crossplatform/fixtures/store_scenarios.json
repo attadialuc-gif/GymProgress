@@ -22012,20 +22012,6 @@
         "op" : "goalProgress",
         "result" : [
           {
-            "achieved" : true,
-            "achievedOn" : 1768338000,
-            "current" : 62.5,
-            "fraction" : 1,
-            "goal" : {
-              "createdAt" : 1767646800,
-              "exerciseId" : "bench",
-              "id" : "g1",
-              "metric" : "weight",
-              "status" : "active",
-              "value" : 62.5
-            }
-          },
-          {
             "achieved" : false,
             "achievedOn" : null,
             "current" : 11,
@@ -22038,6 +22024,20 @@
               "status" : "active",
               "value" : 12,
               "weight" : 60
+            }
+          },
+          {
+            "achieved" : true,
+            "achievedOn" : 1768338000,
+            "current" : 62.5,
+            "fraction" : 1,
+            "goal" : {
+              "createdAt" : 1767646800,
+              "exerciseId" : "bench",
+              "id" : "g1",
+              "metric" : "weight",
+              "status" : "active",
+              "value" : 62.5
             }
           }
         ],

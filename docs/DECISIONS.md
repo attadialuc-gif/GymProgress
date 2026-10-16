@@ -19,6 +19,14 @@ Motivo: un solo código de UI para ambas plataformas, binarios nativos, offline,
 
 **D-102 · Persistencia Dart: SQLite vía `package:sqlite3`** (FFI, sin generación de código) con migraciones por `PRAGMA user_version`, mismo esquema conceptual que SwiftData (columnas indexadas + payload JSON del registro). · Alternativa: drift (requiere `build_runner` y codegen; más dependencias). El formato de intercambio entre plataformas es el JSON de exportación con `schemaVersion` (mismo contrato que iOS).
 
+**D-103 · Semántica de texto de Swift reproducida con fixtures.** Normalizar etiquetas de contexto (máquina/variante) depende de Foundation: recorte con `.whitespacesAndNewlines`, plegado `folding([.caseInsensitive, .diacriticInsensitive], es_AR)` y separación por `Character.isWhitespace`. En vez de aproximarlo, el exportador vuelca el plegado Swift de cada carácter de los bloques latino, griego y cirílico (`parsing.json` → `fold`) y se genera `gym_core/lib/src/fold_table.g.dart` con `dart run tool/gen_fold_table.dart` (regenerar si cambian los fixtures; un test compara cada fila con Swift). Las marcas combinantes se eliminan (texto NFD) y fuera de esos bloques se usa minúscula. Observado en Swift y replicado: `ß→ss`, `Ø→ø`, `ł`/`đ` se mantienen; U+FEFF no es espacio; U+0085, NBSP y U+200B se recortan. La identidad de un contexto normalizado es `identityKey` (sin ambigüedad); `sortKey` (igual a Swift) solo ordena.
+
+**D-104 · Límites conocidos del port (documentados, sin efecto en el uso normal).**
+- Instantes con precisión de microsegundo en Dart (Swift guarda `Double`). Importar un export de iPhone conserva el instante al µs; reimportar en el iPhone el export de Android con los mismos registros puede informar "conflictos" (versión local conservada, nada se duplica ni se pisa).
+- Formato de números: solo es-AR (app) y en-US (verificación), como Swift con esos locales; ICU muestra "-0" para negativos que redondean a cero y Dart también.
+- Zonas horarias: identificadores IANA (los que entrega el sistema operativo); abreviaturas como "GMT-0300" no se aceptan.
+- `DateTime` locales y UTC se comparan por instante (`compareTo`), nunca con `==`.
+
 ## Entorno y estructura
 
 **D-001 · Ubicación del proyecto.** Subcarpeta `GymProgress/` dentro de la carpeta abierta (un proyecto de trading bot), con repo git propio. · Alternativa: carpeta hermana fuera del bot. · Elegido por el usuario.

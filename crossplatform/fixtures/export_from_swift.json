@@ -3,49 +3,25 @@
     {
       "a" : {
         "equipmentLabel" : "Smith",
-        "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+        "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
         "loadMode" : "total"
       },
       "b" : {
-        "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+        "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
         "loadMode" : "total"
       },
       "createdAt" : 1767992400,
-      "id" : "8901E6CF-C27B-413E-8632-9000A820A6F1"
+      "id" : "C2FE9A85-6BED-4BF2-9768-C003831FD80E"
     }
   ],
   "decisions" : [
     {
-      "decidedAt" : 1767906120,
-      "exerciseLogId" : "3F788816-4576-46E6-97C4-F8653AFE4305",
-      "finalReps" : [
-        9,
-        9,
-        9
-      ],
-      "finalWeight" : 62.5,
-      "id" : "93A74C1D-C78B-4DC9-9A7F-93D869A4E4C8",
-      "kind" : "modified",
-      "recommended" : {
-        "action" : "increaseWeight",
-        "confidence" : "high",
-        "reason" : "topOfRangeReached",
-        "reasonText" : "Alcanzaste 12 repeticiones en todas las series con el esfuerzo objetivo. Subí a 62,5 kg y volvé a 8 repeticiones.",
-        "targetReps" : [
-          8,
-          8,
-          8
-        ],
-        "targetWeight" : 62.5
-      }
-    },
-    {
       "decidedAt" : 1767646920,
-      "exerciseLogId" : "95B23DD7-D1C1-44BB-8815-A1215289CA02",
+      "exerciseLogId" : "9DD59186-5A9E-4D51-A18F-DD6961B7D478",
       "finalReps" : [
 
       ],
-      "id" : "A618B679-BE04-4482-834F-8EA9FB60552C",
+      "id" : "202394D5-CD01-40DF-AA55-D1BA21D144F2",
       "kind" : "accepted",
       "recommended" : {
         "action" : "needsInitialTarget",
@@ -59,20 +35,44 @@
     },
     {
       "decidedAt" : 1768165260,
-      "exerciseLogId" : "2E4DF054-EDCF-4E54-AF30-BBFC46CAA923",
+      "exerciseLogId" : "D1A2F03E-6374-415F-AC73-F02ED6BE33E5",
       "finalReps" : [
         8,
         8,
         8
       ],
       "finalWeight" : 62.5,
-      "id" : "BDD21132-1E6B-4BDA-B4C3-6D7D48263BD3",
+      "id" : "2D35BF95-4882-4699-B50B-D021FBF26328",
       "kind" : "accepted",
       "recommended" : {
         "action" : "maintain",
         "confidence" : "high",
         "reason" : "belowRepMin",
         "reasonText" : "Algunas series quedaron por debajo de 8 repeticiones. Mantené 62,5 kg y apuntá a llegar a 8 en todas.",
+        "targetReps" : [
+          8,
+          8,
+          8
+        ],
+        "targetWeight" : 62.5
+      }
+    },
+    {
+      "decidedAt" : 1767906120,
+      "exerciseLogId" : "25C3819F-0C74-4FCC-A1E1-A2E5C4743A31",
+      "finalReps" : [
+        9,
+        9,
+        9
+      ],
+      "finalWeight" : 62.5,
+      "id" : "F3987F97-E27E-4449-AFDE-4C939164702F",
+      "kind" : "modified",
+      "recommended" : {
+        "action" : "increaseWeight",
+        "confidence" : "high",
+        "reason" : "topOfRangeReached",
+        "reasonText" : "Alcanzaste 12 repeticiones en todas las series con el esfuerzo objetivo. Subí a 62,5 kg y volvé a 8 repeticiones.",
         "targetReps" : [
           8,
           8,
@@ -97,160 +97,8 @@
         "targetRIR" : 2,
         "targetSets" : 3
       },
-      "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
-      "frozenRecommendation" : {
-        "action" : "maintain",
-        "conditions" : [
-
-        ],
-        "confidence" : "high",
-        "context" : {
-          "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
-          "loadMode" : "total"
-        },
-        "evidence" : [
-          {
-            "context" : {
-              "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
-              "loadMode" : "total"
-            },
-            "date" : 1767906000,
-            "exerciseLogId" : "3F788816-4576-46E6-97C4-F8653AFE4305",
-            "measurement" : "weightReps",
-            "sessionId" : "382103FB-BAC8-4BBE-88E4-2FCAAE6AACE1",
-            "sets" : [
-              {
-                "amount" : 8,
-                "load" : 62.5
-              },
-              {
-                "amount" : 8,
-                "load" : 62.5
-              },
-              {
-                "amount" : 7,
-                "load" : 62.5
-              }
-            ],
-            "workingLoad" : 62.5
-          },
-          {
-            "context" : {
-              "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
-              "loadMode" : "total"
-            },
-            "date" : 1767646800,
-            "exerciseLogId" : "95B23DD7-D1C1-44BB-8815-A1215289CA02",
-            "measurement" : "weightReps",
-            "sessionId" : "97D077C9-DB41-4F51-BE6A-A694F02218B4",
-            "sets" : [
-              {
-                "amount" : 12,
-                "load" : 60,
-                "rir" : 2
-              },
-              {
-                "amount" : 12,
-                "load" : 60,
-                "rir" : 2
-              },
-              {
-                "amount" : 12,
-                "load" : 60,
-                "rir" : 2
-              }
-            ],
-            "workingLoad" : 60
-          }
-        ],
-        "generatedAt" : 1768165260,
-        "lastPerformance" : {
-          "context" : {
-            "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
-            "loadMode" : "total"
-          },
-          "date" : 1767906000,
-          "exerciseLogId" : "3F788816-4576-46E6-97C4-F8653AFE4305",
-          "measurement" : "weightReps",
-          "sessionId" : "382103FB-BAC8-4BBE-88E4-2FCAAE6AACE1",
-          "sets" : [
-            {
-              "amount" : 8,
-              "load" : 62.5
-            },
-            {
-              "amount" : 8,
-              "load" : 62.5
-            },
-            {
-              "amount" : 7,
-              "load" : 62.5
-            }
-          ],
-          "workingLoad" : 62.5
-        },
-        "measurement" : "weightReps",
-        "notes" : [
-
-        ],
-        "reason" : "belowRepMin",
-        "reasonText" : "Algunas series quedaron por debajo de 8 repeticiones. Mantené 62,5 kg y apuntá a llegar a 8 en todas.",
-        "strategy" : "doubleProgression",
-        "target" : {
-          "repMax" : 12,
-          "repMin" : 8,
-          "secondsMax" : 60,
-          "secondsMin" : 30,
-          "sets" : 3,
-          "targetRIR" : 2
-        },
-        "targetReps" : [
-          8,
-          8,
-          8
-        ],
-        "targetWeight" : 62.5,
-        "trend" : "insufficientData"
-      },
-      "id" : "2E4DF054-EDCF-4E54-AF30-BBFC46CAA923",
-      "isAtypical" : false,
-      "notes" : "",
-      "plannedOrder" : 0,
-      "recommendationFrozenAt" : 1768165260,
-      "routineExerciseId" : "1A39F0FF-15A7-40D9-9AF0-FAA652CE7D66",
-      "sessionId" : "509DDC32-855E-4D58-AB37-703EB42371C8",
-      "snapshot" : {
-        "equipment" : "barbell",
-        "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
-        "loadMode" : "total",
-        "measurement" : "weightReps",
-        "name" : "Press de banca",
-        "primaryMuscles" : [
-          "chest"
-        ],
-        "secondaryMuscles" : [
-          {
-            "muscle" : "triceps"
-          }
-        ]
-      }
-    },
-    {
-      "configSnapshot" : {
-        "increment" : 2.5,
-        "reassessAfterDays" : 21,
-        "repMax" : 12,
-        "repMin" : 8,
-        "requiredConsecutiveSessions" : 1,
-        "secondsIncrement" : 5,
-        "secondsMax" : 60,
-        "secondsMin" : 30,
-        "strategy" : "doubleProgression",
-        "targetRIR" : 2,
-        "targetSets" : 3
-      },
       "executionOrder" : 0,
-      "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+      "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
       "frozenRecommendation" : {
         "action" : "increaseWeight",
         "conditions" : [
@@ -258,19 +106,19 @@
         ],
         "confidence" : "high",
         "context" : {
-          "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+          "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
           "loadMode" : "total"
         },
         "evidence" : [
           {
             "context" : {
-              "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+              "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
               "loadMode" : "total"
             },
             "date" : 1767646800,
-            "exerciseLogId" : "95B23DD7-D1C1-44BB-8815-A1215289CA02",
+            "exerciseLogId" : "9DD59186-5A9E-4D51-A18F-DD6961B7D478",
             "measurement" : "weightReps",
-            "sessionId" : "97D077C9-DB41-4F51-BE6A-A694F02218B4",
+            "sessionId" : "CFE682D2-E8D0-4FE9-8DF9-8F77EAB1EA6E",
             "sets" : [
               {
                 "amount" : 12,
@@ -294,13 +142,13 @@
         "generatedAt" : 1767906060,
         "lastPerformance" : {
           "context" : {
-            "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+            "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
             "loadMode" : "total"
           },
           "date" : 1767646800,
-          "exerciseLogId" : "95B23DD7-D1C1-44BB-8815-A1215289CA02",
+          "exerciseLogId" : "9DD59186-5A9E-4D51-A18F-DD6961B7D478",
           "measurement" : "weightReps",
-          "sessionId" : "97D077C9-DB41-4F51-BE6A-A694F02218B4",
+          "sessionId" : "CFE682D2-E8D0-4FE9-8DF9-8F77EAB1EA6E",
           "sets" : [
             {
               "amount" : 12,
@@ -343,16 +191,16 @@
         "targetWeight" : 62.5,
         "trend" : "insufficientData"
       },
-      "id" : "3F788816-4576-46E6-97C4-F8653AFE4305",
+      "id" : "25C3819F-0C74-4FCC-A1E1-A2E5C4743A31",
       "isAtypical" : false,
       "notes" : "",
       "plannedOrder" : 0,
       "recommendationFrozenAt" : 1767906060,
-      "routineExerciseId" : "1A39F0FF-15A7-40D9-9AF0-FAA652CE7D66",
-      "sessionId" : "382103FB-BAC8-4BBE-88E4-2FCAAE6AACE1",
+      "routineExerciseId" : "BCA816A5-3672-4F85-82DC-0543A5250C57",
+      "sessionId" : "5AE4FB90-D07D-41CD-B8FD-D05C4C8388C8",
       "snapshot" : {
         "equipment" : "barbell",
-        "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+        "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
         "loadMode" : "total",
         "measurement" : "weightReps",
         "name" : "Press de banca",
@@ -381,7 +229,7 @@
         "targetSets" : 3
       },
       "executionOrder" : 0,
-      "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+      "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
       "frozenRecommendation" : {
         "action" : "needsInitialTarget",
         "conditions" : [
@@ -389,7 +237,7 @@
         ],
         "confidence" : "high",
         "context" : {
-          "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+          "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
           "loadMode" : "total"
         },
         "evidence" : [
@@ -416,16 +264,168 @@
         ],
         "trend" : "insufficientData"
       },
-      "id" : "95B23DD7-D1C1-44BB-8815-A1215289CA02",
+      "id" : "9DD59186-5A9E-4D51-A18F-DD6961B7D478",
       "isAtypical" : false,
       "notes" : "",
       "plannedOrder" : 0,
       "recommendationFrozenAt" : 1767646860,
-      "routineExerciseId" : "1A39F0FF-15A7-40D9-9AF0-FAA652CE7D66",
-      "sessionId" : "97D077C9-DB41-4F51-BE6A-A694F02218B4",
+      "routineExerciseId" : "BCA816A5-3672-4F85-82DC-0543A5250C57",
+      "sessionId" : "CFE682D2-E8D0-4FE9-8DF9-8F77EAB1EA6E",
       "snapshot" : {
         "equipment" : "barbell",
-        "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+        "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
+        "loadMode" : "total",
+        "measurement" : "weightReps",
+        "name" : "Press de banca",
+        "primaryMuscles" : [
+          "chest"
+        ],
+        "secondaryMuscles" : [
+          {
+            "muscle" : "triceps"
+          }
+        ]
+      }
+    },
+    {
+      "configSnapshot" : {
+        "increment" : 2.5,
+        "reassessAfterDays" : 21,
+        "repMax" : 12,
+        "repMin" : 8,
+        "requiredConsecutiveSessions" : 1,
+        "secondsIncrement" : 5,
+        "secondsMax" : 60,
+        "secondsMin" : 30,
+        "strategy" : "doubleProgression",
+        "targetRIR" : 2,
+        "targetSets" : 3
+      },
+      "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
+      "frozenRecommendation" : {
+        "action" : "maintain",
+        "conditions" : [
+
+        ],
+        "confidence" : "high",
+        "context" : {
+          "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
+          "loadMode" : "total"
+        },
+        "evidence" : [
+          {
+            "context" : {
+              "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
+              "loadMode" : "total"
+            },
+            "date" : 1767906000,
+            "exerciseLogId" : "25C3819F-0C74-4FCC-A1E1-A2E5C4743A31",
+            "measurement" : "weightReps",
+            "sessionId" : "5AE4FB90-D07D-41CD-B8FD-D05C4C8388C8",
+            "sets" : [
+              {
+                "amount" : 8,
+                "load" : 62.5
+              },
+              {
+                "amount" : 8,
+                "load" : 62.5
+              },
+              {
+                "amount" : 7,
+                "load" : 62.5
+              }
+            ],
+            "workingLoad" : 62.5
+          },
+          {
+            "context" : {
+              "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
+              "loadMode" : "total"
+            },
+            "date" : 1767646800,
+            "exerciseLogId" : "9DD59186-5A9E-4D51-A18F-DD6961B7D478",
+            "measurement" : "weightReps",
+            "sessionId" : "CFE682D2-E8D0-4FE9-8DF9-8F77EAB1EA6E",
+            "sets" : [
+              {
+                "amount" : 12,
+                "load" : 60,
+                "rir" : 2
+              },
+              {
+                "amount" : 12,
+                "load" : 60,
+                "rir" : 2
+              },
+              {
+                "amount" : 12,
+                "load" : 60,
+                "rir" : 2
+              }
+            ],
+            "workingLoad" : 60
+          }
+        ],
+        "generatedAt" : 1768165260,
+        "lastPerformance" : {
+          "context" : {
+            "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
+            "loadMode" : "total"
+          },
+          "date" : 1767906000,
+          "exerciseLogId" : "25C3819F-0C74-4FCC-A1E1-A2E5C4743A31",
+          "measurement" : "weightReps",
+          "sessionId" : "5AE4FB90-D07D-41CD-B8FD-D05C4C8388C8",
+          "sets" : [
+            {
+              "amount" : 8,
+              "load" : 62.5
+            },
+            {
+              "amount" : 8,
+              "load" : 62.5
+            },
+            {
+              "amount" : 7,
+              "load" : 62.5
+            }
+          ],
+          "workingLoad" : 62.5
+        },
+        "measurement" : "weightReps",
+        "notes" : [
+
+        ],
+        "reason" : "belowRepMin",
+        "reasonText" : "Algunas series quedaron por debajo de 8 repeticiones. Mantené 62,5 kg y apuntá a llegar a 8 en todas.",
+        "strategy" : "doubleProgression",
+        "target" : {
+          "repMax" : 12,
+          "repMin" : 8,
+          "secondsMax" : 60,
+          "secondsMin" : 30,
+          "sets" : 3,
+          "targetRIR" : 2
+        },
+        "targetReps" : [
+          8,
+          8,
+          8
+        ],
+        "targetWeight" : 62.5,
+        "trend" : "insufficientData"
+      },
+      "id" : "D1A2F03E-6374-415F-AC73-F02ED6BE33E5",
+      "isAtypical" : false,
+      "notes" : "",
+      "plannedOrder" : 0,
+      "recommendationFrozenAt" : 1768165260,
+      "routineExerciseId" : "BCA816A5-3672-4F85-82DC-0543A5250C57",
+      "sessionId" : "33782444-C5C4-4685-A11B-79351E86940E",
+      "snapshot" : {
+        "equipment" : "barbell",
+        "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
         "loadMode" : "total",
         "measurement" : "weightReps",
         "name" : "Press de banca",
@@ -2637,7 +2637,7 @@
     {
       "defaultIncrement" : 2.5,
       "equipment" : "barbell",
-      "id" : "20BCEC27-7914-468A-8F04-18D4B194825F",
+      "id" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
       "isArchived" : false,
       "isCustom" : true,
       "loadMode" : "total",
@@ -3893,8 +3893,8 @@
   "goals" : [
     {
       "createdAt" : 1767646800,
-      "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
-      "id" : "0354229F-203C-49D8-895F-36FC39B3354E",
+      "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
+      "id" : "1E7E6E9B-19B7-41F6-ABCB-A12DB6FBC75E",
       "metric" : "weight",
       "status" : "active",
       "value" : 70
@@ -3902,17 +3902,17 @@
   ],
   "routineExercises" : [
     {
-      "exerciseId" : "20BCEC27-7914-468A-8F04-18D4B194825F",
-      "id" : "1A39F0FF-15A7-40D9-9AF0-FAA652CE7D66",
+      "exerciseId" : "28A8447D-4497-46D5-B913-5DDF9C6A90BE",
+      "id" : "BCA816A5-3672-4F85-82DC-0543A5250C57",
       "notes" : "",
-      "routineId" : "68DB6835-EAB7-4243-96C9-4D2E4905006E",
+      "routineId" : "8FCE3B77-2E22-4E6E-A46C-68AEDC6FD015",
       "sortOrder" : 0
     }
   ],
   "routines" : [
     {
       "createdAt" : 1767560400,
-      "id" : "68DB6835-EAB7-4243-96C9-4D2E4905006E",
+      "id" : "8FCE3B77-2E22-4E6E-A46C-68AEDC6FD015",
       "isArchived" : false,
       "name" : "Torso A",
       "notes" : "",
@@ -3922,60 +3922,60 @@
   "schedule" : [
     {
       "createdAt" : 1767646800,
-      "id" : "2651EBFB-5BE4-427D-B782-E43E0C893864",
-      "validFrom" : 1767582000,
-      "weekday" : 1
-    },
-    {
-      "createdAt" : 1767646800,
-      "id" : "32B3EFA8-B1A0-4ACD-8AAB-A12EB8B9D311",
-      "validFrom" : 1767582000,
-      "weekday" : 4
-    },
-    {
-      "createdAt" : 1767646800,
-      "id" : "40A4DF1B-3A69-4851-B60E-6CE8C2DD450F",
-      "validFrom" : 1767582000,
-      "weekday" : 6
-    },
-    {
-      "createdAt" : 1767646800,
-      "id" : "49274C96-0976-42FE-8C6B-3C9E2749DFAE",
-      "validFrom" : 1767582000,
-      "weekday" : 3
-    },
-    {
-      "createdAt" : 1767646800,
-      "id" : "7EC9DC76-6824-4896-AAAF-D99FE0D2BE51",
-      "routineId" : "68DB6835-EAB7-4243-96C9-4D2E4905006E",
-      "validFrom" : 1767582000,
-      "weekday" : 5
-    },
-    {
-      "createdAt" : 1767646800,
-      "id" : "8D850A00-CDEE-4127-B56B-4D24B94A3637",
+      "id" : "0CEF3E61-042D-477E-B96A-3F102CD884ED",
       "validFrom" : 1767582000,
       "weekday" : 7
     },
     {
       "createdAt" : 1767646800,
-      "id" : "F39AA8E8-BC53-4FAD-B117-E379DBF3CCD6",
-      "routineId" : "68DB6835-EAB7-4243-96C9-4D2E4905006E",
+      "id" : "BB00D5D9-A7E5-4E61-BBC8-DB6266175154",
+      "routineId" : "8FCE3B77-2E22-4E6E-A46C-68AEDC6FD015",
+      "validFrom" : 1767582000,
+      "weekday" : 5
+    },
+    {
+      "createdAt" : 1767646800,
+      "id" : "BC008127-12A6-4829-AB3E-0B3287E40C59",
+      "validFrom" : 1767582000,
+      "weekday" : 3
+    },
+    {
+      "createdAt" : 1767646800,
+      "id" : "CE731919-91E3-4EBE-B1BD-EA20A32977A7",
+      "validFrom" : 1767582000,
+      "weekday" : 4
+    },
+    {
+      "createdAt" : 1767646800,
+      "id" : "E3C64896-C0D1-4D58-8420-2E99A2B74CA1",
+      "validFrom" : 1767582000,
+      "weekday" : 1
+    },
+    {
+      "createdAt" : 1767646800,
+      "id" : "F06CA940-21FE-41E5-8BE8-7C85160F5980",
+      "routineId" : "8FCE3B77-2E22-4E6E-A46C-68AEDC6FD015",
       "validFrom" : 1767582000,
       "weekday" : 2
+    },
+    {
+      "createdAt" : 1767646800,
+      "id" : "F11EC62A-0E0E-4C52-87C5-3A79FEA2131F",
+      "validFrom" : 1767582000,
+      "weekday" : 6
     }
   ],
   "schemaVersion" : 1,
   "sessions" : [
     {
       "endedAt" : 1767650400,
-      "id" : "97D077C9-DB41-4F51-BE6A-A694F02218B4",
+      "id" : "CFE682D2-E8D0-4FE9-8DF9-8F77EAB1EA6E",
       "isAtypical" : false,
       "notes" : "",
       "pauses" : [
 
       ],
-      "routineId" : "68DB6835-EAB7-4243-96C9-4D2E4905006E",
+      "routineId" : "8FCE3B77-2E22-4E6E-A46C-68AEDC6FD015",
       "routineNameSnapshot" : "Torso A",
       "startedAt" : 1767646800,
       "status" : "completed",
@@ -3983,26 +3983,26 @@
     },
     {
       "endedAt" : 1767909600,
-      "id" : "382103FB-BAC8-4BBE-88E4-2FCAAE6AACE1",
+      "id" : "5AE4FB90-D07D-41CD-B8FD-D05C4C8388C8",
       "isAtypical" : false,
       "notes" : "",
       "pauses" : [
 
       ],
-      "routineId" : "68DB6835-EAB7-4243-96C9-4D2E4905006E",
+      "routineId" : "8FCE3B77-2E22-4E6E-A46C-68AEDC6FD015",
       "routineNameSnapshot" : "Torso A",
       "startedAt" : 1767906000,
       "status" : "completed",
       "updatedAt" : 1767909600
     },
     {
-      "id" : "509DDC32-855E-4D58-AB37-703EB42371C8",
+      "id" : "33782444-C5C4-4685-A11B-79351E86940E",
       "isAtypical" : false,
       "notes" : "",
       "pauses" : [
 
       ],
-      "routineId" : "68DB6835-EAB7-4243-96C9-4D2E4905006E",
+      "routineId" : "8FCE3B77-2E22-4E6E-A46C-68AEDC6FD015",
       "routineNameSnapshot" : "Torso A",
       "startedAt" : 1768165200,
       "status" : "active",
@@ -4011,52 +4011,32 @@
   ],
   "setLogs" : [
     {
-      "excludedFromEstimates" : false,
-      "exerciseLogId" : "2E4DF054-EDCF-4E54-AF30-BBFC46CAA923",
-      "id" : "1A10F934-4A26-4C62-968A-8CA477CD0326",
-      "index" : 0,
-      "kind" : "working",
-      "status" : "pending",
-      "targetReps" : 8,
-      "weight" : 62.5
-    },
-    {
-      "excludedFromEstimates" : false,
-      "exerciseLogId" : "2E4DF054-EDCF-4E54-AF30-BBFC46CAA923",
-      "id" : "2C7718F4-3C47-4043-AEC5-A4D2B2B30B06",
-      "index" : 2,
-      "kind" : "working",
-      "status" : "pending",
-      "targetReps" : 8,
-      "weight" : 62.5
-    },
-    {
-      "excludedFromEstimates" : false,
-      "exerciseLogId" : "2E4DF054-EDCF-4E54-AF30-BBFC46CAA923",
-      "id" : "5F1C765C-4867-4850-95D9-220353D6AFD4",
-      "index" : 1,
-      "kind" : "working",
-      "status" : "pending",
-      "targetReps" : 8,
-      "weight" : 62.5
-    },
-    {
       "completedAt" : 1767647280,
       "excludedFromEstimates" : false,
-      "exerciseLogId" : "95B23DD7-D1C1-44BB-8815-A1215289CA02",
-      "id" : "879AE2B8-9D0F-484C-9B16-6E2131F0558D",
+      "exerciseLogId" : "9DD59186-5A9E-4D51-A18F-DD6961B7D478",
+      "id" : "05165BC2-27B5-4870-9251-31D85DF70C5D",
       "index" : 1,
       "kind" : "working",
       "reps" : 12,
       "rir" : 2,
       "status" : "completed",
       "weight" : 60
+    },
+    {
+      "excludedFromEstimates" : false,
+      "exerciseLogId" : "D1A2F03E-6374-415F-AC73-F02ED6BE33E5",
+      "id" : "1B8BBB3B-DABB-4F88-A8E1-09DC246186EC",
+      "index" : 1,
+      "kind" : "working",
+      "status" : "pending",
+      "targetReps" : 8,
+      "weight" : 62.5
     },
     {
       "completedAt" : 1767647460,
       "excludedFromEstimates" : false,
-      "exerciseLogId" : "95B23DD7-D1C1-44BB-8815-A1215289CA02",
-      "id" : "8D30BFE3-7811-428E-8224-5810666EE776",
+      "exerciseLogId" : "9DD59186-5A9E-4D51-A18F-DD6961B7D478",
+      "id" : "325F4E9C-0CC6-4F12-AA12-E43D440C6E90",
       "index" : 2,
       "kind" : "working",
       "reps" : 12,
@@ -4065,22 +4045,10 @@
       "weight" : 60
     },
     {
-      "completedAt" : 1767906660,
-      "excludedFromEstimates" : false,
-      "exerciseLogId" : "3F788816-4576-46E6-97C4-F8653AFE4305",
-      "id" : "C2AD9DAA-EFA9-4FE8-B6A8-6F25EC3A782E",
-      "index" : 2,
-      "kind" : "working",
-      "reps" : 7,
-      "status" : "completed",
-      "targetReps" : 9,
-      "weight" : 62.5
-    },
-    {
       "completedAt" : 1767647100,
       "excludedFromEstimates" : false,
-      "exerciseLogId" : "95B23DD7-D1C1-44BB-8815-A1215289CA02",
-      "id" : "DF87CF0D-FF5E-4CF3-AA16-ADDE3BB2442A",
+      "exerciseLogId" : "9DD59186-5A9E-4D51-A18F-DD6961B7D478",
+      "id" : "498BC25F-D4A6-49A2-AC92-30B3053B7C88",
       "index" : 0,
       "kind" : "working",
       "reps" : 12,
@@ -4089,10 +4057,20 @@
       "weight" : 60
     },
     {
+      "excludedFromEstimates" : false,
+      "exerciseLogId" : "D1A2F03E-6374-415F-AC73-F02ED6BE33E5",
+      "id" : "89CE0721-7789-401D-AB9D-0FC32B5E122D",
+      "index" : 2,
+      "kind" : "working",
+      "status" : "pending",
+      "targetReps" : 8,
+      "weight" : 62.5
+    },
+    {
       "completedAt" : 1767906300,
       "excludedFromEstimates" : false,
-      "exerciseLogId" : "3F788816-4576-46E6-97C4-F8653AFE4305",
-      "id" : "EC1CF8AC-5E3D-4DC9-AD12-901334EFD26D",
+      "exerciseLogId" : "25C3819F-0C74-4FCC-A1E1-A2E5C4743A31",
+      "id" : "B49D5F10-55E1-4B0B-A703-4ECF4BE11291",
       "index" : 0,
       "kind" : "working",
       "reps" : 8,
@@ -4101,10 +4079,32 @@
       "weight" : 62.5
     },
     {
+      "completedAt" : 1767906660,
+      "excludedFromEstimates" : false,
+      "exerciseLogId" : "25C3819F-0C74-4FCC-A1E1-A2E5C4743A31",
+      "id" : "BCDA68C0-0F01-4BC5-AA03-5BA4875EE979",
+      "index" : 2,
+      "kind" : "working",
+      "reps" : 7,
+      "status" : "completed",
+      "targetReps" : 9,
+      "weight" : 62.5
+    },
+    {
+      "excludedFromEstimates" : false,
+      "exerciseLogId" : "D1A2F03E-6374-415F-AC73-F02ED6BE33E5",
+      "id" : "C4B157DE-8DD0-4846-928F-0CFC46D12D05",
+      "index" : 0,
+      "kind" : "working",
+      "status" : "pending",
+      "targetReps" : 8,
+      "weight" : 62.5
+    },
+    {
       "completedAt" : 1767906480,
       "excludedFromEstimates" : false,
-      "exerciseLogId" : "3F788816-4576-46E6-97C4-F8653AFE4305",
-      "id" : "FD48F999-C66A-4A44-9ED0-732B4FEABFAB",
+      "exerciseLogId" : "25C3819F-0C74-4FCC-A1E1-A2E5C4743A31",
+      "id" : "E8AA0AE2-18AB-4BDF-9E36-15BD4D34065C",
       "index" : 1,
       "kind" : "working",
       "reps" : 8,

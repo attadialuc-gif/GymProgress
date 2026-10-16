@@ -85,3 +85,14 @@ Solo series efectivas (calentamiento y pendientes excluidas). Peso usado, volume
 ## Parseo de números
 
 `WeightParser.parse`: acepta coma o punto como separador decimal (`62,5`, `62.5`, `,5`, `100.`), un solo separador, sin signos ni miles ni exponentes; normaliza a 1 g. Validación (`SetValidator`): negativos = error; peso > 500 kg, reps > 100 o duración > 1 h = advertencia que no bloquea; RIR 0–10, RPE 1–10.
+
+## Fidelidad numérica y temporal del port Dart (Android/Windows)
+
+El port (`crossplatform/gym_core`) reproduce Swift bit a bit; lo verifican los fixtures generados por `FixtureExporter` (D-101). Puntos donde los lenguajes difieren y cómo se resolvió:
+
+- **Doubles**: ambos usan IEEE-754 binary64 y las mismas operaciones en el mismo orden (`(v / 0.001).rounded() * 0.001`; sumas con `reduce`/`fold` de izquierda a derecha). `round()` de Dart y `rounded()` de Swift redondean al entero más cercano con empates lejos de cero. Los tests comparan con tolerancia relativa 1e-12 (solo admite diferencias en el último bit; nunca apareció ninguna).
+- **Formato de números** (`GymFormat.number`): Swift usa ICU — representación decimal más corta del double, redondeo *half-even* a 2 decimales, agrupación de miles. Dart lo replica sobre la cadena decimal más corta (`toString`), no sobre el binario: `62,555 → "62,56"`, `2,675 → "2,68"`, `0,005 → "0"`. Locales soportados: es-AR (`1.234,5`) y en-US (`1,234.5`).
+- **Orden estable**: `sorted` de Swift es estable y `List.sort` de Dart no; el port usa `stableSorted` (merge sort) en todo ordenamiento con posibles empates.
+- **Calendario**: zona horaria IANA con el paquete `timezone` (base tz embebida, sin red). Se replica `Calendar` de Foundation: hora local inexistente (salto de DST) se resuelve con el desfase previo (02:30 → 03:30); hora repetida → primera ocurrencia; sumar días conserva la hora de reloj; `daysBetween` cuenta días completos como `dateComponents([.day])`. Día de semana 1 = domingo (Dart: `weekday % 7 + 1`).
+- **Instantes**: `DateTime` UTC con precisión de microsegundos; en JSON, segundos desde 1970 como `Double` (igual que el `Codable` de Swift).
+- **Textos**: las explicaciones del motor son las mismas cadenas en español, verificadas literalmente por los fixtures (incluye en-US para números).
