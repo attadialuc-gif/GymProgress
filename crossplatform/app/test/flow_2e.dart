@@ -29,7 +29,17 @@ Future<void> run2EFlow(WidgetTester tester, String dbPath) async {
     await tester.pumpAndSettle();
   }
 
+  // On a real device the on-screen keyboard can stay open and cover buttons: close it and let
+  // the layout settle before locating the next target.
+  Future<void> hideKeyboard() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 800));
+    await tester.pumpAndSettle();
+  }
+
   Future<void> tapText(String text) async {
+    await hideKeyboard();
     await tester.ensureVisible(find.text(text).first);
     await tester.tap(find.text(text).first);
     await tester.pumpAndSettle();
@@ -95,7 +105,9 @@ Future<void> run2EFlow(WidgetTester tester, String dbPath) async {
   // 5. Save (finish) the session.
   await back();
   clock = clock.add(const Duration(minutes: 5));
+  await hideKeyboard();
   await tester.ensureVisible(find.byKey(const Key('finishWorkout')));
+  await tester.pumpAndSettle();
   await tester.tap(find.byKey(const Key('finishWorkout')));
   await tester.pumpAndSettle();
   await tapText('Finalizar');
