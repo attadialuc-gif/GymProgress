@@ -38,9 +38,19 @@ Future<void> run2EFlow(WidgetTester tester, String dbPath) async {
     await tester.pumpAndSettle();
   }
 
+  // Lists build lazily on a phone screen: scroll until the target exists, then make it visible.
+  Future<void> reveal(Finder target) async {
+    if (target.evaluate().isEmpty) {
+      await tester.scrollUntilVisible(target, 150, scrollable: find.byType(Scrollable).first);
+      await tester.pumpAndSettle();
+    }
+    await tester.ensureVisible(target.first);
+    await tester.pumpAndSettle();
+  }
+
   Future<void> tapText(String text) async {
     await hideKeyboard();
-    await tester.ensureVisible(find.text(text).first);
+    await reveal(find.text(text));
     await tester.tap(find.text(text).first);
     await tester.pumpAndSettle();
   }
@@ -59,6 +69,7 @@ Future<void> run2EFlow(WidgetTester tester, String dbPath) async {
 
   // 2. Pick an exercise from the library.
   await tapText('Torso A');
+  await reveal(find.byKey(const Key('addRoutineExercise')));
   await tester.tap(find.byKey(const Key('addRoutineExercise')));
   await tester.pumpAndSettle();
   await tester.enterText(find.byKey(const Key('exerciseSearch')), 'banca');
@@ -68,6 +79,7 @@ Future<void> run2EFlow(WidgetTester tester, String dbPath) async {
   expect(find.textContaining('Sin datos: configurá un objetivo inicial'), findsOneWidget);
 
   // 3. Start the workout and open the exercise: no history → initial target.
+  await reveal(find.byKey(const Key('startRoutine')));
   await tester.tap(find.byKey(const Key('startRoutine')));
   await tester.pumpAndSettle();
   expect(find.text('En curso'), findsOneWidget);
@@ -86,11 +98,11 @@ Future<void> run2EFlow(WidgetTester tester, String dbPath) async {
   expect(sets.length, 3);
   for (var i = 0; i < 3; i++) {
     clock = clock.add(const Duration(minutes: 3));
-    await tester.ensureVisible(find.byKey(Key('amount-${sets[i].id}')));
+    await reveal(find.byKey(Key('amount-${sets[i].id}')));
     await tester.enterText(find.byKey(Key('amount-${sets[i].id}')), '${reps[i]}');
     // On a device the on-screen keyboard opens and the layout moves: settle, then locate ✓ again.
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.byKey(Key('complete-${sets[i].id}')));
+    await reveal(find.byKey(Key('complete-${sets[i].id}')));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(Key('complete-${sets[i].id}')));
     await tester.pumpAndSettle();
@@ -106,7 +118,7 @@ Future<void> run2EFlow(WidgetTester tester, String dbPath) async {
   await back();
   clock = clock.add(const Duration(minutes: 5));
   await hideKeyboard();
-  await tester.ensureVisible(find.byKey(const Key('finishWorkout')));
+  await reveal(find.byKey(const Key('finishWorkout')));
   await tester.pumpAndSettle();
   await tester.tap(find.byKey(const Key('finishWorkout')));
   await tester.pumpAndSettle();
@@ -148,6 +160,7 @@ Future<void> run2EFlow(WidgetTester tester, String dbPath) async {
   // 9. And it is what the next workout shows on its card.
   await tapText('Rutinas');
   await tapText('Torso A');
+  await reveal(find.byKey(const Key('startRoutine')));
   await tester.tap(find.byKey(const Key('startRoutine')));
   await tester.pumpAndSettle();
   await tapText(benchName);
