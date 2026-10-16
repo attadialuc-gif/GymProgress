@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 
 /// Rest countdown kept as an end timestamp (port of RestTimerService): it survives the app going
-/// to background, a lock or a process restart while the screen re-reads the clock.
+/// to background or a lock because the screen re-reads the clock. Restoring it after a process
+/// restart and the end-of-rest notification/sound are provided by the platform layer (D-106).
 class RestTimer extends ChangeNotifier {
   DateTime? _endsAt;
 

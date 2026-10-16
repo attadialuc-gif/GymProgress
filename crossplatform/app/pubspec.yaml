@@ -7,8 +7,11 @@ environment:
   sdk: ^3.13.5
 
 dependencies:
+  file_picker: ^13.1.0
+  fl_chart: ^1.2.0
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^20.1.0
   flutter_localizations:
     sdk: flutter
   flutter_timezone: ^5.1.1
@@ -17,6 +20,7 @@ dependencies:
   gym_store:
     path: ../gym_store
   path_provider: ^2.1.6
+  wakelock_plus: ^1.8.0
 
 dev_dependencies:
   flutter_test:

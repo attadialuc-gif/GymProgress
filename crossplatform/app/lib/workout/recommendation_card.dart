@@ -52,7 +52,7 @@ class RecommendationCard extends StatelessWidget {
       child: GymCard(
         highlighted: decision == null,
         children: [
-          // Header
+          // Header: the action title always has the full width; badges go below it.
           Row(
             children: [
               Icon(_icon, color: theme.colorScheme.primary),
@@ -66,14 +66,18 @@ class RecommendationCard extends StatelessWidget {
                   ),
                 ),
               ),
-              if (r.confidence == RecommendationConfidence.conditional)
-                const GymBadge('Condicionada', color: GymColors.caution),
-              if (decision != null) ...[
-                const SizedBox(width: 6),
-                GymBadge(decision!.kind.label, color: GymColors.positive),
-              ],
             ],
           ),
+          if (r.confidence == RecommendationConfidence.conditional || decision != null)
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: [
+                if (r.confidence == RecommendationConfidence.conditional)
+                  const GymBadge('Condicionada', color: GymColors.caution),
+                if (decision != null) GymBadge(decision!.kind.label, color: GymColors.positive),
+              ],
+            ),
           // Last comparable session
           if (r.lastPerformance != null)
             MergeSemantics(
@@ -238,6 +242,10 @@ class _ModifySheetState extends State<ModifySheet> {
   bool get _isDuration => widget.recommendation.measurement == MeasurementType.duration;
   bool get _isBodyweight => widget.recommendation.measurement == MeasurementType.bodyweightReps;
 
+  /// Same bounds as iOS: 0…100 reps, 0…3600 s.
+  int get _max => _isDuration ? 3600 : 100;
+  int get _step => _isDuration ? 5 : 1;
+
   @override
   void initState() {
     super.initState();
@@ -303,17 +311,22 @@ class _ModifySheetState extends State<ModifySheet> {
                     icon: const Icon(Icons.remove),
                   ),
                   Expanded(
-                    child: TextField(
-                      key: const Key('modifyWeight'),
-                      controller: _weight,
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.numberWithOptions(decimal: true, signed: _isBodyweight),
-                      style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
-                      decoration: InputDecoration(
-                        hintText: _isDuration ? 'Sin carga' : f.unit.name,
-                        errorText: _invalid ? 'Número inválido. Usá coma o punto decimal (ej.: 61,5).' : null,
+                    child: MergeSemantics(
+                      child: Semantics(
+                        label: _isBodyweight ? 'Lastre o asistencia objetivo' : 'Peso objetivo',
+                        child: TextField(
+                          key: const Key('modifyWeight'),
+                          controller: _weight,
+                          textAlign: TextAlign.center,
+                          keyboardType: TextInputType.numberWithOptions(decimal: true, signed: _isBodyweight),
+                          style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                          decoration: InputDecoration(
+                            hintText: _isDuration ? 'Sin carga' : f.unit.name,
+                            errorText: _invalid ? 'Número inválido. Usá coma o punto decimal (ej.: 61,5).' : null,
+                          ),
+                          onChanged: (_) => setState(() {}),
+                        ),
                       ),
-                      onChanged: (_) => setState(() {}),
                     ),
                   ),
                   IconButton.filledTonal(
@@ -335,13 +348,17 @@ class _ModifySheetState extends State<ModifySheet> {
                   children: [
                     Expanded(child: Text('Serie ${i + 1}: ${_amounts[i]}${_isDuration ? ' s' : ''}')),
                     IconButton(
-                      tooltip: 'Menos',
-                      onPressed: _amounts[i] > 0 ? () => setState(() => _amounts[i] -= _isDuration ? 5 : 1) : null,
+                      tooltip: 'Menos en la serie ${i + 1}',
+                      onPressed: _amounts[i] > 0
+                          ? () => setState(() => _amounts[i] = (_amounts[i] - _step).clamp(0, _max))
+                          : null,
                       icon: const Icon(Icons.remove_circle_outline),
                     ),
                     IconButton(
-                      tooltip: 'Más',
-                      onPressed: () => setState(() => _amounts[i] += _isDuration ? 5 : 1),
+                      tooltip: 'Más en la serie ${i + 1}',
+                      onPressed: _amounts[i] < _max
+                          ? () => setState(() => _amounts[i] = (_amounts[i] + _step).clamp(0, _max))
+                          : null,
                       icon: const Icon(Icons.add_circle_outline),
                     ),
                   ],

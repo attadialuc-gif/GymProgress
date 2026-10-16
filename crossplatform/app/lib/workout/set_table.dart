@@ -1,3 +1,5 @@
+import 'dart:ui' show AppExitResponse;
+
 import 'package:flutter/material.dart';
 import 'package:gym_core/gym_core.dart';
 import 'package:gym_store/gym_store.dart';
@@ -119,17 +121,30 @@ class SetRowState extends State<SetRow> with WidgetsBindingObserver {
   @override
   void didUpdateWidget(SetRow oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _sync();
+    // Only when the stored set changed (Aceptar, Copiar…): a rejected entry stays visible.
+    if (canonicalJson(oldWidget.entry.toJson()) != canonicalJson(widget.entry.toJson())) _sync();
   }
+
+  bool _disposing = false;
 
   @override
   void dispose() {
+    // The row is going away (navigation, tab switch, app teardown): never lose what was typed.
+    _disposing = true;
+    commit();
     WidgetsBinding.instance.removeObserver(this);
     _load.dispose();
     _amount.dispose();
     _loadFocus.dispose();
     _amountFocus.dispose();
     super.dispose();
+  }
+
+  /// Closing the window (Windows) saves what was typed.
+  @override
+  Future<AppExitResponse> didRequestAppExit() async {
+    commit();
+    return AppExitResponse.exit;
   }
 
   /// Leaving the app (call, lock, app switcher) saves what was typed, even mid-edit.
@@ -218,7 +233,7 @@ class SetRowState extends State<SetRow> with WidgetsBindingObserver {
 
   void _save(AppModel model, SetLog s, String? parseWarning) {
     void warn(String? w) {
-      if (mounted) setState(() => _warning = w);
+      if (mounted && !_disposing) setState(() => _warning = w);
     }
 
     if (canonicalJson(s.toJson()) == canonicalJson(widget.entry.toJson())) {
@@ -229,7 +244,7 @@ class SetRowState extends State<SetRow> with WidgetsBindingObserver {
     final unusual = issues.where((i) => !i.isError).map((i) => i.message).firstOrNull;
     // A typing error is shown first; it is never hidden by another field's save.
     warn(parseWarning ?? unusual);
-    if (mounted) {
+    if (mounted && !_disposing) {
       model.perform(() => model.workout.updateSet(s));
     } else {
       // Row being removed (navigation): save without rebuilding the tree being torn down.
@@ -442,5 +457,8 @@ class SetRowState extends State<SetRow> with WidgetsBindingObserver {
 }
 
 extension on Widget {
-  Widget withSemantics(String label) => Semantics(textField: true, label: label, child: this);
+  /// One accessible node: the label and the editable field are announced together.
+  Widget withSemantics(String label) => MergeSemantics(
+    child: Semantics(label: label, child: this),
+  );
 }

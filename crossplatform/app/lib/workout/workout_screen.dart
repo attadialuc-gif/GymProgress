@@ -69,7 +69,10 @@ class _WorkoutSessionViewState extends State<WorkoutSessionView> {
   void initState() {
     super.initState();
     _tick = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (mounted) setState(() {});
+      // Only while visible: current route of the selected tab.
+      if (!mounted || !(ModalRoute.of(context)?.isCurrent ?? true)) return;
+      if (AppScope.read(context).selectedTab != AppTab.workout) return;
+      setState(() {});
     });
   }
 
@@ -263,7 +266,6 @@ class _SessionExerciseTile extends StatelessWidget {
       label: '${log.snapshot.name}, $done de ${sets.length} series completadas',
       child: ListTile(
         onTap: onTap,
-        onLongPress: onRemove,
         title: Row(
           children: [
             Flexible(child: Text(log.snapshot.name)),

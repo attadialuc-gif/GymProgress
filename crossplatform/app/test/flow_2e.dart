@@ -118,7 +118,8 @@ Future<void> run2EFlow(WidgetTester tester, String dbPath) async {
 
   // 8. Next recommendation, from what was really done (60 × 10, 10, 9), not from the target.
   //    The catalog bench press range is 6–10: +1 rep on the set below the top → 10, 10, 10.
-  await tapText(benchName);
+  await tapText(benchName); // exercise progress (charts per context)
+  await tapText('Historial completo y recomendación');
   expect(find.textContaining('Próxima sesión: Sumá repeticiones'), findsOneWidget);
   expect(find.text('60 kg × 10, 10, 10'), findsOneWidget);
   final next = model.workout.previewRecommendation(log.exerciseId, now: model.now())!;

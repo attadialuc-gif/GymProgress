@@ -99,6 +99,10 @@ class ExerciseHistoryScreen extends StatelessWidget {
     final dates = DateText(model.workout.calendar);
     final next = model.workout.previewRecommendation(exerciseId, now: model.now());
     final f = model.loadFormatter;
+    // Records of the context currently in use (other machines/variants: Récords y objetivos).
+    final currentClass = model.stats.currentContextClass(exerciseId);
+    final records = model.stats.records(exerciseId, contextClass: currentClass);
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(exercise?.name ?? 'Ejercicio')),
       body: ListView(
@@ -107,11 +111,45 @@ class ExerciseHistoryScreen extends StatelessWidget {
           if (next != null)
             GymCard(
               children: [
-                Text('Próxima sesión: ${next.actionTitle}', style: Theme.of(context).textTheme.titleMedium),
-                Text('${f.load(next.targetWeight, next.measurement, next.context.loadMode)} × ${next.amountsText}'),
-                Text(next.reasonText, style: Theme.of(context).textTheme.bodySmall),
+                Text(
+                  'Próxima sesión: ${next.actionTitle}',
+                  style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary),
+                ),
+                if (next.targetWeight != null)
+                  Text(
+                    '${f.load(next.targetWeight, next.measurement, next.context.loadMode)} × ${next.amountsText}',
+                    style: theme.textTheme.titleLarge,
+                  ),
+                Text(next.reasonText),
+                Text(
+                  'Tendencia: ${next.trend.label}',
+                  style: theme.textTheme.bodySmall?.copyWith(color: theme.hintColor),
+                ),
               ],
             ),
+          if (records.maxWeight != null) ...[
+            SectionTitle(
+              currentClass == null || currentClass.label == 'estándar' ? 'Récords' : 'Récords · ${currentClass.label}',
+            ),
+            ListTile(
+              dense: true,
+              title: const Text('Peso máximo (real)'),
+              trailing: Text(f.weight(records.maxWeight!.value)),
+            ),
+            if (records.bestEstimatedOneRepMax != null)
+              ListTile(
+                dense: true,
+                title: const Text('Mejor 1RM estimado'),
+                trailing: Text('${f.weight(records.bestEstimatedOneRepMax!.value)} (estimado)'),
+              ),
+            if (records.maxSessionVolume != null)
+              ListTile(
+                dense: true,
+                title: const Text('Mayor volumen en una sesión'),
+                trailing: Text(f.weight(records.maxSessionVolume!.value)),
+              ),
+          ],
+          const SectionTitle('Sesiones'),
           if (entries.isEmpty) const EmptyState(icon: Icons.history, title: 'Sin sesiones registradas'),
           for (final e in entries) ...[
             const SizedBox(height: 12),

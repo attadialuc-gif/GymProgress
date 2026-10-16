@@ -69,6 +69,14 @@ class AppModel extends ChangeNotifier {
     }
   }
 
+  /// Runs a mutation that returns nothing; true when it succeeded.
+  bool run(void Function() action) =>
+      perform(() {
+        action();
+        return true;
+      }) ??
+      false;
+
   void clearError() {
     errorMessage = null;
     notifyListeners();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'app_model.dart';
 import 'home/home_screen.dart';
@@ -104,10 +105,14 @@ class _ShellState extends State<Shell> {
     );
     final wide = MediaQuery.sizeOf(context).width >= 720;
     return PopScope(
-      // Android back: pop inside the current tab first; only exit at the tab's root.
-      canPop: !(_navigators[model.selectedTab]!.currentState?.canPop() ?? false),
-      onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) _navigators[model.selectedTab]!.currentState?.maybePop();
+      // Android back: pops inside the current tab first (screens and sheets); exits only at the
+      // tab's root. Decided at the moment of the gesture (nested navigators don't rebuild Shell).
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) async {
+        if (didPop) return;
+        final nav = _navigators[model.selectedTab]!.currentState;
+        if (nav != null && await nav.maybePop()) return;
+        await SystemNavigator.pop();
       },
       child: wide
           ? Scaffold(

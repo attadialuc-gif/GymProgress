@@ -5,6 +5,7 @@ import 'package:gym_store/gym_store.dart';
 import '../app_model.dart';
 import '../ui/format.dart';
 import '../ui/theme.dart';
+import '../library/library_screen.dart';
 import 'exercise_picker_screen.dart';
 import 'routine_exercise_editor.dart';
 
@@ -49,6 +50,11 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
       appBar: AppBar(
         title: const Text('Rutinas'),
         actions: [
+          IconButton(
+            tooltip: 'Biblioteca',
+            icon: const Icon(Icons.menu_book_outlined),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const LibraryScreen())),
+          ),
           PopupMenuButton<String>(
             key: const Key('newRoutineMenu'),
             tooltip: 'Nueva rutina',

@@ -61,12 +61,28 @@ class _RoutineExerciseEditorState extends State<RoutineExerciseEditor> {
     final model = AppScope.read(context);
     final f = model.loadFormatter;
     final item = model.repository.routineExercise(widget.itemId)!;
-    final updated = _config.copy()
-      ..targetRIR = _hasRIR ? _rir : null
-      ..initialWeight = _initial.text.trim().isEmpty ? null : f.parse(_initial.text);
+    void fail(String message) {
+      model.errorMessage = message;
+      model.perform(() {});
+    }
+
+    final updated = _config.copy()..targetRIR = _hasRIR ? _rir : null;
+    // Never drop typed input silently: invalid values stop the save with an explanation.
+    if (swiftTrim(_initial.text).isEmpty) {
+      updated.initialWeight = null;
+    } else {
+      final initial = f.parse(_initial.text);
+      if (initial == null) return fail('Peso inicial inválido: usá coma o punto decimal (ej.: 40 o 42,5).');
+      updated.initialWeight = initial;
+    }
     final inc = f.parse(_increment.text);
-    if (inc != null && inc > 0) updated.increment = inc;
-    final weights = _available.text.split(';').map(f.parse).whereType<double>().toList();
+    if (inc == null || inc <= 0) return fail('Incremento inválido: usá coma o punto decimal (ej.: 2,5).');
+    updated.increment = inc;
+    final parts = _available.text.split(';').map(swiftTrim).where((p) => p.isNotEmpty).toList();
+    final weights = parts.map(f.parse).whereType<double>().toList();
+    if (weights.length != parts.length) {
+      return fail('Pesos disponibles inválidos: separalos con punto y coma (ej.: 20; 22,5; 25).');
+    }
     updated.availableWeights = weights.isEmpty ? null : weights;
     item
       ..progressionOverride = updated

@@ -29,6 +29,7 @@ class _ExerciseLogScreenState extends State<ExerciseLogScreen> {
   final _notes = TextEditingController();
   final _notesFocus = FocusNode();
   late AppModel _model;
+  String? _openError;
 
   @override
   void didChangeDependencies() {
@@ -41,6 +42,11 @@ class _ExerciseLogScreenState extends State<ExerciseLogScreen> {
     // Saved quietly: this runs while the tree builds (the screen reads the store itself).
     ExerciseLogState? state;
     model.performQuietly(() => state = model.workout.openExercise(widget.logId, now: model.now()));
+    if (state == null) {
+      _openError = model.errorMessage ?? 'No se pudo abrir el ejercicio.';
+      // Surface the error dialog after this frame (no notify while building).
+      WidgetsBinding.instance.addPostFrameCallback((_) => model.perform(() {}));
+    }
     _notes.text = state?.log.notes ?? '';
     _notesFocus.addListener(() {
       if (!_notesFocus.hasFocus) _saveNotes();
@@ -132,7 +138,9 @@ class _ExerciseLogScreenState extends State<ExerciseLogScreen> {
     if (state == null) {
       return Scaffold(
         appBar: AppBar(),
-        body: const Center(child: CircularProgressIndicator()),
+        body: _openError == null
+            ? const Center(child: CircularProgressIndicator())
+            : EmptyState(icon: Icons.error_outline, title: 'No se pudo abrir el ejercicio', message: _openError),
       );
     }
     final log = state.log;
@@ -345,7 +353,10 @@ class _RestTimerBannerState extends State<RestTimerBanner> {
   void initState() {
     super.initState();
     _tick = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (mounted) setState(() {});
+      // Only while visible: current route of the selected tab.
+      if (!mounted || !(ModalRoute.of(context)?.isCurrent ?? true)) return;
+      if (AppScope.read(context).selectedTab != AppTab.workout) return;
+      setState(() {});
     });
   }
 
