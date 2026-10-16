@@ -55,6 +55,33 @@ jobs:
           path: "*-test.log"
           if-no-files-found: ignore
 
+  # The 2.E flow (UI + real SQLite file + app reload) on a real Windows desktop build.
+  windows-integration:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.7
+          cache: true
+      - name: Integration test 2.E (Windows)
+        working-directory: crossplatform/app
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter config --enable-windows-desktop
+          flutter pub get
+          flutter test integration_test -d windows -r expanded 2>&1 | tee ../../windows-integration.log
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-integration-log
+          path: windows-integration.log
+          if-no-files-found: ignore
+
   # The fixtures are generated from the Swift implementation; they must match what the Swift
   # code produces today (export_from_swift.json uses random ids and is checked by import instead).
   fixtures:

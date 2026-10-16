@@ -1,122 +1,131 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:gym_core/gym_core.dart';
+import 'package:gym_store/gym_store.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'app_model.dart';
+import 'shell.dart';
+import 'ui/theme.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final model = await openAppModel();
+  runApp(GymProgressApp(model: model));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+/// IANA zone of the device; falls back to a fixed-offset zone when the platform name is unknown
+/// to the embedded tz database (days are still counted in local time).
+Future<String> deviceTimeZone() async {
+  try {
+    final id = (await FlutterTimezone.getLocalTimezone()).identifier;
+    TrainingCalendar(timeZone: id);
+    return id;
+  } catch (_) {
+    final hours = DateTime.now().timeZoneOffset.inHours;
+    // Etc/GMT signs are inverted (Etc/GMT+3 = UTC−3).
+    return hours == 0 ? 'UTC' : 'Etc/GMT${hours > 0 ? '-' : '+'}${hours.abs()}';
+  }
+}
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+/// Opens the persistent store in the app's private data folder (Android: app files;
+/// Windows: %APPDATA%\com.gymprogress\GymProgress). Never falls back silently to a temporary store.
+Future<AppModel> openAppModel() async {
+  final zone = await deviceTimeZone();
+  try {
+    final dir = await getApplicationSupportDirectory();
+    await dir.create(recursive: true);
+    final repo = SqliteGymRepository.open('${dir.path}${Platform.pathSeparator}gymprogress.sqlite');
+    final model = AppModel(repo, timeZone: zone);
+    model.seedCatalog();
+    return model;
+  } catch (e) {
+    // Block the UI and explain; an in-memory store only backs the error screen.
+    return AppModel(
+      SqliteGymRepository.open(),
+      timeZone: zone,
+      storeError:
+          'No se pudo abrir la base de datos de la app. Tus datos no se modificaron. Cerrá la app y volvé a abrirla; '
+          'si el problema sigue, no registres entrenamientos hasta resolverlo.\n\nDetalle: $e',
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class GymProgressApp extends StatefulWidget {
+  const GymProgressApp({super.key, required this.model});
+  final AppModel model;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<GymProgressApp> createState() => _GymProgressAppState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _GymProgressAppState extends State<GymProgressApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  /// The device time zone may change while the app sleeps (travel, DST rules): re-read on resume.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      deviceTimeZone().then((zone) {
+        if (zone != widget.model.timeZone) {
+          widget.model.timeZone = zone;
+          widget.model.perform(() {});
+        }
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    return AppScope(
+      model: widget.model,
+      child: ListenableBuilder(
+        listenable: widget.model,
+        builder: (context, _) => MaterialApp(
+          title: 'GymProgress',
+          debugShowCheckedModeBanner: false,
+          theme: buildTheme(Brightness.light),
+          darkTheme: buildTheme(Brightness.dark),
+          themeMode: widget.model.storeError != null ? ThemeMode.dark : themeMode(widget.model.settings.theme),
+          locale: const Locale('es', 'AR'),
+          supportedLocales: const [Locale('es', 'AR'), Locale('es')],
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+          home: widget.model.storeError != null ? _StoreErrorScreen(message: widget.model.storeError!) : const Shell(),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
   }
+}
+
+class _StoreErrorScreen extends StatelessWidget {
+  const _StoreErrorScreen({required this.message});
+  final String message;
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: SafeArea(
+      child: Center(
+        child: SingleChildScrollView(
+          child: EmptyState(
+            icon: Icons.sd_card_alert_outlined,
+            title: 'No se pudieron abrir tus datos',
+            message: message,
+          ),
+        ),
+      ),
+    ),
+  );
 }
