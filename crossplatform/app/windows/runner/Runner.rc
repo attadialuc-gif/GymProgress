@@ -92,9 +92,9 @@ BEGIN
             VALUE "CompanyName", "GymProgress" "\0"
             VALUE "FileDescription", "GymProgress" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "gym_progress" "\0"
+            VALUE "InternalName", "GymProgress" "\0"
             VALUE "LegalCopyright", "GymProgress" "\0"
-            VALUE "OriginalFilename", "gym_progress.exe" "\0"
+            VALUE "OriginalFilename", "GymProgress.exe" "\0"
             VALUE "ProductName", "GymProgress" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END

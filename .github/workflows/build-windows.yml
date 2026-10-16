@@ -1,0 +1,86 @@
+name: build-windows
+
+# Windows release: Inno Setup installer + portable zip.
+on:
+  push:
+    paths:
+      - "crossplatform/**"
+      - ".github/workflows/build-windows.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: build-windows-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.7
+          cache: true
+      - name: Build release
+        working-directory: crossplatform/app
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter config --enable-windows-desktop
+          flutter pub get
+          flutter build windows --release 2>&1 | tee ../../build-windows.log
+      - name: Bundle the Visual C++ runtime next to the app
+        shell: pwsh
+        run: |
+          $rel = "crossplatform/app/build/windows/x64/runner/Release"
+          foreach ($dll in 'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll') {
+            Copy-Item "$env:WINDIR\System32\$dll" $rel
+          }
+          if (-not (Test-Path "$rel/GymProgress.exe")) { throw "GymProgress.exe not found" }
+          Get-ChildItem -Recurse $rel | Select-Object FullName, Length | Format-Table -AutoSize | Out-String -Width 200
+      - name: Smoke test (the app starts and stays up)
+        shell: pwsh
+        run: |
+          $p = Start-Process -FilePath "crossplatform/app/build/windows/x64/runner/Release/GymProgress.exe" -PassThru
+          Start-Sleep -Seconds 15
+          if ($p.HasExited) { throw "GymProgress.exe exited early with code $($p.ExitCode)" }
+          Stop-Process -Id $p.Id -Force
+          Write-Output "GymProgress.exe ran for 15 s"
+      - name: Portable zip
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force out, staging | Out-Null
+          Copy-Item -Recurse "crossplatform/app/build/windows/x64/runner/Release" "staging/GymProgress"
+          Compress-Archive -Path "staging/GymProgress" -DestinationPath "out/GymProgress-windows.zip"
+      - name: Installer (Inno Setup)
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) {
+            choco install innosetup -y --no-progress | Out-Null
+          }
+          if (-not (Test-Path $iscc)) { throw "Inno Setup not available" }
+          $src = (Resolve-Path "crossplatform/app/build/windows/x64/runner/Release").Path
+          $outDir = (Resolve-Path "out").Path
+          & $iscc "/DSourceDir=$src" "/DOutputDir=$outDir" "crossplatform/app/windows/installer/GymProgress.iss" 2>&1 | Tee-Object -FilePath installer.log
+          if ($LASTEXITCODE -ne 0) { throw "ISCC failed: $LASTEXITCODE" }
+          Get-FileHash out/* -Algorithm SHA256 | ForEach-Object { "$($_.Hash.ToLower())  $(Split-Path $_.Path -Leaf)" } | Tee-Object -FilePath out/SHA256SUMS.txt
+          Get-ChildItem out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GymProgress-windows
+          path: out/*
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-logs
+          path: |
+            build-windows.log
+            installer.log
+          if-no-files-found: ignore
