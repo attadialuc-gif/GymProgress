@@ -114,7 +114,8 @@ jobs:
           target: google_apis
           disable-animations: true
           working-directory: crossplatform/app
-          script: flutter test integration_test -d emulator-5554 -r expanded 2>&1 | tee ../../android-integration.log
+          # pipefail: a failing test must fail the job even though the output goes through tee.
+          script: bash -c 'set -o pipefail; flutter test integration_test -d emulator-5554 -r expanded 2>&1 | tee ../../android-integration.log'
       - name: Upload log
         if: always()
         uses: actions/upload-artifact@v4

@@ -78,6 +78,10 @@ Future<void> run2EFlow(WidgetTester tester, String dbPath) async {
     clock = clock.add(const Duration(minutes: 3));
     await tester.ensureVisible(find.byKey(Key('amount-${sets[i].id}')));
     await tester.enterText(find.byKey(Key('amount-${sets[i].id}')), '${reps[i]}');
+    // On a device the on-screen keyboard opens and the layout moves: settle, then locate ✓ again.
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(Key('complete-${sets[i].id}')));
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(Key('complete-${sets[i].id}')));
     await tester.pumpAndSettle();
   }
