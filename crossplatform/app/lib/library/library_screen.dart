@@ -213,12 +213,8 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
     final hasHistory = model.repository.hasExerciseHistory(widget.exerciseId);
     final hint = TextStyle(color: Theme.of(context).hintColor, fontSize: 12);
     final c = _config;
-    Widget info(String label, String value) => ListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      trailing: Flexible(child: Text(value, textAlign: TextAlign.end)),
-    );
+    Widget info(String label, String value) =>
+        ListTile(dense: true, contentPadding: EdgeInsets.zero, title: Text(label), subtitle: Text(value));
     return Scaffold(
       appBar: AppBar(title: Text(exercise.name)),
       body: ListView(

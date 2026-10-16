@@ -49,19 +49,20 @@ class MuscleVolumeScreen extends StatelessWidget {
           for (final item in volume)
             ListTile(
               title: Text(item.muscle.label),
-              subtitle: settings.weeklySetGoal(item.muscle) == null
-                  ? null
-                  : Text('Tu objetivo: ${settings.weeklySetGoal(item.muscle)} series directas por semana'),
-              trailing: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
+              trailing: Text(
+                '${item.directSets} directas',
+                style: const TextStyle(fontFeatures: [FontFeature.tabularFigures()]),
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${item.directSets} directas'),
                   Text(
                     '${GymFormat.number(item.indirectSets, maxFractionDigits: 1)} indirectas · '
                     '${GymFormat.number(item.frequencyDays / weeks, maxFractionDigits: 1)} días/sem.',
                     style: hint,
                   ),
+                  if (settings.weeklySetGoal(item.muscle) != null)
+                    Text('Tu objetivo: ${settings.weeklySetGoal(item.muscle)} series directas por semana', style: hint),
                 ],
               ),
               onTap: () =>

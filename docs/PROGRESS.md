@@ -150,6 +150,22 @@ $ dart test (gym_core)    +113: All tests passed!
 $ swift run FixtureExporter verify-import export_from_dart.json   OK: no loss, no duplicates
 ```
 
+### Etapa D — Flujo 2.E con UI Flutter · ✅ revisada
+
+- App Flutter sin lógica de negocio (todo pasa por `gym_store`): cinco secciones (barra inferior en teléfono, navegación lateral en ventana ancha), rutinas y biblioteca, criterios por ejercicio, entrenamiento, pantalla de ejercicio con la **tarjeta de recomendación arriba** (última sesión comparable, objetivo de hoy, peso/reps recomendados, motivo, Aceptar / Modificar / Ignorar persistidos), tabla de series que guarda al salir del campo, al pausar la app, al cerrar la ventana y al desmontar, descanso por marca de tiempo, historial y diálogo para retomar la sesión abierta.
+- Tests: tarjeta (Aceptar, Modificar 2.D-8 sin pisarse al reabrir, Ignorar, sin historial, condicionada), registro de series (coma/punto, objetivo visible, valores inválidos), flujo 2.E completo por la UI sobre un archivo SQLite **con recarga de la app** (teléfono y ventana ancha), atrás de Android, cierre del proceso con sesión abierta, 360 dp con texto ×2, lb.
+- Integración 2.E en Windows real (runner de CI): run https://github.com/attadialuc-gif/GymProgress/actions/runs/38933222432 → `+1: All tests passed!`.
+- Revisión independiente: 2 mayores (atrás de Android cerraba la app; título de la tarjeta oculto a 360 dp) y 8 menores; luego 1 mayor nuevo (en lb, guardar sin cambios reescribía kg). Todo corregido con tests; verificación del revisor: cerrados.
+
+### Etapa E — Paridad con iOS · ✅
+
+- Inicio completo (próximo entrenamiento con recomendaciones, semana vs objetivo, racha con definición, volumen y gráfico semanal, récords recientes, última sesión), calendario mensual/semanal y plan semanal con `validFrom`, Progreso (filtros de período y rutina, comparación a la fecha, gráficos por máquina/variante con `fl_chart`, volumen por músculo directo/indirecto con objetivos propios y gráfico semanal, récords reales vs estimados, objetivos), biblioteca de 98 ejercicios + propios con criterios, Perfil con todos los ajustes, export JSON/CSV e import JSON.
+- Tests de pantallas con dos años de datos en 360 dp: encontraron y se corrigieron tres desbordes de diseño.
+
+### Etapa F — Adaptación de plataforma · ✅
+
+- Detalle en `docs/PARIDAD.md` y D-106: notificación de fin de descanso (Android programada exacta/inexacta, permiso en contexto; Windows sonido + aviso), pantalla encendida en sesión, atrás de Android, recuperación tras cierre del proceso (incluido el descanso en curso), ventana redimensionable con mínimo por DPI, atajos de teclado, datos en `%APPDATA%`, ícono y nombre de la app.
+
 ## Próximos pasos
 
 - En un Mac: `xcodegen generate`, compilar, corregir lo que marque el compilador, correr `GymProgressTests` y probar el flujo en simulador y en un iPhone.

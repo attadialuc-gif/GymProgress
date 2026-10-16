@@ -201,6 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ListTile(
             title: const Text('Tema'),
             subtitle: DropdownButton<AppTheme>(
+              isExpanded: true,
               value: s.theme,
               onChanged: (v) => _save((x) => x.theme = v!),
               items: const [
@@ -232,6 +233,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ListTile(
             title: const Text('Racha'),
             subtitle: DropdownButton<StreakMode>(
+              isExpanded: true,
               value: s.streakMode,
               onChanged: (v) => _save((x) => x.streakMode = v!),
               items: const [
